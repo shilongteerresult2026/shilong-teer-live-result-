@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
 <meta name="description" content="Shillong Teer Live Result - Today's results, previous records, common numbers, house and ending numbers. Dream chart, winning strategies, expert advice, traditional history & game rules explained. Month-wise results Jan-Jun 2026.">
-<meta name="keywords" content="Shillong Teer Result, Teer Common Number, Shillong Teer Today, Teer Winning Strategy, Teer Expert Advice, Dream Chart, Khanapara Teer, Juwai Teer, Month Wise Results">
+<meta name="keywords" content="Shillong Teer Result, Teer Common Number, Shillong Teer Today, Teer Winning Strategy, Teer Expert Advice, Dream Chart, Khanapara Teer, Juwai Teer, Morning Teer, Night Teer, Month Wise Results">
 <meta name="author" content="shillongteerliveresult.in">
 <title>Shillong Teer Live Result | Dream Chart & Winning Strategies</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -303,16 +303,6 @@ body {
     border-radius: 40px;
     font-size: 0.7rem;
 }
-.update-btn {
-    background: #2c6e2f;
-    color: white;
-    padding: 0.15rem 0.6rem;
-    border-radius: 40px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    cursor: pointer;
-    margin-left: 0.5rem;
-}
 
 .common-venues-container {
     display: flex;
@@ -370,42 +360,6 @@ body {
 .direct-num { background: #e67e22; color: white; }
 .house-num { background: #1f6392; color: white; }
 .ending-num { background: #2c6e2f; color: white; }
-
-.analytics-section {
-    background: #1e2a2f;
-    border-radius: 0.9rem;
-    padding: 0.7rem;
-    margin: 0.8rem 0;
-    border: 2px solid #f5b642;
-}
-.analytics-title {
-    font-size: 0.95rem;
-    font-weight: 800;
-    color: #ffda88;
-    text-align: center;
-    margin-bottom: 0.7rem;
-}
-.analytics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 0.7rem;
-}
-.analytics-card {
-    background: #fffef7;
-    border-radius: 0.7rem;
-    padding: 0.6rem;
-}
-.analytics-card-title {
-    font-weight: 800;
-    color: #b85e0e;
-    font-size: 0.8rem;
-    margin-bottom: 5px;
-}
-.analytics-value {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: #2c3e50;
-}
 
 .monthwise-section {
     background: #fef7e8;
@@ -803,6 +757,9 @@ body {
     .container { padding: 0.5rem; }
     .result-number { font-size: 1.3rem; }
     .dream-chart-table th, .dream-chart-table td { padding: 5px; font-size: 0.75rem; }
+    .strategy-title { font-size: 0.9rem; }
+    .strategy-text, .strategy-list li, .pro-tip-text { font-size: 0.75rem; }
+    .history-content { font-size: 0.75rem; }
 }
 </style>
 </head>
@@ -829,11 +786,6 @@ body {
 
     <div id="resultsGrid" class="results-grid"></div>
     <div class="common-venues-container" id="commonTablesContainer"></div>
-
-    <div class="analytics-section">
-        <div class="analytics-title">📊 SHILLONG TEER ANALYTICS & CALCULATION 📊</div>
-        <div class="analytics-grid" id="analyticsGrid"></div>
-    </div>
 
     <div class="monthwise-section">
         <div class="monthwise-title">📅 SHILLONG TEER - PREVIOUS RESULTS 📅</div>
@@ -880,7 +832,7 @@ body {
     <div class="dream-chart-section">
         <div class="dream-chart-title">📖 TRADITIONAL DREAM CHART (Dream to Direct, House, Ending) 📖</div>
         <table class="dream-chart-table">
-            <thead><tr><th>Dream</th><th>Direct Numbers</th><th>House Digit</th><th>Ending Digit</th><tr></thead>
+            <thead><tr><th>Dream</th><th>Direct Numbers</th><th>House Digit</th><th>Ending Digit</th></tr></thead>
             <tbody id="dreamChartBody"></tbody>
         </table>
         <div class="dream-chart-note">How to use: Find your dream in the chart above, note the Direct, House, and Ending numbers. Then use the Dream Predictor above for personalized predictions.</div>
@@ -1048,22 +1000,19 @@ function displayResults() {
         }
         tbody.innerHTML = html;
     } else {
-        tbody.innerHTML = '<tr><td colspan="3" class="no-data">No results available for this month</span></td>';
+        tbody.innerHTML = '<tr><td colspan="3" class="no-data">No results available for this month</td></tr>';
     }
 }
 
-const SUPABASE_URL = 'https://bwjjqidmeooyojjvtqjs.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3ampxaWRtZW9veW9qanZ0cWpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NDIxMTAsImV4cCI6MjA5NjUxODExMH0.sRbG-Pwd8kgy94e9g7uuWhAj0-mH6JjOC7KXARxLIEk';
-let supabaseClient, useSupabase = false;
-try { supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); useSupabase = true; } catch(e) {}
-
 let isVipUnlocked = localStorage.getItem('teer_vip_status') === 'active';
 
-// INITIAL WAITING STATE - NO NUMBERS SHOW, ONLY WAITING TEXT
+// INITIAL WAITING STATE - ALL 5 VENUES
 let liveData = { 
     shillong: { fr: null, sr: null }, 
     khanapara: { fr: null, sr: null }, 
-    juwai: { fr: null, sr: null } 
+    juwai: { fr: null, sr: null },
+    morning: { fr: null, sr: null },
+    night: { fr: null, sr: null }
 };
 
 function getFRDirect(v){ let d=liveData[v]; if(!d || d.fr === null) return "24"; let f=parseInt(d.fr)||0; return ((f*7+13)%100).toString().padStart(2,'0'); }
@@ -1073,32 +1022,17 @@ function getEnding(n){ return (parseInt(n)%10+7)%10; }
 function getVIP(){ let sf=liveData.shillong.fr ? parseInt(liveData.shillong.fr) : 0, ss=liveData.shillong.sr ? parseInt(liveData.shillong.sr) : 0; let com=[]; for(let i=0;i<5;i++) com.push(((sf*3+ss*2+i*17+11)%100).toString().padStart(2,'0')); let house=[((sf+ss+5)%10).toString(), ((sf+ss+14)%10).toString()]; return { common: com, house }; }
 function dreamToNum(t){ if(!t) return 24; let m={"snake":5,"tiger":28,"lion":32,"elephant":47,"horse":19,"dog":24,"cat":18,"water":2,"fire":3,"money":22,"gold":23}; let l=t.toLowerCase(); for(let [k,v] of Object.entries(m)) if(l.includes(k)) return v; let h=0; for(let i=0;i<l.length;i++) h=((h<<5)-h)+l.charCodeAt(i); return Math.abs(h)%100||24; }
 function getHE(n){ let x=n%100; return { house:[((x*3+7)%10).toString(),((x*5+11)%10).toString()], ending:[((x*9+17)%10).toString(),((x*11+23)%10).toString()] }; }
-function renderAnalytics() { document.getElementById('analyticsGrid').innerHTML = `<div class="analytics-card"><div class="analytics-card-title">📈 LAST 30 DAYS AVERAGE</div><div class="analytics-value">FR: 42.5 | SR: 53.2</div></div><div class="analytics-card"><div class="analytics-card-title">⭐ MOST FREQUENT</div><div class="analytics-value">FR: 20 | SR: 46</div></div><div class="analytics-card"><div class="analytics-card-title">🔮 NEXT PREDICTION</div><div class="analytics-value">FR: 37 | SR: 82</div></div>`; }
-const passingHits = [{ name:"SHILLONG MORNING", val:"93", status:"PASS" },{ name:"SHILLONG TEER SR", val:"9", status:"PASS" },{ name:"JUWAI FR", val:"5", status:"PASS" },{ name:"KHANAPARA", val:"4", status:"PASS" }];
+
 let todayStr = new Date().toLocaleDateString('en-GB');
 
-// UPDATE FUNCTION - Manually update results
-window.updateResults = function() {
-    let shillongFR = prompt("Enter SHILLONG TEER First Round (FR) number:", "46");
-    let shillongSR = prompt("Enter SHILLONG TEER Second Round (SR) number:", "28");
-    let khanaparaFR = prompt("Enter KHANAPARA TEER First Round (FR) number:", "75");
-    let khanaparaSR = prompt("Enter KHANAPARA TEER Second Round (SR) number:", "67");
-    let juwaiFR = prompt("Enter JUWAI TEER First Round (FR) number:", "49");
-    let juwaiSR = prompt("Enter JUWAI TEER Second Round (SR) number:", "92");
-    
-    if(shillongFR && shillongFR.match(/^\d{1,2}$/)) liveData.shillong.fr = shillongFR.padStart(2,'0');
-    if(shillongSR && shillongSR.match(/^\d{1,2}$/)) liveData.shillong.sr = shillongSR.padStart(2,'0');
-    if(khanaparaFR && khanaparaFR.match(/^\d{1,2}$/)) liveData.khanapara.fr = khanaparaFR.padStart(2,'0');
-    if(khanaparaSR && khanaparaSR.match(/^\d{1,2}$/)) liveData.khanapara.sr = khanaparaSR.padStart(2,'0');
-    if(juwaiFR && juwaiFR.match(/^\d{1,2}$/)) liveData.juwai.fr = juwaiFR.padStart(2,'0');
-    if(juwaiSR && juwaiSR.match(/^\d{1,2}$/)) liveData.juwai.sr = juwaiSR.padStart(2,'0');
-    
-    renderResults();
-    alert("Results updated successfully!");
-};
-
 function renderResults() {
-    let venues = [{id:"shillong",name:"SHILLONG TEER"},{id:"khanapara",name:"KHANAPARA TEER"},{id:"juwai",name:"JUWAI TEER"}];
+    let venues = [
+        {id:"shillong", name:"SHILLONG TEER", time1:"4:00 PM", time2:"5:00 PM"},
+        {id:"khanapara", name:"KHANAPARA TEER", time1:"4:00 PM", time2:"5:00 PM"},
+        {id:"juwai", name:"JUWAI TEER", time1:"2:00 PM", time2:"3:30 PM"},
+        {id:"morning", name:"MORNING TEER", time1:"10:30 AM", time2:"11:30 AM"},
+        {id:"night", name:"NIGHT TEER", time1:"11:10 PM", time2:"12:10 AM"}
+    ];
     let html = '';
     for(let v of venues) {
         let d = liveData[v.id] || { fr: null, sr: null };
@@ -1126,8 +1060,8 @@ function renderResults() {
                 <span class="${badgeClass}">${badgeText}</span>
             </div>
             <div class="timing-dual">
-                <div class="fr-box"><div>FIRST ROUND</div>${frDisplay}</div>
-                <div class="sr-box"><div>SECOND ROUND</div>${srDisplay}</div>
+                <div class="fr-box"><div>FIRST ROUND (${v.time1})</div>${frDisplay}</div>
+                <div class="sr-box"><div>SECOND ROUND (${v.time2})</div>${srDisplay}</div>
             </div>
             <div class="card-footer">
                 <div class="prev-btn" onclick="openPrevModal('${v.id}','${v.name}')">📜 Prev 30 Days</div>
@@ -1136,15 +1070,11 @@ function renderResults() {
         </div>`;
     }
     
-    // Add Update Button at the bottom of results
-    html += `<div style="margin-top: 0.5rem; text-align: center;">
-        <button onclick="updateResults()" style="background: #2c6e2f; color: white; border: none; padding: 0.5rem 1rem; border-radius: 60px; font-weight: bold; cursor: pointer; width: 100%;">✏️ UPDATE RESULTS (Enter Today's Numbers)</button>
-    </div>`;
-    
     document.getElementById('resultsGrid').innerHTML = html;
     
     let tables = '';
-    for(let v of venues) {
+    let mainVenues = [{id:"shillong",name:"SHILLONG TEER"},{id:"khanapara",name:"KHANAPARA TEER"},{id:"juwai",name:"JUWAI TEER"}];
+    for(let v of mainVenues) {
         let fd = getFRDirect(v.id);
         let sd = getSRDirect(v.id);
         let fh = getHouse(fd);
@@ -1163,10 +1093,11 @@ function renderResults() {
         </div>`;
     }
     document.getElementById('commonTablesContainer').innerHTML = tables;
-    renderAnalytics();
     
-    let pass=''; passingHits.forEach(p=>{ pass+=`<div class="pass-item"><strong>${p.name}</strong> ${p.val} <span style="color:green;">✅${p.status}</span></div>`; });
-    document.getElementById('passingGrid').innerHTML = pass;
+    let pass=[{ name:"SHILLONG MORNING", val:"93", status:"PASS" },{ name:"SHILLONG TEER SR", val:"9", status:"PASS" },{ name:"JUWAI FR", val:"5", status:"PASS" },{ name:"KHANAPARA", val:"4", status:"PASS" }];
+    let passHtml=''; pass.forEach(p=>{ passHtml+=`<div class="pass-item"><strong>${p.name}</strong> ${p.val} <span style="color:green;">✅${p.status}</span></div>`; });
+    document.getElementById('passingGrid').innerHTML = passHtml;
+    
     let vip = getVIP(); let vc = document.getElementById('vipNumbersContainer');
     if(isVipUnlocked) { vc.innerHTML = `<div><strong>⭐ VIP COMMON:</strong> ${vip.common.map(n=>`<span style="background:#e67e22;padding:2px 9px;border-radius:30px;margin:2px;display:inline-block;font-size:0.85rem;">${n}</span>`).join('')}</div>`; document.getElementById('vipLockIcon').innerHTML = '✅ UNLOCKED'; }
     else { vc.innerHTML = `<div>⭐ VIP Common: ${Array(5).fill('<span class="locked-blur">🔒 •••</span>').join('')}</div>`; }
@@ -1175,9 +1106,9 @@ function renderResults() {
 window.openPrevModal = function(vid, title) { 
     let modal = document.getElementById('prevModalWin'); 
     document.getElementById('prevModalTitle').innerHTML = `📜 ${title} - Last 30 Days`; 
-    let results = monthData[vid] || monthData.january.slice(0,15);
+    let dataArr = monthData[vid] || monthData.january.slice(0,15);
     let html = '<table class="prev-table"><thead><tr><th>Date</th><th>FR</th><th>SR</th></tr></thead><tbody>';
-    for(let r of results.slice(0,20)) { html += `<tr><td style="padding:5px;">${r.date}</span><tr><td style="padding:5px;">${r.fr}</span></td><td style="padding:5px;">${r.sr}</span></tr>`; }
+    for(let r of dataArr.slice(0,20)) { html += `<tr><td>${r.date}</td><td>${r.fr}</td><td>${r.sr}</td>`; }
     html += '</tbody></table>';
     document.getElementById('prevModalTable').innerHTML = html; 
     modal.style.display = 'flex'; 
@@ -1186,7 +1117,7 @@ window.openPrevModal = function(vid, title) {
 document.getElementById('predictDreamBtn').onclick = () => { let inp = document.getElementById('dreamInput').value.trim(); if(!inp) { alert("Enter dream word"); return; } let num = dreamToNum(inp); let he = getHE(num); document.getElementById('dreamDisplayText').innerHTML = `💭 Dream: <strong>${inp}</strong> → Number: <strong>${num}</strong>`; document.getElementById('houseDigit1').innerText = he.house[0]; document.getElementById('houseDigit2').innerText = he.house[1]; document.getElementById('endingDigit1').innerText = he.ending[0]; document.getElementById('endingDigit2').innerText = he.ending[1]; };
 document.getElementById('payNowBtn').onclick = () => { window.location.href="upi://pay?pa=7628988767@airtel&pn=Teer%20VIP&am=1500&cu=INR"; setTimeout(()=>window.open("https://pay.google.com/gp/p/u/0/home?upic=7628988767@airtel&amount=1500","_blank"),200); };
 document.getElementById('verifyPaymentBtn').onclick = () => { let txn=document.getElementById('transactionIdInput').value.trim(); if(!/^[A-Za-z0-9]{10,20}$/.test(txn)){ document.getElementById('vipMessage').innerHTML="❌ Invalid TXN ID"; return; } if(confirm(`Verify?`)){ isVipUnlocked=true; localStorage.setItem('teer_vip_status','active'); renderResults(); document.getElementById('vipMessage').innerHTML="✅ VIP UNLOCKED!"; } };
-document.getElementById('liveStreamBtn').onclick = () => { let m=document.getElementById('liveModalWin'); let d = liveData; document.getElementById('liveModalContent').innerHTML=`<p>📅 ${todayStr}<br>Shillong: ${d.shillong.fr || '--'}/${d.shillong.sr || '--'}<br>Khanapara: ${d.khanapara.fr || '--'}/${d.khanapara.sr || '--'}<br>Juwai: ${d.juwai.fr || '--'}/${d.juwai.sr || '--'}</p><p>Click UPDATE RESULTS button to enter today's numbers</p>`; m.style.display='flex'; };
+document.getElementById('liveStreamBtn').onclick = () => { let m=document.getElementById('liveModalWin'); let d = liveData; document.getElementById('liveModalContent').innerHTML=`<p>📅 ${todayStr}<br><strong>Shillong:</strong> ${d.shillong.fr || '--'}/${d.shillong.sr || '--'}<br><strong>Khanapara:</strong> ${d.khanapara.fr || '--'}/${d.khanapara.sr || '--'}<br><strong>Juwai:</strong> ${d.juwai.fr || '--'}/${d.juwai.sr || '--'}<br><strong>Morning:</strong> ${d.morning.fr || '--'}/${d.morning.sr || '--'}<br><strong>Night:</strong> ${d.night.fr || '--'}/${d.night.sr || '--'}</p><p>📢 Admin will update results via Supabase. Please check back later.</p>`; m.style.display='flex'; };
 function closeModals(){ document.getElementById('liveModalWin').style.display='none'; document.getElementById('prevModalWin').style.display='none'; }
 document.getElementById('closeLiveModalBtn').onclick = closeModals;
 document.getElementById('closePrevModalBtn').onclick = closeModals;
