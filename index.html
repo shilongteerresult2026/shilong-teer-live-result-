@@ -211,6 +211,7 @@ body {
     padding: 0.15rem 0.6rem;
     border-radius: 50px;
 }
+/* FLASH LIVE BADGE STYLES */
 .flash-waiting {
     display: inline-flex;
     align-items: center;
@@ -219,28 +220,42 @@ body {
     color: white;
     font-size: 0.65rem;
     font-weight: bold;
-    padding: 0.1rem 0.5rem;
+    padding: 0.2rem 0.6rem;
     border-radius: 30px;
-    animation: blinkBg 0.8s infinite;
+    animation: flashWaiting 0.8s infinite;
 }
-@keyframes blinkBg {
-    0%, 100% { background: #dc2626; opacity: 1; }
-    50% { background: #ef4444; opacity: 0.7; }
+@keyframes flashWaiting {
+    0%, 100% { background: #dc2626; opacity: 1; box-shadow: 0 0 0px #ff4444; }
+    50% { background: #ff0000; opacity: 0.9; box-shadow: 0 0 8px #ff4444; }
 }
+
 .live-result-badge {
     background: #dc2626;
     color: white;
-    font-size: 0.65rem;
-    padding: 0.1rem 0.5rem;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 0.2rem 0.7rem;
     border-radius: 30px;
-    display: inline-block;
-    animation: livePulse 1s infinite;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    animation: flashLive 0.6s infinite;
 }
-@keyframes livePulse {
-    0% { opacity: 0.8; }
-    70% { opacity: 1; box-shadow: 0 0 0 2px rgba(220,38,38,0.3); }
-    100% { opacity: 0.8; }
+@keyframes flashLive {
+    0%, 100% { background: #dc2626; box-shadow: 0 0 0px #ff4444; transform: scale(1); }
+    50% { background: #ff3333; box-shadow: 0 0 12px #ff4444; transform: scale(1.02); }
 }
+
+.live-result-badge::before {
+    content: "●";
+    font-size: 0.7rem;
+    animation: blinkDot 0.5s infinite;
+}
+@keyframes blinkDot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
 .timing-dual {
     display: flex;
     gap: 0.6rem;
@@ -274,7 +289,7 @@ body {
 }
 @keyframes blinkWaiting {
     0%, 100% { opacity: 1; background: #dc2626; }
-    50% { opacity: 0.6; background: #ff4444; }
+    50% { opacity: 0.7; background: #ff0000; }
 }
 .card-footer {
     display: flex;
@@ -763,7 +778,7 @@ body {
     
     <button class="btn-live-stream" id="liveStreamBtn">📡 LIVE STREAMING & TODAY'S RESULTS</button>
 
-    <!-- Dream Predictor Section - FIXED -->
+    <!-- Dream Predictor Section -->
     <div class="dream-card">
         <div class="dream-title">✨ DREAM NUMBER PREDICTOR ✨</div>
         <div class="dream-flex">
@@ -1056,7 +1071,7 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 async function loadFromSupabase() {
     try {
-        const { data, error } = await supabaseClient.from('teer_results').select('*').eq('result_date', todayDate);
+        const { data, error } = await supabaseClient.from('teer_live_results').select('*').eq('result_date', todayDate);
         if (error) { console.log('Supabase error:', error); return; }
         if (data && data.length > 0) {
             for (let venue in liveData) { liveData[venue] = { fr: null, sr: null }; }
@@ -1120,8 +1135,8 @@ window.openPrevModal = function(vid, title) {
     document.getElementById('prevModalTitle').innerHTML = `📜 ${title} - Last 30 Days`; 
     let dataArr = monthData[vid] || monthData.january;
     let html = '<table class="prev-table"><thead><tr><th>Date</th><th>FR</th><th>SR</th></tr></thead><tbody>';
-    for(let r of dataArr.slice(0,20)) { html += `<tr><td style="padding:5px;">${r.date}</td><td style="padding:5px;">${r.fr}</td><td style="padding:5px;">${r.sr}</td></td>`; }
-    html += '</tbody></table>';
+    for(let r of dataArr.slice(0,20)) { html += `<tr><td style="padding:5px;">${r.date}</td><td style="padding:5px;">${r.fr}</td><td style="padding:5px;">${r.sr}</td></tr>`; }
+    html += '</tbody><tr>';
     document.getElementById('prevModalTable').innerHTML = html; 
     modal.style.display = 'flex'; 
 };
