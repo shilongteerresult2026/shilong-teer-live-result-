@@ -30,6 +30,20 @@ l.parentNode.insertBefore(s, l);
 })({})
 </script>
 
+<!-- HilltopAds Mobile Banner Code -->
+<script>
+(function(wlvc){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = wlvc || {};
+s.src = "\/\/masculine-employment.com\/b\/XTV.sZd\/G\/lw0iYhW\/cN\/eeqmH9\/uOZfURlbkGPtTzc\/xwM\/zdYa2dMMThcWtZNJz\/Esz\/NUjeY\/yMMhQF";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+</script>
+
 <title>Shillong Teer Live Result | Dream Chart & Winning Strategies</title>
 
 <!-- Favicon -->
@@ -392,11 +406,13 @@ body {
         </div>
         <div id="dreamDisplayText" style="text-align:center; margin-bottom:6px; font-weight:bold; color:#bc5a0c; font-size:0.8rem;">💭 Enter a dream word and click Predict</div>
         <table class="dream-table">
-            <thead><td><th>🏠 HOUSE NUMBERS</th><th>🎯 ENDING NUMBERS</th></tr></thead>
+            <thead>
+                <tr><th>🏠 HOUSE NUMBERS</th><th>🎯 ENDING NUMBERS</th></tr>
+            </thead>
             <tbody>
                 <tr>
                     <td><div class="number-group"><span class="dream-num-box" id="houseDigit1">--</span><span class="dream-num-box" id="houseDigit2">--</span></div></td>
-                    <td><div class="number-group"><span class="dream-num-box" id="endingDigit1">--</span><span class="dream-num-box" id="endingDigit2">--</span></div></td>
+                    <td><div class="number-group"><span class="dream-num-box" id="endingDigit1">--</span><span class="dream-num-box" id="endingDigit2">--</span></div></tr>
                 </tr>
             </tbody>
         </table>
@@ -449,7 +465,7 @@ body {
     <div class="dream-chart-section">
         <div class="dream-chart-title">📖 TRADITIONAL DREAM CHART (Dream to Direct, House, Ending)</div>
         <table class="dream-chart-table">
-            <thead><tr><th>Dream</th><th>Direct Numbers</th><th>House Digit</th><th>Ending Digit</th></tr></thead>
+            <thead></tr><th>Dream</th><th>Direct Numbers</th><th>House Digit</th><th>Ending Digit</th></tr></thead>
             <tbody id="dreamChartBody"></tbody>
         </table>
         <div class="dream-chart-note">How to use: Find your dream in the chart above, note the Direct, House, and Ending numbers. Then use the Dream Predictor above for personalized predictions.</div>
@@ -699,7 +715,7 @@ function displayPreviousResults() {
         }
         tbody.innerHTML = html;
     } else {
-        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:20px;">No results available</span></tr>';
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:20px;">No results available</span></table>';
     }
 }
 
@@ -836,8 +852,8 @@ function renderCommonNumbers() {
     let mainVenues = [{id:"shillong", name:"SHILLONG TEER"},{id:"khanapara", name:"KHANAPARA TEER"},{id:"juwai", name:"JUWAI TEER"}];
     for(let v of mainVenues) {
         let common = calculateCommonFromPreviousDay(v.id);
-        tables += `<div class="common-venue-card"><div class="common-venue-title">🔢 ${v.name} - COMMON NUMBERS</div><div class="common-time-badge" style="background:#e67e22; margin-bottom:10px;">📢 Based on yesterday's results (5 Formula Average)</div><table class="common-table"><thead><tr><th>ROUND</th><th>🔢 DIRECT NUMBER</th><th>🏠 HOUSE DIGIT</th><th>🎯 ENDING DIGIT</th></tr></thead><tbody><tr><td class="round-cell">FIRST ROUND (FR)</td><td class="round-cell"><span class="direct-num">${common.frDirect}</span></td><td class="round-cell"><span class="house-num">${common.frHouse}</span></td><td class="round-cell"><span class="ending-num">${common.frEnding}</span></td></td>
-                <tr><td class="round-cell">SECOND ROUND (SR)</td><td class="round-cell"><span class="direct-num">${common.srDirect}</span></td><td class="round-cell"><span class="house-num">${common.srHouse}</span></td><td class="round-cell"><span class="ending-num">${common.srEnding}</span></td></tr>
+        tables += `<div class="common-venue-card"><div class="common-venue-title">🔢 ${v.name} - COMMON NUMBERS</div><div class="common-time-badge" style="background:#e67e22; margin-bottom:10px;">📢 Based on yesterday's results (5 Formula Average)</div><table class="common-table"><thead><tr><th>ROUND</th><th>🔢 DIRECT NUMBER</th><th>🏠 HOUSE DIGIT</th><th>🎯 ENDING DIGIT</th></tr></thead><tbody><tr><td class="round-cell">FIRST ROUND (FR)</td><td class="round-cell"><span class="direct-num">${common.frDirect}</span></td><td class="round-cell"><span class="house-num">${common.frHouse}</span></td><td class="round-cell"><span class="ending-num">${common.frEnding}</span></td></tr>
+            <tr><td class="round-cell">SECOND ROUND (SR)</td><td class="round-cell"><span class="direct-num">${common.srDirect}</span></td><td class="round-cell"><span class="house-num">${common.srHouse}</span></td><td class="round-cell"><span class="ending-num">${common.srEnding}</span></td></tr>
             </tbody>
         </table>
     </div>`;
