@@ -10,6 +10,9 @@
 <!-- Monetag Verification Meta Tag -->
 <meta name="monetag" content="e3a0521c07fdafddf5dcf60165108aa8" />
 
+<!-- HilltopAds Verification Meta Tag -->
+<meta name="50064c663ff903c2e60fcbe064af79fac42c5954" content="50064c663ff903c2e60fcbe064af79fac42c5954" />
+
 <!-- Monetag Push Notification Code -->
 <script src="https://5gvci.com/act/files/tag.min.js?z=11146595" data-cfasync="false" async></script>
 
@@ -605,7 +608,7 @@ const dreamChartData = [
 function renderDreamChart() { 
     let html = ''; 
     dreamChartData.forEach(item => { 
-        html += `<tr><td style="padding:6px;"><strong>${item.dream}</strong><td><td style="padding:6px;">${item.direct}</td><td style="padding:6px;">${item.house}</td><td style="padding:6px;">${item.ending}</td>`; 
+        html += `<tr><td style="padding:6px;"><strong>${item.dream}</strong></td><td style="padding:6px;">${item.direct}</td><td style="padding:6px;">${item.house}</td><td style="padding:6px;">${item.ending}</td>`; 
     }); 
     document.getElementById('dreamChartBody').innerHTML = html; 
 }
@@ -678,11 +681,11 @@ function displayPreviousResults() {
     if(data && data.length > 0) {
         let html = '';
         for(let row of data) {
-            html += `<tr><td style="padding:6px;">${row.date}<td><td style="padding:6px;">${row.fr}</td><td style="padding:6px;">${row.sr}</td></tr>`;
+            html += `<tr><td style="padding:6px;">${row.date}<tr><td style="padding:6px;">${row.fr}</td><td style="padding:6px;">${row.sr}</td></tr>`;
         }
         tbody.innerHTML = html;
     } else {
-        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:20px;">No results available</span></tr>';
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:20px;">No results available</span></td>';
     }
 }
 
@@ -837,7 +840,7 @@ window.openPrevModal = function(vid, title) {
     document.getElementById('prevModalTitle').innerHTML = `📜 ${title} - Last 30 Days`; 
     let dataArr = monthData[vid] || monthData.january;
     let html = '<table class="prev-table"><thead><tr><th>Date</th><th>FR</th><th>SR</th></tr></thead><tbody>';
-    for(let r of dataArr.slice(0,20)) { html += `<td><td style="padding:5px;">${r.date}</td><td style="padding:5px;">${r.fr}</td><td style="padding:5px;">${r.sr}</td></tr>`; }
+    for(let r of dataArr.slice(0,20)) { html += `<tr><td style="padding:5px;">${r.date}</td><td style="padding:5px;">${r.fr}</td><td style="padding:5px;">${r.sr}</tr></tr>`; }
     html += '</tbody></table>';
     document.getElementById('prevModalTable').innerHTML = html; 
     modal.style.display = 'flex'; 
