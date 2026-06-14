@@ -115,6 +115,7 @@ body {
     margin-bottom: 0.8rem;
 }
 
+/* ========== DREAM CARD FIXED ========== */
 .dream-card {
     background: linear-gradient(115deg, #fff9ef, #fff1e0);
     border-radius: 1rem;
@@ -123,7 +124,7 @@ body {
     border: 1px solid #ffcd94;
 }
 .dream-title {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 800;
     color: #b94b0c;
     text-align: center;
@@ -146,11 +147,12 @@ body {
 .dream-btn {
     background: #e67e22;
     border: none;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1.2rem;
     border-radius: 60px;
     font-weight: bold;
     color: white;
     cursor: pointer;
+    font-size: 0.85rem;
 }
 .dream-table {
     width: 100%;
@@ -163,29 +165,35 @@ body {
 .dream-table th {
     background: #d45a1a;
     color: white;
-    padding: 8px;
+    padding: 10px;
+    font-size: 0.85rem;
+    text-align: center;
 }
 .dream-table td {
-    padding: 8px;
+    padding: 12px;
     background: #2c3824;
     text-align: center;
 }
 .number-group {
     display: flex;
     justify-content: center;
-    gap: 0.8rem;
+    gap: 1rem;
     flex-wrap: wrap;
 }
 .dream-num-box {
     background: #f5b042;
-    min-width: 55px;
-    padding: 0.35rem 0.7rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    padding: 0.4rem 0.8rem;
     border-radius: 50px;
     font-weight: 800;
     color: #1f2a1b;
-    font-size: 1rem;
+    font-size: 1.1rem;
     border: 2px solid #d48a2a;
 }
+/* ========== END DREAM CARD FIXED ========== */
 
 .results-grid {
     display: flex;
@@ -364,6 +372,7 @@ body {
     
     <button class="btn-live-stream" id="liveStreamBtn">📡 LIVE STREAMING & TODAY'S RESULTS</button>
 
+    <!-- ========== DREAM PREDICTOR - FIXED ========== -->
     <div class="dream-card">
         <div class="dream-title">✨ DREAM NUMBER PREDICTOR ✨</div>
         <div class="dream-flex">
@@ -372,15 +381,18 @@ body {
         </div>
         <div id="dreamDisplayText" style="text-align:center; margin-bottom:6px; font-weight:bold; color:#bc5a0c; font-size:0.8rem;">💭 Enter a dream word and click Predict</div>
         <table class="dream-table">
-            <thead><tr><th>🏠 HOUSE NUMBERS</th><th>🎯 ENDING NUMBERS</th></tr></thead>
+            <thead>
+                <tr><th>🏠 HOUSE NUMBERS</th><th>🎯 ENDING NUMBERS</th></tr>
+            </thead>
             <tbody>
                 <tr>
-                    <td><div class="number-group"><span class="dream-num-box" id="houseDigit1">--</span><span class="dream-num-box" id="houseDigit2">--</span></div></tr>
-                    <td><div class="number-group"><span class="dream-num-box" id="endingDigit1">--</span><span class="dream-num-box" id="endingDigit2">--</span></div></tr>
+                    <td><div class="number-group"><span class="dream-num-box" id="houseDigit1">--</span><span class="dream-num-box" id="houseDigit2">--</span></div></td>
+                    <td><div class="number-group"><span class="dream-num-box" id="endingDigit1">--</span><span class="dream-num-box" id="endingDigit2">--</span></div></td>
                 </tr>
             </tbody>
         </table>
     </div>
+    <!-- ========== END DREAM PREDICTOR ========== -->
 
     <div class="common-time-badge">⭐ TODAY'S COMMON NUMBERS (Based on yesterday's results)</div>
     <div class="common-venues-container" id="commonTablesContainer"></div>
@@ -675,7 +687,7 @@ function displayPreviousResults() {
     if(data && data.length > 0) {
         let html = '';
         for(let row of data) {
-            html += `<td><td style="padding:6px;">${row.date}</td><td style="padding:6px;">${row.fr}</td><td style="padding:6px;">${row.sr}</td></td>`;
+            html += `<tr><td style="padding:6px;">${row.date}</td><td style="padding:6px;">${row.fr}</td><td style="padding:6px;">${row.sr}</td></tr>`;
         }
         tbody.innerHTML = html;
     } else {
@@ -745,7 +757,10 @@ function dreamToNum(t){
 
 function getHENumbers(n){ 
     let x=n%100; 
-    return { house:[((x*3+7)%10).toString(),((x*5+11)%10).toString()], ending:[((x*9+17)%10).toString(),((x*11+23)%10).toString()] }; 
+    return { 
+        house: [((x*3+7)%10).toString(), ((x*5+11)%10).toString()], 
+        ending: [((x*9+17)%10).toString(), ((x*11+23)%10).toString()] 
+    }; 
 }
 
 let todayStr = new Date().toLocaleDateString('en-GB');
@@ -816,7 +831,7 @@ function renderCommonNumbers() {
     let mainVenues = [{id:"shillong", name:"SHILLONG TEER"},{id:"khanapara", name:"KHANAPARA TEER"},{id:"juwai", name:"JUWAI TEER"}];
     for(let v of mainVenues) {
         let common = calculateCommonFromPreviousDay(v.id);
-        tables += `<div class="common-venue-card"><div class="common-venue-title">🔢 ${v.name} - COMMON NUMBERS</div><div class="common-time-badge" style="background:#e67e22; margin-bottom:10px;">📢 Based on yesterday's results (5 Formula Average)</div><table class="common-table"><thead><tr><th>ROUND</th><th>🔢 DIRECT NUMBER</th><th>🏠 HOUSE DIGIT</th><th>🎯 ENDING DIGIT</th><tr></thead><tbody><tr><td class="round-cell">FIRST ROUND (FR)</td><td class="round-cell"><span class="direct-num">${common.frDirect}</span></td><td class="round-cell"><span class="house-num">${common.frHouse}</span></td><td class="round-cell"><span class="ending-num">${common.frEnding}</span></td></tr><tr><td class="round-cell">SECOND ROUND (SR)</td><td class="round-cell"><span class="direct-num">${common.srDirect}</span></td><td class="round-cell"><span class="house-num">${common.srHouse}</span></td><td class="round-cell"><span class="ending-num">${common.srEnding}</span></td></tr></tbody></table></div>`;
+        tables += `<div class="common-venue-card"><div class="common-venue-title">🔢 ${v.name} - COMMON NUMBERS</div><div class="common-time-badge" style="background:#e67e22; margin-bottom:10px;">📢 Based on yesterday's results (5 Formula Average)</div><table class="common-table"><thead><tr><th>ROUND</th><th>🔢 DIRECT NUMBER</th><th>🏠 HOUSE DIGIT</th><th>🎯 ENDING DIGIT</th></tr></thead><tbody><tr><td class="round-cell">FIRST ROUND (FR)</td><td class="round-cell"><span class="direct-num">${common.frDirect}</span></td><td class="round-cell"><span class="house-num">${common.frHouse}</span></td><td class="round-cell"><span class="ending-num">${common.frEnding}</span></td></tr><tr><td class="round-cell">SECOND ROUND (SR)</td><td class="round-cell"><span class="direct-num">${common.srDirect}</span></td><td class="round-cell"><span class="house-num">${common.srHouse}</span></td><td class="round-cell"><span class="ending-num">${common.srEnding}</span></td></tr></tbody></table></div>`;
     }
     document.getElementById('commonTablesContainer').innerHTML = tables;
 }
@@ -835,14 +850,18 @@ window.openPrevModal = function(vid, title) {
     let dataArr = monthData[vid] || monthData.january;
     let html = '<table class="prev-table"><thead><tr><th>Date</th><th>FR</th><th>SR</th></tr></thead><tbody>';
     for(let r of dataArr.slice(0,20)) { html += `<tr><td style="padding:5px;">${r.date}</td><td style="padding:5px;">${r.fr}</td><td style="padding:5px;">${r.sr}</td></tr>`; }
-    html += '</tbody></tr>';
+    html += '</tbody></table>';
     document.getElementById('prevModalTable').innerHTML = html; 
     modal.style.display = 'flex'; 
 };
 
+// ========== DREAM PREDICTOR BUTTON - FIXED ==========
 document.getElementById('predictDreamBtn').onclick = () => { 
     let inp = document.getElementById('dreamInput').value.trim(); 
-    if(!inp) { alert("Enter dream word"); return; } 
+    if(!inp) { 
+        alert("Enter dream word"); 
+        return; 
+    } 
     let num = dreamToNum(inp); 
     let he = getHENumbers(num); 
     document.getElementById('dreamDisplayText').innerHTML = `💭 Dream: <strong>${inp}</strong> → Number: <strong>${num}</strong>`; 
@@ -851,6 +870,7 @@ document.getElementById('predictDreamBtn').onclick = () => {
     document.getElementById('endingDigit1').innerText = he.ending[0]; 
     document.getElementById('endingDigit2').innerText = he.ending[1]; 
 };
+// ========== END DREAM PREDICTOR FIX ==========
 
 document.getElementById('payNowBtn').onclick = () => { window.location.href="upi://pay?pa=7628988767@airtel&pn=Teer%20VIP&am=1500&cu=INR"; };
 document.getElementById('verifyPaymentBtn').onclick = () => { let txn=document.getElementById('transactionIdInput').value.trim(); if(txn.length>=5){ isVipUnlocked=true; localStorage.setItem('teer_vip_status','active'); renderVIP(); document.getElementById('vipMessage').innerHTML="✅ VIP UNLOCKED!"; } else { document.getElementById('vipMessage').innerHTML="❌ Invalid TXN ID"; } };
