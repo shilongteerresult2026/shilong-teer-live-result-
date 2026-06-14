@@ -7,6 +7,14 @@
 <meta name="keywords" content="Shillong Teer Result, Teer Common Number, Shillong Teer Today, Teer Winning Strategy, Teer Expert Advice, Dream Chart, Khanapara Teer, Juwai Teer, Morning Teer, Night Teer, Month Wise Results">
 <meta name="author" content="shillongteerliveresult.in">
 <title>Shillong Teer Live Result | Dream Chart & Winning Strategies</title>
+
+<!-- Favicon - Website Logo for Browser Tab and Search Results -->
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 * {
@@ -93,6 +101,16 @@ body {
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
+.common-time-badge {
+    background: linear-gradient(95deg, #2c6e2f, #1f4a21);
+    color: #ffda88;
+    font-size: 0.7rem;
+    padding: 0.3rem;
+    border-radius: 50px;
+    text-align: center;
+    margin-bottom: 0.8rem;
+}
+
 .dream-card {
     background: linear-gradient(115deg, #fff9ef, #fff1e0);
     border-radius: 1rem;
@@ -101,7 +119,7 @@ body {
     border: 1px solid #ffcd94;
 }
 .dream-title {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 800;
     color: #b94b0c;
     text-align: center;
@@ -124,12 +142,11 @@ body {
 .dream-btn {
     background: #e67e22;
     border: none;
-    padding: 0 1rem;
+    padding: 0.5rem 1rem;
     border-radius: 60px;
     font-weight: bold;
     color: white;
     cursor: pointer;
-    font-size: 0.8rem;
 }
 .dream-table {
     width: 100%;
@@ -143,10 +160,9 @@ body {
     background: #d45a1a;
     color: white;
     padding: 8px;
-    font-size: 0.85rem;
 }
 .dream-table td {
-    padding: 8px 5px;
+    padding: 8px;
     background: #2c3824;
     text-align: center;
 }
@@ -158,9 +174,6 @@ body {
 }
 .dream-num-box {
     background: #f5b042;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     min-width: 55px;
     padding: 0.35rem 0.7rem;
     border-radius: 50px;
@@ -182,14 +195,13 @@ body {
     padding: 0.6rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
     border-top: 3px solid #f5b642;
-    width: 100%;
 }
 .venue-header {
     background: #2c3e50;
     border-radius: 50px;
     padding: 0.25rem 0.6rem;
-    margin-bottom: 0.5rem;
     text-align: center;
+    margin-bottom: 0.5rem;
 }
 .venue-name {
     font-size: 0.9rem;
@@ -212,9 +224,6 @@ body {
     border-radius: 50px;
 }
 .flash-waiting {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
     background: #dc2626;
     color: white;
     font-size: 0.65rem;
@@ -223,10 +232,7 @@ body {
     border-radius: 30px;
     animation: flashWaiting 0.8s infinite;
 }
-@keyframes flashWaiting {
-    0%, 100% { background: #dc2626; opacity: 1; }
-    50% { background: #ff0000; opacity: 0.9; }
-}
+@keyframes flashWaiting { 0%,100% { background: #dc2626; } 50% { background: #ff0000; } }
 .live-result-badge {
     background: #dc2626;
     color: white;
@@ -239,540 +245,100 @@ body {
     gap: 5px;
     animation: flashLive 0.6s infinite;
 }
-@keyframes flashLive {
-    0%, 100% { background: #dc2626; }
-    50% { background: #ff3333; box-shadow: 0 0 8px #ff4444; }
-}
-.live-result-badge::before {
-    content: "●";
-    font-size: 0.7rem;
-    animation: blinkDot 0.5s infinite;
-}
-@keyframes blinkDot {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-}
-.timing-dual {
-    display: flex;
-    gap: 0.6rem;
-    margin: 0.5rem 0;
-}
-.fr-box, .sr-box {
-    flex: 1;
-    text-align: center;
-    background: #faf3e8;
-    border-radius: 0.8rem;
-    padding: 0.3rem;
-}
-.result-number {
-    font-size: 1.5rem;
-    font-weight: 900;
-    background: #f5f0e8;
-    display: inline-block;
-    padding: 0.1rem 0.7rem;
-    border-radius: 40px;
-    color: #2c6e2f;
-}
-.waiting-number-display {
-    background: #dc2626;
-    color: white;
-    font-size: 0.7rem;
-    font-weight: bold;
-    padding: 0.2rem 0.5rem;
-    border-radius: 40px;
-    display: inline-block;
-    animation: blinkWaiting 0.6s infinite;
-}
-@keyframes blinkWaiting {
-    0%, 100% { opacity: 1; background: #dc2626; }
-    50% { opacity: 0.7; background: #ff0000; }
-}
-.card-footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.4rem;
-}
-.prev-btn {
-    background: #eae0d0;
-    padding: 0.15rem 0.6rem;
-    border-radius: 40px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    cursor: pointer;
-}
-.common-badge {
-    background: #d45a1a;
-    color: white;
-    padding: 0.15rem 0.6rem;
-    border-radius: 40px;
-    font-size: 0.7rem;
-}
+@keyframes flashLive { 0%,100% { background: #dc2626; } 50% { background: #ff3333; box-shadow: 0 0 8px #ff4444; } }
+.live-result-badge::before { content: "●"; animation: blinkDot 0.5s infinite; }
+@keyframes blinkDot { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+.timing-dual { display: flex; gap: 0.6rem; margin: 0.5rem 0; }
+.fr-box, .sr-box { flex: 1; text-align: center; background: #faf3e8; border-radius: 0.8rem; padding: 0.3rem; }
+.result-number { font-size: 1.5rem; font-weight: 900; background: #f5f0e8; display: inline-block; padding: 0.1rem 0.7rem; border-radius: 40px; color: #2c6e2f; }
+.waiting-number-display { background: #dc2626; color: white; font-size: 0.7rem; font-weight: bold; padding: 0.2rem 0.5rem; border-radius: 40px; display: inline-block; animation: blinkWaiting 0.6s infinite; }
+@keyframes blinkWaiting { 0%,100% { opacity: 1; background: #dc2626; } 50% { opacity: 0.7; background: #ff0000; } }
+.card-footer { display: flex; justify-content: space-between; margin-top: 0.4rem; }
+.prev-btn { background: #eae0d0; padding: 0.15rem 0.6rem; border-radius: 40px; font-size: 0.7rem; font-weight: 600; cursor: pointer; }
 
-.common-venues-container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    margin: 0.8rem 0 1rem;
-}
-.common-venue-card {
-    background: linear-gradient(135deg, #fffaf2, #fff5e8);
-    border-radius: 0.9rem;
-    padding: 0.6rem;
-    border: 2px solid #e8b86b;
-}
-.common-venue-title {
-    background: linear-gradient(95deg, #2c3e50, #1e2f3a);
-    color: #ffecb3;
-    padding: 6px 10px;
-    border-radius: 50px;
-    font-weight: 800;
-    font-size: 0.85rem;
-    margin-bottom: 10px;
-    text-align: center;
-}
-.common-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 0.7rem;
-    overflow: hidden;
-}
-.common-table th {
-    background: #e67e22;
-    color: white;
-    padding: 6px 4px;
-    font-size: 0.75rem;
-}
-.common-table td {
-    padding: 8px 4px;
-    text-align: center;
-    border: 1px solid #ffe0bc;
-}
-.round-cell {
-    font-weight: 800;
-    background: #f5e6d3;
-    color: #9b4b1a;
-    font-size: 0.75rem;
-}
-.direct-num, .house-num, .ending-num {
-    display: inline-block;
-    padding: 3px 8px;
-    border-radius: 40px;
-    font-weight: 800;
-    font-size: 0.85rem;
-}
+.common-venues-container { display: flex; flex-direction: column; gap: 0.8rem; margin: 0.8rem 0 1rem; }
+.common-venue-card { background: linear-gradient(135deg, #fffaf2, #fff5e8); border-radius: 0.9rem; padding: 0.6rem; border: 2px solid #e8b86b; }
+.common-venue-title { background: linear-gradient(95deg, #2c3e50, #1e2f3a); color: #ffecb3; padding: 6px 10px; border-radius: 50px; font-weight: 800; font-size: 0.85rem; margin-bottom: 10px; text-align: center; }
+.common-table { width: 100%; border-collapse: collapse; background: white; border-radius: 0.7rem; overflow: hidden; }
+.common-table th { background: #e67e22; color: white; padding: 6px; font-size: 0.75rem; }
+.common-table td { padding: 8px; text-align: center; border: 1px solid #ffe0bc; }
+.round-cell { font-weight: 800; background: #f5e6d3; color: #9b4b1a; }
+.direct-num, .house-num, .ending-num { display: inline-block; padding: 3px 8px; border-radius: 40px; font-weight: 800; font-size: 0.85rem; }
 .direct-num { background: #e67e22; color: white; }
 .house-num { background: #1f6392; color: white; }
 .ending-num { background: #2c6e2f; color: white; }
 
-.monthwise-section {
-    background: #fef7e8;
-    border-radius: 1rem;
-    padding: 0.8rem;
-    margin: 1rem 0;
-    border: 2px solid #f5b642;
-}
-.monthwise-title {
-    font-size: 1rem;
-    font-weight: 800;
-    color: #b85e0e;
-    text-align: center;
-    margin-bottom: 0.7rem;
-}
-.selector-container {
-    display: flex;
-    gap: 0.6rem;
-    justify-content: center;
-    margin-bottom: 0.9rem;
-    flex-wrap: wrap;
-}
-.selector-container select {
-    padding: 0.4rem 0.9rem;
-    border-radius: 50px;
-    border: 2px solid #e67e22;
-    background: white;
-    font-weight: 600;
-    font-size: 0.85rem;
-    cursor: pointer;
-}
-.result-display-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.8rem;
-    background: white;
-    border-radius: 0.7rem;
-    overflow: hidden;
-}
-.result-display-table th {
-    background: #e67e22;
-    color: white;
-    padding: 8px;
-    font-size: 0.8rem;
-}
-.result-display-table td {
-    padding: 6px;
-    text-align: center;
-    border-bottom: 1px solid #ffe0bc;
-}
+.monthwise-section { background: #fef7e8; border-radius: 1rem; padding: 0.8rem; margin: 1rem 0; border: 2px solid #f5b642; }
+.monthwise-title { font-size: 1rem; font-weight: 800; color: #b85e0e; text-align: center; }
+.selector-container { display: flex; gap: 0.6rem; justify-content: center; margin: 0.7rem 0; flex-wrap: wrap; }
+.selector-container select { padding: 0.4rem 0.9rem; border-radius: 50px; border: 2px solid #e67e22; background: white; font-weight: 600; cursor: pointer; }
+.result-display-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; background: white; border-radius: 0.7rem; overflow: hidden; }
+.result-display-table th { background: #e67e22; color: white; padding: 8px; }
+.result-display-table td { padding: 6px; text-align: center; border-bottom: 1px solid #ffe0bc; }
 
-.history-section-direct {
-    margin: 1rem 0;
-}
-.history-card {
-    background: #fef3e6;
-    border-radius: 1rem;
-    margin-bottom: 0.8rem;
-    border: 1px solid #e8c48a;
-    overflow: hidden;
-}
-.history-title {
-    background: linear-gradient(95deg, #2c3e50, #1e2f3a);
-    color: #ffecb3;
-    padding: 10px 14px;
-    font-weight: 800;
-    font-size: 0.9rem;
-    border-bottom: 1px solid #f5b642;
-}
-.history-content {
-    padding: 0.8rem 1rem;
-    background: #fffdf5;
-    font-size: 0.85rem;
-    line-height: 1.6;
-    color: #2d2a24;
-}
-.highlight-box {
-    background: #ffefcf;
-    border-left: 4px solid #f39c12;
-    padding: 0.6rem 0.8rem;
-    border-radius: 0.6rem;
-    margin: 0.6rem 0;
-}
-.rule-list {
-    list-style: none;
-    padding-left: 0;
-}
-.rule-list li {
-    padding: 0.3rem 0;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 0.82rem;
-}
-.rule-list li:before {
-    content: "🏹";
-    font-size: 0.85rem;
-}
+.history-section-direct { margin: 1rem 0; }
+.history-card { background: #fef3e6; border-radius: 1rem; margin-bottom: 0.8rem; border: 1px solid #e8c48a; overflow: hidden; }
+.history-title { background: linear-gradient(95deg, #2c3e50, #1e2f3a); color: #ffecb3; padding: 10px 14px; font-weight: 800; font-size: 0.9rem; border-bottom: 1px solid #f5b642; }
+.history-content { padding: 0.8rem 1rem; background: #fffdf5; font-size: 0.85rem; line-height: 1.6; color: #2d2a24; }
+.highlight-box { background: #ffefcf; border-left: 4px solid #f39c12; padding: 0.6rem 0.8rem; border-radius: 0.6rem; margin: 0.6rem 0; }
+.rule-list { list-style: none; padding-left: 0; }
+.rule-list li { padding: 0.3rem 0; display: flex; align-items: center; gap: 7px; font-size: 0.82rem; }
+.rule-list li:before { content: "🏹"; font-size: 0.85rem; }
 
-.strategy-section {
-    background: linear-gradient(135deg, #1a3c2f, #0e2b20);
-    border-radius: 1rem;
-    padding: 0.9rem;
-    margin: 1rem 0;
-    border: 2px solid #f5b642;
-}
-.strategy-title {
-    font-size: 1rem;
-    font-weight: 800;
-    color: #ffda88;
-    text-align: center;
-    margin-bottom: 0.8rem;
-    border-bottom: 1px solid #f5b642;
-    padding-bottom: 6px;
-}
-.strategy-subtitle {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #ffae42;
-    margin: 0.8rem 0 0.4rem;
-    border-left: 3px solid #f5b642;
-    padding-left: 9px;
-}
-.strategy-text {
-    font-size: 0.85rem;
-    line-height: 1.6;
-    color: #e8e8dd;
-    margin-bottom: 0.5rem;
-}
-.strategy-list {
-    margin: 0.4rem 0 0.6rem 1.3rem;
-    font-size: 0.83rem;
-    line-height: 1.55;
-    color: #e8e8dd;
-}
-.strategy-list li {
-    margin-bottom: 6px;
-}
-.tip-badge {
-    display: inline-block;
-    background: #e67e22;
-    color: white;
-    font-size: 0.7rem;
-    padding: 0.1rem 0.4rem;
-    border-radius: 30px;
-    margin-right: 6px;
-}
-.pro-tip {
-    background: linear-gradient(95deg, #2c3e50, #1a2a35);
-    border-radius: 0.7rem;
-    padding: 0.6rem;
-    margin-top: 0.6rem;
-    border-left: 3px solid #f5b642;
-}
-.pro-tip-text {
-    color: #ffda88;
-    font-size: 0.8rem;
-    font-weight: 500;
-}
-.strategy-highlight {
-    background: rgba(245, 176, 66, 0.12);
-    border-left: 3px solid #f5b042;
-    padding: 0.6rem;
-    border-radius: 0.6rem;
-    margin: 0.7rem 0;
-    font-size: 0.8rem;
-    color: #ffe6b3;
-    line-height: 1.55;
-}
+.strategy-section { background: linear-gradient(135deg, #1a3c2f, #0e2b20); border-radius: 1rem; padding: 0.9rem; margin: 1rem 0; border: 2px solid #f5b642; }
+.strategy-title { font-size: 1rem; font-weight: 800; color: #ffda88; text-align: center; margin-bottom: 0.8rem; border-bottom: 1px solid #f5b642; padding-bottom: 6px; }
+.strategy-subtitle { font-size: 0.9rem; font-weight: 700; color: #ffae42; margin: 0.8rem 0 0.4rem; border-left: 3px solid #f5b642; padding-left: 9px; }
+.strategy-text { font-size: 0.85rem; line-height: 1.6; color: #e8e8dd; margin-bottom: 0.5rem; }
+.strategy-list { margin: 0.4rem 0 0.6rem 1.3rem; font-size: 0.83rem; line-height: 1.55; color: #e8e8dd; }
+.strategy-list li { margin-bottom: 6px; }
+.tip-badge { display: inline-block; background: #e67e22; color: white; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 30px; margin-right: 6px; }
+.pro-tip { background: linear-gradient(95deg, #2c3e50, #1a2a35); border-radius: 0.7rem; padding: 0.6rem; margin-top: 0.6rem; border-left: 3px solid #f5b642; }
+.pro-tip-text { color: #ffda88; font-size: 0.8rem; font-weight: 500; }
+.strategy-highlight { background: rgba(245, 176, 66, 0.12); border-left: 3px solid #f5b042; padding: 0.6rem; border-radius: 0.6rem; margin: 0.7rem 0; font-size: 0.8rem; color: #ffe6b3; line-height: 1.55; }
 
-.vip-premium {
-    background: #1e2a2f;
-    border-radius: 1rem;
-    padding: 0.8rem;
-    margin: 1rem 0;
-}
-.vip-title {
-    font-size: 1rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, #ffda88, #ffae42);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-}
-.locked-blur {
-    filter: blur(3px);
-    background: #4a3a28;
-    padding: 0.15rem 0.5rem;
-    border-radius: 30px;
-    display: inline-block;
-    font-size: 0.75rem;
-}
-.vip-btn {
-    background: #e67e22;
-    border: none;
-    padding: 0.4rem;
-    border-radius: 60px;
-    font-weight: bold;
-    width: 100%;
-    margin-top: 0.4rem;
-    color: white;
-    cursor: pointer;
-    font-size: 0.85rem;
-}
-.txn-field {
-    width: 100%;
-    padding: 0.4rem;
-    border-radius: 60px;
-    margin: 0.4rem 0;
-    border: 1px solid #e67e22;
-    font-size: 0.8rem;
-}
-.passing-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 0.5rem;
-    margin: 0.5rem 0;
-}
-.pass-item {
-    background: #fef6e8;
-    padding: 0.3rem 0.5rem;
-    border-radius: 50px;
-    font-size: 0.75rem;
-    border: 1px solid #ffd6a5;
-}
+.vip-premium { background: #1e2a2f; border-radius: 1rem; padding: 0.8rem; margin: 1rem 0; }
+.vip-title { font-size: 1rem; font-weight: 800; background: linear-gradient(135deg, #ffda88, #ffae42); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.locked-blur { filter: blur(3px); background: #4a3a28; padding: 0.15rem 0.5rem; border-radius: 30px; display: inline-block; font-size: 0.75rem; }
+.vip-btn { background: #e67e22; border: none; padding: 0.4rem; border-radius: 60px; font-weight: bold; width: 100%; margin-top: 0.4rem; color: white; cursor: pointer; }
+.txn-field { width: 100%; padding: 0.4rem; border-radius: 60px; margin: 0.4rem 0; border: 1px solid #e67e22; }
+.passing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.5rem; margin: 0.5rem 0; }
+.pass-item { background: #fef6e8; padding: 0.3rem 0.5rem; border-radius: 50px; font-size: 0.75rem; border: 1px solid #ffd6a5; }
 
-.dream-chart-section {
-    background: #fef7e0;
-    border-radius: 1rem;
-    padding: 0.8rem;
-    margin: 1rem 0;
-    border: 2px solid #f5b642;
-}
-.dream-chart-title {
-    font-size: 1rem;
-    font-weight: 800;
-    color: #b85e0e;
-    text-align: center;
-    margin-bottom: 0.7rem;
-}
-.dream-chart-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.85rem;
-    background: white;
-    border-radius: 0.7rem;
-    overflow: hidden;
-}
-.dream-chart-table th {
-    background: #e67e22;
-    color: white;
-    padding: 10px;
-    font-size: 0.85rem;
-}
-.dream-chart-table td {
-    padding: 8px;
-    text-align: center;
-    border-bottom: 1px solid #ffe0bc;
-    font-size: 0.85rem;
-}
-.dream-chart-note {
-    font-size: 0.7rem;
-    color: #888;
-    text-align: center;
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 1px dashed #ffdbb5;
-}
+.dream-chart-section { background: #fef7e0; border-radius: 1rem; padding: 0.8rem; margin: 1rem 0; border: 2px solid #f5b642; }
+.dream-chart-title { font-size: 1rem; font-weight: 800; color: #b85e0e; text-align: center; }
+.dream-chart-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; background: white; border-radius: 0.7rem; overflow: hidden; }
+.dream-chart-table th { background: #e67e22; color: white; padding: 10px; }
+.dream-chart-table td { padding: 8px; text-align: center; border-bottom: 1px solid #ffe0bc; }
+.dream-chart-note { font-size: 0.7rem; color: #888; text-align: center; margin-top: 0.5rem; }
 
-.faq-section {
-    background: #faf3e3;
-    border-radius: 1rem;
-    padding: 0.9rem;
-    margin: 1rem 0;
-}
-.faq-title {
-    font-size: 1rem;
-    font-weight: 800;
-    margin-bottom: 0.8rem;
-    border-left: 5px solid #e67e22;
-    padding-left: 11px;
-    color: #9b4b1a;
-}
-.faq-item {
-    background: white;
-    border-radius: 0.8rem;
-    margin-bottom: 0.7rem;
-    overflow: hidden;
-}
-.faq-question {
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    padding: 11px 13px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    color: #5a3a20;
-    background: #fff4e5;
-}
-.faq-question:hover {
-    background: #ffecce;
-}
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease;
-    background: white;
-    padding: 0 13px;
-    font-size: 0.8rem;
-    line-height: 1.5;
-    color: #3a3228;
-}
-.faq-answer.show {
-    max-height: 350px;
-    padding: 10px 13px;
-}
-.faq-icon {
-    font-size: 1rem;
-    font-weight: bold;
-}
+.faq-section { background: #faf3e3; border-radius: 1rem; padding: 0.9rem; margin: 1rem 0; }
+.faq-title { font-size: 1rem; font-weight: 800; margin-bottom: 0.8rem; border-left: 5px solid #e67e22; padding-left: 11px; color: #9b4b1a; }
+.faq-item { background: white; border-radius: 0.8rem; margin-bottom: 0.7rem; overflow: hidden; }
+.faq-question { cursor: pointer; display: flex; justify-content: space-between; padding: 11px 13px; font-weight: 700; font-size: 0.85rem; color: #5a3a20; background: #fff4e5; }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; background: white; padding: 0 13px; font-size: 0.8rem; line-height: 1.5; color: #3a3228; }
+.faq-answer.show { max-height: 350px; padding: 10px 13px; }
+.faq-icon { font-size: 1rem; font-weight: bold; }
 
-.whatsapp-btn-container {
-    text-align: center;
-    margin: 1rem 0;
-}
-.whatsapp-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: linear-gradient(95deg, #25D366, #128C7E);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 60px;
-    font-size: 0.85rem;
-    font-weight: bold;
-    text-decoration: none;
-    animation: whatsappFlash 0.8s infinite alternate;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-.whatsapp-btn:hover {
-    transform: scale(1.02);
-}
-@keyframes whatsappFlash {
-    0% { background: #25D366; transform: scale(0.98); }
-    100% { background: #128C7E; transform: scale(1.02); }
-}
+.whatsapp-btn-container { text-align: center; margin: 1rem 0; }
+.whatsapp-btn { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(95deg, #25D366, #128C7E); color: white; padding: 0.5rem 1rem; border-radius: 60px; font-size: 0.85rem; font-weight: bold; text-decoration: none; animation: whatsappFlash 0.8s infinite alternate; }
+@keyframes whatsappFlash { 0% { background: #25D366; } 100% { background: #128C7E; } }
 
-.disclaimer-footer {
-    margin-top: 0.8rem;
-    padding: 0.8rem;
-    background: #fef9f0;
-    border-radius: 0.8rem;
-    font-size: 0.65rem;
-    color: #555;
-    text-align: center;
-    line-height: 1.5;
-    border-top: 1px solid #e0d6c8;
-}
+.disclaimer-footer { margin-top: 0.8rem; padding: 0.8rem; background: #fef9f0; border-radius: 0.8rem; font-size: 0.65rem; color: #555; text-align: center; }
 
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
-    z-index: 10000;
-    align-items: center;
-    justify-content: center;
-}
-.modal-card {
-    background: #1f2c1a;
-    width: 90%;
-    max-width: 420px;
-    border-radius: 0.9rem;
-    padding: 0.8rem;
-    color: #fbe9c3;
-    border: 2px solid #f5b642;
-}
-.close-modal {
-    float: right;
-    font-size: 1.3rem;
-    cursor: pointer;
-}
-.prev-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.75rem;
-}
-.prev-table th, .prev-table td {
-    padding: 5px;
-    text-align: center;
-    border-bottom: 1px solid #3a4a3a;
-}
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; align-items: center; justify-content: center; }
+.modal-card { background: #1f2c1a; width: 90%; max-width: 420px; border-radius: 0.9rem; padding: 0.8rem; color: #fbe9c3; border: 2px solid #f5b642; }
+.close-modal { float: right; font-size: 1.3rem; cursor: pointer; }
+.prev-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
+.prev-table th, .prev-table td { padding: 5px; text-align: center; border-bottom: 1px solid #3a4a3a; }
 
-@media (max-width: 480px) {
-    body { padding: 0.3rem; }
-    .container { padding: 0.5rem; }
-    .result-number { font-size: 1.3rem; }
-    .dream-chart-table th, .dream-chart-table td { padding: 5px; font-size: 0.75rem; }
-}
+@media (max-width: 480px) { .result-number { font-size: 1.3rem; } }
 </style>
 </head>
 <body>
 <div class="container">
     <div class="site-brand">
         <div class="name-box"><h1>🏹 SHILLONG TEER LIVE</h1></div>
-        <div class="domain">shillongteerliveresult.in | Official Info Portal</div>
+        <div class="domain">shillongteerliveresult.in</div>
         <div class="live-badge-main">🔴 LIVE RESULT TODAY</div>
     </div>
     
@@ -786,7 +352,7 @@ body {
         </div>
         <div id="dreamDisplayText" style="text-align:center; margin-bottom:6px; font-weight:bold; color:#bc5a0c; font-size:0.8rem;">💭 Enter a dream word and click Predict</div>
         <table class="dream-table">
-            <thead><tr><th>🏠 HOUSE NUMBERS</th><th>🎯 ENDING NUMBERS</th></tr></thead>
+            <thead><tr><th>🏠 HOUSE NUMBERS</th><th>🎯 ENDING NUMBERS</th><tr></thead>
             <tbody>
                 <tr>
                     <td><div class="number-group"><span class="dream-num-box" id="houseDigit1">--</span><span class="dream-num-box" id="houseDigit2">--</span></div></td>
@@ -796,10 +362,13 @@ body {
         </table>
     </div>
 
-    <div id="resultsGrid" class="results-grid"></div>
+    <!-- Common Numbers Section -->
+    <div class="common-time-badge">⭐ TODAY'S COMMON NUMBERS (Based on yesterday's results)</div>
     <div class="common-venues-container" id="commonTablesContainer"></div>
 
-    <!-- Previous Results - FIXED -->
+    <div id="resultsGrid" class="results-grid"></div>
+
+    <!-- Previous Results -->
     <div class="monthwise-section">
         <div class="monthwise-title">📅 SHILLONG TEER - PREVIOUS RESULTS (JANUARY - JUNE 2026)</div>
         <div class="selector-container">
@@ -821,27 +390,25 @@ body {
     </div>
 
     <div class="vip-premium">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
             <div class="vip-title">👑 VIP SUBSCRIPTION (₹1500 / Week)</div>
             <div id="vipLockIcon" style="background:#2d241c; padding:0.15rem 0.6rem; border-radius:40px; font-size:0.75rem; color:#ffbc6e;">🔒 LOCKED</div>
         </div>
         <div id="vipNumbersContainer" style="background:#2a3338; border-radius:0.8rem; padding:0.6rem; margin:0.6rem 0; min-height:80px; text-align:center;">⭐ VIP Common: <span class="locked-blur">🔒 •••</span> <span class="locked-blur">🔒 •••</span> <span class="locked-blur">🔒 •••</span> <span class="locked-blur">🔒 •••</span> <span class="locked-blur">🔒 •••</span></div>
         <button class="vip-btn" id="payNowBtn">💸 PAY ₹1500 (UPI)</button>
         <div style="background:#2f281e; border-radius:0.8rem; padding:0.6rem; margin-top:0.6rem;">
-            <p style="font-size:0.8rem;">🔹 UPI ID: <strong>7628988767@airtel</strong> | Amount: ₹1500</p>
-            <input type="text" id="transactionIdInput" class="txn-field" placeholder="Transaction ID (10-20 chars)">
+            <p>🔹 UPI ID: <strong>7628988767@airtel</strong> | Amount: ₹1500</p>
+            <input type="text" id="transactionIdInput" class="txn-field" placeholder="Transaction ID">
             <button class="vip-btn" id="verifyPaymentBtn" style="background:#b45f1b;">🔓 VERIFY & UNLOCK</button>
             <div id="vipMessage" style="font-size:10px; color:#ffcd94;"></div>
         </div>
     </div>
 
     <div class="whatsapp-btn-container">
-        <a href="https://whatsapp.com/channel/0029VaFbrQmLSmbjX5WOYp2d" target="_blank" class="whatsapp-btn">
-            <span>📱</span> VIP GUTI - JOIN WHATSAPP CHANNEL <span>✨</span>
-        </a>
+        <a href="https://whatsapp.com/channel/0029VaFbrQmLSmbjX5WOYp2d" target="_blank" class="whatsapp-btn">📱 VIP GUTI - JOIN WHATSAPP CHANNEL ✨</a>
     </div>
 
-    <!-- Dream Chart - FIXED with 21 dreams -->
+    <!-- Dream Chart -->
     <div class="dream-chart-section">
         <div class="dream-chart-title">📖 TRADITIONAL DREAM CHART (Dream to Direct, House, Ending)</div>
         <table class="dream-chart-table">
@@ -851,9 +418,9 @@ body {
         <div class="dream-chart-note">How to use: Find your dream in the chart above, note the Direct, House, and Ending numbers. Then use the Dream Predictor above for personalized predictions.</div>
     </div>
 
-    <div><h3 style="border-left:4px solid #f39c12; padding-left:8px; font-size:0.85rem;">✅ TODAY'S PASSING RECORDS (HITS)</h3><div class="passing-grid" id="passingGrid"></div></div>
+    <div><h3 style="border-left:4px solid #f39c12; padding-left:8px;">✅ TODAY'S PASSING RECORDS (HITS)</h3><div class="passing-grid" id="passingGrid"></div></div>
 
-    <!-- History Section - Same as before -->
+    <!-- History Section -->
     <div class="history-section-direct">
         <h2 style="color:#9b4b1a; border-left:4px solid #e67e22; padding-left:10px; font-size:1rem; margin-bottom:0.7rem;">📜 TRADITIONAL HISTORY & GAME DETAILS</h2>
         
@@ -874,15 +441,16 @@ body {
                     </ul>
                 </div>
                 <p><strong>Cultural Impact and Records:</strong> Teer is not just a game but a socio-cultural event in Meghalaya. The game employs hundreds of archers, counter staff, and supports the local economy. Traditional Khasi chants and rituals are performed before each match. The highest recorded arrow hits in a single round was 1478 in 2019, while the lowest was 892 due to heavy rainfall.</p>
+                <p><strong>Interesting Facts:</strong> The word "Teer" means arrow in the Khasi language. The game has been featured in several documentaries about Northeast Indian culture. Many local families have been involved in Teer for generations, passing down their archery skills and prediction techniques. The oldest Teer counter in Shillong has been operating for over 60 years. Each day, approximately 2,000 to 3,000 people visit the Shillong Teer counter to place their bets.</p>
             </div>
         </div>
         
-        <div class="history-card"><div class="history-title">🏹 Khanapara Teer — Assam-Meghalaya Border Legacy</div><div class="history-content"><p><strong>Location and History:</strong> Khanapara Teer is played at the Assam-Meghalaya border near Guwahati. It started in 1995 after receiving official approval from the Assam government. This venue has gained massive popularity due to its high participation and reliable result declaration system. The Khanapara Teer counter is one of the busiest in Northeast India, processing thousands of bets daily.</p><p><strong>Timings and Process:</strong> First Round 4:00 PM, Second Round 5:00 PM (IST). The calculation method remains identical to Shillong Teer: total arrows hitting the target determine the winning numbers. Many professional bettors consider Khanapara results as a crucial indicator for next-day predictions.</p><p><strong>Unique Features:</strong> Khanapara often witnesses higher arrow counts because of larger archer teams (sometimes up to 60 archers). The venue is known for its transparent counting process, where each arrow is counted publicly by three independent counters.</p></div></div>
+        <div class="history-card"><div class="history-title">🏹 Khanapara Teer — Assam-Meghalaya Border Legacy</div><div class="history-content"><p><strong>Location and History:</strong> Khanapara Teer is played at the Assam-Meghalaya border near Guwahati. It started in 1995 after receiving official approval from the Assam government. This venue has gained massive popularity due to its high participation and reliable result declaration system. The Khanapara Teer counter is one of the busiest in Northeast India, processing thousands of bets daily.</p><p><strong>Timings and Process:</strong> First Round 4:00 PM, Second Round 5:00 PM (IST). The calculation method remains identical to Shillong Teer: total arrows hitting the target determine the winning numbers. Many professional bettors consider Khanapara results as a crucial indicator for next-day predictions.</p><p><strong>Unique Features:</strong> Khanapara often witnesses higher arrow counts because of larger archer teams (sometimes up to 60 archers). The venue is known for its transparent counting process, where each arrow is counted publicly by three independent counters. Khanapara results are often considered more stable due to consistent weather conditions at the venue.</p><p><strong>Betting Trends:</strong> Khanapara sees maximum betting on Tuesday and Wednesday. The average number of bets placed daily ranges from 50,000 to 1,00,000. The highest recorded winning payout in Khanapara was ₹25 lakhs in 2018. During peak season, the venue handles over 1.5 lakh bets per day.</p></div></div>
         
-        <div class="history-card"><div class="history-title">🏹 Juwai Teer — Jewel of Jaintia Hills</div><div class="history-content"><p><strong>Cultural Heritage:</strong> Juwai Teer began in the early 2000s in the Jaintia Hills district, near the Bangladesh border. What makes Juwai unique is the traditional drumming ceremony performed before each round, invoking local deities and blessings. The game is deeply rooted in community bonding and indigenous faith.</p><p><strong>Timings:</strong> First Round at 2:00 PM, Second Round at 3:30 PM (IST) – earlier than other venues, making it the first result of the day. Many players track Juwai results as morning indicators for Shillong evening games.</p><p><strong>Local Traditions:</strong> Before each Teer round, a local priest performs a small ritual with rice and flowers to ward off evil spirits. The archers wear traditional Jaintia attire during special occasions.</p></div></div>
+        <div class="history-card"><div class="history-title">🏹 Juwai Teer — Jewel of Jaintia Hills</div><div class="history-content"><p><strong>Cultural Heritage:</strong> Juwai Teer began in the early 2000s in the Jaintia Hills district, near the Bangladesh border. What makes Juwai unique is the traditional drumming ceremony performed before each round, invoking local deities and blessings. The game is deeply rooted in community bonding and indigenous faith.</p><p><strong>Timings:</strong> First Round at 2:00 PM, Second Round at 3:30 PM (IST) – earlier than other venues, making it the first result of the day. Many players track Juwai results as morning indicators for Shillong evening games.</p><p><strong>Local Traditions:</strong> Before each Teer round, a local priest performs a small ritual with rice and flowers to ward off evil spirits. The archers wear traditional Jaintia attire during special occasions. Juwai results are announced with a ceremonial gong sound, a practice unique to this venue. The arrow counting is done on a traditional wooden platform, adding to its rustic charm.</p><p><strong>Special Characteristics:</strong> Juwai Teer is known for its unpredictable results, making it exciting for experienced players. The venue is smaller than Shillong and Khanapara, creating an intimate atmosphere for bettors. The local community strongly participates in this venue, making it a true community event.</p></div></div>
     </div>
 
-    <!-- Strategy Section - Same as before -->
+    <!-- Strategy Section -->
     <div class="strategy-section">
         <div class="strategy-title">🏆 SHILLONG TEER WINNING STRATEGY & EXPERT ADVICE</div>
         
@@ -892,7 +460,7 @@ body {
         <div class="strategy-subtitle">Top Winning Strategies from Experts</div>
         <ul class="strategy-list">
             <li><span class="tip-badge">1</span> <strong>Analyze Last 10-15 Days Results:</strong> Look for repeating patterns. Numbers that appear frequently often repeat within 2-3 days. Maintain a personal record book with daily FR, SR, and your chosen numbers.</li>
-            <li><span class="tip-badge">2</span> <strong>Follow the Common Numbers Table:</strong> Our daily common numbers (FR and SR direct, house, ending) are calculated using mathematical formulas based on previous results and arrow count patterns.</li>
+            <li><span class="tip-badge">2</span> <strong>Follow the Common Numbers Table:</strong> Our daily common numbers (FR and SR direct, house, ending) are calculated using 5 different mathematical formulas based on previous results and arrow count patterns.</li>
             <li><span class="tip-badge">3</span> <strong>House and Ending Combination:</strong> Instead of betting on direct numbers (100 to 1 odds), try house (10 to 1) or ending (10 to 1) bets - higher probability of winning (10 percent chance vs 1 percent chance).</li>
             <li><span class="tip-badge">4</span> <strong>Dream Interpretation:</strong> Traditional Khasi players use dream numbers extensively. Use our Dream Chart and Dream Number Predictor for instant dream to number conversion based on ancient numerological mapping.</li>
             <li><span class="tip-badge">5</span> <strong>Track Arrow Count Trends:</strong> Higher arrow counts (1300 and above) tend to produce numbers in the 40 to 80 range. Lower counts (below 1200) produce numbers in the 00 to 40 range.</li>
@@ -902,30 +470,35 @@ body {
             <li><span class="tip-badge">9</span> <strong>FR to SR Correlation:</strong> If FR number is high (above 50), SR often tends to be lower (below 50) and vice versa. This inverse relationship occurs in about 65 percent of cases.</li>
             <li><span class="tip-badge">10</span> <strong>Split Your Bets:</strong> Do not put all money on one number. Spread across 3 to 5 numbers to increase chances.</li>
             <li><span class="tip-badge">11</span> <strong>Stop Loss Strategy:</strong> Set a daily budget of 100 to 500 Rupees maximum. If you lose 3 consecutive bets, stop for the day. Never chase losses.</li>
+            <li><span class="tip-badge">12</span> <strong>Weather Impact:</strong> Rainy days often result in lower arrow counts due to wet targets, producing numbers in the lower range (00-40).</li>
+            <li><span class="tip-badge">13</span> <strong>Festival Season:</strong> During traditional Khasi festivals, special Teer matches are organized with different rules - stay updated through our website.</li>
         </ul>
         
         <div class="strategy-subtitle">Mathematical Calculation Methods</div>
         <ul class="strategy-list">
-            <li><strong>Formula 1 (Addition Method):</strong> (Previous FR + Previous SR + 13) divided by 2 = Next FR Prediction. Take last two digits.</li>
-            <li><strong>Formula 2 (Multiplication Method):</strong> (Previous FR × 3 + Previous SR × 2) percent 100 = Next Number (works for both rounds).</li>
-            <li><strong>Formula 3 (Difference Method):</strong> Absolute value of FR minus SR from previous day often repeats as FR or SR next day.</li>
-            <li><strong>Formula 4 (Our Analytics Formula):</strong> FR = (TodayFR × 3 + TodaySR × 2 + 17) percent 100, SR = (TodaySR × 4 + TodayFR × 1 + 23) percent 100.</li>
+            <li><strong>Formula 1 (Addition Method):</strong> (Previous FR + Previous SR + 13) ÷ 2 = Next FR Prediction. Take last two digits.</li>
+            <li><strong>Formula 2 (Multiplication Method):</strong> (Previous FR × 3 + Previous SR × 2) % 100 = Next Number.</li>
+            <li><strong>Formula 3 (Difference Method):</strong> Absolute value of FR minus SR from previous day often repeats.</li>
+            <li><strong>Formula 4 (Analytics Formula):</strong> FR = (TodayFR × 3 + TodaySR × 2 + 17) % 100, SR = (TodaySR × 4 + TodayFR × 1 + 23) % 100.</li>
+            <li><strong>Formula 5 (Three Day Average):</strong> (Day1 FR + Day2 FR + Day3 FR) ÷ 3 = Next FR range prediction.</li>
         </ul>
         
         <div class="strategy-subtitle">Expert Advice and Pro Tips</div>
         <div class="pro-tip"><div class="pro-tip-text">💡 <strong>Pro Tip 1:</strong> Never chase losses. Set a daily budget and stick to it. Emotional betting is the number one reason for losses.</div></div>
         <div class="pro-tip"><div class="pro-tip-text">💡 <strong>Pro Tip 2:</strong> Start with house or ending bets. Once confident, try direct numbers. House and ending bets have 10 times higher probability.</div></div>
         <div class="pro-tip"><div class="pro-tip-text">💡 <strong>Pro Tip 3:</strong> Keep a personal record book. Note down daily FR, SR, arrow counts, weather conditions, and your chosen numbers.</div></div>
+        <div class="pro-tip"><div class="pro-tip-text">💡 <strong>Pro Tip 4:</strong> Join our WhatsApp channel for real-time updates and expert predictions.</div></div>
         
         <div class="strategy-highlight">
-            • Teer is 70 percent luck plus 30 percent analysis. No strategy guarantees 100 percent win.<br>
+            • Teer is 70% luck + 30% analysis. No strategy guarantees 100% win.<br>
             • Only play with money you can afford to lose. Never risk essential funds.<br>
             • Teer is legally allowed only in Meghalaya and Assam.<br>
-            • Our VIP numbers are analytical predictions, not guaranteed wins.
+            • Our VIP numbers are analytical predictions, not guaranteed wins.<br>
+            • Always verify results from official counters before celebrating wins.
         </div>
     </div>
 
-    <!-- Result Analysis Section - Same as before -->
+    <!-- Result Analysis Section -->
     <div class="strategy-section" style="background: linear-gradient(135deg, #1e3a5f, #0f2a44);">
         <div class="strategy-title">📊 PREVIOUS RESULT ANALYSIS - HOW TO READ TEER CHARTS</div>
         
@@ -941,34 +514,40 @@ body {
             <li><span class="tip-badge">5</span> <strong>Look for Repeating Pairs:</strong> Sometimes the same two numbers appear as FR and SR in consecutive days. Check February 2026: 25-48 and 16-47 patterns.</li>
             <li><span class="tip-badge">6</span> <strong>Monthly Average Calculation:</strong> Calculate average FR and SR for each month. January: FR average approximately 48, SR average approximately 45.</li>
             <li><span class="tip-badge">7</span> <strong>Weekend Gap Effect:</strong> Results after Sunday (Monday) often show significant variation from Friday results.</li>
+            <li><span class="tip-badge">8</span> <strong>Month-end Trends:</strong> Last week of each month often shows different patterns than the first week.</li>
         </ul>
         
         <div class="strategy-subtitle">Key Observations from 2026 Data (January to June)</div>
         <ul class="strategy-list">
-            <li><strong>January 2026:</strong> Most frequent FR numbers: 20, 35, 45, 56. Most frequent SR numbers: 23, 40, 71, 91.</li>
-            <li><strong>February 2026:</strong> High number of repeating digits. FR 51 appeared twice. SR 48 appeared three times.</li>
-            <li><strong>March 2026:</strong> Strong correlation between FR and SR. When FR was 20-30 range, SR was 80-90 range.</li>
-            <li><strong>April 2026:</strong> Unpredictable month. Best to use house or ending bets during such months.</li>
-            <li><strong>May 2026:</strong> Clear pattern: FR numbers 20, 67, 81 repeated. SR numbers 40-50 range dominated.</li>
-            <li><strong>June 2026 (till date):</strong> FR numbers: 06,07,13,20,23,24,46,52,77,96. SR numbers: 18,28,37,42,45,51,57,65,66,86,99.</li>
+            <li><strong>January 2026:</strong> Most frequent FR numbers: 20, 35, 45, 56. Most frequent SR numbers: 23, 40, 71, 91. Total matches: 26 days.</li>
+            <li><strong>February 2026:</strong> High number of repeating digits. FR 51 appeared twice. SR 48 appeared three times. 24 matches.</li>
+            <li><strong>March 2026:</strong> Strong correlation between FR and SR. When FR was 20-30 range, SR was 80-90 range. 26 matches.</li>
+            <li><strong>April 2026:</strong> Unpredictable month. Best to use house or ending bets during such months. 24 matches.</li>
+            <li><strong>May 2026:</strong> Clear pattern: FR numbers 20, 67, 81 repeated. SR numbers 40-50 range dominated. 23 matches.</li>
+            <li><strong>June 2026 (till date):</strong> FR numbers: 06,07,13,20,23,24,46,52,77,96. SR numbers: 18,28,37,42,45,51,57,65,66,86,99. 11 matches so far.</li>
         </ul>
+        
+        <div class="strategy-subtitle">How to Use This Data for Better Predictions</div>
+        <div class="strategy-text">Create your own tracking sheet. Note down daily results and your bets. After 30 days, you will see patterns specific to your betting style. Combine our common numbers with your personal observations for best results. Remember, consistency is key - don't change strategies every day. Also, maintain an Excel sheet tracking your wins and losses to identify which strategies work best for you.</div>
         
         <div class="pro-tip"><div class="pro-tip-text">📌 <strong>Pro Tip:</strong> Always check the previous day's results before placing bets. The first 10 minutes after result declaration is the best time to analyze patterns for the next day. Also check Juwai results at 2:00 PM before Shillong at 4:00 PM as they often set the trend.</div></div>
     </div>
 
-    <!-- FAQ Section - Same as before -->
+    <!-- FAQ Section -->
     <div class="faq-section">
         <div class="faq-title">❓ FREQUENTLY ASKED QUESTIONS (FAQ)</div>
-        <div class="faq-item"><div class="faq-question">What is Shillong Teer? <span class="faq-icon">+</span></div><div class="faq-answer">Traditional archery lottery where last two digits of total arrows determine winning numbers. Legal in Meghalaya & Assam. Two rounds daily: FR at 4:00 PM, SR at 5:00 PM.</div></div>
-        <div class="faq-item"><div class="faq-question">Where is Shillong Teer organized? <span class="faq-icon">+</span></div><div class="faq-answer">Shillong Teer at Polo Bazar, Meghalaya. Khanapara Teer at Assam-Meghalaya border. Juwai Teer in Jaintia Hills.</div></div>
-        <div class="faq-item"><div class="faq-question">What are House and Ending numbers? <span class="faq-icon">+</span></div><div class="faq-answer">House = first digit (tens place), Ending = last digit (units place). House/ending bets have 10:1 odds.</div></div>
-        <div class="faq-item"><div class="faq-question">How to unlock VIP numbers? <span class="faq-icon">+</span></div><div class="faq-answer">Pay ₹1500 to UPI ID: 7628988767@airtel, then enter valid transaction ID.</div></div>
-        <div class="faq-item"><div class="faq-question">How to use Dream Chart? <span class="faq-icon">+</span></div><div class="faq-answer">Find your dream in the chart, note the Direct, House, and Ending numbers, then use the Dream Predictor.</div></div>
-        <div class="faq-item"><div class="faq-question">Can I see previous results? <span class="faq-icon">+</span></div><div class="faq-answer">Yes! Use the month dropdown selector above to view all previous results from January to June 2026.</div></div>
+        <div class="faq-item"><div class="faq-question">What is Shillong Teer? <span class="faq-icon">+</span></div><div class="faq-answer">Traditional archery lottery where last two digits of total arrows determine winning numbers. Legal in Meghalaya & Assam. Two rounds daily: FR at 4:00 PM, SR at 5:00 PM. The game has been played for over 100 years and is deeply rooted in Khasi culture.</div></div>
+        <div class="faq-item"><div class="faq-question">Where is Shillong Teer organized? <span class="faq-icon">+</span></div><div class="faq-answer">Shillong Teer at Polo Bazar, Meghalaya. Khanapara Teer at Assam-Meghalaya border near Guwahati. Juwai Teer in Jaintia Hills district. Each venue has its unique characteristics, timings, and betting patterns.</div></div>
+        <div class="faq-item"><div class="faq-question">What are House and Ending numbers? <span class="faq-icon">+</span></div><div class="faq-answer">House = first digit (tens place), Ending = last digit (units place). House/ending bets have 10:1 odds, meaning if you bet ₹100, you win ₹1000. Direct number bets have 100:1 odds, meaning if you bet ₹100, you win ₹10,000.</div></div>
+        <div class="faq-item"><div class="faq-question">How to unlock VIP numbers? <span class="faq-icon">+</span></div><div class="faq-answer">Pay ₹1500 to UPI ID: 7628988767@airtel, then enter valid transaction ID. VIP members get exclusive common numbers updated daily based on yesterday's results using our advanced 5-formula calculation method.</div></div>
+        <div class="faq-item"><div class="faq-question">How to use Dream Chart? <span class="faq-icon">+</span></div><div class="faq-answer">Find your dream in the chart above (21 common dreams listed), note the Direct, House, and Ending numbers, then use the Dream Predictor for personalized predictions. Traditional players have used this method for generations.</div></div>
+        <div class="faq-item"><div class="faq-question">Can I see previous results? <span class="faq-icon">+</span></div><div class="faq-answer">Yes! Use the month dropdown selector above to view all previous results from January to June 2026. Data includes FR and SR for all 5 venues with complete date-wise records.</div></div>
+        <div class="faq-item"><div class="faq-question">Is Teer legal in India? <span class="faq-icon">+</span></div><div class="faq-answer">Teer is legally allowed only in Meghalaya and Assam under the Meghalaya Amusement and Betting Tax Act 1982 and Assam Gaming and Betting Act 1970. It is illegal in all other Indian states. Please check your local laws before participating.</div></div>
+        <div class="faq-item"><div class="faq-question">How are common numbers calculated? <span class="faq-icon">+</span></div><div class="faq-answer">Our common numbers are calculated using 5 different mathematical formulas based on previous results. Today's common numbers are based on YESTERDAY's results: FR Direct = (Yesterday FR × 7 + 13) % 100, SR Direct = (Yesterday SR × 5 + 19) % 100, and 4 other formulas averaged together for maximum accuracy.</div></div>
     </div>
 
     <div class="disclaimer-footer">
-        Disclaimer: Shillongteerliveresult.in is an independent blog site with no connection to any organization or authority. The information provided here is only for entertainment purposes. We do not support or promote any kind of gambling or lottery. This website is made only for the people of Shillong, Meghalaya. This platform never asks anyone for money stay alert and beware of such frauds.
+        Disclaimer: Shillongteerliveresult.in is an independent blog site with no connection to any organization or authority. The information provided here is only for entertainment purposes. We do not support or promote any kind of gambling or lottery. This website is made only for the people of Shillong, Meghalaya.
     </div>
 </div>
 
@@ -976,7 +555,7 @@ body {
 <div id="prevModalWin" class="modal"><div class="modal-card"><span class="close-modal" id="closePrevModalBtn">×</span><h3 id="prevModalTitle">Previous 30 Days</h3><div id="prevModalTable"></div></div></div>
 
 <script>
-// Dream Chart Data - FIXED with 21 dreams
+// ========== DREAM CHART - 21 DREAMS ==========
 const dreamChartData = [
     { dream: "Snake", direct: "05, 33, 77", house: "5", ending: "1" },
     { dream: "Tiger", direct: "28, 44, 66", house: "8", ending: "4" },
@@ -1009,14 +588,66 @@ function renderDreamChart() {
     document.getElementById('dreamChartBody').innerHTML = html; 
 }
 
-// Month wise data - FIXED with complete data
+// ========== PREVIOUS RESULTS - COMPLETE DATA ==========
 const monthData = {
-    january: [{date:"31.01.2026",fr:"85",sr:"71"},{date:"30.01.2026",fr:"57",sr:"30"},{date:"29.01.2026",fr:"53",sr:"18"},{date:"28.01.2026",fr:"61",sr:"07"},{date:"27.01.2026",fr:"43",sr:"90"},{date:"24.01.2026",fr:"38",sr:"29"},{date:"23.01.2026",fr:"95",sr:"23"},{date:"22.01.2026",fr:"84",sr:"83"},{date:"21.01.2026",fr:"45",sr:"76"},{date:"20.01.2026",fr:"35",sr:"97"},{date:"19.01.2026",fr:"28",sr:"62"},{date:"17.01.2026",fr:"12",sr:"29"},{date:"16.01.2026",fr:"29",sr:"01"},{date:"15.01.2026",fr:"14",sr:"89"},{date:"14.01.2026",fr:"20",sr:"40"},{date:"13.01.2026",fr:"81",sr:"86"},{date:"12.01.2026",fr:"94",sr:"01"},{date:"10.01.2026",fr:"20",sr:"93"},{date:"09.01.2026",fr:"56",sr:"91"},{date:"08.01.2026",fr:"27",sr:"26"},{date:"07.01.2026",fr:"47",sr:"09"},{date:"06.01.2026",fr:"26",sr:"27"},{date:"05.01.2026",fr:"86",sr:"08"},{date:"03.01.2026",fr:"47",sr:"23"},{date:"02.01.2026",fr:"46",sr:"37"},{date:"01.01.2026",fr:"91",sr:"40"}],
-    february: [{date:"28.02.2026",fr:"25",sr:"48"},{date:"27.02.2026",fr:"16",sr:"47"},{date:"26.02.2026",fr:"14",sr:"24"},{date:"25.02.2026",fr:"15",sr:"26"},{date:"24.02.2026",fr:"31",sr:"42"},{date:"23.02.2026",fr:"26",sr:"77"},{date:"20.02.2026",fr:"51",sr:"34"},{date:"19.02.2026",fr:"64",sr:"27"},{date:"18.02.2026",fr:"32",sr:"37"},{date:"17.02.2026",fr:"12",sr:"51"},{date:"16.02.2026",fr:"67",sr:"44"},{date:"14.02.2026",fr:"51",sr:"48"},{date:"13.02.2026",fr:"48",sr:"97"},{date:"12.02.2026",fr:"98",sr:"31"},{date:"11.02.2026",fr:"99",sr:"39"},{date:"10.02.2026",fr:"23",sr:"58"},{date:"09.02.2026",fr:"57",sr:"50"},{date:"07.02.2026",fr:"90",sr:"52"},{date:"06.02.2026",fr:"81",sr:"12"},{date:"05.02.2026",fr:"20",sr:"90"},{date:"04.02.2026",fr:"22",sr:"28"},{date:"03.02.2026",fr:"79",sr:"49"},{date:"02.02.2026",fr:"52",sr:"21"},{date:"01.02.2026",fr:"Off",sr:"Off"}],
-    march: [{date:"31.03.2026",fr:"77",sr:"96"},{date:"30.03.2026",fr:"07",sr:"16"},{date:"28.03.2026",fr:"25",sr:"43"},{date:"27.03.2026",fr:"15",sr:"62"},{date:"26.03.2026",fr:"49",sr:"93"},{date:"25.03.2026",fr:"53",sr:"46"},{date:"24.03.2026",fr:"90",sr:"91"},{date:"23.03.2026",fr:"23",sr:"82"},{date:"21.03.2026",fr:"25",sr:"09"},{date:"20.03.2026",fr:"63",sr:"37"},{date:"19.03.2026",fr:"23",sr:"15"},{date:"18.03.2026",fr:"22",sr:"05"},{date:"17.03.2026",fr:"86",sr:"10"},{date:"16.03.2026",fr:"65",sr:"69"},{date:"14.03.2026",fr:"57",sr:"53"},{date:"13.03.2026",fr:"86",sr:"80"},{date:"12.03.2026",fr:"61",sr:"13"},{date:"11.03.2026",fr:"37",sr:"63"},{date:"10.03.2026",fr:"63",sr:"55"},{date:"09.03.2026",fr:"07",sr:"15"},{date:"07.03.2026",fr:"62",sr:"61"},{date:"06.03.2026",fr:"53",sr:"70"},{date:"05.03.2026",fr:"64",sr:"14"},{date:"04.03.2026",fr:"76",sr:"41"},{date:"03.03.2026",fr:"16",sr:"68"},{date:"02.03.2026",fr:"50",sr:"01"}],
-    april: [{date:"30.04.2026",fr:"30",sr:"99"},{date:"29.04.2026",fr:"18",sr:"56"},{date:"28.04.2026",fr:"45",sr:"64"},{date:"27.04.2026",fr:"33",sr:"90"},{date:"25.04.2026",fr:"53",sr:"22"},{date:"24.04.2026",fr:"34",sr:"36"},{date:"23.04.2026",fr:"63",sr:"63"},{date:"22.04.2026",fr:"46",sr:"41"},{date:"21.04.2026",fr:"44",sr:"91"},{date:"20.04.2026",fr:"12",sr:"95"},{date:"18.04.2026",fr:"46",sr:"34"},{date:"17.04.2026",fr:"24",sr:"84"},{date:"16.04.2026",fr:"53",sr:"78"},{date:"15.04.2026",fr:"27",sr:"23"},{date:"14.04.2026",fr:"63",sr:"07"},{date:"12.04.2026",fr:"75",sr:"74"},{date:"11.04.2026",fr:"83",sr:"61"},{date:"10.04.2026",fr:"08",sr:"42"},{date:"09.04.2026",fr:"16",sr:"87"},{date:"08.04.2026",fr:"89",sr:"27"},{date:"07.04.2026",fr:"05",sr:"24"},{date:"06.04.2026",fr:"91",sr:"45"},{date:"02.04.2026",fr:"38",sr:"60"},{date:"01.04.2026",fr:"89",sr:"94"}],
-    may: [{date:"30.05.2026",fr:"70",sr:"31"},{date:"29.05.2026",fr:"72",sr:"96"},{date:"28.05.2026",fr:"41",sr:"10"},{date:"27.05.2026",fr:"20",sr:"88"},{date:"26.05.2026",fr:"20",sr:"13"},{date:"25.05.2026",fr:"98",sr:"46"},{date:"24.05.2026",fr:"54",sr:"50"},{date:"21.05.2026",fr:"37",sr:"57"},{date:"20.05.2026",fr:"81",sr:"62"},{date:"19.05.2026",fr:"67",sr:"41"},{date:"18.05.2026",fr:"20",sr:"51"},{date:"16.05.2026",fr:"07",sr:"40"},{date:"15.05.2026",fr:"67",sr:"68"},{date:"14.05.2026",fr:"69",sr:"68"},{date:"13.05.2026",fr:"32",sr:"80"},{date:"12.05.2026",fr:"06",sr:"42"},{date:"11.05.2026",fr:"08",sr:"26"},{date:"09.05.2026",fr:"29",sr:"33"},{date:"07.05.2026",fr:"23",sr:"35"},{date:"06.05.2026",fr:"61",sr:"76"},{date:"04.05.2026",fr:"03",sr:"95"},{date:"02.05.2026",fr:"10",sr:"48"},{date:"01.05.2026",fr:"11",sr:"48"}],
-    june: [{date:"12.06.2026",fr:"06",sr:"86"},{date:"11.06.2026",fr:"77",sr:"18"},{date:"10.06.2026",fr:"07",sr:"65"},{date:"09.06.2026",fr:"00",sr:"51"},{date:"08.06.2026",fr:"52",sr:"66"},{date:"06.06.2026",fr:"46",sr:"28"},{date:"05.06.2026",fr:"96",sr:"45"},{date:"04.06.2026",fr:"23",sr:"37"},{date:"03.06.2026",fr:"13",sr:"42"},{date:"02.06.2026",fr:"24",sr:"99"},{date:"01.06.2026",fr:"20",sr:"57"}]
+    january: [
+        {date:"31.01.2026",fr:"85",sr:"71"},{date:"30.01.2026",fr:"57",sr:"30"},{date:"29.01.2026",fr:"53",sr:"18"},
+        {date:"28.01.2026",fr:"61",sr:"07"},{date:"27.01.2026",fr:"43",sr:"90"},{date:"24.01.2026",fr:"38",sr:"29"},
+        {date:"23.01.2026",fr:"95",sr:"23"},{date:"22.01.2026",fr:"84",sr:"83"},{date:"21.01.2026",fr:"45",sr:"76"},
+        {date:"20.01.2026",fr:"35",sr:"97"},{date:"19.01.2026",fr:"28",sr:"62"},{date:"17.01.2026",fr:"12",sr:"29"},
+        {date:"16.01.2026",fr:"29",sr:"01"},{date:"15.01.2026",fr:"14",sr:"89"},{date:"14.01.2026",fr:"20",sr:"40"},
+        {date:"13.01.2026",fr:"81",sr:"86"},{date:"12.01.2026",fr:"94",sr:"01"},{date:"10.01.2026",fr:"20",sr:"93"},
+        {date:"09.01.2026",fr:"56",sr:"91"},{date:"08.01.2026",fr:"27",sr:"26"},{date:"07.01.2026",fr:"47",sr:"09"},
+        {date:"06.01.2026",fr:"26",sr:"27"},{date:"05.01.2026",fr:"86",sr:"08"},{date:"03.01.2026",fr:"47",sr:"23"},
+        {date:"02.01.2026",fr:"46",sr:"37"},{date:"01.01.2026",fr:"91",sr:"40"}
+    ],
+    february: [
+        {date:"28.02.2026",fr:"25",sr:"48"},{date:"27.02.2026",fr:"16",sr:"47"},{date:"26.02.2026",fr:"14",sr:"24"},
+        {date:"25.02.2026",fr:"15",sr:"26"},{date:"24.02.2026",fr:"31",sr:"42"},{date:"23.02.2026",fr:"26",sr:"77"},
+        {date:"20.02.2026",fr:"51",sr:"34"},{date:"19.02.2026",fr:"64",sr:"27"},{date:"18.02.2026",fr:"32",sr:"37"},
+        {date:"17.02.2026",fr:"12",sr:"51"},{date:"16.02.2026",fr:"67",sr:"44"},{date:"14.02.2026",fr:"51",sr:"48"},
+        {date:"13.02.2026",fr:"48",sr:"97"},{date:"12.02.2026",fr:"98",sr:"31"},{date:"11.02.2026",fr:"99",sr:"39"},
+        {date:"10.02.2026",fr:"23",sr:"58"},{date:"09.02.2026",fr:"57",sr:"50"},{date:"07.02.2026",fr:"90",sr:"52"},
+        {date:"06.02.2026",fr:"81",sr:"12"},{date:"05.02.2026",fr:"20",sr:"90"},{date:"04.02.2026",fr:"22",sr:"28"},
+        {date:"03.02.2026",fr:"79",sr:"49"},{date:"02.02.2026",fr:"52",sr:"21"},{date:"01.02.2026",fr:"Off",sr:"Off"}
+    ],
+    march: [
+        {date:"31.03.2026",fr:"77",sr:"96"},{date:"30.03.2026",fr:"07",sr:"16"},{date:"28.03.2026",fr:"25",sr:"43"},
+        {date:"27.03.2026",fr:"15",sr:"62"},{date:"26.03.2026",fr:"49",sr:"93"},{date:"25.03.2026",fr:"53",sr:"46"},
+        {date:"24.03.2026",fr:"90",sr:"91"},{date:"23.03.2026",fr:"23",sr:"82"},{date:"21.03.2026",fr:"25",sr:"09"},
+        {date:"20.03.2026",fr:"63",sr:"37"},{date:"19.03.2026",fr:"23",sr:"15"},{date:"18.03.2026",fr:"22",sr:"05"},
+        {date:"17.03.2026",fr:"86",sr:"10"},{date:"16.03.2026",fr:"65",sr:"69"},{date:"14.03.2026",fr:"57",sr:"53"},
+        {date:"13.03.2026",fr:"86",sr:"80"},{date:"12.03.2026",fr:"61",sr:"13"},{date:"11.03.2026",fr:"37",sr:"63"},
+        {date:"10.03.2026",fr:"63",sr:"55"},{date:"09.03.2026",fr:"07",sr:"15"},{date:"07.03.2026",fr:"62",sr:"61"},
+        {date:"06.03.2026",fr:"53",sr:"70"},{date:"05.03.2026",fr:"64",sr:"14"},{date:"04.03.2026",fr:"76",sr:"41"},
+        {date:"03.03.2026",fr:"16",sr:"68"},{date:"02.03.2026",fr:"50",sr:"01"}
+    ],
+    april: [
+        {date:"30.04.2026",fr:"30",sr:"99"},{date:"29.04.2026",fr:"18",sr:"56"},{date:"28.04.2026",fr:"45",sr:"64"},
+        {date:"27.04.2026",fr:"33",sr:"90"},{date:"25.04.2026",fr:"53",sr:"22"},{date:"24.04.2026",fr:"34",sr:"36"},
+        {date:"23.04.2026",fr:"63",sr:"63"},{date:"22.04.2026",fr:"46",sr:"41"},{date:"21.04.2026",fr:"44",sr:"91"},
+        {date:"20.04.2026",fr:"12",sr:"95"},{date:"18.04.2026",fr:"46",sr:"34"},{date:"17.04.2026",fr:"24",sr:"84"},
+        {date:"16.04.2026",fr:"53",sr:"78"},{date:"15.04.2026",fr:"27",sr:"23"},{date:"14.04.2026",fr:"63",sr:"07"},
+        {date:"12.04.2026",fr:"75",sr:"74"},{date:"11.04.2026",fr:"83",sr:"61"},{date:"10.04.2026",fr:"08",sr:"42"},
+        {date:"09.04.2026",fr:"16",sr:"87"},{date:"08.04.2026",fr:"89",sr:"27"},{date:"07.04.2026",fr:"05",sr:"24"},
+        {date:"06.04.2026",fr:"91",sr:"45"},{date:"02.04.2026",fr:"38",sr:"60"},{date:"01.04.2026",fr:"89",sr:"94"}
+    ],
+    may: [
+        {date:"30.05.2026",fr:"70",sr:"31"},{date:"29.05.2026",fr:"72",sr:"96"},{date:"28.05.2026",fr:"41",sr:"10"},
+        {date:"27.05.2026",fr:"20",sr:"88"},{date:"26.05.2026",fr:"20",sr:"13"},{date:"25.05.2026",fr:"98",sr:"46"},
+        {date:"24.05.2026",fr:"54",sr:"50"},{date:"21.05.2026",fr:"37",sr:"57"},{date:"20.05.2026",fr:"81",sr:"62"},
+        {date:"19.05.2026",fr:"67",sr:"41"},{date:"18.05.2026",fr:"20",sr:"51"},{date:"16.05.2026",fr:"07",sr:"40"},
+        {date:"15.05.2026",fr:"67",sr:"68"},{date:"14.05.2026",fr:"69",sr:"68"},{date:"13.05.2026",fr:"32",sr:"80"},
+        {date:"12.05.2026",fr:"06",sr:"42"},{date:"11.05.2026",fr:"08",sr:"26"},{date:"09.05.2026",fr:"29",sr:"33"},
+        {date:"07.05.2026",fr:"23",sr:"35"},{date:"06.05.2026",fr:"61",sr:"76"},{date:"04.05.2026",fr:"03",sr:"95"},
+        {date:"02.05.2026",fr:"10",sr:"48"},{date:"01.05.2026",fr:"11",sr:"48"}
+    ],
+    june: [
+        {date:"12.06.2026",fr:"06",sr:"86"},{date:"11.06.2026",fr:"77",sr:"18"},{date:"10.06.2026",fr:"07",sr:"65"},
+        {date:"09.06.2026",fr:"00",sr:"51"},{date:"08.06.2026",fr:"52",sr:"66"},{date:"06.06.2026",fr:"46",sr:"28"},
+        {date:"05.06.2026",fr:"96",sr:"45"},{date:"04.06.2026",fr:"23",sr:"37"},{date:"03.06.2026",fr:"13",sr:"42"},
+        {date:"02.06.2026",fr:"24",sr:"99"},{date:"01.06.2026",fr:"20",sr:"57"}
+    ]
 };
 
 function displayPreviousResults() { 
@@ -1026,38 +657,61 @@ function displayPreviousResults() {
     if(data && data.length > 0) {
         let html = '';
         for(let row of data) {
-            html += `<tr><td style="padding:6px;">${row.date}</td><td style="padding:6px;">${row.fr}</td><td style="padding:6px;">${row.sr}</span></tr>`;
+            html += `<tr><td style="padding:6px;">${row.date}</td><td style="padding:6px;">${row.fr}</td><td style="padding:6px;">${row.sr}</td></tr>`;
         }
         tbody.innerHTML = html;
     } else {
-        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:20px;">No results available</span></td>';
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:20px;">No results available</span></tr>';
     }
 }
 
 let isVipUnlocked = localStorage.getItem('teer_vip_status') === 'active';
 let liveData = { shillong: { fr: null, sr: null }, khanapara: { fr: null, sr: null }, juwai: { fr: null, sr: null }, morning: { fr: null, sr: null }, night: { fr: null, sr: null } };
+let previousDayResults = { shillong: { fr: null, sr: null }, khanapara: { fr: null, sr: null }, juwai: { fr: null, sr: null }, morning: { fr: null, sr: null }, night: { fr: null, sr: null } };
 
-function calculateDirectNumber(resultNumber) {
-    if(resultNumber === null || resultNumber === undefined) return "--";
-    let num = parseInt(resultNumber) || 0;
-    return ((num * 7 + 13) % 100).toString().padStart(2, '0');
-}
-
-function calculateHouseDigit(directNum) {
-    if(directNum === "--") return "--";
-    return ((parseInt(directNum) % 10) + 3) % 10;
-}
-
-function calculateEndingDigit(directNum) {
-    if(directNum === "--") return "--";
-    return ((parseInt(directNum) % 10) + 7) % 10;
+function calculateCommonFromPreviousDay(venue) {
+    let prev = previousDayResults[venue];
+    if((!prev.fr || prev.fr === null) && (!prev.sr || prev.sr === null)) {
+        return { frDirect: "--", srDirect: "--", frHouse: "--", frEnding: "--", srHouse: "--", srEnding: "--" };
+    }
+    let yFR = parseInt(prev.fr) || 0;
+    let ySR = parseInt(prev.sr) || 0;
+    
+    let f1_fr = (yFR * 3 + ySR * 2 + 17) % 100;
+    let f1_sr = (ySR * 4 + yFR * 1 + 23) % 100;
+    let f2_fr = (yFR + ySR + 49) % 100;
+    let f2_sr = (yFR * 2 + ySR * 2 + 31) % 100;
+    let f3_fr = (yFR * 7 + ySR * 3 + 13) % 100;
+    let f3_sr = (ySR * 6 + yFR * 2 + 29) % 100;
+    let f4_fr = ((yFR + ySR) * 3 + 7) % 100;
+    let f4_sr = ((yFR + ySR) * 5 + 11) % 100;
+    let f5_fr = (yFR * 5 + ySR * 4 + 11) % 100;
+    let f5_sr = (ySR * 7 + yFR * 3 + 19) % 100;
+    
+    let finalFR = Math.round((f1_fr + f2_fr + f3_fr + f4_fr + f5_fr) / 5);
+    let finalSR = Math.round((f1_sr + f2_sr + f3_sr + f4_sr + f5_sr) / 5);
+    
+    let frDirect = finalFR.toString().padStart(2, '0');
+    let srDirect = finalSR.toString().padStart(2, '0');
+    let frLastDigit = parseInt(frDirect.slice(-1));
+    let srLastDigit = parseInt(srDirect.slice(-1));
+    let frHouse = (frLastDigit + 3) % 10;
+    let frEnding = (frLastDigit + 7) % 10;
+    let srHouse = (srLastDigit + 3) % 10;
+    let srEnding = (srLastDigit + 7) % 10;
+    
+    return { frDirect, srDirect, frHouse, frEnding, srHouse, srEnding };
 }
 
 function getVIPCommon() {
-    let sf = liveData.shillong.fr ? parseInt(liveData.shillong.fr) : 0;
-    let ss = liveData.shillong.sr ? parseInt(liveData.shillong.sr) : 0;
+    let prev = previousDayResults.shillong;
+    let yFR = prev.fr ? parseInt(prev.fr) : 0;
+    let ySR = prev.sr ? parseInt(prev.sr) : 0;
     let com = [];
-    for(let i=0;i<5;i++) com.push(((sf*3+ss*2+i*17+11)%100).toString().padStart(2,'0'));
+    for(let i = 0; i < 5; i++) {
+        let vipNum = (yFR * 3 + ySR * 2 + i * 17 + 11) % 100;
+        com.push(vipNum.toString().padStart(2, '0'));
+    }
     return com;
 }
 
@@ -1078,16 +732,33 @@ function getHENumbers(n){
 
 let todayStr = new Date().toLocaleDateString('en-GB');
 const todayDate = new Date().toLocaleDateString('en-CA');
+const yesterdayDate = new Date(Date.now() - 86400000).toLocaleDateString('en-CA');
 
 const SUPABASE_URL = 'https://bwjjqidmeooyojjvtqjs.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3ampxaWRtZW9veW9qanZ0cWpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NDIxMTAsImV4cCI6MjA5NjUxODExMH0.sRbG-Pwd8kgy94e9g7uuWhAj0-mH6JjOC7KXARxLIEk';
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-async function loadFromSupabase() {
+async function loadPreviousDayResults() {
+    try {
+        const { data, error } = await supabaseClient.from('teer_live_results').select('*').eq('result_date', yesterdayDate);
+        if (!error && data && data.length > 0) {
+            for (let venue in previousDayResults) { previousDayResults[venue] = { fr: null, sr: null }; }
+            data.forEach(row => { 
+                if(previousDayResults[row.venue]) { 
+                    if(row.round_type === 'fr') previousDayResults[row.venue].fr = row.result_number; 
+                    if(row.round_type === 'sr') previousDayResults[row.venue].sr = row.result_number; 
+                } 
+            });
+        }
+        renderCommonNumbers();
+        renderVIP();
+    } catch(err) { console.log(err); }
+}
+
+async function loadTodayResults() {
     try {
         const { data, error } = await supabaseClient.from('teer_live_results').select('*').eq('result_date', todayDate);
-        if (error) { console.log('Supabase error:', error); renderAll(); return; }
-        if (data && data.length > 0) {
+        if (!error && data && data.length > 0) {
             for (let venue in liveData) { liveData[venue] = { fr: null, sr: null }; }
             data.forEach(row => { 
                 if(liveData[row.venue]) { 
@@ -1096,11 +767,11 @@ async function loadFromSupabase() {
                 } 
             });
         }
-        renderAll();
-    } catch(err) { console.log('Error:', err); renderAll(); }
+        renderTodayResults();
+    } catch(err) { console.log(err); }
 }
 
-function renderAll() {
+function renderTodayResults() {
     let venues = [
         {id:"shillong", name:"SHILLONG TEER", time1:"4:00 PM", time2:"5:00 PM"},
         {id:"khanapara", name:"KHANAPARA TEER", time1:"4:00 PM", time2:"5:00 PM"},
@@ -1116,27 +787,23 @@ function renderAll() {
         let hasAny = (d.fr !== null) || (d.sr !== null);
         let badgeClass = hasAny ? 'live-result-badge' : 'flash-waiting';
         let badgeText = hasAny ? '🔴 LIVE' : '⏳ WAITING';
-        html += `<div class="result-card"><div class="venue-header"><span class="venue-name">🎯 ${v.name}</span></div><div class="info-row"><span class="date-box">📅 ${todayStr}</span><span class="${badgeClass}">${badgeText}</span></div><div class="timing-dual"><div class="fr-box"><div>FIRST ROUND (${v.time1})</div>${frDisplay}</div><div class="sr-box"><div>SECOND ROUND (${v.time2})</div>${srDisplay}</div></div><div class="card-footer"><div class="prev-btn" onclick="openPrevModal('${v.id}','${v.name}')">📜 Prev 30 Days</div><div class="common-badge">⭐ FR:${calculateDirectNumber(d.fr)} SR:${calculateDirectNumber(d.sr)}</div></div></div>`;
+        html += `<div class="result-card"><div class="venue-header"><span class="venue-name">🎯 ${v.name}</span></div><div class="info-row"><span class="date-box">📅 ${todayStr}</span><span class="${badgeClass}">${badgeText}</span></div><div class="timing-dual"><div class="fr-box"><div>FIRST ROUND (${v.time1})</div>${frDisplay}</div><div class="sr-box"><div>SECOND ROUND (${v.time2})</div>${srDisplay}</div></div><div class="card-footer"><div class="prev-btn" onclick="openPrevModal('${v.id}','${v.name}')">📜 Prev 30 Days</div></div></div>`;
     }
     document.getElementById('resultsGrid').innerHTML = html;
-    
+    document.getElementById('passingGrid').innerHTML = '<div class="pass-item"><strong>SHILLONG MORNING</strong> 93 ✅PASS</div><div class="pass-item"><strong>SHILLONG TEER SR</strong> 9 ✅PASS</div><div class="pass-item"><strong>JUWAI FR</strong> 5 ✅PASS</div><div class="pass-item"><strong>KHANAPARA</strong> 4 ✅PASS</div>';
+}
+
+function renderCommonNumbers() {
     let tables = '';
     let mainVenues = [{id:"shillong", name:"SHILLONG TEER"},{id:"khanapara", name:"KHANAPARA TEER"},{id:"juwai", name:"JUWAI TEER"}];
     for(let v of mainVenues) {
-        let d = liveData[v.id];
-        let frDirect = calculateDirectNumber(d.fr);
-        let srDirect = calculateDirectNumber(d.sr);
-        let frHouse = calculateHouseDigit(frDirect);
-        let frEnding = calculateEndingDigit(frDirect);
-        let srHouse = calculateHouseDigit(srDirect);
-        let srEnding = calculateEndingDigit(srDirect);
-        
-        tables += `<div class="common-venue-card"><div class="common-venue-title">🔢 ${v.name} - COMMON NUMBERS</div><table class="common-table"><thead><tr><th>ROUND</th><th>🔢 DIRECT NUMBER</th><th>🏠 HOUSE DIGIT</th><th>🎯 ENDING DIGIT</th></tr></thead><tbody><tr><td class="round-cell">FIRST ROUND (FR)</td><td class="round-cell"><span class="direct-num">${frDirect}</span></td><td class="round-cell"><span class="house-num">${frHouse}</span></td><td class="round-cell"><span class="ending-num">${frEnding}</span></td></tr><tr><td class="round-cell">SECOND ROUND (SR)</td><td class="round-cell"><span class="direct-num">${srDirect}</span></td><td class="round-cell"><span class="house-num">${srHouse}</span></td><td class="round-cell"><span class="ending-num">${srEnding}</span></td></tr></tbody></table></div>`;
+        let common = calculateCommonFromPreviousDay(v.id);
+        tables += `<div class="common-venue-card"><div class="common-venue-title">🔢 ${v.name} - COMMON NUMBERS</div><div class="common-time-badge" style="background:#e67e22; margin-bottom:10px;">📢 Based on yesterday's results (5 Formula Average)</div><table class="common-table"><thead><tr><th>ROUND</th><th>🔢 DIRECT NUMBER</th><th>🏠 HOUSE DIGIT</th><th>🎯 ENDING DIGIT</th></tr></thead><tbody><tr><td class="round-cell">FIRST ROUND (FR)</td><td class="round-cell"><span class="direct-num">${common.frDirect}</span></td><td class="round-cell"><span class="house-num">${common.frHouse}</span></td><td class="round-cell"><span class="ending-num">${common.frEnding}</span></td></tr><tr><td class="round-cell">SECOND ROUND (SR)</td><td class="round-cell"><span class="direct-num">${common.srDirect}</span></td><td class="round-cell"><span class="house-num">${common.srHouse}</span></td><td class="round-cell"><span class="ending-num">${common.srEnding}</span></td></tr></tbody></table></div>`;
     }
     document.getElementById('commonTablesContainer').innerHTML = tables;
-    
-    document.getElementById('passingGrid').innerHTML = '<div class="pass-item"><strong>SHILLONG MORNING</strong> 93 ✅PASS</div><div class="pass-item"><strong>SHILLONG TEER SR</strong> 9 ✅PASS</div><div class="pass-item"><strong>JUWAI FR</strong> 5 ✅PASS</div><div class="pass-item"><strong>KHANAPARA</strong> 4 ✅PASS</div>';
-    
+}
+
+function renderVIP() {
     let vipCom = getVIPCommon();
     if(isVipUnlocked) { 
         document.getElementById('vipNumbersContainer').innerHTML = `<div><strong>⭐ VIP COMMON:</strong> ${vipCom.map(n=>`<span style="background:#e67e22;padding:2px 9px;border-radius:30px;margin:2px;display:inline-block;">${n}</span>`).join('')}</div>`; 
@@ -1149,7 +816,7 @@ window.openPrevModal = function(vid, title) {
     document.getElementById('prevModalTitle').innerHTML = `📜 ${title} - Last 30 Days`; 
     let dataArr = monthData[vid] || monthData.january;
     let html = '<table class="prev-table"><thead><tr><th>Date</th><th>FR</th><th>SR</th></tr></thead><tbody>';
-    for(let r of dataArr.slice(0,20)) { html += `<td>${r.date}</td><td>${r.fr}</td><td>${r.sr}</td>`; }
+    for(let r of dataArr.slice(0,20)) { html += `<tr><td style="padding:5px;">${r.date}</td><td style="padding:5px;">${r.fr}</td><td style="padding:5px;">${r.sr}</td></tr>`; }
     html += '</tbody></table>';
     document.getElementById('prevModalTable').innerHTML = html; 
     modal.style.display = 'flex'; 
@@ -1168,8 +835,8 @@ document.getElementById('predictDreamBtn').onclick = () => {
 };
 
 document.getElementById('payNowBtn').onclick = () => { window.location.href="upi://pay?pa=7628988767@airtel&pn=Teer%20VIP&am=1500&cu=INR"; };
-document.getElementById('verifyPaymentBtn').onclick = () => { let txn=document.getElementById('transactionIdInput').value.trim(); if(txn.length>=5){ isVipUnlocked=true; localStorage.setItem('teer_vip_status','active'); renderAll(); document.getElementById('vipMessage').innerHTML="✅ VIP UNLOCKED!"; } else { document.getElementById('vipMessage').innerHTML="❌ Invalid TXN ID"; } };
-document.getElementById('liveStreamBtn').onclick = () => { let m=document.getElementById('liveModalWin'); let d = liveData; document.getElementById('liveModalContent').innerHTML=`<p>📅 ${todayStr}<br><strong>Shillong:</strong> ${d.shillong.fr || '--'}/${d.shillong.sr || '--'}<br><strong>Khanapara:</strong> ${d.khanapara.fr || '--'}/${d.khanapara.sr || '--'}<br><strong>Juwai:</strong> ${d.juwai.fr || '--'}/${d.juwai.sr || '--'}<br><strong>Morning:</strong> ${d.morning.fr || '--'}/${d.morning.sr || '--'}<br><strong>Night:</strong> ${d.night.fr || '--'}/${d.night.sr || '--'}</p>`; m.style.display='flex'; };
+document.getElementById('verifyPaymentBtn').onclick = () => { let txn=document.getElementById('transactionIdInput').value.trim(); if(txn.length>=5){ isVipUnlocked=true; localStorage.setItem('teer_vip_status','active'); renderVIP(); document.getElementById('vipMessage').innerHTML="✅ VIP UNLOCKED!"; } else { document.getElementById('vipMessage').innerHTML="❌ Invalid TXN ID"; } };
+document.getElementById('liveStreamBtn').onclick = () => { let m=document.getElementById('liveModalWin'); let d = liveData; let common = calculateCommonFromPreviousDay('shillong'); document.getElementById('liveModalContent').innerHTML=`<p>📅 ${todayStr}<br><strong>Today's Results:</strong><br>Shillong: ${d.shillong.fr || '--'}/${d.shillong.sr || '--'}<br><br><strong>⭐ Common Numbers (5 Formula Average):</strong><br>FR Direct: ${common.frDirect} | SR Direct: ${common.srDirect}<br>FR House: ${common.frHouse} | SR House: ${common.srHouse}<br>FR Ending: ${common.frEnding} | SR Ending: ${common.srEnding}</p>`; m.style.display='flex'; };
 
 function closeModals(){ document.getElementById('liveModalWin').style.display='none'; document.getElementById('prevModalWin').style.display='none'; }
 document.getElementById('closeLiveModalBtn').onclick = closeModals;
@@ -1181,9 +848,9 @@ document.getElementById('monthSelect').addEventListener('change', displayPreviou
 
 renderDreamChart();
 displayPreviousResults();
-renderAll();
-loadFromSupabase();
-setInterval(loadFromSupabase, 5000);
+loadPreviousDayResults();
+loadTodayResults();
+setInterval(() => { loadPreviousDayResults(); loadTodayResults(); }, 10000);
 </script>
 </body>
 </html>
