@@ -375,8 +375,8 @@ body {
             <thead><tr><th>🏠 HOUSE NUMBERS</th><th>🎯 ENDING NUMBERS</th></tr></thead>
             <tbody>
                 <tr>
-                    <td><div class="number-group"><span class="dream-num-box" id="houseDigit1">--</span><span class="dream-num-box" id="houseDigit2">--</span></div></td>
-                    <td><div class="number-group"><span class="dream-num-box" id="endingDigit1">--</span><span class="dream-num-box" id="endingDigit2">--</span></div></td>
+                    <td><div class="number-group"><span class="dream-num-box" id="houseDigit1">--</span><span class="dream-num-box" id="houseDigit2">--</span></div></tr>
+                    <td><div class="number-group"><span class="dream-num-box" id="endingDigit1">--</span><span class="dream-num-box" id="endingDigit2">--</span></div></tr>
                 </tr>
             </tbody>
         </table>
@@ -401,7 +401,7 @@ body {
         </div>
         <div id="resultDisplayArea">
             <table class="result-display-table">
-                <thead><tr><th>Date</th><th>FR (4:00 PM)</th><th>SR (5:00 PM)</th><tr></thead>
+                <thead><tr><th>Date</th><th>FR (4:00 PM)</th><th>SR (5:00 PM)</th></tr></thead>
                 <tbody id="resultsTableBody"></tbody>
             </table>
         </div>
@@ -675,7 +675,7 @@ function displayPreviousResults() {
     if(data && data.length > 0) {
         let html = '';
         for(let row of data) {
-            html += `<tr><td style="padding:6px;">${row.date}<tr><td style="padding:6px;">${row.fr}</td><td style="padding:6px;">${row.sr}</td></table>`;
+            html += `<td><td style="padding:6px;">${row.date}</td><td style="padding:6px;">${row.fr}</td><td style="padding:6px;">${row.sr}</td></td>`;
         }
         tbody.innerHTML = html;
     } else {
@@ -816,7 +816,7 @@ function renderCommonNumbers() {
     let mainVenues = [{id:"shillong", name:"SHILLONG TEER"},{id:"khanapara", name:"KHANAPARA TEER"},{id:"juwai", name:"JUWAI TEER"}];
     for(let v of mainVenues) {
         let common = calculateCommonFromPreviousDay(v.id);
-        tables += `<div class="common-venue-card"><div class="common-venue-title">🔢 ${v.name} - COMMON NUMBERS</div><div class="common-time-badge" style="background:#e67e22; margin-bottom:10px;">📢 Based on yesterday's results (5 Formula Average)</div><table class="common-table"><thead><tr><th>ROUND</th><th>🔢 DIRECT NUMBER</th><th>🏠 HOUSE DIGIT</th><th>🎯 ENDING DIGIT</th></tr></thead><tbody><tr><td class="round-cell">FIRST ROUND (FR)</td><td class="round-cell"><span class="direct-num">${common.frDirect}</span></td><td class="round-cell"><span class="house-num">${common.frHouse}</span></td><td class="round-cell"><span class="ending-num">${common.frEnding}</span></td></tr><tr><td class="round-cell">SECOND ROUND (SR)</td><td class="round-cell"><span class="direct-num">${common.srDirect}</span></td><td class="round-cell"><span class="house-num">${common.srHouse}</span></td><td class="round-cell"><span class="ending-num">${common.srEnding}</span></td></tr></tbody></table></div>`;
+        tables += `<div class="common-venue-card"><div class="common-venue-title">🔢 ${v.name} - COMMON NUMBERS</div><div class="common-time-badge" style="background:#e67e22; margin-bottom:10px;">📢 Based on yesterday's results (5 Formula Average)</div><table class="common-table"><thead><tr><th>ROUND</th><th>🔢 DIRECT NUMBER</th><th>🏠 HOUSE DIGIT</th><th>🎯 ENDING DIGIT</th><tr></thead><tbody><tr><td class="round-cell">FIRST ROUND (FR)</td><td class="round-cell"><span class="direct-num">${common.frDirect}</span></td><td class="round-cell"><span class="house-num">${common.frHouse}</span></td><td class="round-cell"><span class="ending-num">${common.frEnding}</span></td></tr><tr><td class="round-cell">SECOND ROUND (SR)</td><td class="round-cell"><span class="direct-num">${common.srDirect}</span></td><td class="round-cell"><span class="house-num">${common.srHouse}</span></td><td class="round-cell"><span class="ending-num">${common.srEnding}</span></td></tr></tbody></table></div>`;
     }
     document.getElementById('commonTablesContainer').innerHTML = tables;
 }
@@ -835,7 +835,7 @@ window.openPrevModal = function(vid, title) {
     let dataArr = monthData[vid] || monthData.january;
     let html = '<table class="prev-table"><thead><tr><th>Date</th><th>FR</th><th>SR</th></tr></thead><tbody>';
     for(let r of dataArr.slice(0,20)) { html += `<tr><td style="padding:5px;">${r.date}</td><td style="padding:5px;">${r.fr}</td><td style="padding:5px;">${r.sr}</td></tr>`; }
-    html += '</tbody></table>';
+    html += '</tbody></tr>';
     document.getElementById('prevModalTable').innerHTML = html; 
     modal.style.display = 'flex'; 
 };
@@ -870,5 +870,8 @@ loadPreviousDayResults();
 loadTodayResults();
 setInterval(() => { loadPreviousDayResults(); loadTodayResults(); }, 10000);
 </script>
+
+<!-- Monetag Ad Code -->
+<script>(function(s){s.dataset.zone='11146338',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 </body>
 </html>
