@@ -1069,7 +1069,24 @@ function getHENumbers(n){
     }; 
 }
 
-// ========== NIGHT TEER - আগের তারিখ + Supabase থেকে লোড + WAITING বাদ ==========
+// ========== COMMON NUMBER TIME-BASED DISPLAY ==========
+function shouldShowCommonNumbers() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const totalMinutes = hours * 60 + minutes;
+    
+    // সকাল ১০:০০ (600 মিনিট) থেকে রাত ১২:০০ (1440 মিনিট) পর্যন্ত দেখাবে
+    const startTime = 10 * 60; // 10:00 AM
+    const endTime = 24 * 60; // 12:00 AM (রাত ১২টা)
+    
+    if (totalMinutes >= startTime && totalMinutes < endTime) {
+        return true;
+    }
+    return false;
+}
+
+// NIGHT TEER - আগের তারিখ + Supabase থেকে লোড + WAITING বাদ
 function getCurrentDateForVenue(venueId) {
     let now = new Date();
     let currentHour = now.getHours();
@@ -1100,7 +1117,7 @@ function getCurrentDateForVenue(venueId) {
     }
 }
 
-// ⭐ Night Teer - WAITING বাদ, সবসময় রেজাল্ট দেখাবে
+// Night Teer - WAITING বাদ, সবসময় রেজাল্ট দেখাবে
 function shouldShowWaitingForVenue(venueId, roundType) {
     let now = new Date();
     let currentHour = now.getHours();
@@ -1125,7 +1142,7 @@ function shouldShowWaitingForVenue(venueId, roundType) {
         return false;
     }
     
-    // ⭐ Night Teer - কখনো WAITING দেখাবে না, সবসময় রেজাল্ট দেখাবে
+    // Night Teer - কখনো WAITING দেখাবে না, সবসময় রেজাল্ট দেখাবে
     if(venueId === 'night') {
         return false;  // WAITING বাদ
     }
@@ -1239,7 +1256,7 @@ async function loadPreviousDayResults() {
     } catch(err) { console.log(err); }
 }
 
-// ⭐ Night Teer-ও Supabase থেকে লোড হবে
+// Night Teer-ও Supabase থেকে লোড হবে
 async function loadTodayResults() {
     try {
         const { data, error } = await supabaseClient.from('teer_live_results').select('*').eq('result_date', todayDate);
@@ -1319,21 +1336,33 @@ function renderTodayResults() {
 }
 
 function renderCommonNumbers() {
+    let show = shouldShowCommonNumbers();
     let tables = '';
     let mainVenues = [{id:"shillong", name:"SHILLONG TEER"},{id:"khanapara", name:"KHANAPARA TEER"},{id:"juwai", name:"JUWAI TEER"}];
     
     for(let v of mainVenues) {
         let common = calculateCommonFromPreviousDay(v.id);
-        tables += `<div class="common-venue-card">
-            <div class="common-venue-title">🔢 ${v.name} - COMMON NUMBERS</div>
-            <table class="common-table">
-                <thead><tr><th>ROUND</th><th>🔢 DIRECT NUMBER</th><th>🏠 HOUSE DIGIT</th><th>🎯 ENDING DIGIT</th></tr></thead>
-                <tbody>
-                    <tr><td class="round-cell">FIRST ROUND (FR)</td><td class="round-cell"><span class="direct-num">${common.frDirect}</span></span></td><td class="round-cell"><span class="house-num">${common.frHouse}</span></span></td><td class="round-cell"><span class="ending-num">${common.frEnding}</span></span></td></tr>
-                    <tr><td class="round-cell">SECOND ROUND (SR)</span></span></td><td class="round-cell"><span class="direct-num">${common.srDirect}</span></span></td><td class="round-cell"><span class="house-num">${common.srHouse}</span></span></td><td class="round-cell"><span class="ending-num">${common.srEnding}</span></span></td></tr>
-                </tbody>
-            </table>
-        </div>`;
+        
+        if(show) {
+            tables += `<div class="common-venue-card">
+                <div class="common-venue-title">🔢 ${v.name} - COMMON NUMBERS</div>
+                <table class="common-table">
+                    <thead><tr><th>ROUND</th><th>🔢 DIRECT NUMBER</th><th>🏠 HOUSE DIGIT</th><th>🎯 ENDING DIGIT</th></tr></thead>
+                    <tbody>
+                        <tr><td class="round-cell">FIRST ROUND (FR)</td><td class="round-cell"><span class="direct-num">${common.frDirect}</span></span></td><td class="round-cell"><span class="house-num">${common.frHouse}</span></span></td><td class="round-cell"><span class="ending-num">${common.frEnding}</span></span></td></tr>
+                        <tr><td class="round-cell">SECOND ROUND (SR)</span></span></td><td class="round-cell"><span class="direct-num">${common.srDirect}</span></span></td><td class="round-cell"><span class="house-num">${common.srHouse}</span></span></td><td class="round-cell"><span class="ending-num">${common.srEnding}</span></span></td></tr>
+                    </tbody>
+                </table>
+            </div>`;
+        } else {
+            tables += `<div class="common-venue-card" style="background: #f0f0f0; border-color: #ccc;">
+                <div class="common-venue-title" style="background: #666;">🔢 ${v.name} - COMMON NUMBERS</div>
+                <div style="text-align: center; padding: 20px; font-size: 1.2rem; color: #888;">
+                    ⏳ -- -- -- <br>
+                    <span style="font-size: 0.8rem;">(সকাল ১০টা থেকে রাত ১২টা পর্যন্ত দেখানো হবে)</span>
+                </div>
+            </div>`;
+        }
     }
     document.getElementById('commonTablesContainer').innerHTML = tables;
 }
