@@ -782,7 +782,7 @@ body {
         <div class="dream-chart-note">How to use: Find your dream in the chart above, note the Direct, House, and Ending numbers. Then use the Dream Predictor above for personalized predictions.<br> ব্যবহার পদ্ধতি: উপরের চার্টে আপনার স্বপ্ন খুঁজুন, ডাইরেক্ট, হাউজ ও এন্ডিং নাম্বার দেখুন। তারপর উপরের ড্রিম প্রেডিক্টর ব্যবহার করুন।</div>
     </div>
 
-    <!-- 🔥 DETAILED HISTORY SECTION - আরও বিস্তারিত -->
+    <!-- 🔥 DETAILED HISTORY SECTION - বিস্তারিত -->
     <div class="history-section-direct">
         <h2 style="color:#9b4b1a; border-left:4px solid #e67e22; padding-left:12px; font-size:1.05rem; margin-bottom:0.8rem;">📜 COMPLETE HISTORY & TRADITIONAL BACKGROUND | সম্পূর্ণ ইতিহাস ও ঐতিহ্য</h2>
         
@@ -837,7 +837,7 @@ body {
         </div>
     </div>
 
-    <!-- 🔥 PREVIOUS RESULT ANALYSIS SECTION - আরও বিস্তারিত -->
+    <!-- 🔥 PREVIOUS RESULT ANALYSIS SECTION - বিস্তারিত -->
     <div class="strategy-section" style="background: linear-gradient(135deg, #1e3a5f, #0f2a44);">
         <div class="strategy-title">📊 PREVIOUS RESULT ANALYSIS - COMPLETE GUIDE | পূর্ববর্তী ফলাফল বিশ্লেষণ - সম্পূর্ণ গাইড</div>
         
@@ -893,7 +893,7 @@ body {
         <div class="pro-tip"><div class="pro-tip-text">📌 <strong>Advanced Pro Tip | উন্নত প্রো টিপ:</strong> Always check the previous day's results before placing bets. The first 10 minutes after result declaration is the best time to analyze patterns for the next day. Also check Juwai results at 2:00 PM before Shillong at 4:00 PM as they often set the trend with 68% correlation. Create a heat map of numbers that appear most frequently in each time slot. Numbers that appear in both FR and SR on the same day have a 40% higher chance of repeating within 3 days. Keep a notebook dedicated solely to pattern analysis. This comprehensive approach will help you develop a deeper understanding of the game and improve your betting decisions significantly. Consider using color-coding to track different types of patterns - for example, using red for hot numbers, blue for cold numbers, and green for pairs that appear together. This visual system can help you quickly identify patterns and make faster decisions during the limited time window between result announcements. <span class="bn-text">| বাজি রাখার আগে সর্বদা আগের দিনের ফলাফল পরীক্ষা করুন। ফলাফল ঘোষণার পরে প্রথম ১০ মিনিট পরের দিনের ধরণ বিশ্লেষণ করার সর্বোত্তম সময়। এছাড়াও শিলং এর ৪:০০ টার আগে জুওয়াই এর ২:০০ টার ফলাফল পরীক্ষা করুন কারণ তারা প্রায়শই ৬৮% সম্পর্কের সাথে প্রবণতা সেট করে। প্রতিটি সময় স্লটে সবচেয়ে বেশি ঘন ঘন আসা সংখ্যার একটি হিট ম্যাপ তৈরি করুন। একই দিনে FR এবং SR উভয় ক্ষেত্রেই যে সংখ্যাগুলি আসে তাদের ৩ দিনের মধ্যে পুনরাবৃত্তি হওয়ার সম্ভাবনা ৪০% বেশি। শুধুমাত্র প্যাটার্ন বিশ্লেষণের জন্য উত্সর্গীকৃত একটি নোটবুক রাখুন। এই বিস্তৃত পদ্ধতি আপনাকে গেমটির গভীরতর বোঝার বিকাশ করতে এবং আপনার বাজি সিদ্ধান্তগুলি উল্লেখযোগ্যভাবে উন্নত করতে সহায়তা করবে। বিভিন্ন ধরণের প্যাটার্ন ট্র্যাক করতে রঙ-কোডিং ব্যবহার করার কথা বিবেচনা করুন - উদাহরণস্বরূপ, হট নাম্বারের জন্য লাল, কোল্ড নাম্বারের জন্য নীল এবং একসাথে আসা জোড়াগুলির জন্য সবুজ ব্যবহার করা। এই ভিজ্যুয়াল সিস্টেম আপনাকে দ্রুত ধরণগুলি সনাক্ত করতে এবং ফলাফল ঘোষণার মধ্যে সীমিত সময়ের উইন্ডোতে দ্রুত সিদ্ধান্ত নিতে সহায়তা করতে পারে।</span></div></div>
     </div>
 
-    <!-- 🔥 WINNING STRATEGIES - আরও বিস্তারিত -->
+    <!-- 🔥 WINNING STRATEGIES - বিস্তারিত -->
     <div class="strategy-section">
         <div class="strategy-title">🏆 ULTIMATE WINNING STRATEGIES - 15 EXPERT TIPS | আলটিমেট জয়ের কৌশল - ১৫টি বিশেষজ্ঞ টিপস</div>
         
@@ -1049,7 +1049,7 @@ function getHENumbers(n){
     }; 
 }
 
-// ========== NIGHT TEER - আগের তারিখ + Supabase থেকে লোড ==========
+// ========== NIGHT TEER - আগের তারিখ + Supabase থেকে লোড + WAITING বাদ ==========
 function getCurrentDateForVenue(venueId) {
     let now = new Date();
     let currentHour = now.getHours();
@@ -1080,6 +1080,7 @@ function getCurrentDateForVenue(venueId) {
     }
 }
 
+// ⭐ Night Teer - WAITING বাদ, সবসময় রেজাল্ট দেখাবে
 function shouldShowWaitingForVenue(venueId, roundType) {
     let now = new Date();
     let currentHour = now.getHours();
@@ -1104,10 +1105,9 @@ function shouldShowWaitingForVenue(venueId, roundType) {
         return false;
     }
     
+    // ⭐ Night Teer - কখনো WAITING দেখাবে না, সবসময় রেজাল্ট দেখাবে
     if(venueId === 'night') {
-        if(roundType === 'fr' && currentTime < 23.17) return true;
-        if(roundType === 'sr' && currentTime < 24.17) return true;
-        return false;
+        return false;  // WAITING বাদ
     }
     
     return false;
