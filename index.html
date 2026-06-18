@@ -780,7 +780,6 @@ body {
     font-size: 1rem;
 }
 
-/* মোবাইলের জন্য */
 @media (max-width: 480px) {
     .share-btn {
         font-size: 0.65rem;
@@ -795,7 +794,6 @@ body {
     }
 }
 
-/* Toast Notification */
 .toast-notification {
     position: fixed;
     bottom: 20px;
@@ -880,15 +878,10 @@ body {
 
     <h2 class="seo-h2-dark">📅 Shillong Teer Previous Results (2026) | শিলং তীর পূর্ববর্তী ফলাফল (২০২৬)</h2>
     <div class="monthwise-section">
-        <div class="monthwise-title">📅 SHILLONG TEER - PREVIOUS RESULTS (JANUARY - JUNE 2026)</div>
+        <div class="monthwise-title">📅 SHILLONG TEER - PREVIOUS RESULTS (CURRENT MONTH)</div>
         <div class="selector-container">
             <select id="monthSelect">
-                <option value="january">January 2026</option>
-                <option value="february">February 2026</option>
-                <option value="march">March 2026</option>
-                <option value="april">April 2026</option>
-                <option value="may">May 2026</option>
-                <option value="june">June 2026</option>
+                <!-- JavaScript দিয়ে Auto Populate হবে -->
             </select>
         </div>
         <div id="resultDisplayArea">
@@ -1221,7 +1214,247 @@ function shouldShowCommonNumbers() {
     return false;
 }
 
-// NIGHT TEER - আগের তারিখ + Supabase থেকে লোড + WAITING বাদ
+// ============================================================
+//   🔥 মাস ডিটেক্ট - বর্তমান মাস অটো সিলেক্ট
+// ============================================================
+
+function getCurrentMonth() {
+    const now = new Date();
+    const months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+    return months[now.getMonth()];
+}
+
+function getCurrentMonthName() {
+    const now = new Date();
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return months[now.getMonth()];
+}
+
+// ============================================================
+//   🔥 মাসভিত্তিক ডেটা (শুধু জুন ডেটা, বাকি মাস খালি)
+// ============================================================
+
+let monthData = {
+    january: [],
+    february: [],
+    march: [],
+    april: [],
+    may: [],
+    // ========== 🔥 জুন ২০২৬ - আপনার দেওয়া ডেটা ==========
+    june: [
+        {date:"17.06.2026", fr:"68", sr:"75"},
+        {date:"16.06.2026", fr:"47", sr:"86"},
+        {date:"15.06.2026", fr:"70", sr:"31"},
+        {date:"13.06.2026", fr:"20", sr:"52"},
+        {date:"12.06.2026", fr:"06", sr:"86"},
+        {date:"11.06.2026", fr:"77", sr:"18"},
+        {date:"10.06.2026", fr:"07", sr:"65"},
+        {date:"09.06.2026", fr:"00", sr:"51"},
+        {date:"08.06.2026", fr:"52", sr:"66"},
+        {date:"06.06.2026", fr:"46", sr:"28"},
+        {date:"05.06.2026", fr:"96", sr:"45"},
+        {date:"04.06.2026", fr:"23", sr:"37"},
+        {date:"03.06.2026", fr:"13", sr:"42"},
+        {date:"02.06.2026", fr:"24", sr:"99"}
+    ],
+    july: [],
+    august: [],
+    september: [],
+    october: [],
+    november: [],
+    december: []
+};
+
+// ============================================================
+//   🔥 কমন নাম্বার ক্যালকুলেশন (100% আলাদা)
+// ============================================================
+
+function calculateCommonNumber() {
+    const currentMonth = getCurrentMonth();
+    const data = monthData[currentMonth];
+    
+    if (!data || data.length === 0) {
+        return {
+            frDirect: "47", srDirect: "20",
+            frHouse: "4", frEnding: "7",
+            srHouse: "2", srEnding: "0",
+            confidence: "95%"
+        };
+    }
+    
+    // গত ৭ দিনের ডেটা
+    const last7Days = data.slice(0, Math.min(7, data.length));
+    
+    const frList = last7Days.map(item => parseInt(item.fr)).filter(n => !isNaN(n));
+    const srList = last7Days.map(item => parseInt(item.sr)).filter(n => !isNaN(n));
+    
+    // ১. গড়
+    const avgFR = Math.round(frList.reduce((a, b) => a + b, 0) / frList.length);
+    const avgSR = Math.round(srList.reduce((a, b) => a + b, 0) / srList.length);
+    
+    // ২. মোড
+    const frMode = getMode(frList);
+    const srMode = getMode(srList);
+    
+    // ৩. মিডিয়ান
+    const frSorted = [...frList].sort((a, b) => a - b);
+    const srSorted = [...srList].sort((a, b) => a - b);
+    const frMedian = frSorted[Math.floor(frSorted.length / 2)];
+    const srMedian = srSorted[Math.floor(srSorted.length / 2)];
+    
+    // ৪. ট্রেন্ড
+    const last3FR = frList.slice(0, Math.min(3, frList.length));
+    const last3SR = srList.slice(0, Math.min(3, srList.length));
+    const trendFR = Math.round(last3FR.reduce((a, b) => a + b, 0) / last3FR.length);
+    const trendSR = Math.round(last3SR.reduce((a, b) => a + b, 0) / last3SR.length);
+    
+    // ৫. বেস্ট কমন নাম্বার (১০০% আলাদা অ্যালগরিদম)
+    const bestFR = Math.round((avgFR * 1.3 + frMode * 1.5 + frMedian * 1.2 + trendFR * 0.8) / 4.8);
+    const bestSR = Math.round((avgSR * 1.3 + srMode * 1.5 + srMedian * 1.2 + trendSR * 0.8) / 4.8);
+    
+    const finalFR = ((bestFR % 100) + 100) % 100;
+    const finalSR = ((bestSR % 100) + 100) % 100;
+    
+    // হাউজ ও এন্ডিং (আলাদা ক্যালকুলেশন)
+    const frLastDigit = finalFR % 10;
+    const srLastDigit = finalSR % 10;
+    
+    // আগের দিনের রেজাল্ট (যদি থাকে)
+    const prevDay = data[0] || { fr: '42', sr: '35' };
+    const prevFR = parseInt(prevDay.fr) || 42;
+    const prevSR = parseInt(prevDay.sr) || 35;
+    const prevFRLastDigit = prevFR % 10;
+    const prevSRLastDigit = prevSR % 10;
+    
+    const frHouse = (frLastDigit + prevFRLastDigit + 5) % 10;  // ভিন্ন ফর্মুলা
+    const frEnding = (frLastDigit + prevFRLastDigit + 9) % 10; // ভিন্ন ফর্মুলা
+    const srHouse = (srLastDigit + prevSRLastDigit + 5) % 10;
+    const srEnding = (srLastDigit + prevSRLastDigit + 9) % 10;
+    
+    return {
+        frDirect: finalFR.toString().padStart(2, '0'),
+        srDirect: finalSR.toString().padStart(2, '0'),
+        frHouse: frHouse,
+        frEnding: frEnding,
+        srHouse: srHouse,
+        srEnding: srEnding,
+        confidence: "100%"
+    };
+}
+
+function getMode(arr) {
+    const freq = {};
+    let maxFreq = 0;
+    let mode = arr[0] || 0;
+    for (const val of arr) {
+        freq[val] = (freq[val] || 0) + 1;
+        if (freq[val] > maxFreq) {
+            maxFreq = freq[val];
+            mode = val;
+        }
+    }
+    return mode;
+}
+
+// ============================================================
+//   🔥 UI আপডেট ফাংশন
+// ============================================================
+
+function displayPreviousResults() {
+    const currentMonth = getCurrentMonth();
+    const data = monthData[currentMonth];
+    const tbody = document.getElementById('resultsTableBody');
+    
+    if (data && data.length > 0) {
+        let html = '';
+        for (let row of data) {
+            html += `<tr><td style="padding:8px;">${row.date}</td><td style="padding:8px;">${row.fr}</td><td style="padding:8px;">${row.sr}</td></tr>`;
+        }
+        tbody.innerHTML = html;
+    } else {
+        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8892a0;">${getCurrentMonthName()} মাসে এখনো কোনো রেজাল্ট নেই</td></tr>`;
+    }
+    
+    // কমন নাম্বার আপডেট (আলাদা)
+    updateCommonNumbers();
+}
+
+function updateCommonNumbers() {
+    const common = calculateCommonNumber();
+    
+    const tables = document.querySelectorAll('.common-table tbody');
+    if (tables.length >= 2) {
+        // Shillong
+        tables[0].innerHTML = `
+            <tr><td class="round-cell">FIRST ROUND (FR)</td>
+                <td class="round-cell"><span class="direct-num">${common.frDirect}</span></td>
+                <td class="round-cell"><span class="house-num">${common.frHouse}</span></td>
+                <td class="round-cell"><span class="ending-num">${common.frEnding}</span></td></tr>
+            <tr><td class="round-cell">SECOND ROUND (SR)</td>
+                <td class="round-cell"><span class="direct-num">${common.srDirect}</span></td>
+                <td class="round-cell"><span class="house-num">${common.srHouse}</span></td>
+                <td class="round-cell"><span class="ending-num">${common.srEnding}</span></td></tr>
+        `;
+        
+        // Khanapara (ভিন্ন কিন্তু সম্পর্কিত)
+        const kfr = ((parseInt(common.frDirect) + 5) % 100).toString().padStart(2, '0');
+        const ksr = ((parseInt(common.srDirect) - 3 + 100) % 100).toString().padStart(2, '0');
+        const kHouse = (common.frHouse + 2) % 10;
+        const kEnding = (common.frEnding + 1) % 10;
+        
+        tables[1].innerHTML = `
+            <tr><td class="round-cell">FIRST ROUND (FR)</td>
+                <td class="round-cell"><span class="direct-num">${kfr}</span></td>
+                <td class="round-cell"><span class="house-num">${kHouse}</span></td>
+                <td class="round-cell"><span class="ending-num">${kEnding}</span></td></tr>
+            <tr><td class="round-cell">SECOND ROUND (SR)</td>
+                <td class="round-cell"><span class="direct-num">${ksr}</span></td>
+                <td class="round-cell"><span class="house-num">${(common.srHouse + 2) % 10}</span></td>
+                <td class="round-cell"><span class="ending-num">${(common.srEnding + 1) % 10}</span></td></tr>
+        `;
+    }
+}
+
+// ============================================================
+//   🔥 সিলেক্ট বক্স শুধু বর্তমান মাস দেখাবে
+// ============================================================
+
+function setupMonthSelector() {
+    const select = document.getElementById('monthSelect');
+    const currentMonth = getCurrentMonth();
+    const monthNames = {
+        'january': 'January 2026',
+        'february': 'February 2026',
+        'march': 'March 2026',
+        'april': 'April 2026',
+        'may': 'May 2026',
+        'june': 'June 2026',
+        'july': 'July 2026',
+        'august': 'August 2026',
+        'september': 'September 2026',
+        'october': 'October 2026',
+        'november': 'November 2026',
+        'december': 'December 2026'
+    };
+    
+    const monthOrder = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+    const currentIndex = monthOrder.indexOf(currentMonth);
+    
+    let html = '';
+    for (let i = 0; i <= currentIndex; i++) {
+        const month = monthOrder[i];
+        const hasData = monthData[month] && monthData[month].length > 0;
+        const displayName = monthNames[month] || month;
+        const selected = month === currentMonth ? 'selected' : '';
+        html += `<option value="${month}" ${selected}>${displayName} ${hasData ? '📊' : ''}</option>`;
+    }
+    select.innerHTML = html;
+}
+
+// ============================================================
+//   🔥 NIGHT TEER - আগের তারিখ + Supabase থেকে লোড + WAITING বাদ
+// ============================================================
+
 function getCurrentDateForVenue(venueId) {
     let now = new Date();
     let currentHour = now.getHours();
@@ -1251,7 +1484,6 @@ function getCurrentDateForVenue(venueId) {
     }
 }
 
-// Night Teer - WAITING বাদ, সবসময় রেজাল্ট দেখাবে
 function shouldShowWaitingForVenue(venueId, roundType) {
     let now = new Date();
     let currentHour = now.getHours();
@@ -1283,32 +1515,10 @@ function shouldShowWaitingForVenue(venueId, roundType) {
     return false;
 }
 
-// Month Data
-let monthData = {
-    january: [{date:"31.01.2026",fr:"85",sr:"71"},{date:"30.01.2026",fr:"57",sr:"30"},{date:"29.01.2026",fr:"53",sr:"18"},{date:"28.01.2026",fr:"61",sr:"07"},{date:"27.01.2026",fr:"43",sr:"90"},{date:"24.01.2026",fr:"38",sr:"29"},{date:"23.01.2026",fr:"95",sr:"23"},{date:"22.01.2026",fr:"84",sr:"83"},{date:"21.01.2026",fr:"45",sr:"76"},{date:"20.01.2026",fr:"35",sr:"97"},{date:"19.01.2026",fr:"28",sr:"62"},{date:"17.01.2026",fr:"12",sr:"29"},{date:"16.01.2026",fr:"29",sr:"01"},{date:"15.01.2026",fr:"14",sr:"89"},{date:"14.01.2026",fr:"20",sr:"40"},{date:"13.01.2026",fr:"81",sr:"86"},{date:"12.01.2026",fr:"94",sr:"01"},{date:"10.01.2026",fr:"20",sr:"93"},{date:"09.01.2026",fr:"56",sr:"91"},{date:"08.01.2026",fr:"27",sr:"26"},{date:"07.01.2026",fr:"47",sr:"09"},{date:"06.01.2026",fr:"26",sr:"27"},{date:"05.01.2026",fr:"86",sr:"08"},{date:"03.01.2026",fr:"47",sr:"23"},{date:"02.01.2026",fr:"46",sr:"37"},{date:"01.01.2026",fr:"91",sr:"40"}],
-    february: [{date:"28.02.2026",fr:"25",sr:"48"},{date:"27.02.2026",fr:"16",sr:"47"},{date:"26.02.2026",fr:"14",sr:"24"},{date:"25.02.2026",fr:"15",sr:"26"},{date:"24.02.2026",fr:"31",sr:"42"},{date:"23.02.2026",fr:"26",sr:"77"},{date:"20.02.2026",fr:"51",sr:"34"},{date:"19.02.2026",fr:"64",sr:"27"},{date:"18.02.2026",fr:"32",sr:"37"},{date:"17.02.2026",fr:"12",sr:"51"},{date:"16.02.2026",fr:"67",sr:"44"},{date:"14.02.2026",fr:"51",sr:"48"},{date:"13.02.2026",fr:"48",sr:"97"},{date:"12.02.2026",fr:"98",sr:"31"},{date:"11.02.2026",fr:"99",sr:"39"},{date:"10.02.2026",fr:"23",sr:"58"},{date:"09.02.2026",fr:"57",sr:"50"},{date:"07.02.2026",fr:"90",sr:"52"},{date:"06.02.2026",fr:"81",sr:"12"},{date:"05.02.2026",fr:"20",sr:"90"},{date:"04.02.2026",fr:"22",sr:"28"},{date:"03.02.2026",fr:"79",sr:"49"},{date:"02.02.2026",fr:"52",sr:"21"},{date:"01.02.2026",fr:"Off",sr:"Off"}],
-    march: [{date:"31.03.2026",fr:"77",sr:"96"},{date:"30.03.2026",fr:"07",sr:"16"},{date:"28.03.2026",fr:"25",sr:"43"},{date:"27.03.2026",fr:"15",sr:"62"},{date:"26.03.2026",fr:"49",sr:"93"},{date:"25.03.2026",fr:"53",sr:"46"},{date:"24.03.2026",fr:"90",sr:"91"},{date:"23.03.2026",fr:"23",sr:"82"},{date:"21.03.2026",fr:"25",sr:"09"},{date:"20.03.2026",fr:"63",sr:"37"},{date:"19.03.2026",fr:"23",sr:"15"},{date:"18.03.2026",fr:"22",sr:"05"},{date:"17.03.2026",fr:"86",sr:"10"},{date:"16.03.2026",fr:"65",sr:"69"},{date:"14.03.2026",fr:"57",sr:"53"},{date:"13.03.2026",fr:"86",sr:"80"},{date:"12.03.2026",fr:"61",sr:"13"},{date:"11.03.2026",fr:"37",sr:"63"},{date:"10.03.2026",fr:"63",sr:"55"},{date:"09.03.2026",fr:"07",sr:"15"},{date:"07.03.2026",fr:"62",sr:"61"},{date:"06.03.2026",fr:"53",sr:"70"},{date:"05.03.2026",fr:"64",sr:"14"},{date:"04.03.2026",fr:"76",sr:"41"},{date:"03.03.2026",fr:"16",sr:"68"},{date:"02.03.2026",fr:"50",sr:"01"}],
-    april: [{date:"30.04.2026",fr:"30",sr:"99"},{date:"29.04.2026",fr:"18",sr:"56"},{date:"28.04.2026",fr:"45",sr:"64"},{date:"27.04.2026",fr:"33",sr:"90"},{date:"25.04.2026",fr:"53",sr:"22"},{date:"24.04.2026",fr:"34",sr:"36"},{date:"23.04.2026",fr:"63",sr:"63"},{date:"22.04.2026",fr:"46",sr:"41"},{date:"21.04.2026",fr:"44",sr:"91"},{date:"20.04.2026",fr:"12",sr:"95"},{date:"18.04.2026",fr:"46",sr:"34"},{date:"17.04.2026",fr:"24",sr:"84"},{date:"16.04.2026",fr:"53",sr:"78"},{date:"15.04.2026",fr:"27",sr:"23"},{date:"14.04.2026",fr:"63",sr:"07"},{date:"12.04.2026",fr:"75",sr:"74"},{date:"11.04.2026",fr:"83",sr:"61"},{date:"10.04.2026",fr:"08",sr:"42"},{date:"09.04.2026",fr:"16",sr:"87"},{date:"08.04.2026",fr:"89",sr:"27"},{date:"07.04.2026",fr:"05",sr:"24"},{date:"06.04.2026",fr:"91",sr:"45"},{date:"02.04.2026",fr:"38",sr:"60"},{date:"01.04.2026",fr:"89",sr:"94"}],
-    may: [{date:"30.05.2026",fr:"70",sr:"31"},{date:"29.05.2026",fr:"72",sr:"96"},{date:"28.05.2026",fr:"41",sr:"10"},{date:"27.05.2026",fr:"20",sr:"88"},{date:"26.05.2026",fr:"20",sr:"13"},{date:"25.05.2026",fr:"98",sr:"46"},{date:"24.05.2026",fr:"54",sr:"50"},{date:"21.05.2026",fr:"37",sr:"57"},{date:"20.05.2026",fr:"81",sr:"62"},{date:"19.05.2026",fr:"67",sr:"41"},{date:"18.05.2026",fr:"20",sr:"51"},{date:"16.05.2026",fr:"07",sr:"40"},{date:"15.05.2026",fr:"67",sr:"68"},{date:"14.05.2026",fr:"69",sr:"68"},{date:"13.05.2026",fr:"32",sr:"80"},{date:"12.05.2026",fr:"06",sr:"42"},{date:"11.05.2026",fr:"08",sr:"26"},{date:"09.05.2026",fr:"29",sr:"33"},{date:"07.05.2026",fr:"23",sr:"35"},{date:"06.05.2026",fr:"61",sr:"76"},{date:"04.05.2026",fr:"03",sr:"95"},{date:"02.05.2026",fr:"10",sr:"48"},{date:"01.05.2026",fr:"11",sr:"48"}],
-    june: [{date:"12.06.2026",fr:"06",sr:"86"},{date:"11.06.2026",fr:"77",sr:"18"},{date:"10.06.2026",fr:"07",sr:"65"},{date:"09.06.2026",fr:"00",sr:"51"},{date:"08.06.2026",fr:"52",sr:"66"},{date:"06.06.2026",fr:"46",sr:"28"},{date:"05.06.2026",fr:"96",sr:"45"},{date:"04.06.2026",fr:"23",sr:"37"},{date:"03.06.2026",fr:"13",sr:"42"},{date:"02.06.2026",fr:"24",sr:"99"},{date:"01.06.2026",fr:"20",sr:"57"}]
-};
-
-function displayPreviousResults() { 
-    let month = document.getElementById('monthSelect').value; 
-    let data = monthData[month]; 
-    let tbody = document.getElementById('resultsTableBody');
-    if(data && data.length > 0) {
-        let html = '';
-        for(let row of data) { html += `<tr><td style="padding:8px;">${row.date}</td><td style="padding:8px;">${row.fr}</td><td style="padding:8px;">${row.sr}</td>`; }
-        tbody.innerHTML = html;
-    } else { tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:20px;">No results available</span></tr>'; }
-}
-
 let isVipUnlocked = localStorage.getItem('teer_vip_status') === 'active';
 let liveData = { shillong: { fr: null, sr: null }, khanapara: { fr: null, sr: null }, juwai: { fr: null, sr: null }, morning: { fr: null, sr: null }, night: { fr: null, sr: null } };
 let previousDayResults = { shillong: { fr: null, sr: null }, khanapara: { fr: null, sr: null }, juwai: { fr: null, sr: null }, morning: { fr: null, sr: null }, night: { fr: null, sr: null } };
 
-// ========== IMPROVED CALCULATION FOR BEST COMMON NUMBERS ==========
 function calculateCommonFromPreviousDay(venue) {
     let prev = previousDayResults[venue];
     if((!prev.fr || prev.fr === null) && (!prev.sr || prev.sr === null)) {
@@ -1317,48 +1527,30 @@ function calculateCommonFromPreviousDay(venue) {
     let yFR = parseInt(prev.fr) || 42;
     let ySR = parseInt(prev.sr) || 35;
     
-    let formulas = [
-        { fr: (yFR * 3 + ySR * 2 + 17) % 100, sr: (ySR * 4 + yFR * 1 + 23) % 100 },
-        { fr: (yFR + ySR + 49) % 100, sr: (yFR * 2 + ySR * 2 + 31) % 100 },
-        { fr: (yFR * 7 + ySR * 3 + 13) % 100, sr: (ySR * 6 + yFR * 2 + 29) % 100 },
-        { fr: ((yFR + ySR) * 3 + 7) % 100, sr: ((yFR + ySR) * 5 + 11) % 100 },
-        { fr: (yFR * 5 + ySR * 4 + 11) % 100, sr: (ySR * 7 + yFR * 3 + 19) % 100 },
-        { fr: (yFR * 8 + ySR * 5 + 21) % 100, sr: (ySR * 9 + yFR * 4 + 27) % 100 },
-        { fr: (yFR * 11 + ySR * 7 + 31) % 100, sr: (ySR * 13 + yFR * 8 + 37) % 100 }
-    ];
+    let f1_fr = (yFR * 3 + ySR * 2 + 17) % 100;
+    let f1_sr = (ySR * 4 + yFR * 1 + 23) % 100;
+    let f2_fr = (yFR + ySR + 49) % 100;
+    let f2_sr = (yFR * 2 + ySR * 2 + 31) % 100;
+    let f3_fr = (yFR * 7 + ySR * 3 + 13) % 100;
+    let f3_sr = (ySR * 6 + yFR * 2 + 29) % 100;
+    let f4_fr = ((yFR + ySR) * 3 + 7) % 100;
+    let f4_sr = ((yFR + ySR) * 5 + 11) % 100;
+    let f5_fr = (yFR * 5 + ySR * 4 + 11) % 100;
+    let f5_sr = (ySR * 7 + yFR * 3 + 19) % 100;
+    let f6_fr = (yFR * 8 + ySR * 5 + 21) % 100;
+    let f6_sr = (ySR * 9 + yFR * 4 + 27) % 100;
+    let f7_fr = (yFR * 11 + ySR * 7 + 31) % 100;
+    let f7_sr = (ySR * 13 + yFR * 8 + 37) % 100;
     
-    let weights = [1.5, 1.0, 1.3, 0.8, 1.2, 0.9, 1.1];
-    let frWeighted = 0, srWeighted = 0, totalWeight = 0;
-    for(let i = 0; i < formulas.length; i++) {
-        frWeighted += formulas[i].fr * weights[i];
-        srWeighted += formulas[i].sr * weights[i];
-        totalWeight += weights[i];
-    }
-    let finalFR = Math.round(frWeighted / totalWeight);
-    let finalSR = Math.round(srWeighted / totalWeight);
+    let finalFR = Math.round((f1_fr * 1.2 + f2_fr * 1.0 + f3_fr * 1.1 + f4_fr * 0.9 + f5_fr * 1.0 + f6_fr * 0.8 + f7_fr * 1.0) / 7);
+    let finalSR = Math.round((f1_sr * 1.2 + f2_sr * 1.0 + f3_sr * 1.1 + f4_sr * 0.9 + f5_sr * 1.0 + f6_sr * 0.8 + f7_sr * 1.0) / 7);
     
-    let frValues = formulas.map(f => f.fr).sort((a,b) => a - b);
-    let srValues = formulas.map(f => f.sr).sort((a,b) => a - b);
-    let frMedian = frValues[3];
-    let srMedian = srValues[3];
-    
-    let trendFR = (yFR + ySR + 11) % 100;
-    let trendSR = (ySR + yFR + 13) % 100;
-    
-    let finalFR_Adjusted = Math.round((finalFR * 1.2 + frMedian * 0.9 + trendFR * 0.5) / 2.6);
-    let finalSR_Adjusted = Math.round((finalSR * 1.2 + srMedian * 0.9 + trendSR * 0.5) / 2.6);
-    
-    finalFR_Adjusted = ((finalFR_Adjusted % 100) + 100) % 100;
-    finalSR_Adjusted = ((finalSR_Adjusted % 100) + 100) % 100;
-    
-    let frDirect = finalFR_Adjusted.toString().padStart(2, '0');
-    let srDirect = finalSR_Adjusted.toString().padStart(2, '0');
-    
+    let frDirect = finalFR.toString().padStart(2, '0');
+    let srDirect = finalSR.toString().padStart(2, '0');
     let frLastDigit = parseInt(frDirect.slice(-1));
     let srLastDigit = parseInt(srDirect.slice(-1));
     let prevFRLastDigit = yFR % 10;
     let prevSRLastDigit = ySR % 10;
-    
     let frHouse = (frLastDigit + prevFRLastDigit + 3) % 10;
     let frEnding = (frLastDigit + prevFRLastDigit + 7) % 10;
     let srHouse = (srLastDigit + prevSRLastDigit + 3) % 10;
@@ -1726,19 +1918,51 @@ document.getElementById('closePrevModalBtn').onclick = closeModals;
 window.onclick = (e) => { if(e.target.classList.contains('modal')) closeModals(); };
 
 document.querySelectorAll('.faq-question').forEach(q => { q.onclick = () => { let a=q.nextElementSibling; a.classList.toggle('show'); q.querySelector('.faq-icon').innerHTML = a.classList.contains('show') ? '−' : '+'; }; });
-document.getElementById('monthSelect').addEventListener('change', displayPreviousResults);
+document.getElementById('monthSelect').addEventListener('change', function() {
+    const month = this.value;
+    const data = monthData[month];
+    const tbody = document.getElementById('resultsTableBody');
+    
+    if (data && data.length > 0) {
+        let html = '';
+        for (let row of data) {
+            html += `<tr><td style="padding:8px;">${row.date}</td><td style="padding:8px;">${row.fr}</td><td style="padding:8px;">${row.sr}</td></tr>`;
+        }
+        tbody.innerHTML = html;
+    } else {
+        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8892a0;">এই মাসে কোনো রেজাল্ট নেই</td></tr>`;
+    }
+});
 
 function showBangla() { alert("বাংলা ভার্সন সক্রিয়। পুরো সাইট বাংলা ও ইংরেজিতে দেখা যাচ্ছে।"); }
 function showEnglish() { alert("English version active. Site is fully bilingual."); }
 
+// ============================================================
+//   🔥 পেজ লোড হলে
+// ============================================================
+
 document.addEventListener('DOMContentLoaded', function() {
-    updateMetaTagsWithDate();
-    renderDreamChart();
+    // সিলেক্ট বক্স সেটআপ
+    setupMonthSelector();
+    
+    // রেজাল্ট দেখান
     displayPreviousResults();
+    
+    // কমন নাম্বার আপডেট
+    updateCommonNumbers();
+    
+    // ড্রিম চার্ট
+    renderDreamChart();
+    
+    // লাইভ রেজাল্ট লোড
     loadPreviousDayResults();
     loadTodayResults();
+    
+    // মেটা ট্যাগ আপডেট
+    updateMetaTagsWithDate();
 });
 
+// অটো আপডেট
 setInterval(() => { 
     updateMetaTagsWithDate();
     loadPreviousDayResults(); 
