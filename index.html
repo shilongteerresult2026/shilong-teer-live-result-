@@ -364,19 +364,200 @@ body {
     50% { background: #ef4444; box-shadow: 0 0 5px #ff4444; }
 }
 
-.btn-live-stream {
-    background: linear-gradient(95deg, #e67e22, #b85e0e);
-    border: none;
-    padding: 0.8rem;
-    border-radius: 60px;
-    font-weight: bold;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
+/* ===== স্লাইডার অ্যানিমেশন ===== */
+.slider-container {
+    overflow: hidden;
+    background: linear-gradient(135deg, #00ff88, #00ccff, #ff00ff, #ff6600);
+    background-size: 300% 300%;
+    animation: neonGlow 3s ease infinite;
+    border-radius: 0.6rem;
+    padding: 0.4rem 0.6rem;
     margin-bottom: 1rem;
-    width: 100%;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    border: 2px solid #fff;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.5), 0 0 40px rgba(0, 204, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2);
 }
+@keyframes neonGlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.slider-track {
+    display: flex;
+    animation: slideLeftToRight 10s linear infinite;
+    white-space: nowrap;
+}
+.slider-track a {
+    display: inline-block;
+    padding: 0 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #ff0000;
+    text-decoration: none;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+.slider-track a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+@keyframes slideLeftToRight {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0%); }
+}
+/* ===== স্লাইডার অ্যানিমেশন শেষ ===== */
+
+/* ===== কমন নাম্বার স্লাইডার বাটন ===== */
+.common-slider-container {
+    overflow: hidden;
+    background: linear-gradient(135deg, #00ff88, #00ccff, #ff00ff, #ff6600);
+    background-size: 300% 300%;
+    animation: neonGlow 3s ease infinite;
+    border-radius: 0.6rem;
+    padding: 0.4rem 0.6rem;
+    margin-bottom: 1rem;
+    border: 2px solid #fff;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.5), 0 0 40px rgba(0, 204, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.2);
+}
+.common-slider-track {
+    display: flex;
+    animation: slideLeftToRight 12s linear infinite;
+    white-space: nowrap;
+    gap: 1rem;
+}
+.common-slider-track a {
+    display: inline-block;
+    padding: 0.3rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #ff0000;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+.common-slider-track a:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+/* ===== কমন নাম্বার স্লাইডার বাটন শেষ ===== */
+
+/* ===== নেভিগেশন বাটন স্টাইল ===== */
+.nav-btn-main {
+    display: inline-block;
+    padding: 0.6rem 2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.nav-btn-main:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+.nav-btn-small {
+    display: inline-block;
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+.nav-btn-small:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+/* Shillong Result Button - Green + Redish */
+.btn-shillong-result {
+    background: linear-gradient(135deg, #2e7d32, #c62828);
+    color: white;
+    border: 2px solid #66bb6a;
+}
+.btn-shillong-result:hover {
+    background: linear-gradient(135deg, #388e3c, #d32f2f);
+    border-color: #81c784;
+}
+/* Khanapara Button */
+.btn-khanapara {
+    background: linear-gradient(135deg, #1565c0, #0d47a1);
+    color: white;
+    border: 2px solid #42a5f5;
+}
+.btn-khanapara:hover {
+    background: linear-gradient(135deg, #1976d2, #0d47a1);
+}
+/* Juwai Button */
+.btn-juwai {
+    background: linear-gradient(135deg, #e65100, #bf360c);
+    color: white;
+    border: 2px solid #ff9800;
+}
+.btn-juwai:hover {
+    background: linear-gradient(135deg, #f57c00, #bf360c);
+}
+/* Morning Button */
+.btn-morning {
+    background: linear-gradient(135deg, #f9a825, #f57f17);
+    color: white;
+    border: 2px solid #ffeb3b;
+}
+.btn-morning:hover {
+    background: linear-gradient(135deg, #fbc02d, #f57f17);
+}
+/* Night Button */
+.btn-night {
+    background: linear-gradient(135deg, #1a237e, #0d1442);
+    color: white;
+    border: 2px solid #5c6bc0;
+}
+.btn-night:hover {
+    background: linear-gradient(135deg, #283593, #0d1442);
+}
+/* Common Number Buttons */
+.btn-common-shillong {
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    color: white;
+    border: 2px solid #66bb6a;
+}
+.btn-common-khanapara {
+    background: linear-gradient(135deg, #1565c0, #0d47a1);
+    color: white;
+    border: 2px solid #42a5f5;
+}
+.btn-common-juwai {
+    background: linear-gradient(135deg, #e65100, #bf360c);
+    color: white;
+    border: 2px solid #ff9800;
+}
+.btn-previous {
+    background: linear-gradient(135deg, #37474f, #263238);
+    color: #ffecb3;
+    border: 2px solid #78909c;
+}
+.btn-previous:hover {
+    background: linear-gradient(135deg, #455a64, #263238);
+}
+/* ===== নেভিগেশন বাটন স্টাইল শেষ ===== */
+
+/* ===== 3 Button Row ===== */
+.btn-row-three {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0.2rem 0 0.8rem 0;
+}
+.btn-row-three a {
+    flex: 1;
+    min-width: 100px;
+    max-width: 180px;
+    text-align: center;
+}
+/* ===== 3 Button Row End ===== */
 
 .seo-h2 {
     background: linear-gradient(95deg, #2c6e2f, #1f4a21);
@@ -419,6 +600,7 @@ body {
     margin-bottom: 1rem;
 }
 
+/* ===== DREAM CARD ===== */
 .dream-card {
     background: linear-gradient(115deg, #fff9ef, #fff1e0);
     border-radius: 1rem;
@@ -499,6 +681,7 @@ body {
     font-size: 1.1rem;
     border: 2px solid #d48a2a;
 }
+/* ===== DREAM CARD END ===== */
 
 /* ===== RESULT CARDS ===== */
 .results-grid {
@@ -1372,6 +1555,14 @@ body {
         <div class="live-badge-main">🔴 Shillong Teer Result Today | আজকের লাইভ রেজাল্ট</div>
     </div>
     
+    <!-- ===== Morning, Juwai, Night - 3 Buttons Side by Side (Domain er niche) ===== -->
+    <div class="btn-row-three">
+        <a href="morning-teer-result.html" class="nav-btn-small btn-morning">🌅 মর্নিং তীর</a>
+        <a href="juwai-teer-result.html" class="nav-btn-small btn-juwai">🏹 জুওয়াই তীর</a>
+        <a href="night-teer-result.html" class="nav-btn-small btn-night">🌙 নাইট তীর</a>
+    </div>
+    <!-- ===== Morning, Juwai, Night - 3 Buttons Side by Side End ===== -->
+    
     <!-- 🎯 OMG10 Link - Now with Flash Animation -->
     <div style="margin: 15px 0; text-align: center;">
         <a href="https://omg10.com/4/11160871" target="_blank" 
@@ -1385,8 +1576,19 @@ body {
         <p style="font-size: 0.8rem; color: #555; margin-top: 5px;">(এক্সক্লুসিভ কন্টেন্ট ও অফার পেতে ক্লিক করুন)</p>
     </div>
     
-    <button class="btn-live-stream" id="liveStreamBtn">📡 LIVE STREAMING & TODAY'S RESULTS | লাইভ স্ট্রিমিং ও আজকের রেজাল্ট</button>
+    <!-- ===== Shillong Teer Slider ===== -->
+    <div class="slider-container">
+        <div class="slider-track">
+            <a href="shillong-teer-result.html">🏹 Shillong Teer Result Today - FR: 4:00 PM | SR: 5:00 PM</a>
+            <a href="khanapara-teer-result.html">🏹 Khanapara Teer Result - FR: 4:00 PM | SR: 5:00 PM</a>
+            <a href="juwai-teer-result.html">🏹 Juwai Teer Result - FR: 2:00 PM | SR: 3:30 PM</a>
+            <a href="morning-teer-result.html">🌅 Morning Teer Result - FR: 10:30 AM | SR: 11:30 AM</a>
+            <a href="night-teer-result.html">🌙 Night Teer Result - FR: 11:10 PM | SR: 12:10 AM</a>
+        </div>
+    </div>
+    <!-- ===== Shillong Teer Slider End ===== -->
 
+    <!-- ===== DREAM PREDICTOR (Shillong Teer Slider er niche) ===== -->
     <div class="dream-card">
         <div class="dream-title">✨ DREAM NUMBER PREDICTOR ✨</div>
         <div class="dream-subtitle">স্বপ্নের সংখ্যা জানতে নিচে স্বপ্নের নাম লিখুন</div>
@@ -1407,13 +1609,30 @@ body {
             </tbody>
         </table>
     </div>
+    <!-- ===== DREAM PREDICTOR END ===== -->
 
     <h2 class="seo-h2-orange">🎯 Shillong Teer Result Today Live | আজকের শিলং তীর লাইভ রেজাল্ট</h2>
     <div id="resultsGrid" class="results-grid"></div>
+    
+    <!-- ===== Shillong Teer Result Full Page Button ===== -->
+    <div style="text-align: center; margin: 0.5rem 0 1.5rem 0;">
+        <a href="shillong-teer-result.html" class="nav-btn-main btn-shillong-result">
+            📊 পূর্ণ Shillong Teer ফলাফল দেখুন →
+        </a>
+    </div>
+    <!-- ===== Shillong Teer Result Full Page Button End ===== -->
 
     <h2 class="seo-h2">🔢 Shillong Teer Common Number Today | আজকের শিলং তীর কমন নাম্বার</h2>
     <div class="common-time-badge">⭐ TODAY'S COMMON NUMBERS (7 Formula Analysis) | আজকের কমন নাম্বার (৭ ফর্মুলা বিশ্লেষণ)</div>
     <div class="common-venues-container" id="commonTablesContainer"></div>
+    
+    <!-- ===== Common Number Buttons ===== -->
+    <div style="text-align: center; margin: 0.5rem 0 1.5rem 0; display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center;">
+        <a href="shillong-common.html" class="nav-btn-small btn-common-shillong">🎯 শিলং কমন নাম্বার</a>
+        <a href="khanapara-common.html" class="nav-btn-small btn-common-khanapara">🎯 খানাপাড়া কমন নাম্বার</a>
+        <a href="juwai-common.html" class="nav-btn-small btn-common-juwai">🎯 জুওয়াই কমন নাম্বার</a>
+    </div>
+    <!-- ===== Common Number Buttons End ===== -->
 
     <h2 class="seo-h2-dark">📅 Shillong Teer Previous Results (2026) | শিলং তীর পূর্ববর্তী ফলাফল (২০২৬)</h2>
     <div class="monthwise-section">
@@ -1430,6 +1649,14 @@ body {
             </table>
         </div>
     </div>
+    
+    <!-- ===== Previous Results Full Page Button ===== -->
+    <div style="text-align: center; margin: 0.5rem 0 1.5rem 0;">
+        <a href="shillong-previous.html" class="nav-btn-main btn-previous">
+            📜 সব পূর্ববর্তী ফলাফল দেখুন →
+        </a>
+    </div>
+    <!-- ===== Previous Results Full Page Button End ===== -->
 
     <div class="vip-premium">
         <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -1450,6 +1677,7 @@ body {
         <a href="https://whatsapp.com/channel/0029VaFbrQmLSmbjX5WOYp2d" target="_blank" class="whatsapp-btn">📱 VIP GUTI - JOIN WHATSAPP CHANNEL ✨</a>
     </div>
 
+    <!-- ===== Dream Chart ===== -->
     <h2 class="seo-h2-dark">📖 Shillong Teer Dream Chart | শিলং তীর স্বপ্নের চার্ট</h2>
     <div class="dream-chart-section">
         <div class="dream-chart-title">📖 TRADITIONAL DREAM CHART</div>
@@ -1461,206 +1689,15 @@ body {
         </table>
         <div class="dream-chart-note">How to use: Find your dream in the chart above, note the Direct, House, and Ending numbers. Then use the Dream Predictor above for personalized predictions.<br> ব্যবহার পদ্ধতি: উপরের চার্টে আপনার স্বপ্ন খুঁজুন, ডাইরেক্ট, হাউজ ও এন্ডিং নাম্বার দেখুন। তারপর উপরের ড্রিম প্রেডিক্টর ব্যবহার করুন।</div>
     </div>
-
-    <!-- ============================================================ -->
-    <!-- 🆕 NEW SECTIONS (Dream Chart এর নিচে)                       -->
-    <!-- ============================================================ -->
-
-    <!-- -------- TEER CALCULATOR -------- -->
-    <div class="section-calculator" id="teerCalculator">
-        <h2 class="seo-h2-orange">🧮 Teer Number Calculator</h2>
-        <div class="calculator-box">
-            <div class="calc-row">
-                <div class="calc-group">
-                    <label>📆 আগের দিনের FR</label>
-                    <input type="number" id="calcPrevFR" placeholder="যেমন: 47" min="0" max="99">
-                </div>
-                <div class="calc-group">
-                    <label>📆 আগের দিনের SR</label>
-                    <input type="number" id="calcPrevSR" placeholder="যেমন: 20" min="0" max="99">
-                </div>
-            </div>
-            <div class="calc-row">
-                <div class="calc-group">
-                    <label>🌅 আজকের Morning FR</label>
-                    <input type="number" id="calcMorningFR" placeholder="যেমন: 35" min="0" max="99">
-                </div>
-                <div class="calc-group">
-                    <label>🌅 আজকের Morning SR</label>
-                    <input type="number" id="calcMorningSR" placeholder="যেমন: 68" min="0" max="99">
-                </div>
-            </div>
-            <div class="calc-row">
-                <div class="calc-group">
-                    <label>🏹 আজকের Juwai FR</label>
-                    <input type="number" id="calcJuwaiFR" placeholder="যেমন: 52" min="0" max="99">
-                </div>
-                <div class="calc-group">
-                    <label>🏹 আজকের Juwai SR</label>
-                    <input type="number" id="calcJuwaiSR" placeholder="যেমন: 73" min="0" max="99">
-                </div>
-            </div>
-            <div class="calc-row">
-                <div class="calc-group">
-                    <label>🌙 গতকালের Night FR</label>
-                    <input type="number" id="calcNightFR" placeholder="যেমন: 28" min="0" max="99">
-                </div>
-                <div class="calc-group">
-                    <label>🌙 গতকালের Night SR</label>
-                    <input type="number" id="calcNightSR" placeholder="যেমন: 44" min="0" max="99">
-                </div>
-            </div>
-            <button class="btn-calculate" onclick="calculateUserInput()">🔮 প্রেডিক্ট করুন</button>
-            <div id="calcResult" class="calc-result">
-                <div class="result-grid">
-                    <div class="result-item"><span class="r-label">FR Direct</span><span class="r-value" id="calcFRDirect">--</span></div>
-                    <div class="result-item"><span class="r-label">SR Direct</span><span class="r-value" id="calcSRDirect">--</span></div>
-                    <div class="result-item"><span class="r-label">FR House</span><span class="r-value" id="calcFRHouse">--</span></div>
-                    <div class="result-item"><span class="r-label">FR Ending</span><span class="r-value" id="calcFREnding">--</span></div>
-                    <div class="result-item"><span class="r-label">SR House</span><span class="r-value" id="calcSRHouse">--</span></div>
-                    <div class="result-item"><span class="r-label">SR Ending</span><span class="r-value" id="calcSREnding">--</span></div>
-                </div>
-                <div class="calc-confidence" id="calcConfidence">⚡ কনফিডেন্স: --%</div>
-            </div>
-        </div>
+    <!-- ===== Dream Chart End ===== -->
+    
+    <!-- ===== Khanapara Result Button ===== -->
+    <div style="text-align: center; margin: 0.5rem 0 1.5rem 0;">
+        <a href="khanapara-teer-result.html" class="nav-btn-main btn-khanapara">
+            🏹 খানাপাড়া তীর রেজাল্ট দেখুন →
+        </a>
     </div>
-
-    <!-- -------- TRENDING NUMBERS -------- -->
-    <div class="section-trending">
-        <h2 class="seo-h2">🔥 Trending Numbers (Last 7 Days)</h2>
-        <div class="trending-grid" id="trendingGrid"></div>
-    </div>
-
-    <!-- -------- TEER NEWS -------- -->
-    <div class="section-news">
-        <h2 class="seo-h2-dark">📰 Teer News & Expert Tips</h2>
-        <div class="news-grid" id="newsGrid">
-            <div class="news-card">
-                <div class="news-badge">🔥 আজকের টিপস</div>
-                <h3>শিলং তীর জেতার ৫টি সেরা কৌশল</h3>
-                <p>বিশেষজ্ঞদের মতে, গত ৭ দিনের ফলাফল বিশ্লেষণ করে বাজি করলে জয়ের হার ৭০% বেড়ে যায়...</p>
-                <a href="#" class="news-readmore">আরও পড়ুন →</a>
-            </div>
-            <div class="news-card">
-                <div class="news-badge">📊 বিশ্লেষণ</div>
-                <h3>কমন নাম্বার বের করার সঠিক পদ্ধতি</h3>
-                <p>১৫টি অ্যালগরিদম ব্যবহার করে কিভাবে ৯৯% সঠিক কমন নাম্বার বের করবেন...</p>
-                <a href="#" class="news-readmore">আরও পড়ুন →</a>
-            </div>
-            <div class="news-card">
-                <div class="news-badge">🎯 এক্সক্লুসিভ</div>
-                <h3>আজকের স্ট্রং প্রেডিকশন (FR/SR)</h3>
-                <p>আমাদের এআই অ্যালগরিদম অনুযায়ী আজকের সবচেয়ে সম্ভাব্য নাম্বারগুলো দেখুন...</p>
-                <a href="#" class="news-readmore">আরও পড়ুন →</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- -------- WINNER LEADERBOARD -------- -->
-    <div class="section-leaderboard">
-        <h2 class="seo-h2-orange">🏆 সাপ্তাহিক টপ প্রেডিক্টর</h2>
-        <div class="leaderboard-table">
-            <table>
-                <thead>
-                    <tr><th>#</th><th>প্রেডিক্টর</th><th>সঠিক প্রেডিকশন</th><th>মোট প্রেডিকশন</th><th>হার</th></tr>
-                </thead>
-                <tbody id="leaderboardBody"></tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- -------- COMMENT SYSTEM -------- -->
-    <div class="section-comments">
-        <h2 class="seo-h2-dark">💬 মন্তব্য করুন</h2>
-        <div class="comment-box">
-            <textarea id="commentInput" placeholder="আপনার মন্তব্য লিখুন..."></textarea>
-            <div class="comment-input-row">
-                <input type="text" id="commentName" placeholder="আপনার নাম">
-                <button onclick="postComment()">💬 মন্তব্য করুন</button>
-            </div>
-            <div id="commentList" class="comment-list"></div>
-        </div>
-    </div>
-
-    <!-- -------- NEWSLETTER -------- -->
-    <div class="section-newsletter">
-        <div class="newsletter-box">
-            <h3>📧 দৈনিক আপডেট পান</h3>
-            <p>প্রতিদিন সকালে কমন নাম্বার ও রেজাল্ট পেতে সাবস্ক্রাইব করুন</p>
-            <div class="newsletter-form">
-                <input type="email" id="newsletterEmail" placeholder="আপনার ইমেইল">
-                <button onclick="subscribeNewsletter()">সাবস্ক্রাইব</button>
-            </div>
-            <div id="newsletterMsg" class="newsletter-msg"></div>
-        </div>
-    </div>
-
-    <!-- -------- BEGINNER'S GUIDE -------- -->
-    <div class="section-guide">
-        <h2 class="seo-h2">📖 বিগিনার্স গাইড - শিলং তীর</h2>
-        <div class="guide-content">
-            <div class="guide-step">
-                <div class="step-number">১</div>
-                <div class="step-text">
-                    <h4>শিলং তীর কী?</h4>
-                    <p>শিলং তীর একটি ঐতিহ্যবাহী তীরন্দাজ-ভিত্তিক লটারি খেলা যা মেঘালয়ের শিলংয়ে খেলা হয়।</p>
-                </div>
-            </div>
-            <div class="guide-step">
-                <div class="step-number">২</div>
-                <div class="step-text">
-                    <h4>কখন খেলা হয়?</h4>
-                    <p>সোমবার থেকে শুক্রবার, বিকাল ৪:০০টা (FR) ও ৫:০০টা (SR)-তে।</p>
-                </div>
-            </div>
-            <div class="guide-step">
-                <div class="step-number">৩</div>
-                <div class="step-text">
-                    <h4>কিভাবে জিতবেন?</h4>
-                    <p>গত ৭ দিনের ফলাফল বিশ্লেষণ করে কমন নাম্বার বের করুন এবং হাউজ/এন্ডিং বাজিতে ফোকাস করুন।</p>
-                </div>
-            </div>
-            <div class="guide-step">
-                <div class="step-number">৪</div>
-                <div class="step-text">
-                    <h4>বেস্ট স্ট্র্যাটেজি</h4>
-                    <p>হট নাম্বার + কোল্ড নাম্বার + ট্রেন্ড অ্যানালাইসিস - এই তিনটি একসাথে ব্যবহার করুন।</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- -------- ABOUT US -------- -->
-    <div class="section-about">
-        <h2 class="seo-h2-dark">ℹ️ আমাদের সম্পর্কে</h2>
-        <div class="about-content">
-            <p><strong>Shillong Teer Live Result</strong> - আপনার বিশ্বস্ত উৎস শিলং তীরের লাইভ রেজাল্ট, কমন নাম্বার, হাউজ ডিজিট, এন্ডিং ডিজিট এবং এক্সপার্ট প্রেডিকশনের জন্য।</p>
-            <p>আমরা প্রতিদিন সোমবার থেকে শুক্রবার বিকাল ৪:০০টা (FR) ও ৫:০০টা (SR) IST-তে আপডেট করি।</p>
-            <div class="about-stats">
-                <div class="about-stat"><span id="aboutTotalPredictions">0</span> মোট প্রেডিকশন</div>
-                <div class="about-stat"><span id="aboutAccuracy">99%</span> সঠিকতা</div>
-                <div class="about-stat"><span id="aboutUsers">0</span> সক্রিয় ইউজার</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- -------- CONTACT US -------- -->
-    <div class="section-contact">
-        <h2 class="seo-h2-orange">📞 যোগাযোগ</h2>
-        <div class="contact-content">
-            <div class="contact-info">
-                <p><strong>📧 ইমেইল:</strong> support@shillongteerliveresult.in</p>
-                <p><strong>📱 হোয়াটসঅ্যাপ:</strong> +91 7628988767</p>
-                <p><strong>🌐 ওয়েবসাইট:</strong> shillongteerliveresult.in</p>
-            </div>
-            <div class="contact-form">
-                <input type="text" placeholder="আপনার নাম">
-                <input type="email" placeholder="আপনার ইমেইল">
-                <textarea placeholder="আপনার বার্তা..."></textarea>
-                <button>পাঠান</button>
-            </div>
-        </div>
-    </div>
+    <!-- ===== Khanapara Result Button End ===== -->
 
     <!-- ============================================================ -->
     <!-- 🔥 DETAILED HISTORY - সম্পূর্ণ (আগের মতো)                    -->
@@ -1875,7 +1912,7 @@ body {
         <strong>দাবিত্যাগ:</strong> এই সাইটটি শুধুমাত্র বিনোদন এবং তথ্যের উদ্দেশ্যে। আমরা জুয়া সমর্থন বা প্রচার করি না। তীর শুধুমাত্র নির্দিষ্ট সরকারি আইনের অধীনে মেঘালয় এবং আসামে আইনত অনুমোদিত। দয়া করে দায়িত্ব সহকারে এবং আপনার বাজেটের মধ্যে খেলুন। এই ওয়েবসাইটে প্রদত্ত তথ্যের ভিত্তিতে হওয়া কোনো আর্থিক ক্ষতির জন্য আমরা দায়ী নই। সমস্ত ভবিষ্যদ্বাণী গাণিতিক বিশ্লেষণ এবং ঐতিহাসিক ডেটার উপর ভিত্তি করে - এগুলি জয়ের গ্যারান্টি নয়।
     </div>
 
-    <!-- 🔗 OMG10 Link in Footer - with Flash Animation -->
+    <!-- 🔗 OMG10 Link in Footer -->
     <div style="text-align: center; margin: 1rem 0; padding: 0.5rem; background: #f5f0eb; border-radius: 0.8rem;">
         <a href="https://omg10.com/4/11160871" target="_blank" 
            class="omg10-flash"
@@ -1888,8 +1925,16 @@ body {
         <a href="about.html">📖 About Us | আমাদের সম্পর্কে</a> | 
         <a href="contact.html">📞 Contact | যোগাযোগ</a> | 
         <a href="privacy.html">🔒 Privacy Policy | গোপনীয়তা নীতি</a> |
-        <a href="sitemap.xml">🗺️ Sitemap | সাইটম্যাপ</a> |
-        <a href="terms.html">📜 Terms & Conditions | শর্তাবলী</a>
+        <a href="terms.html">📜 Terms & Conditions | শর্তাবলী</a> |
+        <a href="shillong-common.html">🎯 শিলং কমন</a> |
+        <a href="khanapara-common.html">🎯 খানাপাড়া কমন</a> |
+        <a href="juwai-common.html">🎯 জুওয়াই কমন</a> |
+        <a href="shillong-previous.html">📜 পূর্ববর্তী ফলাফল</a> |
+        <a href="shillong-teer-result.html">🏹 শিলং রেজাল্ট</a> |
+        <a href="khanapara-teer-result.html">🏹 খানাপাড়া রেজাল্ট</a> |
+        <a href="juwai-teer-result.html">🏹 জুওয়াই রেজাল্ট</a> |
+        <a href="morning-teer-result.html">🌅 মর্নিং রেজাল্ট</a> |
+        <a href="night-teer-result.html">🌙 নাইট রেজাল্ট</a>
     </div>
 </div>
 
@@ -1899,9 +1944,7 @@ body {
 <div id="liveModalWin" class="modal"><div class="modal-card"><span class="close-modal" id="closeLiveModalBtn">×</span><h3>📺 LIVE RESULTS</h3><div id="liveModalContent"></div></div></div>
 <div id="prevModalWin" class="modal"><div class="modal-card"><span class="close-modal" id="closePrevModalBtn">×</span><h3 id="prevModalTitle">Previous 30 Days</h3><div id="prevModalTable"></div></div></div>
 
-<!-- ============================================================ -->
-<!-- 📜 JAVASCRIPT - সম্পূর্ণ                                     -->
-<!-- ============================================================ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 // ============================================================
 // 📊 DREAM CHART DATA
@@ -1983,6 +2026,13 @@ function getCurrentMonthName() {
     const now = new Date();
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     return months[now.getMonth()];
+}
+
+function getPreviousDayDate() {
+    const now = new Date();
+    const prev = new Date(now);
+    prev.setDate(now.getDate() - 1);
+    return prev.toLocaleDateString('en-GB');
 }
 
 let monthData = {
@@ -2129,14 +2179,27 @@ function displayPreviousResults() {
     const currentMonth = getCurrentMonth();
     const data = monthData[currentMonth];
     const tbody = document.getElementById('resultsTableBody');
+    
+    const prevDate = getPreviousDayDate();
+    const prevData = monthData[currentMonth]?.find(item => item.date === prevDate);
+    
     if (data && data.length > 0) {
         let html = '';
+        if (prevData) {
+            html += `<tr style="background: #fff4e5; border: 2px solid #f5b642;">
+                <td style="padding:8px; font-weight:800; color:#b85e0e;">⬅️ ${prevData.date} (গতকাল)</td>
+                <td style="padding:8px; font-weight:800;"><span style="background:#e67e22;color:white;padding:2px 12px;border-radius:30px;">${prevData.fr}</span></td>
+                <td style="padding:8px; font-weight:800;"><span style="background:#2c6e2f;color:white;padding:2px 12px;border-radius:30px;">${prevData.sr}</span></td>
+            </tr>`;
+        }
         for (let row of data) {
-            html += `<tr><td style="padding:8px;">${row.date}</td><td style="padding:8px;">${row.fr}</td><td style="padding:8px;">${row.sr}</td></tr>`;
+            if (row.date !== prevDate) {
+                html += `<tr><td style="padding:8px;">${row.date}</td><td style="padding:8px;">${row.fr}</td><td style="padding:8px;">${row.sr}</td></tr>`;
+            }
         }
         tbody.innerHTML = html;
     } else {
-        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8892a0;">${getCurrentMonthName()} মাসে এখনো কোনো রেজাল্ট নেই</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8892a0;">${getCurrentMonthName()} মাসে কোনো রেজাল্ট নেই</td></tr>`;
     }
     updateCommonNumbers();
 }
@@ -2406,7 +2469,6 @@ function renderTodayResults() {
         </div>`;
     }
     document.getElementById('resultsGrid').innerHTML = html;
-    document.getElementById('passingGrid').innerHTML = '<div class="pass-item"><strong>SHILLONG MORNING</strong> 93 ✅PASS</div><div class="pass-item"><strong>SHILLONG TEER SR</strong> 9 ✅PASS</div><div class="pass-item"><strong>JUWAI FR</strong> 5 ✅PASS</div><div class="pass-item"><strong>KHANAPARA</strong> 4 ✅PASS</div>';
 }
 
 function renderCommonNumbers() {
@@ -2511,6 +2573,165 @@ function getCurrentPageUrl() {
 function getPageTitle() {
     return encodeURIComponent(document.title);
 }
+
+// ============================================================
+// 🔥 সব ইভেন্ট লিসনার - DOMContentLoaded এর ভিতরে
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // ✅ ১. ড্রিম প্রেডিক্টর বাটন
+    const dreamBtn = document.getElementById('predictDreamBtn');
+    if (dreamBtn) {
+        dreamBtn.onclick = function() { 
+            let inp = document.getElementById('dreamInput').value.trim(); 
+            if(!inp) { alert("Enter dream word"); return; } 
+            let num = dreamToNum(inp); 
+            let he = getHENumbers(num); 
+            document.getElementById('dreamDisplayText').innerHTML = `💭 Dream: <strong>${inp}</strong> → Number: <strong>${num}</strong><br>💭 স্বপ্ন: <strong>${inp}</strong> → সংখ্যা: <strong>${num}</strong>`; 
+            document.getElementById('houseDigit1').innerText = he.house[0]; 
+            document.getElementById('houseDigit2').innerText = he.house[1]; 
+            document.getElementById('endingDigit1').innerText = he.ending[0]; 
+            document.getElementById('endingDigit2').innerText = he.ending[1]; 
+        };
+    } else {
+        console.log('⚠️ predictDreamBtn not found in HTML');
+    }
+
+    // ✅ ২. পেমেন্ট বাটন
+    const payBtn = document.getElementById('payNowBtn');
+    if (payBtn) {
+        payBtn.onclick = function() { 
+            window.location.href = "upi://pay?pa=7628988767@airtel&pn=Teer%20VIP&am=1500&cu=INR"; 
+        };
+    } else {
+        console.log('⚠️ payNowBtn not found in HTML');
+    }
+
+    // ✅ ৩. ভেরিফাই পেমেন্ট বাটন
+    const verifyBtn = document.getElementById('verifyPaymentBtn');
+    if (verifyBtn) {
+        verifyBtn.onclick = function() { 
+            let txn = document.getElementById('transactionIdInput').value.trim(); 
+            if(txn.length >= 5) { 
+                isVipUnlocked = true; 
+                localStorage.setItem('teer_vip_status', 'active'); 
+                renderVIP(); 
+                document.getElementById('vipMessage').innerHTML = "✅ VIP UNLOCKED!"; 
+            } else { 
+                document.getElementById('vipMessage').innerHTML = "❌ Invalid TXN ID"; 
+            } 
+        };
+    } else {
+        console.log('⚠️ verifyPaymentBtn not found in HTML');
+    }
+
+    // ✅ ৪. লাইভ স্ট্রিম বাটন
+    const liveBtn = document.getElementById('liveStreamBtn');
+    if (liveBtn) {
+        liveBtn.onclick = function() { 
+            let m = document.getElementById('liveModalWin'); 
+            let d = liveData; 
+            let common = calculateCommonFromPreviousDay('shillong'); 
+            document.getElementById('liveModalContent').innerHTML = `
+                <p>📅 ${todayDate}<br>
+                <strong>Today's Results:</strong><br>
+                Shillong: ${d.shillong?.fr || '--'}/${d.shillong?.sr || '--'}<br>
+                Khanapara: ${d.khanapara?.fr || '--'}/${d.khanapara?.sr || '--'}<br>
+                Juwai: ${d.juwai?.fr || '--'}/${d.juwai?.sr || '--'}<br>
+                Morning: ${d.morning?.fr || '--'}/${d.morning?.sr || '--'}<br>
+                Night: ${d.night?.fr || '--'}/${d.night?.sr || '--'}<br><br>
+                <strong>⭐ Common Numbers (7 Formula Average):</strong><br>
+                FR Direct: ${common.frDirect} | SR Direct: ${common.srDirect}<br>
+                FR House: ${common.frHouse} | SR House: ${common.srHouse}<br>
+                FR Ending: ${common.frEnding} | SR Ending: ${common.srEnding}
+                </p>`; 
+            if (m) m.style.display = 'flex'; 
+        };
+    } else {
+        console.log('⚠️ liveStreamBtn not found in HTML');
+    }
+
+    // ✅ ৫. মোডাল ক্লোজ বাটন
+    const closeLiveModal = document.getElementById('closeLiveModalBtn');
+    if (closeLiveModal) {
+        closeLiveModal.onclick = closeModals;
+    } else {
+        console.log('⚠️ closeLiveModalBtn not found in HTML');
+    }
+
+    const closePrevModal = document.getElementById('closePrevModalBtn');
+    if (closePrevModal) {
+        closePrevModal.onclick = closeModals;
+    } else {
+        console.log('⚠️ closePrevModalBtn not found in HTML');
+    }
+
+    // ✅ ৬. FAQ টগল
+    document.querySelectorAll('.faq-question').forEach(q => { 
+        q.onclick = function() { 
+            let a = this.nextElementSibling; 
+            if (a) {
+                a.classList.toggle('show'); 
+                this.querySelector('.faq-icon').innerHTML = a.classList.contains('show') ? '−' : '+'; 
+            }
+        }; 
+    });
+
+    // ✅ ৭. মন্থ সিলেক্টর
+    const monthSelect = document.getElementById('monthSelect');
+    if (monthSelect) {
+        monthSelect.addEventListener('change', function() {
+            const month = this.value;
+            const data = monthData[month];
+            const tbody = document.getElementById('resultsTableBody');
+            if (data && data.length > 0) {
+                let html = '';
+                for (let row of data) {
+                    html += `<tr><td style="padding:8px;">${row.date}</td><td style="padding:8px;">${row.fr}</td><td style="padding:8px;">${row.sr}</td></tr>`;
+                }
+                if (tbody) tbody.innerHTML = html;
+            } else {
+                if (tbody) tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8892a0;">এই মাসে কোনো রেজাল্ট নেই</td></tr>`;
+            }
+        });
+    }
+
+    // ✅ ৮. উইন্ডো ক্লিক - মোডাল বন্ধ
+    window.onclick = function(e) { 
+        if(e.target.classList.contains('modal')) closeModals(); 
+    };
+
+    // ✅ ৯. অন্যান্য ফাংশন কল
+    setupMonthSelector();
+    displayPreviousResults();
+    renderDreamChart();
+    loadPreviousDayResults();
+    loadTodayResults();
+    updateMetaTagsWithDate();
+    loadTrendingNumbers();
+    loadLeaderboard();
+    
+    const totalPredictions = document.getElementById('aboutTotalPredictions');
+    const users = document.getElementById('aboutUsers');
+    if (totalPredictions) totalPredictions.textContent = '12,847';
+    if (users) users.textContent = '3,421';
+
+    console.log('✅ All event listeners registered successfully!');
+});
+
+// ============================================================
+// 🔥 মোডাল ক্লোজ ফাংশন (global)
+// ============================================================
+function closeModals() { 
+    const liveModal = document.getElementById('liveModalWin');
+    const prevModal = document.getElementById('prevModalWin');
+    if (liveModal) liveModal.style.display = 'none';
+    if (prevModal) prevModal.style.display = 'none';
+}
+
+// ============================================================
+// 🔥 শেয়ার ফাংশন (global)
+// ============================================================
 function shareOnFacebook() {
     const url = getCurrentPageUrl();
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=400');
@@ -2583,45 +2804,6 @@ window.openPrevModal = function(vid, title) {
     document.getElementById('prevModalTable').innerHTML = html; 
     modal.style.display = 'flex'; 
 };
-
-document.getElementById('predictDreamBtn').onclick = () => { 
-    let inp = document.getElementById('dreamInput').value.trim(); 
-    if(!inp) { alert("Enter dream word"); return; } 
-    let num = dreamToNum(inp); 
-    let he = getHENumbers(num); 
-    document.getElementById('dreamDisplayText').innerHTML = `💭 Dream: <strong>${inp}</strong> → Number: <strong>${num}</strong><br>💭 স্বপ্ন: <strong>${inp}</strong> → সংখ্যা: <strong>${num}</strong>`; 
-    document.getElementById('houseDigit1').innerText = he.house[0]; 
-    document.getElementById('houseDigit2').innerText = he.house[1]; 
-    document.getElementById('endingDigit1').innerText = he.ending[0]; 
-    document.getElementById('endingDigit2').innerText = he.ending[1]; 
-};
-
-document.getElementById('payNowBtn').onclick = () => { window.location.href="upi://pay?pa=7628988767@airtel&pn=Teer%20VIP&am=1500&cu=INR"; };
-document.getElementById('verifyPaymentBtn').onclick = () => { let txn=document.getElementById('transactionIdInput').value.trim(); if(txn.length>=5){ isVipUnlocked=true; localStorage.setItem('teer_vip_status','active'); renderVIP(); document.getElementById('vipMessage').innerHTML="✅ VIP UNLOCKED!"; } else { document.getElementById('vipMessage').innerHTML="❌ Invalid TXN ID"; } };
-
-document.getElementById('liveStreamBtn').onclick = () => { let m=document.getElementById('liveModalWin'); let d = liveData; let common = calculateCommonFromPreviousDay('shillong'); document.getElementById('liveModalContent').innerHTML=`<p>📅 ${todayDate}<br><strong>Today's Results:</strong><br>Shillong: ${d.shillong.fr || '--'}/${d.shillong.sr || '--'}<br>Khanapara: ${d.khanapara.fr || '--'}/${d.khanapara.sr || '--'}<br>Juwai: ${d.juwai.fr || '--'}/${d.juwai.sr || '--'}<br>Morning: ${d.morning.fr || '--'}/${d.morning.sr || '--'}<br>Night: ${d.night.fr || '--'}/${d.night.sr || '--'}<br><br><strong>⭐ Common Numbers (7 Formula Average):</strong><br>FR Direct: ${common.frDirect} | SR Direct: ${common.srDirect}<br>FR House: ${common.frHouse} | SR House: ${common.srHouse}<br>FR Ending: ${common.frEnding} | SR Ending: ${common.srEnding}</p>`; m.style.display='flex'; };
-
-function closeModals(){ document.getElementById('liveModalWin').style.display='none'; document.getElementById('prevModalWin').style.display='none'; }
-document.getElementById('closeLiveModalBtn').onclick = closeModals;
-document.getElementById('closePrevModalBtn').onclick = closeModals;
-window.onclick = (e) => { if(e.target.classList.contains('modal')) closeModals(); };
-
-document.querySelectorAll('.faq-question').forEach(q => { q.onclick = () => { let a=q.nextElementSibling; a.classList.toggle('show'); q.querySelector('.faq-icon').innerHTML = a.classList.contains('show') ? '−' : '+'; }; });
-
-document.getElementById('monthSelect').addEventListener('change', function() {
-    const month = this.value;
-    const data = monthData[month];
-    const tbody = document.getElementById('resultsTableBody');
-    if (data && data.length > 0) {
-        let html = '';
-        for (let row of data) {
-            html += `<tr><td style="padding:8px;">${row.date}</td><td style="padding:8px;">${row.fr}</td><td style="padding:8px;">${row.sr}</td></tr>`;
-        }
-        tbody.innerHTML = html;
-    } else {
-        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8892a0;">এই মাসে কোনো রেজাল্ট নেই</td></tr>`;
-    }
-});
 
 function showBangla() { alert("বাংলা ভার্সন সক্রিয়। পুরো সাইট বাংলা ও ইংরেজিতে দেখা যাচ্ছে।"); }
 function showEnglish() { alert("English version active. Site is fully bilingual."); }
@@ -2769,29 +2951,18 @@ function subscribeNewsletter() {
     document.getElementById('newsletterEmail').value = '';
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    setupMonthSelector();
-    displayPreviousResults();
-    renderDreamChart();
-    loadPreviousDayResults();
-    loadTodayResults();
-    updateMetaTagsWithDate();
-    loadTrendingNumbers();
-    loadLeaderboard();
-    document.getElementById('aboutTotalPredictions').textContent = '12,847';
-    document.getElementById('aboutUsers').textContent = '3,421';
-});
-
 setInterval(() => { 
     updateMetaTagsWithDate();
     loadPreviousDayResults(); 
     loadTodayResults(); 
-}, 6 * 60 * 60 * 1000);
+    displayPreviousResults();
+}, 3600000);
 
 console.log('🏆 Shillong Teer Website - Fully Loaded!');
 console.log('📊 Features: Calculator, Trending, Leaderboard, Comments, Newsletter');
 console.log('📜 All original articles - History, Strategy, FAQ - preserved!');
 console.log('⏰ Common numbers update only at 10:00 AM daily!');
+console.log('📅 Previous results auto-update with yesterday\'s data!');
 console.log('🔥 OMG10 Direct Link flashing!');
 </script>
 
