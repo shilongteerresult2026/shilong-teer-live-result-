@@ -1,0 +1,6 @@
+# robots.txt for Shillong Teer Live Result
+
+User-agent: *
+Allow: /
+
+Sitemap: https://shillongteerliveresult.in/sitemap.xml
