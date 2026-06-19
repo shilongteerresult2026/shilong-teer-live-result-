@@ -1,8 +1,0 @@
-# robots.txt for Shillong Teer Live Result
-# Created: 19 June 2026
-
-User-agent: *
-Allow: /
-
-# সাইটম্যাপের লোকেশন
-Sitemap: https://shillongteerliveresult.in/sitemap.xml
