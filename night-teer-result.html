@@ -2,166 +2,144 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Night Teer Result Today | নাইট তীর রেজাল্ট টুডে</title>
-    <meta name="description" content="Night Teer Result Today - Get live Night Teer FR and SR results. Daily updated night teer result at 11:10 PM and 12:10 AM IST.">
-    <link rel="canonical" href="https://shillongteerliveresult.in/night-teer-result.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Night Teer Result Today | নাইট তীর রেজাল্ট</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Poppins', sans-serif; }
-        body { background: #0f1419; padding: 0.8rem; font-size: 17px; line-height: 1.5; }
-        .container { max-width: 100%; margin: 0 auto; background: #ffffff; border-radius: 1.2rem; padding: 1rem; box-shadow: 0 20px 35px -10px rgba(0,0,0,0.3); }
-        .back-home { display: inline-block; background: #e67e22; color: white; padding: 0.5rem 1.2rem; border-radius: 50px; text-decoration: none; margin-bottom: 1rem; font-weight: 600; }
-        .back-home:hover { background: #b85e0e; }
-        h1 { color: #174337; border-bottom: 3px solid #f5b642; padding-bottom: 0.5rem; font-size: 1.3rem; }
-        .result-box { background: linear-gradient(135deg, #1a1f2e, #0f1420); border-radius: 1rem; padding: 1.5rem; margin: 1.5rem 0; border: 2px solid #f5b642; }
-        .result-title { background: linear-gradient(95deg, #1a2a35, #0e1a22); color: #ffda88; padding: 10px 15px; border-radius: 50px; font-weight: 800; font-size: 1.1rem; text-align: center; margin-bottom: 1rem; border: 1px solid #f5b642; }
-        .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .result-item { background: #1e2538; border-radius: 0.8rem; padding: 1rem; text-align: center; border: 2px solid rgba(255, 215, 0, 0.2); }
-        .result-item .label { font-weight: 700; color: #8892a0; font-size: 0.9rem; }
-        .result-item .number { font-size: 2.5rem; font-weight: 900; color: #ffd700; padding: 0.3rem; background: rgba(255, 215, 0, 0.1); border-radius: 40px; display: inline-block; min-width: 80px; }
-        .result-item .waiting { background: #dc2626; color: white; font-size: 1rem; font-weight: bold; padding: 0.3rem 0.7rem; border-radius: 40px; display: inline-block; animation: blinkWaiting 0.6s infinite; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: #0f1419; padding: 0.8rem; }
+        .container { max-width: 100%; margin: 0 auto; background: #ffffff; border-radius: 1.2rem; padding: 1rem; }
+        .result-card { background: #ffffff; border-radius: 0.9rem; padding: 0.8rem; border: 2px solid #f5b642; border-top: 4px solid #1a237e; }
+        .venue-header { background: #1a237e; border-radius: 50px; padding: 0.35rem 0.8rem; text-align: center; margin-bottom: 0.6rem; }
+        .venue-name { font-size: 1rem; font-weight: 800; color: #ffe6b3; }
+        .info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; flex-wrap: wrap; }
+        .date-box { background: #ece3d8; font-size: 0.8rem; font-weight: 600; padding: 0.25rem 0.8rem; border-radius: 50px; }
+        .live-result-badge { background: #dc2626; color: white; font-size: 0.8rem; font-weight: bold; padding: 0.25rem 0.9rem; border-radius: 30px; animation: flashLive 0.6s infinite; display: inline-block; }
+        @keyframes flashLive { 0%,100% { background: #dc2626; } 50% { background: #ff3333; box-shadow: 0 0 8px #ff4444; } }
+        .timing-dual { display: flex; gap: 0.8rem; margin: 0.6rem 0; }
+        .fr-box, .sr-box { flex: 1; text-align: center; background: #faf3e8; border-radius: 0.8rem; padding: 0.5rem; border: 1px solid #e8d5c0; }
+        .result-number { font-size: 1.6rem; font-weight: 900; background: #f5f0e8; display: inline-block; padding: 0.2rem 1rem; border-radius: 40px; color: #1a237e; }
+        .waiting-number-display { background: #dc2626; color: white; font-size: 0.8rem; font-weight: bold; padding: 0.3rem 0.7rem; border-radius: 40px; display: inline-block; animation: blinkWaiting 0.6s infinite; }
         @keyframes blinkWaiting { 0%,100% { opacity: 1; background: #dc2626; } 50% { opacity: 0.7; background: #ff0000; } }
-        .update-time { text-align: center; color: #8892a0; font-size: 0.85rem; margin: 0.5rem 0; }
-        .info-box { background: #1a1f2e; border-left: 4px solid #ffd700; padding: 1rem; margin: 1rem 0; border-radius: 0.5rem; color: #e8e8dd; }
-        .info-box h3 { color: #ffd700; margin-bottom: 0.5rem; }
-        .info-box ul { padding-left: 1.2rem; }
-        .info-box ul li { margin: 0.3rem 0; }
-        .other-links { display: flex; gap: 0.8rem; flex-wrap: wrap; margin: 1.5rem 0; justify-content: center; }
-        .other-links a { background: #f5f0eb; padding: 0.4rem 1rem; border-radius: 50px; text-decoration: none; color: #b85e0e; font-weight: 600; border: 1px solid #e0d6c8; font-size: 0.85rem; }
-        .other-links a:hover { background: #e67e22; color: white; }
-        .footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e0d6c8; text-align: center; font-size: 0.8rem; color: #777; }
-        .footer a { color: #b85e0e; text-decoration: none; }
-        .footer-links { text-align: center; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e0d6c8; }
-        .footer-links a { color: #b85e0e; text-decoration: none; margin: 0 10px; font-size: 0.8rem; }
-        @media (max-width: 600px) {
-            body { padding: 0.4rem; font-size: 15px; }
+        .back-btn { display: inline-block; padding: 0.6rem 2rem; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 0.95rem; background: linear-gradient(135deg, #1a237e, #0d1442); color: white; border: 2px solid #5c6bc0; margin-top: 1rem; }
+        .back-btn:hover { background: linear-gradient(135deg, #283593, #0d1442); }
+        .header-title { text-align: center; margin-bottom: 1rem; }
+        .header-title h1 { font-size: 1.5rem; color: #1a237e; }
+        .header-title p { color: #666; font-size: 0.9rem; }
+        @media (max-width: 768px) {
             .container { padding: 0.6rem; }
-            .result-grid { grid-template-columns: 1fr; }
-            .result-item .number { font-size: 2rem; min-width: 60px; }
-            h1 { font-size: 1rem; }
-            .other-links a { font-size: 0.7rem; padding: 0.3rem 0.7rem; }
+            .result-number { font-size: 1.2rem; }
+            .timing-dual { flex-direction: column; }
+            .header-title h1 { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <a href="index.html" class="back-home">← হোমপেজে ফিরুন</a>
-    
-    <h1>🌙 Night Teer Result Today</h1>
-    <h2 style="color:#b85e0e; font-size:1rem; margin-top:0.2rem;">আজকের নাইট তীর রেজাল্ট</h2>
-    
-    <div class="update-time">📅 আপডেট: <span id="todayDate"></span> | ⏰ FR: রাত ১১:১০, SR: রাত ১২:১০ IST</div>
-    
-    <div class="result-box">
-        <div class="result-title">🎯 NIGHT TEER - LIVE RESULTS</div>
-        <div class="result-grid">
-            <div class="result-item">
-                <div class="label">FIRST ROUND (FR)<br><small>রাত ১১:১০</small></div>
-                <div id="nightFR" class="waiting">⏳ WAITING</div>
-            </div>
-            <div class="result-item">
-                <div class="label">SECOND ROUND (SR)<br><small>রাত ১২:১০</small></div>
-                <div id="nightSR" class="waiting">⏳ WAITING</div>
-            </div>
-        </div>
+    <div class="header-title">
+        <h1>🌙 Night Teer Result Today</h1>
+        <p>নাইট তীর আজকের রেজাল্ট</p>
     </div>
     
-    <div class="info-box">
-        <h3>📌 নাইট তীর সম্পর্কে</h3>
-        <ul>
-            <li><strong>শুরু:</strong> ২০২২ সালে তীর পরিবারের নতুন সংযোজন</li>
-            <li><strong>সময়:</strong> FR: রাত ১১:১০টা | SR: রাত ১২:১০টা IST</li>
-            <li><strong>ফলাফল:</strong> দিনের খেলা থেকে ভিন্ন ধরণ দেখায়</li>
-            <li><strong>তীর সংখ্যা:</strong> প্রতি রাউন্ডে ১১৫০-১৩৫০ তীর</li>
-            <li><strong>বৈশিষ্ট্য:</strong> ফ্লাডলাইটে খেলা, নাইট ক্রিকেটের মত পরিবেশ</li>
-            <li><strong>অংশগ্রহণ:</strong> প্রতিদিন ৫,০০০+ খেলোয়াড়</li>
-        </ul>
-    </div>
+    <div id="nightResultsGrid"></div>
     
-    <div class="other-links">
-        <a href="shillong-teer-result.html">🏹 শিলং তীর রেজাল্ট</a>
-        <a href="morning-teer-result.html">🌅 মর্নিং তীর রেজাল্ট</a>
-        <a href="shillong-common.html">🏹 শিলং তীর কমন</a>
-        <a href="khanapara-common.html">🏹 খানাপাড়া তীর কমন</a>
-        <a href="shillong-previous.html">📜 পূর্ববর্তী ফলাফল</a>
-    </div>
-    
-    <div class="footer">
-        <p>© 2026 Shillong Teer Live Result. All rights reserved.</p>
-        <div class="footer-links">
-            <a href="about.html">📖 About Us</a> | 
-            <a href="contact.html">📞 Contact</a> | 
-            <a href="privacy.html">🔒 Privacy Policy</a> |
-            <a href="terms.html">📜 Terms</a>
-        </div>
-        <p style="margin-top:0.5rem;"><a href="index.html">← হোমপেজে ফিরুন</a></p>
+    <div style="text-align: center; margin-top: 1.5rem;">
+        <a href="index.html" class="back-btn">⬅️ Back to Home | হোমে ফিরুন</a>
     </div>
 </div>
 
 <script>
-    document.getElementById('todayDate').textContent = new Date().toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
+const SUPABASE_URL = 'https://bwjjqidmeooyojjvtqjs.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3ampxaWRtZW9veW9qanZ0cWpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NDIxMTAsImV4cCI6MjA5NjUxODExMH0.sRbG-Pwd8kgy94e9g7uuWhAj0-mH6JjOC7KXARxLIEk';
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+async function loadNightTeerResult() {
+    try {
+        const today = new Date().toISOString().split('T')[0];
+        const { data, error } = await supabaseClient
+            .from('teer_live_results')
+            .select('*')
+            .eq('venue', 'night')
+            .eq('result_date', today);
+            
+        if (!error && data && data.length > 0) {
+            const nightData = {};
+            data.forEach(row => {
+                nightData[row.venue] = {
+                    fr: row.fr_result,
+                    sr: row.sr_result
+                };
+            });
+            renderNightResult(nightData);
+        } else {
+            renderNightResult({ night: { fr: '--', sr: '--' } });
+        }
+    } catch(err) {
+        console.error('Error loading night results:', err);
+        renderNightResult({ night: { fr: '--', sr: '--' } });
+    }
+}
+
+function renderNightResult(data) {
+    const grid = document.getElementById('nightResultsGrid');
+    if (!grid) return;
     
-    function updateNightResults() {
-        let now = new Date();
-        let hours = now.getHours();
-        let minutes = now.getMinutes();
-        let totalMinutes = hours * 60 + minutes;
-        
-        let frTime = 23 * 60 + 10;
-        let srTime = 24 * 60 + 10;
-        
-        let frEl = document.getElementById('nightFR');
-        let srEl = document.getElementById('nightSR');
-        
-        let saved = localStorage.getItem('night_teer_results');
-        let results = saved ? JSON.parse(saved) : { fr: null, sr: null, date: null };
-        
-        let today = new Date().toDateString();
-        let isAfterMidnight = totalMinutes >= srTime;
-        let displayDate = isAfterMidnight ? new Date(now.getTime() + 86400000).toDateString() : today;
-        
-        if (results.date === displayDate) {
-            if (results.fr) {
-                frEl.className = 'number';
-                frEl.textContent = results.fr;
-            }
-            if (results.sr) {
-                srEl.className = 'number';
-                srEl.textContent = results.sr;
-            }
-        }
-        
-        if (totalMinutes < frTime && !results.fr) {
-            frEl.className = 'waiting';
-            frEl.textContent = '⏳ WAITING';
-        } else if (totalMinutes >= frTime && totalMinutes < srTime && !results.fr) {
-            let num = Math.floor(Math.random() * 100).toString().padStart(2, '0');
-            frEl.className = 'number';
-            frEl.textContent = num;
-            if (!results.date || results.date !== displayDate) {
-                results = { fr: num, sr: null, date: displayDate };
-            } else {
-                results.fr = num;
-            }
-            localStorage.setItem('night_teer_results', JSON.stringify(results));
-        } else if (totalMinutes >= srTime && !results.sr) {
-            let num = Math.floor(Math.random() * 100).toString().padStart(2, '0');
-            srEl.className = 'number';
-            srEl.textContent = num;
-            if (!results.fr) {
-                let frNum = Math.floor(Math.random() * 100).toString().padStart(2, '0');
-                results.fr = frNum;
-                frEl.className = 'number';
-                frEl.textContent = frNum;
-            }
-            results.sr = num;
-            results.date = displayDate;
-            localStorage.setItem('night_teer_results', JSON.stringify(results));
-        }
+    const today = new Date().toISOString().split('T')[0];
+    const night = data.night || { fr: '--', sr: '--' };
+    
+    // Night time check - 11:10 PM এবং 12:10 AM
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const currentTime = hours + minutes/60;
+    
+    // Night FR: 11:10 PM (23.17), SR: 12:10 AM (0.17)
+    const isFRTime = currentTime < 23.17 || currentTime >= 0.17;
+    const isSRTime = currentTime < 0.17 || currentTime >= 23.17;
+    
+    // Night এর জন্য আলাদা সময় লজিক
+    let frDisplay, srDisplay;
+    
+    // FR (11:10 PM) - যদি 11:10 PM এর আগে হয় তাহলে Waiting
+    if (hours < 23 || (hours === 23 && minutes < 10)) {
+        frDisplay = `<div class="waiting-number-display">⏳ WAITING</div>`;
+    } else {
+        frDisplay = night.fr !== '--' ? `<div class="result-number">${night.fr}</div>` : `<div class="waiting-number-display">⏳ WAITING</div>`;
     }
     
-    updateNightResults();
-    setInterval(updateNightResults, 30000);
+    // SR (12:10 AM) - যদি 12:10 AM এর আগে হয় তাহলে Waiting
+    if (hours < 0 || (hours === 0 && minutes < 10)) {
+        srDisplay = `<div class="waiting-number-display">⏳ WAITING</div>`;
+    } else {
+        srDisplay = night.sr !== '--' ? `<div class="result-number">${night.sr}</div>` : `<div class="waiting-number-display">⏳ WAITING</div>`;
+    }
+    
+    grid.innerHTML = `
+        <div class="result-card">
+            <div class="venue-header">
+                <span class="venue-name">🌙 NIGHT TEER</span>
+            </div>
+            <div class="info-row">
+                <span class="date-box">📅 ${today}</span>
+                <span class="live-result-badge">🔴 LIVE</span>
+            </div>
+            <div class="timing-dual">
+                <div class="fr-box">
+                    <div>FIRST ROUND (11:10 PM)</div>
+                    ${frDisplay}
+                </div>
+                <div class="sr-box">
+                    <div>SECOND ROUND (12:10 AM)</div>
+                    ${srDisplay}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadNightTeerResult();
+});
 </script>
 </body>
 </html>
