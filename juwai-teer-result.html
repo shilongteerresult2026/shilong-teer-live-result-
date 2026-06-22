@@ -53,7 +53,7 @@ const SUPABASE_URL = 'https://bwjjqidmeooyojjvtqjs.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3ampxaWRtZW9veW9qanZ0cWpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NDIxMTAsImV4cCI6MjA5NjUxODExMH0.sRbG-Pwd8kgy94e9g7uuWhAj0-mH6JjOC7KXARxLIEk';
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-async function loadJuwaiTeerResult() {
+async function loadJuwaiResult() {
     try {
         const today = new Date().toISOString().split('T')[0];
         const { data, error } = await supabaseClient
@@ -87,7 +87,7 @@ function renderJuwaiResult(data) {
     const today = new Date().toISOString().split('T')[0];
     const juwai = data.juwai || { fr: '--', sr: '--' };
     
-    // Juwai time check: FR 2:00 PM, SR 3:30 PM
+    // Juwai time: FR 2:00 PM, SR 3:30 PM
     const now = new Date();
     const hours = now.getHours();
     const minutes = now.getMinutes();
@@ -125,7 +125,7 @@ function renderJuwaiResult(data) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    loadJuwaiTeerResult();
+    loadJuwaiResult();
 });
 </script>
 </body>
