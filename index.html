@@ -1703,7 +1703,7 @@ body {
         </div>
     </div>
 
-    <!-- ===== DREAM PREDICTOR (Dream Chart এর ঠিক উপরে) ===== -->
+    <!-- ===== DREAM PREDICTOR ===== -->
     <div class="dream-card">
         <div class="dream-title">✨ DREAM NUMBER PREDICTOR ✨</div>
         <div class="dream-subtitle">স্বপ্নের সংখ্যা জানতে নিচে স্বপ্নের নাম লিখুন</div>
@@ -1746,7 +1746,7 @@ body {
         <a href="juwai-common.html" class="nav-btn-small btn-common-juwai">🎯 জুওয়াই কমন নাম্বার</a>
     </div>
 
-    <!-- ===== PREVIOUS RESULT CHART (June display + সব মাস) ===== -->
+    <!-- ===== PREVIOUS RESULT CHART ===== -->
     <h2 class="seo-h2-dark">📅 Shillong Teer Previous Results (2026) | শিলং তীর পূর্ববর্তী ফলাফল (২০২৬)</h2>
     <div class="monthwise-section">
         <div class="monthwise-title">📅 SHILLONG TEER - PREVIOUS RESULTS (ALL MONTHS)</div>
@@ -1970,6 +1970,75 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ============================================================
+// 🔥 IST TIME ZONE FIX
+// ============================================================
+function getTodayIST() {
+    const now = new Date();
+    const istOffset = 5.5 * 60 * 60 * 1000;
+    const istTime = new Date(now.getTime() + istOffset);
+    return istTime.toISOString().split('T')[0];
+}
+
+// ============================================================
+// 🔥 NIGHT TEER - গতকালের তারিখ দেখাবে
+// ============================================================
+function getNightDate() {
+    const today = getTodayIST();
+    const dateObj = new Date(today);
+    dateObj.setDate(dateObj.getDate() - 1);
+    return dateObj.toISOString().split('T')[0];
+}
+
+// ============================================================
+// 🔥 WAITING চেক - রেজাল্টের ১০ মিনিট আগে WAITING দেখাবে (শুধু Night এর জন্য)
+// ============================================================
+function isNightWaiting(roundType) {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const totalMinutes = hours * 60 + minutes;
+    
+    // FR: 11:10 PM (23:10) - 10 min আগে মানে 11:00 PM (23:00)
+    // SR: 12:10 AM (00:10) - 10 min আগে মানে 12:00 AM (00:00)
+    if (roundType === 'fr') {
+        // 11:00 PM (23:00) থেকে 11:10 PM (23:10) এর মধ্যে WAITING
+        return totalMinutes >= 1380 && totalMinutes < 1390;
+    } else if (roundType === 'sr') {
+        // 12:00 AM (00:00) থেকে 12:10 AM (00:10) এর মধ্যে WAITING
+        return totalMinutes >= 0 && totalMinutes < 10;
+    }
+    return false;
+}
+
+// ============================================================
+// 🔥 অন্যান্য ভেন্যুর জন্য WAITING চেক (আগের মতো)
+// ============================================================
+function isWaitingForVenue(venueId, roundType) {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const currentTime = hours + minutes/60;
+    
+    // Night এর জন্য আলাদা লজিক
+    if (venueId === 'night') {
+        return isNightWaiting(roundType);
+    }
+    
+    // অন্যান্য ভেন্যুর জন্য
+    if (venueId === 'morning') {
+        if (roundType === 'fr') return currentTime < 10.5;
+        if (roundType === 'sr') return currentTime < 11.5;
+    } else if (venueId === 'juwai') {
+        if (roundType === 'fr') return currentTime < 14;
+        if (roundType === 'sr') return currentTime < 15.5;
+    } else if (venueId === 'shillong' || venueId === 'khanapara') {
+        if (roundType === 'fr') return currentTime < 16;
+        if (roundType === 'sr') return currentTime < 17;
+    }
+    return false;
+}
+
+// ============================================================
 // 📊 DREAM CHART DATA
 // ============================================================
 const dreamChartData = [
@@ -2024,212 +2093,109 @@ function getHENumbers(n){
 }
 
 // ============================================================
-// 🔥 FR + SR একসাথে লোড করার ফাংশন
+// 🔥 লাইভ রেজাল্ট লোড - 10 সেকেন্ড পর পর রিফ্রেশ
 // ============================================================
-
 async function loadTodayResults() {
     try {
-        const today = new Date().toISOString().split('T')[0];
-        const { data, error } = await supabaseClient
+        const today = getTodayIST();
+        const nightDate = getNightDate();
+        console.log('📅 Today (IST):', today);
+        console.log('🌙 Night Date:', nightDate);
+        
+        // সব ভেন্যুর জন্য ডেটা নিন (Night এর জন্য গতকালের তারিখ)
+        const venues = ['shillong', 'khanapara', 'juwai', 'morning'];
+        const liveData = {};
+        
+        for (const venue of venues) {
+            const { data, error } = await supabaseClient
+                .from('teer_live_results')
+                .select('*')
+                .eq('venue', venue)
+                .eq('result_date', today);
+                
+            if (!error && data && data.length > 0) {
+                liveData[venue] = {
+                    fr: data[0].fr_result || '--',
+                    sr: data[0].sr_result || '--'
+                };
+            }
+        }
+        
+        // Night Teer - গতকালের ডেটা
+        const { data: nightData, error: nightError } = await supabaseClient
             .from('teer_live_results')
             .select('*')
-            .eq('result_date', today);
+            .eq('venue', 'night')
+            .eq('result_date', nightDate);
             
-        if (!error && data) {
-            const liveData = {};
-            data.forEach(row => {
-                liveData[row.venue] = {
-                    fr: row.fr_result,
-                    sr: row.sr_result
-                };
-            });
-            renderTodayResults(liveData);
+        if (!nightError && nightData && nightData.length > 0) {
+            liveData['night'] = {
+                fr: nightData[0].fr_result || '--',
+                sr: nightData[0].sr_result || '--'
+            };
         }
-    } catch(err) {
-        console.error('Error loading live results:', err);
-    }
-}
-
-async function loadPreviousResults() {
-    try {
-        const { data, error } = await supabaseClient
-            .from('teer_previous_results')
-            .select('*')
-            .order('result_date', { ascending: false })
-            .limit(30);
-            
-        if (!error && data) {
-            renderPreviousResults(data);
-        }
-    } catch(err) {
-        console.error('Error loading previous results:', err);
-    }
-}
-
-function renderPreviousResults(data) {
-    const tbody = document.getElementById('resultsTableBody');
-    if (!tbody) return;
-    
-    let html = '';
-    const today = new Date().toISOString().split('T')[0];
-    
-    data.forEach(row => {
-        const isToday = row.result_date === today;
-        const bgColor = isToday ? 'background: #fff4e5; border: 2px solid #f5b642;' : '';
         
-        html += `
-            <tr style="${bgColor}">
-                <td style="padding:8px; font-weight:${isToday ? '800' : '400'}; font-size:0.9rem;">
-                    ${isToday ? '⭐ ' : ''}${row.result_date}
-                </td>
-                <td style="padding:8px; font-size:0.9rem;">
-                    <span style="background:#e67e22;color:white;padding:2px 12px;border-radius:30px;">
-                        ${row.fr_result}
-                    </span>
-                </td>
-                <td style="padding:8px; font-size:0.9rem;">
-                    <span style="background:#2c6e2f;color:white;padding:2px 12px;border-radius:30px;">
-                        ${row.sr_result}
-                    </span>
-                </td>
-            </tr>
-        `;
-    });
-    
-    tbody.innerHTML = html;
-}
-
-async function loadCommonNumbers() {
-    try {
-        const today = new Date().toISOString().split('T')[0];
-        const { data, error } = await supabaseClient
-            .from('teer_common_numbers')
-            .select('*')
-            .eq('date', today)
-            .limit(1);
-            
-        if (!error && data && data.length > 0) {
-            renderCommonNumbers(data[0]);
-        }
+        renderTodayResults(liveData, today, nightDate);
+        
     } catch(err) {
-        console.error('Error loading common numbers:', err);
+        console.error('❌ Error loading live results:', err);
+        renderTodayResults({}, getTodayIST(), getNightDate());
     }
 }
 
-function renderCommonNumbers(data) {
-    const container = document.getElementById('commonTablesContainer');
-    if (!container) return;
-    
+// ============================================================
+// 🔥 রেজাল্ট রেন্ডার
+// ============================================================
+function renderTodayResults(liveData, todayDate, nightDate) {
     const venues = [
-        { id: 'shillong', name: 'SHILLONG TEER' },
-        { id: 'khanapara', name: 'KHANAPARA TEER' },
-        { id: 'juwai', name: 'JUWAI TEER' }
-    ];
-    
-    let html = '';
-    venues.forEach(v => {
-        const prefix = v.id;
-        html += `
-            <div class="common-venue-card">
-                <div class="common-venue-title">🔢 ${v.name} - COMMON NUMBERS</div>
-                <table class="common-table">
-                    <thead>
-                        <tr>
-                            <th>ROUND</th>
-                            <th>🔢 DIRECT NUMBER</th>
-                            <th>🏠 HOUSE DIGIT</th>
-                            <th>🎯 ENDING DIGIT</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="round-cell">FIRST ROUND (FR)</td>
-                            <td class="round-cell"><span class="direct-num">${data[`${prefix}_fr_direct`] || '--'}</span></td>
-                            <td class="round-cell"><span class="house-num">${data[`${prefix}_fr_house`] || '--'}</span></td>
-                            <td class="round-cell"><span class="ending-num">${data[`${prefix}_fr_ending`] || '--'}</span></td>
-                        </tr>
-                        <tr>
-                            <td class="round-cell">SECOND ROUND (SR)</td>
-                            <td class="round-cell"><span class="direct-num">${data[`${prefix}_sr_direct`] || '--'}</span></td>
-                            <td class="round-cell"><span class="house-num">${data[`${prefix}_sr_house`] || '--'}</span></td>
-                            <td class="round-cell"><span class="ending-num">${data[`${prefix}_sr_ending`] || '--'}</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        `;
-    });
-    
-    container.innerHTML = html;
-}
-
-async function loadVIPNumbers() {
-    try {
-        const today = new Date().toISOString().split('T')[0];
-        const { data, error } = await supabaseClient
-            .from('teer_vip_numbers')
-            .select('*')
-            .eq('date', today)
-            .limit(1);
-            
-        if (!error && data && data.length > 0) {
-            renderVIPNumbers(data[0].numbers);
-        }
-    } catch(err) {
-        console.error('Error loading VIP numbers:', err);
-    }
-}
-
-function renderVIPNumbers(numbers) {
-    const container = document.getElementById('vipNumbersContainer');
-    if (!container) return;
-    
-    container.innerHTML = `
-        <div>
-            <strong>⭐ VIP COMMON:</strong> 
-            ${numbers.map(n => `
-                <span style="background:#e67e22;padding:3px 10px;border-radius:30px;margin:3px;display:inline-block;font-size:0.95rem;">
-                    ${n}
-                </span>
-            `).join('')}
-        </div>
-    `;
-}
-
-function renderTodayResults(liveData) {
-    const venues = [
-        { id: 'shillong', name: 'SHILLONG TEER', time1: '4:00 PM', time2: '5:00 PM' },
-        { id: 'khanapara', name: 'KHANAPARA TEER', time1: '4:00 PM', time2: '5:00 PM' },
-        { id: 'juwai', name: 'JUWAI TEER', time1: '2:00 PM', time2: '3:30 PM' },
-        { id: 'morning', name: 'MORNING TEER', time1: '10:30 AM', time2: '11:30 AM' },
-        { id: 'night', name: 'NIGHT TEER', time1: '11:10 PM', time2: '12:10 AM' }
+        { id: 'shillong', name: 'SHILLONG TEER', time1: '4:00 PM', time2: '5:00 PM', date: todayDate },
+        { id: 'khanapara', name: 'KHANAPARA TEER', time1: '4:00 PM', time2: '5:00 PM', date: todayDate },
+        { id: 'juwai', name: 'JUWAI TEER', time1: '2:00 PM', time2: '3:30 PM', date: todayDate },
+        { id: 'morning', name: 'MORNING TEER', time1: '10:30 AM', time2: '11:30 AM', date: todayDate },
+        { id: 'night', name: 'NIGHT TEER', time1: '11:10 PM', time2: '12:10 AM', date: nightDate || getNightDate() }
     ];
     
     const grid = document.getElementById('resultsGrid');
     if (!grid) return;
     
     let html = '';
-    const today = new Date().toISOString().split('T')[0];
+    let hasData = false;
     
     venues.forEach(v => {
         const data = liveData[v.id] || { fr: '--', sr: '--' };
+        if (data.fr !== '--' || data.sr !== '--') hasData = true;
+        
+        // 🔥 WAITING চেক - Night এর জন্য আলাদা, বাকি ভেন্যুর জন্য আগের মতো
+        const isFRWaiting = isWaitingForVenue(v.id, 'fr');
+        const isSRWaiting = isWaitingForVenue(v.id, 'sr');
+        
+        const frDisplay = isFRWaiting ? 
+            `<div class="waiting-number-display">⏳ WAITING</div>` : 
+            `<div class="result-number">${data.fr}</div>`;
+        const srDisplay = isSRWaiting ? 
+            `<div class="waiting-number-display">⏳ WAITING</div>` : 
+            `<div class="result-number">${data.sr}</div>`;
+        
+        const badgeClass = hasData ? 'live-result-badge' : 'flash-waiting';
+        const badgeText = hasData ? '🔴 LIVE' : '⏳ WAITING';
+        
         html += `
             <div class="result-card">
                 <div class="venue-header">
                     <span class="venue-name">🎯 ${v.name}</span>
                 </div>
                 <div class="info-row">
-                    <span class="date-box">📅 ${today}</span>
-                    <span class="live-result-badge">🔴 LIVE</span>
+                    <span class="date-box">📅 ${v.date}</span>
+                    <span class="${badgeClass}">${badgeText}</span>
                 </div>
                 <div class="timing-dual">
                     <div class="fr-box">
                         <div>FIRST ROUND (${v.time1})</div>
-                        <div class="result-number">${data.fr}</div>
+                        ${frDisplay}
                     </div>
                     <div class="sr-box">
                         <div>SECOND ROUND (${v.time2})</div>
-                        <div class="result-number">${data.sr}</div>
+                        ${srDisplay}
                     </div>
                 </div>
             </div>
@@ -2243,11 +2209,13 @@ function renderTodayResults(liveData) {
 // 📌 DOMContentLoaded
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('✅ DOM Loaded - Loading results...');
     loadTodayResults();
-    loadPreviousResults();
-    loadCommonNumbers();
-    loadVIPNumbers();
     
+    // প্রতি 10 সেকেন্ড পর পর আপডেট চেক করুন
+    setInterval(loadTodayResults, 10000);
+    
+    // বাকি ফাংশন...
     setupMonthSelector();
     renderDreamChart();
     loadTrendingNumbers();
@@ -2258,7 +2226,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if(!inp) { alert("Enter dream word"); return; }
         let num = dreamToNum(inp);
         let he = getHENumbers(num);
-        document.getElementById('dreamDisplayText').innerHTML = `💭 Dream: <strong>${inp}</strong> → Number: <strong>${num}</strong><br>💭 স্বপ্ন: <strong>${inp}</strong> → সংখ্যা: <strong>${num}</strong>`;
+        document.getElementById('dreamDisplayText').innerHTML = `💭 Dream: <strong>${inp}</strong> → Number: <strong>${num}</strong>`;
         document.getElementById('houseDigit1').innerText = he.house[0];
         document.getElementById('houseDigit2').innerText = he.house[1];
         document.getElementById('endingDigit1').innerText = he.ending[0];
@@ -2276,8 +2244,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     document.getElementById('monthSelect').addEventListener('change', function() {
-        const month = this.value;
-        displayMonthResults(month);
+        displayMonthResults(this.value);
     });
     
     document.getElementById('payNowBtn').addEventListener('click', function() {
@@ -2289,7 +2256,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if(txn.length >= 5) {
             localStorage.setItem('teer_vip_status', 'active');
             document.getElementById('vipMessage').innerHTML = "✅ VIP UNLOCKED!";
-            loadVIPNumbers();
         } else {
             document.getElementById('vipMessage').innerHTML = "❌ Invalid TXN ID";
         }
@@ -2301,15 +2267,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if(e.target.classList.contains('modal')) closeModals();
     });
 
-    console.log('✅ All event listeners registered successfully!');
+    console.log('✅ All done!');
 });
 
 // ============================================================
-// 🗓️ Month Selector Functions - সব মাসের সম্পূর্ণ ডেটা
+// 🗓️ Month Selector Functions
 // ============================================================
 function setupMonthSelector() {
     const select = document.getElementById('monthSelect');
-    // ডিফল্ট জুন সিলেক্টেড
     select.value = '5';
     displayMonthResults(5);
 }
@@ -2318,9 +2283,7 @@ function displayMonthResults(monthIndex) {
     const tbody = document.getElementById('resultsTableBody');
     if (!tbody) return;
     
-    // সব মাসের সম্পূর্ণ ডেটা
     const allMonthData = {
-        // January 2026
         0: [
             {date:'2026-01-31', fr:'85', sr:'71'},
             {date:'2026-01-30', fr:'57', sr:'30'},
@@ -2350,7 +2313,6 @@ function displayMonthResults(monthIndex) {
             {date:'2026-01-02', fr:'46', sr:'37'},
             {date:'2026-01-01', fr:'91', sr:'40'}
         ],
-        // February 2026
         1: [
             {date:'2026-02-28', fr:'25', sr:'48'},
             {date:'2026-02-27', fr:'16', sr:'47'},
@@ -2377,7 +2339,6 @@ function displayMonthResults(monthIndex) {
             {date:'2026-02-03', fr:'79', sr:'49'},
             {date:'2026-02-02', fr:'52', sr:'21'}
         ],
-        // March 2026
         2: [
             {date:'2026-03-31', fr:'77', sr:'96'},
             {date:'2026-03-30', fr:'07', sr:'16'},
@@ -2406,7 +2367,6 @@ function displayMonthResults(monthIndex) {
             {date:'2026-03-03', fr:'16', sr:'68'},
             {date:'2026-03-02', fr:'50', sr:'01'}
         ],
-        // April 2026
         3: [
             {date:'2026-04-30', fr:'30', sr:'99'},
             {date:'2026-04-29', fr:'18', sr:'56'},
@@ -2435,7 +2395,6 @@ function displayMonthResults(monthIndex) {
             {date:'2026-04-02', fr:'38', sr:'60'},
             {date:'2026-04-01', fr:'89', sr:'94'}
         ],
-        // May 2026
         4: [
             {date:'2026-05-30', fr:'70', sr:'31'},
             {date:'2026-05-29', fr:'72', sr:'96'},
@@ -2464,8 +2423,8 @@ function displayMonthResults(monthIndex) {
             {date:'2026-05-02', fr:'10', sr:'48'},
             {date:'2026-05-01', fr:'11', sr:'48'}
         ],
-        // June 2026 - Default Selected
         5: [
+            {date:'2026-06-23', fr:'--', sr:'--'},
             {date:'2026-06-22', fr:'28', sr:'04'},
             {date:'2026-06-21', fr:'XX', sr:'XX'},
             {date:'2026-06-20', fr:'15', sr:'65'},
@@ -2487,18 +2446,7 @@ function displayMonthResults(monthIndex) {
             {date:'2026-06-02', fr:'24', sr:'99'},
             {date:'2026-06-01', fr:'20', sr:'57'}
         ],
-        // July 2026 - Empty (will be filled later)
-        6: [],
-        // August 2026 - Empty (will be filled later)
-        7: [],
-        // September 2026 - Empty (will be filled later)
-        8: [],
-        // October 2026 - Empty (will be filled later)
-        9: [],
-        // November 2026 - Empty (will be filled later)
-        10: [],
-        // December 2026 - Empty (will be filled later)
-        11: []
+        6: [], 7: [], 8: [], 9: [], 10: [], 11: []
     };
     
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
