@@ -14,8 +14,12 @@
         .venue-name { font-size: 1rem; font-weight: 800; color: #ffe6b3; }
         .info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; flex-wrap: wrap; }
         .date-box { background: #ece3d8; font-size: 0.8rem; font-weight: 600; padding: 0.25rem 0.8rem; border-radius: 50px; }
+        .flash-waiting { background: #dc2626; color: white; font-size: 0.75rem; font-weight: bold; padding: 0.25rem 0.8rem; border-radius: 30px; animation: flashWaiting 0.8s infinite; display: inline-block; }
+        @keyframes flashWaiting { 0%,100% { background: #dc2626; } 50% { background: #ff0000; } }
         .live-result-badge { background: #dc2626; color: white; font-size: 0.8rem; font-weight: bold; padding: 0.25rem 0.9rem; border-radius: 30px; animation: flashLive 0.6s infinite; display: inline-block; }
-        @keyframes flashLive { 0%,100% { background: #dc2626; } 50% { background: #ff3333; } }
+        @keyframes flashLive { 0%,100% { background: #dc2626; } 50% { background: #ff3333; box-shadow: 0 0 8px #ff4444; } }
+        .live-result-badge::before { content: "●"; animation: blinkDot 0.5s infinite; }
+        @keyframes blinkDot { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
         .timing-dual { display: flex; gap: 0.8rem; margin: 0.6rem 0; }
         .fr-box, .sr-box { flex: 1; text-align: center; background: #faf3e8; border-radius: 0.8rem; padding: 0.5rem; border: 1px solid #e8d5c0; }
         .result-number { font-size: 1.6rem; font-weight: 900; background: #f5f0e8; display: inline-block; padding: 0.2rem 1rem; border-radius: 40px; color: #c62828; }
@@ -26,6 +30,7 @@
         .header-title { text-align: center; margin-bottom: 1rem; }
         .header-title h1 { font-size: 1.5rem; color: #c62828; }
         .header-title p { color: #666; font-size: 0.9rem; }
+        .last-updated { text-align: center; font-size: 0.75rem; color: #888; margin-top: 0.5rem; }
         @media (max-width: 768px) {
             .container { padding: 0.6rem; }
             .result-number { font-size: 1.2rem; }
@@ -41,74 +46,182 @@
         <p>শিলং তীর আজকের রেজাল্ট</p>
     </div>
     
-    <div id="shillongResultsGrid"></div>
+    <!-- 🔥 Container for result - এই ID দিয়ে JavaScript আপডেট করবে -->
+    <div id="shillongResultContainer"></div>
     
     <div style="text-align: center; margin-top: 1.5rem;">
         <a href="index.html" class="back-btn">⬅️ Back to Home | হোমে ফিরুন</a>
     </div>
+    
+    <div class="last-updated" id="lastUpdated">⏳ আপডেট হচ্ছে...</div>
 </div>
 
 <script>
+// ============================================================
+// Supabase Setup
+// ============================================================
 const SUPABASE_URL = 'https://bwjjqidmeooyojjvtqjs.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3ampxaWRtZW9veW9qanZ0cWpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NDIxMTAsImV4cCI6MjA5NjUxODExMH0.sRbG-Pwd8kgy94e9g7uuWhAj0-mH6JjOC7KXARxLIEk';
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+// ============================================================
+// 🔥 IST TIME ZONE FIX
+// ============================================================
+function getTodayIST() {
+    const now = new Date();
+    const istOffset = 5.5 * 60 * 60 * 1000;
+    const istTime = new Date(now.getTime() + istOffset);
+    return istTime.toISOString().split('T')[0];
+}
+
+// ============================================================
+// 🔥 WAITING চেক - Shillong এর জন্য (১০ মিনিট আগে)
+// ============================================================
+function isWaitingForShillong(roundType) {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const totalMinutes = hours * 60 + minutes;
+    
+    if (roundType === 'fr') {
+        // FR: 4:00 PM - ১০ মিনিট আগে মানে 3:50 PM (15:50)
+        return totalMinutes < 960; // 4:00 PM এর আগে
+    } else if (roundType === 'sr') {
+        // SR: 5:00 PM - ১০ মিনিট আগে মানে 4:50 PM (16:50)
+        return totalMinutes < 1020; // 5:00 PM এর আগে
+    }
+    return false;
+}
+
+// ============================================================
+// 🔥 Shillong Teer Result Load - সরাসরি Supabase থেকে
+// ============================================================
 async function loadShillongResult() {
     try {
-        const today = new Date().toISOString().split('T')[0];
+        const today = getTodayIST();
+        console.log('📅 Loading Shillong result for:', today);
+        
         const { data, error } = await supabaseClient
             .from('teer_live_results')
             .select('*')
             .eq('venue', 'shillong')
             .eq('result_date', today);
             
+        const container = document.getElementById('shillongResultContainer');
+        if (!container) return;
+        
+        let frResult = '--';
+        let srResult = '--';
+        
         if (!error && data && data.length > 0) {
-            const shillongData = {};
-            data.forEach(row => {
-                shillongData[row.venue] = {
-                    fr: row.fr_result,
-                    sr: row.sr_result
-                };
-            });
-            renderShillongResult(shillongData);
-        } else {
-            renderShillongResult({ shillong: { fr: '--', sr: '--' } });
+            frResult = data[0].fr_result || '--';
+            srResult = data[0].sr_result || '--';
         }
+        
+        // WAITING চেক
+        const isFRWaiting = isWaitingForShillong('fr');
+        const isSRWaiting = isWaitingForShillong('sr');
+        
+        const frDisplay = isFRWaiting ? 
+            `<span class="waiting-number-display">⏳ WAITING</span>` : 
+            `<span class="result-number">${frResult}</span>`;
+        const srDisplay = isSRWaiting ? 
+            `<span class="waiting-number-display">⏳ WAITING</span>` : 
+            `<span class="result-number">${srResult}</span>`;
+        
+        const hasData = (frResult !== '--' || srResult !== '--');
+        const badgeClass = hasData ? 'live-result-badge' : 'flash-waiting';
+        const badgeText = hasData ? '🔴 LIVE' : '⏳ WAITING';
+        
+        container.innerHTML = `
+            <div class="result-card">
+                <div class="venue-header">
+                    <span class="venue-name">🏹 SHILLONG TEER</span>
+                </div>
+                <div class="info-row">
+                    <span class="date-box">📅 ${today}</span>
+                    <span class="${badgeClass}">${badgeText}</span>
+                </div>
+                <div class="timing-dual">
+                    <div class="fr-box">
+                        <div>FIRST ROUND (4:00 PM)</div>
+                        ${frDisplay}
+                    </div>
+                    <div class="sr-box">
+                        <div>SECOND ROUND (5:00 PM)</div>
+                        ${srDisplay}
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Last updated time
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        document.getElementById('lastUpdated').innerHTML = `🔄 শেষ আপডেট: ${timeStr} IST`;
+        
     } catch(err) {
-        console.error('Error loading shillong results:', err);
-        renderShillongResult({ shillong: { fr: '--', sr: '--' } });
+        console.error('❌ Error loading Shillong results:', err);
+        const container = document.getElementById('shillongResultContainer');
+        if (container) {
+            container.innerHTML = `
+                <div class="result-card">
+                    <div class="venue-header">
+                        <span class="venue-name">🏹 SHILLONG TEER</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="date-box">📅 ${getTodayIST()}</span>
+                        <span class="flash-waiting">⏳ WAITING</span>
+                    </div>
+                    <div class="timing-dual">
+                        <div class="fr-box">
+                            <div>FIRST ROUND (4:00 PM)</div>
+                            <div class="waiting-number-display">⏳ WAITING</div>
+                        </div>
+                        <div class="sr-box">
+                            <div>SECOND ROUND (5:00 PM)</div>
+                            <div class="waiting-number-display">⏳ WAITING</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
     }
 }
 
-function renderShillongResult(data) {
-    const grid = document.getElementById('shillongResultsGrid');
-    if (!grid) return;
+// ============================================================
+// 🔥 গ্লোবাল ফাংশন - মুল পেজ থেকে কল করার জন্য
+// ============================================================
+// এই ফাংশনটি মুল পেজ থেকে কল করলে Shillong সাবপেজ আপডেট হবে
+window.updateShillongSubPage = function(liveData) {
+    const container = document.getElementById('shillongResultContainer');
+    if (!container) return;
     
-    const today = new Date().toISOString().split('T')[0];
-    const shillong = data.shillong || { fr: '--', sr: '--' };
+    const today = getTodayIST();
+    const data = liveData.shillong || { fr: '--', sr: '--' };
     
-    // Shillong time: FR 4:00 PM, SR 5:00 PM
-    const now = new Date();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const currentTime = hours + minutes/60;
+    const isFRWaiting = isWaitingForShillong('fr');
+    const isSRWaiting = isWaitingForShillong('sr');
     
-    const isFRTime = currentTime < 16;
-    const isSRTime = currentTime < 17;
+    const frDisplay = isFRWaiting ? 
+        `<span class="waiting-number-display">⏳ WAITING</span>` : 
+        `<span class="result-number">${data.fr}</span>`;
+    const srDisplay = isSRWaiting ? 
+        `<span class="waiting-number-display">⏳ WAITING</span>` : 
+        `<span class="result-number">${data.sr}</span>`;
     
-    const frDisplay = isFRTime ? `<div class="waiting-number-display">⏳ WAITING</div>` : 
-                     (shillong.fr !== '--' ? `<div class="result-number">${shillong.fr}</div>` : `<div class="waiting-number-display">⏳ WAITING</div>`);
-    const srDisplay = isSRTime ? `<div class="waiting-number-display">⏳ WAITING</div>` : 
-                     (shillong.sr !== '--' ? `<div class="result-number">${shillong.sr}</div>` : `<div class="waiting-number-display">⏳ WAITING</div>`);
+    const hasData = (data.fr !== '--' || data.sr !== '--');
+    const badgeClass = hasData ? 'live-result-badge' : 'flash-waiting';
+    const badgeText = hasData ? '🔴 LIVE' : '⏳ WAITING';
     
-    grid.innerHTML = `
+    container.innerHTML = `
         <div class="result-card">
             <div class="venue-header">
                 <span class="venue-name">🏹 SHILLONG TEER</span>
             </div>
             <div class="info-row">
                 <span class="date-box">📅 ${today}</span>
-                <span class="live-result-badge">🔴 LIVE</span>
+                <span class="${badgeClass}">${badgeText}</span>
             </div>
             <div class="timing-dual">
                 <div class="fr-box">
@@ -122,11 +235,25 @@ function renderShillongResult(data) {
             </div>
         </div>
     `;
-}
+    
+    // Last updated time
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    document.getElementById('lastUpdated').innerHTML = `🔄 শেষ আপডেট: ${timeStr} IST`;
+};
 
+// ============================================================
+// 📌 DOMContentLoaded
+// ============================================================
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('✅ Shillong Teer Page Loaded');
     loadShillongResult();
+    
+    // প্রতি 10 সেকেন্ড পর পর আপডেট চেক করুন
+    setInterval(loadShillongResult, 10000);
 });
+
+console.log('✅ Shillong Teer functions loaded successfully!');
 </script>
 </body>
 </html>
