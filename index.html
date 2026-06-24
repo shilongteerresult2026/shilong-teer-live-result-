@@ -1990,7 +1990,7 @@ function getNightDate() {
 }
 
 // ============================================================
-// 🔥 WAITING চেক - রেজাল্টের ১০ মিনিট আগে WAITING দেখাবে (শুধু Night এর জন্য)
+// 🔥 WAITING চেক - রেজাল্টের ১০ মিনিট আগে WAITING দেখাবে
 // ============================================================
 function isNightWaiting(roundType) {
     const now = new Date();
@@ -2001,17 +2001,15 @@ function isNightWaiting(roundType) {
     // FR: 11:10 PM (23:10) - 10 min আগে মানে 11:00 PM (23:00)
     // SR: 12:10 AM (00:10) - 10 min আগে মানে 12:00 AM (00:00)
     if (roundType === 'fr') {
-        // 11:00 PM (23:00) থেকে 11:10 PM (23:10) এর মধ্যে WAITING
         return totalMinutes >= 1380 && totalMinutes < 1390;
     } else if (roundType === 'sr') {
-        // 12:00 AM (00:00) থেকে 12:10 AM (00:10) এর মধ্যে WAITING
         return totalMinutes >= 0 && totalMinutes < 10;
     }
     return false;
 }
 
 // ============================================================
-// 🔥 অন্যান্য ভেন্যুর জন্য WAITING চেক (আগের মতো)
+// 🔥 অন্যান্য ভেন্যুর জন্য WAITING চেক
 // ============================================================
 function isWaitingForVenue(venueId, roundType) {
     const now = new Date();
@@ -2019,12 +2017,10 @@ function isWaitingForVenue(venueId, roundType) {
     const minutes = now.getMinutes();
     const currentTime = hours + minutes/60;
     
-    // Night এর জন্য আলাদা লজিক
     if (venueId === 'night') {
         return isNightWaiting(roundType);
     }
     
-    // অন্যান্য ভেন্যুর জন্য
     if (venueId === 'morning') {
         if (roundType === 'fr') return currentTime < 10.5;
         if (roundType === 'sr') return currentTime < 11.5;
@@ -2093,7 +2089,13 @@ function getHENumbers(n){
 }
 
 // ============================================================
-// 🔥 লাইভ রেজাল্ট লোড - 10 সেকেন্ড পর পর রিফ্রেশ
+// 🔥 গ্লোবাল ভেরিয়েবল
+// ============================================================
+let globalLiveData = {};
+let globalCommonData = null;
+
+// ============================================================
+// 🔥 লাইভ রেজাল্ট লোড
 // ============================================================
 async function loadTodayResults() {
     try {
@@ -2102,7 +2104,6 @@ async function loadTodayResults() {
         console.log('📅 Today (IST):', today);
         console.log('🌙 Night Date:', nightDate);
         
-        // সব ভেন্যুর জন্য ডেটা নিন (Night এর জন্য গতকালের তারিখ)
         const venues = ['shillong', 'khanapara', 'juwai', 'morning'];
         const liveData = {};
         
@@ -2121,7 +2122,6 @@ async function loadTodayResults() {
             }
         }
         
-        // Night Teer - গতকালের ডেটা
         const { data: nightData, error: nightError } = await supabaseClient
             .from('teer_live_results')
             .select('*')
@@ -2135,7 +2135,9 @@ async function loadTodayResults() {
             };
         }
         
+        globalLiveData = liveData;
         renderTodayResults(liveData, today, nightDate);
+        updateAllSubPages(liveData);
         
     } catch(err) {
         console.error('❌ Error loading live results:', err);
@@ -2165,7 +2167,6 @@ function renderTodayResults(liveData, todayDate, nightDate) {
         const data = liveData[v.id] || { fr: '--', sr: '--' };
         if (data.fr !== '--' || data.sr !== '--') hasData = true;
         
-        // 🔥 WAITING চেক - Night এর জন্য আলাদা, বাকি ভেন্যুর জন্য আগের মতো
         const isFRWaiting = isWaitingForVenue(v.id, 'fr');
         const isSRWaiting = isWaitingForVenue(v.id, 'sr');
         
@@ -2206,16 +2207,263 @@ function renderTodayResults(liveData, todayDate, nightDate) {
 }
 
 // ============================================================
+// 🆕 সাবপেজ আপডেট ফাংশন
+// ============================================================
+function updateAllSubPages(liveData) {
+    const today = getTodayIST();
+    const nightDate = getNightDate();
+    
+    const morningContainer = document.getElementById('morningResultContainer');
+    if (morningContainer) {
+        updateSubPageDisplay(morningContainer, 'morning', liveData, today);
+    }
+    
+    const juwaiContainer = document.getElementById('juwaiResultContainer');
+    if (juwaiContainer) {
+        updateSubPageDisplay(juwaiContainer, 'juwai', liveData, today);
+    }
+    
+    const nightContainer = document.getElementById('nightResultContainer');
+    if (nightContainer) {
+        updateSubPageDisplay(nightContainer, 'night', liveData, nightDate);
+    }
+    
+    const shillongContainer = document.getElementById('shillongResultContainer');
+    if (shillongContainer) {
+        updateSubPageDisplay(shillongContainer, 'shillong', liveData, today);
+    }
+    
+    const khanaparaContainer = document.getElementById('khanaparaResultContainer');
+    if (khanaparaContainer) {
+        updateSubPageDisplay(khanaparaContainer, 'khanapara', liveData, today);
+    }
+}
+
+function updateSubPageDisplay(container, venueId, liveData, displayDate) {
+    const data = liveData[venueId] || { fr: '--', sr: '--' };
+    
+    const isFRWaiting = isWaitingForVenue(venueId, 'fr');
+    const isSRWaiting = isWaitingForVenue(venueId, 'sr');
+    
+    const frDisplay = isFRWaiting ? 
+        `<span class="waiting-number-display">⏳ WAITING</span>` : 
+        `<span class="result-number">${data.fr}</span>`;
+    const srDisplay = isSRWaiting ? 
+        `<span class="waiting-number-display">⏳ WAITING</span>` : 
+        `<span class="result-number">${data.sr}</span>`;
+    
+    const hasData = (data.fr !== '--' || data.sr !== '--');
+    const badgeClass = hasData ? 'live-result-badge' : 'flash-waiting';
+    const badgeText = hasData ? '🔴 LIVE' : '⏳ WAITING';
+    
+    container.innerHTML = `
+        <div class="result-card" style="margin-top: 10px;">
+            <div class="info-row">
+                <span class="date-box">📅 ${displayDate}</span>
+                <span class="${badgeClass}">${badgeText}</span>
+            </div>
+            <div class="timing-dual">
+                <div class="fr-box">
+                    <div>FIRST ROUND</div>
+                    ${frDisplay}
+                </div>
+                <div class="sr-box">
+                    <div>SECOND ROUND</div>
+                    ${srDisplay}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// ============================================================
+// 🔥 কমন নাম্বার লোড
+// ============================================================
+async function loadCommonNumbers() {
+    try {
+        const today = getTodayIST();
+        console.log('📅 Loading Common Numbers for:', today);
+        
+        const { data, error } = await supabaseClient
+            .from('teer_common_numbers')
+            .select('*')
+            .eq('result_date', today)
+            .limit(1);
+            
+        const container = document.getElementById('commonTablesContainer');
+        if (!container) return;
+        
+        if (!error && data && data.length > 0) {
+            const commonData = data[0];
+            globalCommonData = commonData;
+            renderCommonNumbersFromDB(commonData);
+            updateAllCommonSubPages(commonData);
+        } else {
+            renderCommonNumbers();
+        }
+        
+    } catch(err) {
+        console.error('❌ Error loading common numbers:', err);
+        renderCommonNumbers();
+    }
+}
+
+// ============================================================
+// 🔥 সব কমন নাম্বার সাবপেজ আপডেট
+// ============================================================
+function updateAllCommonSubPages(commonData) {
+    if (typeof window.updateShillongCommonSubPage === 'function') {
+        window.updateShillongCommonSubPage(commonData);
+    }
+    if (typeof window.updateKhanaparaCommonSubPage === 'function') {
+        window.updateKhanaparaCommonSubPage(commonData);
+    }
+    if (typeof window.updateJuwaiCommonSubPage === 'function') {
+        window.updateJuwaiCommonSubPage(commonData);
+    }
+}
+
+// ============================================================
+// 🔥 কমন নাম্বার রেন্ডার (ডেটাবেস থেকে)
+// ============================================================
+function renderCommonNumbersFromDB(data) {
+    const container = document.getElementById('commonTablesContainer');
+    if (!container) return;
+    
+    const venues = [
+        { id: 'shillong', name: 'SHILLONG TEER' },
+        { id: 'khanapara', name: 'KHANAPARA TEER' },
+        { id: 'juwai', name: 'JUWAI TEER' }
+    ];
+    
+    let html = '';
+    
+    venues.forEach(venue => {
+        const v = venue.id;
+        const frDirect = data[`${v}_fr_direct`] || '--';
+        const frHouse = data[`${v}_fr_house`] || '--';
+        const frEnding = data[`${v}_fr_ending`] || '--';
+        const srDirect = data[`${v}_sr_direct`] || '--';
+        const srHouse = data[`${v}_sr_house`] || '--';
+        const srEnding = data[`${v}_sr_ending`] || '--';
+        
+        html += `
+            <div class="common-venue-card">
+                <div class="common-venue-title">🎯 ${venue.name} - COMMON NUMBERS</div>
+                <table class="common-table">
+                    <thead>
+                        <tr>
+                            <th>Round</th>
+                            <th>Direct Numbers</th>
+                            <th>House Digit</th>
+                            <th>Ending Digit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="round-cell">FR</td>
+                            <td><span class="direct-num">${frDirect}</span></td>
+                            <td><span class="house-num">${frHouse}</span></td>
+                            <td><span class="ending-num">${frEnding}</span></td>
+                        </tr>
+                        <tr>
+                            <td class="round-cell">SR</td>
+                            <td><span class="direct-num">${srDirect}</span></td>
+                            <td><span class="house-num">${srHouse}</span></td>
+                            <td><span class="ending-num">${srEnding}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+// ============================================================
+// 🔥 কমন নাম্বার ডেমো ডেটা
+// ============================================================
+function renderCommonNumbers() {
+    const container = document.getElementById('commonTablesContainer');
+    if (!container) return;
+    
+    const defaultData = {
+        shillong_fr_direct: '47, 68, 23',
+        shillong_fr_house: '4, 6',
+        shillong_fr_ending: '7, 8',
+        shillong_sr_direct: '86, 15, 70',
+        shillong_sr_house: '8, 1',
+        shillong_sr_ending: '6, 5',
+        khanapara_fr_direct: '35, 72, 19',
+        khanapara_fr_house: '3, 7',
+        khanapara_fr_ending: '5, 2',
+        khanapara_sr_direct: '64, 91, 28',
+        khanapara_sr_house: '6, 9',
+        khanapara_sr_ending: '4, 1',
+        juwai_fr_direct: '52, 77, 31',
+        juwai_fr_house: '5, 7',
+        juwai_fr_ending: '2, 1',
+        juwai_sr_direct: '88, 43, 66',
+        juwai_sr_house: '8, 4',
+        juwai_sr_ending: '8, 3'
+    };
+    
+    const venues = [
+        { id: 'shillong', name: 'SHILLONG TEER' },
+        { id: 'khanapara', name: 'KHANAPARA TEER' },
+        { id: 'juwai', name: 'JUWAI TEER' }
+    ];
+    
+    let html = '';
+    
+    venues.forEach(venue => {
+        const v = venue.id;
+        html += `
+            <div class="common-venue-card">
+                <div class="common-venue-title">🎯 ${venue.name} - COMMON NUMBERS</div>
+                <table class="common-table">
+                    <thead>
+                        <tr>
+                            <th>Round</th>
+                            <th>Direct Numbers</th>
+                            <th>House Digit</th>
+                            <th>Ending Digit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="round-cell">FR</td>
+                            <td><span class="direct-num">${defaultData[`${v}_fr_direct`] || '--'}</span></td>
+                            <td><span class="house-num">${defaultData[`${v}_fr_house`] || '--'}</span></td>
+                            <td><span class="ending-num">${defaultData[`${v}_fr_ending`] || '--'}</span></td>
+                        </tr>
+                        <tr>
+                            <td class="round-cell">SR</td>
+                            <td><span class="direct-num">${defaultData[`${v}_sr_direct`] || '--'}</span></td>
+                            <td><span class="house-num">${defaultData[`${v}_sr_house`] || '--'}</span></td>
+                            <td><span class="ending-num">${defaultData[`${v}_sr_ending`] || '--'}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+// ============================================================
 // 📌 DOMContentLoaded
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ DOM Loaded - Loading results...');
     loadTodayResults();
+    loadCommonNumbers();
     
-    // প্রতি 10 সেকেন্ড পর পর আপডেট চেক করুন
     setInterval(loadTodayResults, 10000);
+    setInterval(loadCommonNumbers, 30000);
     
-    // বাকি ফাংশন...
     setupMonthSelector();
     renderDreamChart();
     loadTrendingNumbers();
