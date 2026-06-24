@@ -14,8 +14,12 @@
         .venue-name { font-size: 1rem; font-weight: 800; color: #ffe6b3; }
         .info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; flex-wrap: wrap; }
         .date-box { background: #ece3d8; font-size: 0.8rem; font-weight: 600; padding: 0.25rem 0.8rem; border-radius: 50px; }
+        .flash-waiting { background: #dc2626; color: white; font-size: 0.75rem; font-weight: bold; padding: 0.25rem 0.8rem; border-radius: 30px; animation: flashWaiting 0.8s infinite; display: inline-block; }
+        @keyframes flashWaiting { 0%,100% { background: #dc2626; } 50% { background: #ff0000; } }
         .live-result-badge { background: #dc2626; color: white; font-size: 0.8rem; font-weight: bold; padding: 0.25rem 0.9rem; border-radius: 30px; animation: flashLive 0.6s infinite; display: inline-block; }
         @keyframes flashLive { 0%,100% { background: #dc2626; } 50% { background: #ff3333; box-shadow: 0 0 8px #ff4444; } }
+        .live-result-badge::before { content: "●"; animation: blinkDot 0.5s infinite; }
+        @keyframes blinkDot { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
         .timing-dual { display: flex; gap: 0.8rem; margin: 0.6rem 0; }
         .fr-box, .sr-box { flex: 1; text-align: center; background: #faf3e8; border-radius: 0.8rem; padding: 0.5rem; border: 1px solid #e8d5c0; }
         .result-number { font-size: 1.6rem; font-weight: 900; background: #f5f0e8; display: inline-block; padding: 0.2rem 1rem; border-radius: 40px; color: #1a237e; }
@@ -26,6 +30,8 @@
         .header-title { text-align: center; margin-bottom: 1rem; }
         .header-title h1 { font-size: 1.5rem; color: #1a237e; }
         .header-title p { color: #666; font-size: 0.9rem; }
+        .last-updated { text-align: center; font-size: 0.75rem; color: #888; margin-top: 0.5rem; }
+        .night-date-note { text-align: center; font-size: 0.7rem; color: #e67e22; margin-top: 0.3rem; font-weight: 600; }
         @media (max-width: 768px) {
             .container { padding: 0.6rem; }
             .result-number { font-size: 1.2rem; }
@@ -39,89 +45,211 @@
     <div class="header-title">
         <h1>🌙 Night Teer Result Today</h1>
         <p>নাইট তীর আজকের রেজাল্ট</p>
+        <p class="night-date-note">⏰ নাইট তীরের রেজাল্ট আগের দিনের দেখায় (কারণ রাতে খেলা হয়)</p>
     </div>
     
-    <div id="nightResultsGrid"></div>
+    <!-- 🔥 Container for result - এই ID দিয়ে JavaScript আপডেট করবে -->
+    <div id="nightResultContainer"></div>
     
     <div style="text-align: center; margin-top: 1.5rem;">
         <a href="index.html" class="back-btn">⬅️ Back to Home | হোমে ফিরুন</a>
     </div>
+    
+    <div class="last-updated" id="lastUpdated">⏳ আপডেট হচ্ছে...</div>
 </div>
 
 <script>
+// ============================================================
+// Supabase Setup
+// ============================================================
 const SUPABASE_URL = 'https://bwjjqidmeooyojjvtqjs.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3ampxaWRtZW9veW9qanZ0cWpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NDIxMTAsImV4cCI6MjA5NjUxODExMH0.sRbG-Pwd8kgy94e9g7uuWhAj0-mH6JjOC7KXARxLIEk';
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+// ============================================================
+// 🔥 IST TIME ZONE FIX
+// ============================================================
+function getTodayIST() {
+    const now = new Date();
+    const istOffset = 5.5 * 60 * 60 * 1000;
+    const istTime = new Date(now.getTime() + istOffset);
+    return istTime.toISOString().split('T')[0];
+}
+
+// ============================================================
+// 🔥 NIGHT TEER - গতকালের তারিখ (ডেটাবেস কোয়েরির জন্য)
+// ============================================================
+function getNightDate() {
+    const today = getTodayIST();
+    const dateObj = new Date(today);
+    dateObj.setDate(dateObj.getDate() - 1);
+    return dateObj.toISOString().split('T')[0];
+}
+
+// ============================================================
+// 🔥 WAITING চেক - Night এর জন্য (১০ মিনিট আগে)
+// ============================================================
+function isNightWaiting(roundType) {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const totalMinutes = hours * 60 + minutes;
+    
+    // FR: 11:10 PM (23:10) - 10 min আগে মানে 11:00 PM (23:00)
+    // SR: 12:10 AM (00:10) - 10 min আগে মানে 12:00 AM (00:00)
+    if (roundType === 'fr') {
+        // 11:00 PM (23:00) থেকে 11:10 PM (23:10) এর মধ্যে WAITING
+        return totalMinutes >= 1380 && totalMinutes < 1390;
+    } else if (roundType === 'sr') {
+        // 12:00 AM (00:00) থেকে 12:10 AM (00:10) এর মধ্যে WAITING
+        return totalMinutes >= 0 && totalMinutes < 10;
+    }
+    return false;
+}
+
+// ============================================================
+// 🔥 Night Teer Result Load - Supabase থেকে (গতকালের তারিখ)
+// ============================================================
 async function loadNightTeerResult() {
     try {
-        const today = new Date().toISOString().split('T')[0];
+        const today = getTodayIST();
+        const nightDate = getNightDate();
+        console.log('📅 Today (IST):', today);
+        console.log('🌙 Night Date (for DB query):', nightDate);
+        
         const { data, error } = await supabaseClient
             .from('teer_live_results')
             .select('*')
             .eq('venue', 'night')
-            .eq('result_date', today);
+            .eq('result_date', nightDate);
             
+        const container = document.getElementById('nightResultContainer');
+        if (!container) return;
+        
+        let frResult = '--';
+        let srResult = '--';
+        
         if (!error && data && data.length > 0) {
-            const nightData = {};
-            data.forEach(row => {
-                nightData[row.venue] = {
-                    fr: row.fr_result,
-                    sr: row.sr_result
-                };
-            });
-            renderNightResult(nightData);
-        } else {
-            renderNightResult({ night: { fr: '--', sr: '--' } });
+            frResult = data[0].fr_result || '--';
+            srResult = data[0].sr_result || '--';
         }
+        
+        // WAITING চেক - Night এর জন্য আলাদা
+        const isFRWaiting = isNightWaiting('fr');
+        const isSRWaiting = isNightWaiting('sr');
+        
+        const frDisplay = isFRWaiting ? 
+            `<span class="waiting-number-display">⏳ WAITING</span>` : 
+            `<span class="result-number">${frResult}</span>`;
+        const srDisplay = isSRWaiting ? 
+            `<span class="waiting-number-display">⏳ WAITING</span>` : 
+            `<span class="result-number">${srResult}</span>`;
+        
+        const hasData = (frResult !== '--' || srResult !== '--');
+        const badgeClass = hasData ? 'live-result-badge' : 'flash-waiting';
+        const badgeText = hasData ? '🔴 LIVE' : '⏳ WAITING';
+        
+        // ✅ Night সাবপেজে আজকের তারিখ দেখাবে, কিন্তু রেজাল্ট আগের দিনের
+        container.innerHTML = `
+            <div class="result-card">
+                <div class="venue-header">
+                    <span class="venue-name">🌙 NIGHT TEER</span>
+                </div>
+                <div class="info-row">
+                    <span class="date-box">📅 ${today}</span>
+                    <span class="${badgeClass}">${badgeText}</span>
+                </div>
+                <div class="timing-dual">
+                    <div class="fr-box">
+                        <div>FIRST ROUND (11:10 PM)</div>
+                        ${frDisplay}
+                    </div>
+                    <div class="sr-box">
+                        <div>SECOND ROUND (12:10 AM)</div>
+                        ${srDisplay}
+                    </div>
+                </div>
+                <div style="text-align:center; font-size:0.65rem; color:#888; margin-top:0.3rem;">
+                    ⏰ রেজাল্ট দেখাচ্ছে ${nightDate} তারিখের (আগের দিনের)
+                </div>
+            </div>
+        `;
+        
+        // Last updated time
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        document.getElementById('lastUpdated').innerHTML = `🔄 শেষ আপডেট: ${timeStr} IST`;
+        
     } catch(err) {
-        console.error('Error loading night results:', err);
-        renderNightResult({ night: { fr: '--', sr: '--' } });
+        console.error('❌ Error loading Night results:', err);
+        const container = document.getElementById('nightResultContainer');
+        if (container) {
+            const today = getTodayIST();
+            const nightDate = getNightDate();
+            container.innerHTML = `
+                <div class="result-card">
+                    <div class="venue-header">
+                        <span class="venue-name">🌙 NIGHT TEER</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="date-box">📅 ${today}</span>
+                        <span class="flash-waiting">⏳ WAITING</span>
+                    </div>
+                    <div class="timing-dual">
+                        <div class="fr-box">
+                            <div>FIRST ROUND (11:10 PM)</div>
+                            <div class="waiting-number-display">⏳ WAITING</div>
+                        </div>
+                        <div class="sr-box">
+                            <div>SECOND ROUND (12:10 AM)</div>
+                            <div class="waiting-number-display">⏳ WAITING</div>
+                        </div>
+                    </div>
+                    <div style="text-align:center; font-size:0.65rem; color:#888; margin-top:0.3rem;">
+                        ⏰ রেজাল্ট দেখাচ্ছে ${nightDate} তারিখের (আগের দিনের)
+                    </div>
+                </div>
+            `;
+        }
     }
 }
 
-function renderNightResult(data) {
-    const grid = document.getElementById('nightResultsGrid');
-    if (!grid) return;
+// ============================================================
+// 🔥 গ্লোবাল ফাংশন - মুল পেজ থেকে কল করার জন্য
+// ============================================================
+// এই ফাংশনটি মুল পেজ থেকে কল করলে Night সাবপেজ আপডেট হবে
+window.updateNightSubPage = function(liveData) {
+    const container = document.getElementById('nightResultContainer');
+    if (!container) return;
     
-    const today = new Date().toISOString().split('T')[0];
-    const night = data.night || { fr: '--', sr: '--' };
+    const today = getTodayIST();
+    const nightDate = getNightDate();
+    const data = liveData.night || { fr: '--', sr: '--' };
     
-    // Night time check - 11:10 PM এবং 12:10 AM
-    const now = new Date();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const currentTime = hours + minutes/60;
+    // WAITING চেক - Night এর জন্য আলাদা
+    const isFRWaiting = isNightWaiting('fr');
+    const isSRWaiting = isNightWaiting('sr');
     
-    // Night FR: 11:10 PM (23.17), SR: 12:10 AM (0.17)
-    const isFRTime = currentTime < 23.17 || currentTime >= 0.17;
-    const isSRTime = currentTime < 0.17 || currentTime >= 23.17;
+    const frDisplay = isFRWaiting ? 
+        `<span class="waiting-number-display">⏳ WAITING</span>` : 
+        `<span class="result-number">${data.fr}</span>`;
+    const srDisplay = isSRWaiting ? 
+        `<span class="waiting-number-display">⏳ WAITING</span>` : 
+        `<span class="result-number">${data.sr}</span>`;
     
-    // Night এর জন্য আলাদা সময় লজিক
-    let frDisplay, srDisplay;
+    const hasData = (data.fr !== '--' || data.sr !== '--');
+    const badgeClass = hasData ? 'live-result-badge' : 'flash-waiting';
+    const badgeText = hasData ? '🔴 LIVE' : '⏳ WAITING';
     
-    // FR (11:10 PM) - যদি 11:10 PM এর আগে হয় তাহলে Waiting
-    if (hours < 23 || (hours === 23 && minutes < 10)) {
-        frDisplay = `<div class="waiting-number-display">⏳ WAITING</div>`;
-    } else {
-        frDisplay = night.fr !== '--' ? `<div class="result-number">${night.fr}</div>` : `<div class="waiting-number-display">⏳ WAITING</div>`;
-    }
-    
-    // SR (12:10 AM) - যদি 12:10 AM এর আগে হয় তাহলে Waiting
-    if (hours < 0 || (hours === 0 && minutes < 10)) {
-        srDisplay = `<div class="waiting-number-display">⏳ WAITING</div>`;
-    } else {
-        srDisplay = night.sr !== '--' ? `<div class="result-number">${night.sr}</div>` : `<div class="waiting-number-display">⏳ WAITING</div>`;
-    }
-    
-    grid.innerHTML = `
+    // ✅ Night সাবপেজে আজকের তারিখ দেখাবে, কিন্তু রেজাল্ট আগের দিনের
+    container.innerHTML = `
         <div class="result-card">
             <div class="venue-header">
                 <span class="venue-name">🌙 NIGHT TEER</span>
             </div>
             <div class="info-row">
                 <span class="date-box">📅 ${today}</span>
-                <span class="live-result-badge">🔴 LIVE</span>
+                <span class="${badgeClass}">${badgeText}</span>
             </div>
             <div class="timing-dual">
                 <div class="fr-box">
@@ -133,13 +261,30 @@ function renderNightResult(data) {
                     ${srDisplay}
                 </div>
             </div>
+            <div style="text-align:center; font-size:0.65rem; color:#888; margin-top:0.3rem;">
+                ⏰ রেজাল্ট দেখাচ্ছে ${nightDate} তারিখের (আগের দিনের)
+            </div>
         </div>
     `;
-}
+    
+    // Last updated time
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    document.getElementById('lastUpdated').innerHTML = `🔄 শেষ আপডেট: ${timeStr} IST`;
+};
 
+// ============================================================
+// 📌 DOMContentLoaded
+// ============================================================
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('✅ Night Teer Page Loaded');
     loadNightTeerResult();
+    
+    // প্রতি 10 সেকেন্ড পর পর আপডেট চেক করুন
+    setInterval(loadNightTeerResult, 10000);
 });
+
+console.log('✅ Night Teer functions loaded successfully!');
 </script>
 </body>
 </html>
