@@ -2468,80 +2468,59 @@ function renderCommonNumbers() {
 }
 
 // ============================================================
-// 📌 DOMContentLoaded
+// 🔥 Supabase থেকে Previous Results লোড করার ফাংশন
 // ============================================================
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ DOM Loaded - Loading results...');
-    loadTodayResults();
-    loadCommonNumbers();
-    
-    setInterval(loadTodayResults, 10000);
-    setInterval(loadCommonNumbers, 30000);
-    
-    setupMonthSelector();
-    renderDreamChart();
-    loadTrendingNumbers();
-    loadLeaderboard();
-    
-    document.getElementById('predictDreamBtn').addEventListener('click', function() {
-        let inp = document.getElementById('dreamInput').value.trim();
-        if(!inp) { alert("Enter dream word"); return; }
-        let num = dreamToNum(inp);
-        let he = getHENumbers(num);
-        document.getElementById('dreamDisplayText').innerHTML = `💭 Dream: <strong>${inp}</strong> → Number: <strong>${num}</strong>`;
-        document.getElementById('houseDigit1').innerText = he.house[0];
-        document.getElementById('houseDigit2').innerText = he.house[1];
-        document.getElementById('endingDigit1').innerText = he.ending[0];
-        document.getElementById('endingDigit2').innerText = he.ending[1];
-    });
-    
-    document.querySelectorAll('.faq-question').forEach(q => {
-        q.addEventListener('click', function() {
-            let a = this.nextElementSibling;
-            if (a) {
-                a.classList.toggle('show');
-                this.querySelector('.faq-icon').innerHTML = a.classList.contains('show') ? '−' : '+';
-            }
-        });
-    });
-    
-    document.getElementById('monthSelect').addEventListener('change', function() {
-        displayMonthResults(this.value);
-    });
-    
-    document.getElementById('payNowBtn').addEventListener('click', function() {
-        window.location.href = "upi://pay?pa=7628988767@airtel&pn=Teer%20VIP&am=1500&cu=INR";
-    });
-    
-    document.getElementById('verifyPaymentBtn').addEventListener('click', function() {
-        let txn = document.getElementById('transactionIdInput').value.trim();
-        if(txn.length >= 5) {
-            localStorage.setItem('teer_vip_status', 'active');
-            document.getElementById('vipMessage').innerHTML = "✅ VIP UNLOCKED!";
+async function loadPreviousResults(monthIndex) {
+    try {
+        const year = 2026;
+        const month = String(monthIndex + 1).padStart(2, '0');
+        const firstDay = `${year}-${month}-01`;
+        const lastDay = `${year}-${month}-${new Date(year, monthIndex + 1, 0).getDate()}`;
+        
+        console.log(`📅 Loading results for ${year}-${month}`);
+        
+        const { data, error } = await supabaseClient
+            .from('teer_previous_results')
+            .select('*')
+            .eq('venue', 'shillong')
+            .gte('result_date', firstDay)
+            .lte('result_date', lastDay)
+            .order('result_date', { ascending: false });
+            
+        const tbody = document.getElementById('resultsTableBody');
+        if (!tbody) return;
+        
+        let html = '';
+        
+        if (!error && data && data.length > 0) {
+            data.forEach(row => {
+                const fr = row.fr_result || '--';
+                const sr = row.sr_result || '--';
+                const frColor = fr !== '--' ? '#2c6e2f' : '#999';
+                const srColor = sr !== '--' ? '#c62828' : '#999';
+                html += `<tr>
+                    <td style="padding:8px; font-size:0.9rem;">${row.result_date}</td>
+                    <td style="padding:8px; font-size:0.9rem; font-weight:${fr !== '--' ? '700' : '400'}; color:${frColor};">${fr}</td>
+                    <td style="padding:8px; font-size:0.9rem; font-weight:${sr !== '--' ? '700' : '400'}; color:${srColor};">${sr}</td>
+                </tr>`;
+            });
         } else {
-            document.getElementById('vipMessage').innerHTML = "❌ Invalid TXN ID";
+            // Supabase এ ডেটা না থাকলে ডেমো ডেটা দেখান
+            displayDemoResults(monthIndex);
         }
-    });
-    
-    document.getElementById('closeLiveModalBtn').addEventListener('click', closeModals);
-    document.getElementById('closePrevModalBtn').addEventListener('click', closeModals);
-    window.addEventListener('click', function(e) {
-        if(e.target.classList.contains('modal')) closeModals();
-    });
-
-    console.log('✅ All done!');
-});
-
-// ============================================================
-// 🗓️ Month Selector Functions
-// ============================================================
-function setupMonthSelector() {
-    const select = document.getElementById('monthSelect');
-    select.value = '5';
-    displayMonthResults(5);
+        
+        tbody.innerHTML = html;
+        
+    } catch(err) {
+        console.error('❌ Error loading previous results:', err);
+        displayDemoResults(monthIndex);
+    }
 }
 
-function displayMonthResults(monthIndex) {
+// ============================================================
+// 🔥 ডেমো ডেটা দেখানোর ফাংশন (যখন Supabase এ ডেটা নেই)
+// ============================================================
+function displayDemoResults(monthIndex) {
     const tbody = document.getElementById('resultsTableBody');
     if (!tbody) return;
     
@@ -2719,11 +2698,94 @@ function displayMonthResults(monthIndex) {
     if (data.length === 0) {
         html = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8892a0;">${monthNames[monthIndex]} 2026 - No results available yet</td></tr>`;
     } else {
-        data.forEach(row => {
+        const sortedData = [...data].reverse();
+        sortedData.forEach(row => {
             html += `<tr><td style="padding:8px; font-size:0.9rem;">${row.date}</td><td style="padding:8px; font-size:0.9rem;">${row.fr}</td><td style="padding:8px; font-size:0.9rem;">${row.sr}</td></tr>`;
         });
     }
     tbody.innerHTML = html;
+}
+
+// ============================================================
+// 🗓️ Month Selector - Supabase থেকে ডেটা লোড করবে
+// ============================================================
+function displayMonthResults(monthIndex) {
+    // Supabase থেকে ডেটা লোড করুন
+    loadPreviousResults(monthIndex);
+}
+
+// ============================================================
+// 📌 DOMContentLoaded
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('✅ DOM Loaded - Loading results...');
+    loadTodayResults();
+    loadCommonNumbers();
+    
+    setInterval(loadTodayResults, 10000);
+    setInterval(loadCommonNumbers, 30000);
+    
+    setupMonthSelector();
+    renderDreamChart();
+    loadTrendingNumbers();
+    loadLeaderboard();
+    
+    document.getElementById('predictDreamBtn').addEventListener('click', function() {
+        let inp = document.getElementById('dreamInput').value.trim();
+        if(!inp) { alert("Enter dream word"); return; }
+        let num = dreamToNum(inp);
+        let he = getHENumbers(num);
+        document.getElementById('dreamDisplayText').innerHTML = `💭 Dream: <strong>${inp}</strong> → Number: <strong>${num}</strong>`;
+        document.getElementById('houseDigit1').innerText = he.house[0];
+        document.getElementById('houseDigit2').innerText = he.house[1];
+        document.getElementById('endingDigit1').innerText = he.ending[0];
+        document.getElementById('endingDigit2').innerText = he.ending[1];
+    });
+    
+    document.querySelectorAll('.faq-question').forEach(q => {
+        q.addEventListener('click', function() {
+            let a = this.nextElementSibling;
+            if (a) {
+                a.classList.toggle('show');
+                this.querySelector('.faq-icon').innerHTML = a.classList.contains('show') ? '−' : '+';
+            }
+        });
+    });
+    
+    document.getElementById('monthSelect').addEventListener('change', function() {
+        displayMonthResults(this.value);
+    });
+    
+    document.getElementById('payNowBtn').addEventListener('click', function() {
+        window.location.href = "upi://pay?pa=7628988767@airtel&pn=Teer%20VIP&am=1500&cu=INR";
+    });
+    
+    document.getElementById('verifyPaymentBtn').addEventListener('click', function() {
+        let txn = document.getElementById('transactionIdInput').value.trim();
+        if(txn.length >= 5) {
+            localStorage.setItem('teer_vip_status', 'active');
+            document.getElementById('vipMessage').innerHTML = "✅ VIP UNLOCKED!";
+        } else {
+            document.getElementById('vipMessage').innerHTML = "❌ Invalid TXN ID";
+        }
+    });
+    
+    document.getElementById('closeLiveModalBtn').addEventListener('click', closeModals);
+    document.getElementById('closePrevModalBtn').addEventListener('click', closeModals);
+    window.addEventListener('click', function(e) {
+        if(e.target.classList.contains('modal')) closeModals();
+    });
+
+    console.log('✅ All done!');
+});
+
+// ============================================================
+// 🗓️ Month Selector Functions
+// ============================================================
+function setupMonthSelector() {
+    const select = document.getElementById('monthSelect');
+    select.value = '5';
+    displayMonthResults(5);
 }
 
 // ============================================================
