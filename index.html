@@ -2091,8 +2091,6 @@ async function loadTodayResults() {
     try {
         const today = getTodayIST();
         const nightDate = getNightDate();
-        console.log('📅 Today (IST):', today);
-        console.log('🌙 Night Date:', nightDate);
         
         const venues = ['shillong', 'khanapara', 'juwai', 'morning'];
         const liveData = {};
@@ -2212,7 +2210,6 @@ function updateAllSubPages(liveData) {
 async function loadCommonNumbers() {
     try {
         const today = getTodayIST();
-        console.log('📅 Loading Common Numbers for:', today);
         
         const { data, error } = await supabaseClient
             .from('teer_common_numbers')
@@ -2302,100 +2299,59 @@ function renderCommonNumbers() {
 }
 
 // ============================================================
-// 🔥 Previous Results - REAL DATA (জানুয়ারি-জুন ২০২৬)
+// 🔥 PREVIOUS RESULTS - Supabase থেকে ডেটা আনে (কোনো লেখা দেখায় না)
 // ============================================================
-function getRealPreviousData(monthIndex) {
-    const allData = {
-        0: [ // January 2026
-            {date:'2026-01-31', fr:'85', sr:'71'},{date:'2026-01-30', fr:'57', sr:'30'},{date:'2026-01-29', fr:'53', sr:'18'},
-            {date:'2026-01-28', fr:'61', sr:'07'},{date:'2026-01-27', fr:'43', sr:'90'},{date:'2026-01-26', fr:'38', sr:'07'},
-            {date:'2026-01-24', fr:'38', sr:'29'},{date:'2026-01-23', fr:'95', sr:'23'},{date:'2026-01-22', fr:'84', sr:'83'},
-            {date:'2026-01-21', fr:'45', sr:'76'},{date:'2026-01-20', fr:'35', sr:'97'},{date:'2026-01-19', fr:'28', sr:'62'},
-            {date:'2026-01-17', fr:'12', sr:'29'},{date:'2026-01-16', fr:'29', sr:'01'},{date:'2026-01-15', fr:'14', sr:'89'},
-            {date:'2026-01-14', fr:'20', sr:'40'},{date:'2026-01-13', fr:'81', sr:'86'},{date:'2026-01-12', fr:'94', sr:'01'},
-            {date:'2026-01-10', fr:'20', sr:'93'},{date:'2026-01-09', fr:'56', sr:'91'},{date:'2026-01-08', fr:'27', sr:'26'},
-            {date:'2026-01-07', fr:'47', sr:'09'},{date:'2026-01-06', fr:'26', sr:'27'},{date:'2026-01-05', fr:'86', sr:'81'},
-            {date:'2026-01-03', fr:'47', sr:'23'},{date:'2026-01-02', fr:'46', sr:'37'},{date:'2026-01-01', fr:'91', sr:'40'}
-        ],
-        1: [ // February 2026
-            {date:'2026-02-28', fr:'25', sr:'48'},{date:'2026-02-27', fr:'16', sr:'47'},{date:'2026-02-26', fr:'14', sr:'24'},
-            {date:'2026-02-25', fr:'15', sr:'26'},{date:'2026-02-24', fr:'31', sr:'42'},{date:'2026-02-23', fr:'26', sr:'77'},
-            {date:'2026-02-21', fr:'92', sr:'40'},{date:'2026-02-20', fr:'51', sr:'34'},{date:'2026-02-19', fr:'64', sr:'27'},
-            {date:'2026-02-18', fr:'32', sr:'37'},{date:'2026-02-17', fr:'12', sr:'51'},{date:'2026-02-16', fr:'67', sr:'44'},
-            {date:'2026-02-14', fr:'51', sr:'48'},{date:'2026-02-13', fr:'48', sr:'97'},{date:'2026-02-12', fr:'98', sr:'31'},
-            {date:'2026-02-11', fr:'99', sr:'39'},{date:'2026-02-10', fr:'23', sr:'58'},{date:'2026-02-09', fr:'57', sr:'50'},
-            {date:'2026-02-07', fr:'90', sr:'52'},{date:'2026-02-06', fr:'81', sr:'12'},{date:'2026-02-05', fr:'20', sr:'90'},
-            {date:'2026-02-04', fr:'22', sr:'28'},{date:'2026-02-03', fr:'79', sr:'49'},{date:'2026-02-02', fr:'52', sr:'21'}
-        ],
-        2: [ // March 2026
-            {date:'2026-03-31', fr:'77', sr:'96'},{date:'2026-03-30', fr:'07', sr:'16'},{date:'2026-03-28', fr:'25', sr:'43'},
-            {date:'2026-03-27', fr:'15', sr:'62'},{date:'2026-03-26', fr:'49', sr:'93'},{date:'2026-03-25', fr:'53', sr:'46'},
-            {date:'2026-03-24', fr:'90', sr:'91'},{date:'2026-03-23', fr:'23', sr:'82'},{date:'2026-03-21', fr:'25', sr:'09'},
-            {date:'2026-03-20', fr:'63', sr:'37'},{date:'2026-03-19', fr:'23', sr:'15'},{date:'2026-03-18', fr:'22', sr:'05'},
-            {date:'2026-03-17', fr:'86', sr:'10'},{date:'2026-03-16', fr:'65', sr:'69'},{date:'2026-03-14', fr:'57', sr:'53'},
-            {date:'2026-03-13', fr:'86', sr:'80'},{date:'2026-03-12', fr:'61', sr:'13'},{date:'2026-03-11', fr:'37', sr:'63'},
-            {date:'2026-03-10', fr:'63', sr:'55'},{date:'2026-03-09', fr:'07', sr:'15'},{date:'2026-03-07', fr:'62', sr:'61'},
-            {date:'2026-03-06', fr:'53', sr:'70'},{date:'2026-03-05', fr:'64', sr:'14'},{date:'2026-03-04', fr:'76', sr:'41'},
-            {date:'2026-03-03', fr:'16', sr:'68'},{date:'2026-03-02', fr:'50', sr:'01'}
-        ],
-        3: [ // April 2026
-            {date:'2026-04-30', fr:'30', sr:'99'},{date:'2026-04-29', fr:'18', sr:'56'},{date:'2026-04-28', fr:'45', sr:'64'},
-            {date:'2026-04-27', fr:'33', sr:'90'},{date:'2026-04-25', fr:'53', sr:'22'},{date:'2026-04-24', fr:'34', sr:'36'},
-            {date:'2026-04-23', fr:'63', sr:'63'},{date:'2026-04-22', fr:'46', sr:'41'},{date:'2026-04-21', fr:'44', sr:'91'},
-            {date:'2026-04-20', fr:'12', sr:'95'},{date:'2026-04-18', fr:'46', sr:'34'},{date:'2026-04-17', fr:'24', sr:'84'},
-            {date:'2026-04-16', fr:'53', sr:'78'},{date:'2026-04-15', fr:'27', sr:'29'},{date:'2026-04-14', fr:'63', sr:'70'},
-            {date:'2026-04-13', fr:'14', sr:'42'},{date:'2026-04-11', fr:'83', sr:'61'},{date:'2026-04-10', fr:'08', sr:'42'},
-            {date:'2026-04-09', fr:'16', sr:'87'},{date:'2026-04-08', fr:'89', sr:'27'},{date:'2026-04-07', fr:'05', sr:'24'},
-            {date:'2026-04-06', fr:'91', sr:'45'},{date:'2026-04-04', fr:'06', sr:'33'},{date:'2026-04-03', fr:'68', sr:'66'},
-            {date:'2026-04-02', fr:'38', sr:'60'},{date:'2026-04-01', fr:'89', sr:'94'}
-        ],
-        4: [ // May 2026
-            {date:'2026-05-30', fr:'70', sr:'31'},{date:'2026-05-29', fr:'72', sr:'96'},{date:'2026-05-28', fr:'41', sr:'10'},
-            {date:'2026-05-27', fr:'20', sr:'88'},{date:'2026-05-26', fr:'20', sr:'13'},{date:'2026-05-25', fr:'98', sr:'46'},
-            {date:'2026-05-23', fr:'54', sr:'50'},{date:'2026-05-22', fr:'86', sr:'60'},{date:'2026-05-21', fr:'37', sr:'57'},
-            {date:'2026-05-20', fr:'81', sr:'62'},{date:'2026-05-19', fr:'67', sr:'41'},{date:'2026-05-18', fr:'20', sr:'51'},
-            {date:'2026-05-16', fr:'07', sr:'40'},{date:'2026-05-15', fr:'67', sr:'68'},{date:'2026-05-14', fr:'69', sr:'68'},
-            {date:'2026-05-13', fr:'32', sr:'80'},{date:'2026-05-12', fr:'06', sr:'42'},{date:'2026-05-11', fr:'08', sr:'26'},
-            {date:'2026-05-09', fr:'29', sr:'33'},{date:'2026-05-08', fr:'88', sr:'60'},{date:'2026-05-07', fr:'23', sr:'35'},
-            {date:'2026-05-06', fr:'61', sr:'76'},{date:'2026-05-05', fr:'57', sr:'10'},{date:'2026-05-04', fr:'03', sr:'95'},
-            {date:'2026-05-02', fr:'10', sr:'48'},{date:'2026-05-01', fr:'11', sr:'48'}
-        ],
-        5: [ // June 2026
-            {date:'2026-06-30', fr:'--', sr:'--'},{date:'2026-06-29', fr:'--', sr:'--'},{date:'2026-06-28', fr:'--', sr:'--'},
-            {date:'2026-06-27', fr:'--', sr:'--'},{date:'2026-06-26', fr:'--', sr:'--'},{date:'2026-06-25', fr:'--', sr:'--'},
-            {date:'2026-06-24', fr:'--', sr:'--'},{date:'2026-06-23', fr:'--', sr:'--'},{date:'2026-06-22', fr:'28', sr:'04'},
-            {date:'2026-06-21', fr:'XX', sr:'XX'},{date:'2026-06-20', fr:'15', sr:'65'},{date:'2026-06-19', fr:'85', sr:'78'},
-            {date:'2026-06-18', fr:'15', sr:'06'},{date:'2026-06-17', fr:'68', sr:'75'},{date:'2026-06-16', fr:'47', sr:'86'},
-            {date:'2026-06-15', fr:'70', sr:'31'},{date:'2026-06-13', fr:'20', sr:'52'},{date:'2026-06-12', fr:'06', sr:'86'},
-            {date:'2026-06-11', fr:'77', sr:'18'},{date:'2026-06-10', fr:'07', sr:'65'},{date:'2026-06-09', fr:'00', sr:'51'},
-            {date:'2026-06-08', fr:'52', sr:'66'},{date:'2026-06-06', fr:'46', sr:'28'},{date:'2026-06-05', fr:'96', sr:'45'},
-            {date:'2026-06-04', fr:'23', sr:'37'},{date:'2026-06-03', fr:'13', sr:'42'},{date:'2026-06-02', fr:'24', sr:'99'},
-            {date:'2026-06-01', fr:'20', sr:'57'}
-        ],
-        6: [], 7: [], 8: [], 9: [], 10: [], 11: []
-    };
-    return allData[monthIndex] || [];
+async function loadPreviousResultsFromSupabase(monthIndex) {
+    try {
+        const today = getTodayIST();
+        const dateObj = new Date(today);
+        dateObj.setMonth(monthIndex);
+        const startDate = new Date(dateObj.getFullYear(), monthIndex, 1);
+        const endDate = new Date(dateObj.getFullYear(), monthIndex + 1, 0);
+        
+        const startDateStr = startDate.toISOString().split('T')[0];
+        const endDateStr = endDate.toISOString().split('T')[0];
+        
+        const { data, error } = await supabaseClient
+            .from('teer_previous_results')
+            .select('*')
+            .eq('venue', 'shillong')
+            .gte('result_date', startDateStr)
+            .lte('result_date', endDateStr)
+            .order('result_date', { ascending: false });
+            
+        if (!error && data && data.length > 0) {
+            return data.map(row => ({
+                date: row.result_date,
+                fr: row.fr_result || '--',
+                sr: row.sr_result || '--'
+            }));
+        } else {
+            return [];
+        }
+    } catch(err) {
+        return [];
+    }
 }
 
-function displayMonthResults(monthIndex) {
+async function displayMonthResults(monthIndex) {
     const tbody = document.getElementById('resultsTableBody');
     if (!tbody) return;
     
-    const data = getRealPreviousData(monthIndex);
+    const data = await loadPreviousResultsFromSupabase(monthIndex);
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     
     let html = '';
     if (data.length === 0) {
         html = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8a9aaa;">${monthNames[monthIndex]} 2026 - No results available yet</td></tr>`;
     } else {
-        const sortedData = [...data].reverse();
-        sortedData.forEach(row => {
-            const frColor = row.fr !== '--' && row.fr !== 'XX' ? '#0d6b3d' : '#8a9aaa';
-            const srColor = row.sr !== '--' && row.sr !== 'XX' ? '#0a3d6b' : '#8a9aaa';
+        data.forEach(row => {
+            const frColor = row.fr !== '--' ? '#0d6b3d' : '#8a9aaa';
+            const srColor = row.sr !== '--' ? '#0a3d6b' : '#8a9aaa';
             html += `<tr>
                 <td style="padding:8px; font-size:0.9rem; color:#0d0a0a; font-weight:600;">${row.date}</td>
-                <td style="padding:8px; font-size:0.9rem; font-weight:${row.fr !== '--' && row.fr !== 'XX' ? '700' : '400'}; color:${frColor};">${row.fr}</td>
-                <td style="padding:8px; font-size:0.9rem; font-weight:${row.sr !== '--' && row.sr !== 'XX' ? '700' : '400'}; color:${srColor};">${row.sr}</td>
+                <td style="padding:8px; font-size:0.9rem; font-weight:${row.fr !== '--' ? '700' : '400'}; color:${frColor};">${row.fr}</td>
+                <td style="padding:8px; font-size:0.9rem; font-weight:${row.sr !== '--' ? '700' : '400'}; color:${srColor};">${row.sr}</td>
             </tr>`;
         });
     }
@@ -2572,10 +2528,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // 🔥 সাবপেজ আপডেট - প্রতি 30 সেকেন্ড পর পর
     setInterval(updateAllSubPages, 30000);
     
+    // মাস সিলেক্ট - আপডেটেড ফাংশন কল
     document.getElementById('monthSelect').value = '5';
     displayMonthResults(5);
     document.getElementById('monthSelect').addEventListener('change', function() {
-        displayMonthResults(this.value);
+        displayMonthResults(parseInt(this.value));
     });
     
     renderDreamChart();
