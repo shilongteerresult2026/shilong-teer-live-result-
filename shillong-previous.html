@@ -2,29 +2,36 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Shillong Teer Previous Results | শিলং তীর পূর্ববর্তী ফলাফল</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background: #0f1419; padding: 0.8rem; }
-        .container { max-width: 100%; margin: 0 auto; background: #ffffff; border-radius: 1.2rem; padding: 1rem; }
-        .header-title { text-align: center; margin-bottom: 1rem; }
-        .header-title h1 { font-size: 1.5rem; color: #37474f; }
-        .header-title p { color: #666; font-size: 0.9rem; }
-        .back-btn { display: inline-block; padding: 0.6rem 2rem; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 0.95rem; background: linear-gradient(135deg, #37474f, #263238); color: #ffecb3; border: 2px solid #78909c; margin-top: 1rem; }
-        .back-btn:hover { background: linear-gradient(135deg, #455a64, #263238); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Poppins', sans-serif; }
+        body { background: #0a0e14; padding: 0.8rem; }
+        .container { max-width: 100%; margin: 0 auto; background: #ffffff; border-radius: 1.2rem; padding: 1rem; box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+        .header-title { text-align: center; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid #cc0000; }
+        .header-title h1 { font-size: 1.5rem; color: #0d0a0a; font-weight: 800; }
+        .header-title p { color: #4a3a2a; font-size: 0.9rem; font-weight: 600; }
+        .back-btn { display: inline-block; padding: 0.6rem 2rem; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 0.95rem; background: linear-gradient(135deg, #0a5a30, #064a25); color: #ffffff; border: 2px solid #1a7a4a; margin-top: 1rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(10,90,48,0.3); }
+        .back-btn:hover { background: linear-gradient(135deg, #1a7a4a, #0a5a30); transform: scale(1.05); }
         
-        .monthwise-section { background: #fef7e8; border-radius: 1rem; padding: 1rem; margin: 1rem 0; border: 2px solid #f5b642; }
-        .monthwise-title { font-size: 1.1rem; font-weight: 700; color: #b85e0e; text-align: center; }
+        .monthwise-section { background: #fdf8f0; border-radius: 1rem; padding: 1rem; margin: 1rem 0; border: 2px solid #e8dcc8; }
+        .monthwise-title { font-size: 1.1rem; font-weight: 800; color: #0d0a0a; text-align: center; }
         .selector-container { display: flex; gap: 0.8rem; justify-content: center; margin: 0.8rem 0; flex-wrap: wrap; }
-        .selector-container select { padding: 0.5rem 1rem; border-radius: 50px; border: 2px solid #e67e22; background: white; font-weight: 600; cursor: pointer; font-size: 0.9rem; }
-        .result-display-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: white; border-radius: 0.7rem; overflow: hidden; }
-        .result-display-table th { background: #e67e22; color: white; padding: 10px; font-size: 0.95rem; }
-        .result-display-table td { padding: 8px; text-align: center; border-bottom: 1px solid #ffe0bc; font-size: 0.9rem; }
-        .result-display-table tr:hover { background: #fff5e8; }
-        .no-data { text-align: center; padding: 20px; color: #8892a0; font-size: 0.9rem; }
-        .last-updated { text-align: center; font-size: 0.75rem; color: #888; margin-top: 0.5rem; }
+        .selector-container select { padding: 0.5rem 1rem; border-radius: 50px; border: 2px solid #dcc8b0; background: white; font-weight: 700; cursor: pointer; font-size: 0.9rem; color: #0d0a0a; }
+        .selector-container select:focus { border-color: #cc0000; outline: none; }
+        .result-display-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: #ffffff; border-radius: 0.7rem; overflow: hidden; border: 1px solid #e8dcc8; }
+        .result-display-table th { background: #0a3d6b; color: #ffffff; padding: 10px; font-size: 0.95rem; font-weight: 700; }
+        .result-display-table td { padding: 8px; text-align: center; border-bottom: 1px solid #e8dcc8; font-size: 0.9rem; color: #0d0a0a; font-weight: 600; }
+        .result-display-table tr:hover { background: #f5ead6; }
+        .no-data { text-align: center; padding: 20px; color: #8a7a6a; font-size: 0.9rem; font-weight: 600; }
+        .last-updated { text-align: center; font-size: 0.75rem; color: #6c7a89; margin-top: 0.5rem; font-weight: 600; }
+        .loading-row td { text-align: center; padding: 20px; color: #0a3d6b; font-weight: 600; }
+        
+        .live-badge { display: inline-block; background: #cc0000; color: white; font-size: 0.7rem; font-weight: bold; padding: 0.15rem 0.8rem; border-radius: 30px; animation: pulseRed 1s infinite; margin-left: 8px; }
+        @keyframes pulseRed { 0%,100% { background: #cc0000; } 50% { background: #ff0000; box-shadow: 0 0 10px rgba(204,0,0,0.3); } }
+        
+        .data-source { text-align: center; font-size: 0.7rem; color: #0a3d6b; font-weight: 600; margin-top: 0.2rem; }
         
         @media (max-width: 768px) {
             .container { padding: 0.6rem; }
@@ -34,19 +41,21 @@
             .header-title h1 { font-size: 1.2rem; }
             .selector-container select { font-size: 0.7rem; padding: 0.25rem 0.5rem; }
             .monthwise-title { font-size: 0.85rem; }
+            .back-btn { font-size: 0.8rem; padding: 0.4rem 1.2rem; }
         }
         @media (max-width: 480px) {
-            .result-display-table { font-size: 0.6rem; display: block; overflow-x: auto; white-space: nowrap; }
+            .result-display-table { font-size: 0.6rem; display: block; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
             .result-display-table th, .result-display-table td { padding: 3px 4px; font-size: 0.55rem; min-width: 45px; }
             .result-display-table th:first-child, .result-display-table td:first-child { min-width: 60px; }
+            .header-title h1 { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header-title">
-        <h1>📅 Shillong Teer Previous Results</h1>
-        <p>শিলং তীর পূর্ববর্তী ফলাফল (২০২৬)</p>
+        <h1>📅 Shillong Teer Previous Results <span class="live-badge">🔴 LIVE</span></h1>
+        <p>শিলং তীর পূর্ববর্তী ফলাফল (২০২৬) - Supabase থেকে রিয়েল টাইম আপডেট</p>
     </div>
     
     <div class="monthwise-section">
@@ -70,9 +79,12 @@
         <div id="resultDisplayArea">
             <table class="result-display-table">
                 <thead><tr><th>Date</th><th>FR (4:00 PM)</th><th>SR (5:00 PM)</th></tr></thead>
-                <tbody id="resultsTableBody"></tbody>
+                <tbody id="resultsTableBody">
+                    <tr class="loading-row"><td colspan="3">⏳ Supabase থেকে রিয়েল ডেটা লোড হচ্ছে...</td></tr>
+                </tbody>
             </table>
         </div>
+        <div class="data-source">📡 ডেটা সোর্স: Supabase (রিয়েল টাইম)</div>
     </div>
     
     <div style="text-align: center; margin-top: 1.5rem;">
@@ -101,262 +113,105 @@ function getTodayIST() {
 }
 
 // ============================================================
-// 🔥 সমস্ত মাসের ডেটা (ডেমো - Supabase থেকে না এনে)
+// 🔥 সব ডেটা Supabase থেকে লোড করুন (কোনো ডেমো ডেটা নেই)
 // ============================================================
-const allMonthData = {
-    0: [
-        {date:'2026-01-31', fr:'85', sr:'71'},
-        {date:'2026-01-30', fr:'57', sr:'30'},
-        {date:'2026-01-29', fr:'53', sr:'18'},
-        {date:'2026-01-28', fr:'61', sr:'07'},
-        {date:'2026-01-27', fr:'43', sr:'90'},
-        {date:'2026-01-26', fr:'38', sr:'07'},
-        {date:'2026-01-24', fr:'38', sr:'29'},
-        {date:'2026-01-23', fr:'95', sr:'23'},
-        {date:'2026-01-22', fr:'84', sr:'83'},
-        {date:'2026-01-21', fr:'45', sr:'76'},
-        {date:'2026-01-20', fr:'35', sr:'97'},
-        {date:'2026-01-19', fr:'28', sr:'62'},
-        {date:'2026-01-17', fr:'12', sr:'29'},
-        {date:'2026-01-16', fr:'29', sr:'01'},
-        {date:'2026-01-15', fr:'14', sr:'89'},
-        {date:'2026-01-14', fr:'20', sr:'40'},
-        {date:'2026-01-13', fr:'81', sr:'86'},
-        {date:'2026-01-12', fr:'94', sr:'01'},
-        {date:'2026-01-10', fr:'20', sr:'93'},
-        {date:'2026-01-09', fr:'56', sr:'91'},
-        {date:'2026-01-08', fr:'27', sr:'26'},
-        {date:'2026-01-07', fr:'47', sr:'09'},
-        {date:'2026-01-06', fr:'26', sr:'27'},
-        {date:'2026-01-05', fr:'86', sr:'81'},
-        {date:'2026-01-03', fr:'47', sr:'23'},
-        {date:'2026-01-02', fr:'46', sr:'37'},
-        {date:'2026-01-01', fr:'91', sr:'40'}
-    ],
-    1: [
-        {date:'2026-02-28', fr:'25', sr:'48'},
-        {date:'2026-02-27', fr:'16', sr:'47'},
-        {date:'2026-02-26', fr:'14', sr:'24'},
-        {date:'2026-02-25', fr:'15', sr:'26'},
-        {date:'2026-02-24', fr:'31', sr:'42'},
-        {date:'2026-02-23', fr:'26', sr:'77'},
-        {date:'2026-02-21', fr:'92', sr:'40'},
-        {date:'2026-02-20', fr:'51', sr:'34'},
-        {date:'2026-02-19', fr:'64', sr:'27'},
-        {date:'2026-02-18', fr:'32', sr:'37'},
-        {date:'2026-02-17', fr:'12', sr:'51'},
-        {date:'2026-02-16', fr:'67', sr:'44'},
-        {date:'2026-02-14', fr:'51', sr:'48'},
-        {date:'2026-02-13', fr:'48', sr:'97'},
-        {date:'2026-02-12', fr:'98', sr:'31'},
-        {date:'2026-02-11', fr:'99', sr:'39'},
-        {date:'2026-02-10', fr:'23', sr:'58'},
-        {date:'2026-02-09', fr:'57', sr:'50'},
-        {date:'2026-02-07', fr:'90', sr:'52'},
-        {date:'2026-02-06', fr:'81', sr:'12'},
-        {date:'2026-02-05', fr:'20', sr:'90'},
-        {date:'2026-02-04', fr:'22', sr:'28'},
-        {date:'2026-02-03', fr:'79', sr:'49'},
-        {date:'2026-02-02', fr:'52', sr:'21'}
-    ],
-    2: [
-        {date:'2026-03-31', fr:'77', sr:'96'},
-        {date:'2026-03-30', fr:'07', sr:'16'},
-        {date:'2026-03-28', fr:'25', sr:'43'},
-        {date:'2026-03-27', fr:'15', sr:'62'},
-        {date:'2026-03-26', fr:'49', sr:'93'},
-        {date:'2026-03-25', fr:'53', sr:'46'},
-        {date:'2026-03-24', fr:'90', sr:'91'},
-        {date:'2026-03-23', fr:'23', sr:'82'},
-        {date:'2026-03-21', fr:'25', sr:'09'},
-        {date:'2026-03-20', fr:'63', sr:'37'},
-        {date:'2026-03-19', fr:'23', sr:'15'},
-        {date:'2026-03-18', fr:'22', sr:'05'},
-        {date:'2026-03-17', fr:'86', sr:'10'},
-        {date:'2026-03-16', fr:'65', sr:'69'},
-        {date:'2026-03-14', fr:'57', sr:'53'},
-        {date:'2026-03-13', fr:'86', sr:'80'},
-        {date:'2026-03-12', fr:'61', sr:'13'},
-        {date:'2026-03-11', fr:'37', sr:'63'},
-        {date:'2026-03-10', fr:'63', sr:'55'},
-        {date:'2026-03-09', fr:'07', sr:'15'},
-        {date:'2026-03-07', fr:'62', sr:'61'},
-        {date:'2026-03-06', fr:'53', sr:'70'},
-        {date:'2026-03-05', fr:'64', sr:'14'},
-        {date:'2026-03-04', fr:'76', sr:'41'},
-        {date:'2026-03-03', fr:'16', sr:'68'},
-        {date:'2026-03-02', fr:'50', sr:'01'}
-    ],
-    3: [
-        {date:'2026-04-30', fr:'30', sr:'99'},
-        {date:'2026-04-29', fr:'18', sr:'56'},
-        {date:'2026-04-28', fr:'45', sr:'64'},
-        {date:'2026-04-27', fr:'33', sr:'90'},
-        {date:'2026-04-25', fr:'53', sr:'22'},
-        {date:'2026-04-24', fr:'34', sr:'36'},
-        {date:'2026-04-23', fr:'63', sr:'63'},
-        {date:'2026-04-22', fr:'46', sr:'41'},
-        {date:'2026-04-21', fr:'44', sr:'91'},
-        {date:'2026-04-20', fr:'12', sr:'95'},
-        {date:'2026-04-18', fr:'46', sr:'34'},
-        {date:'2026-04-17', fr:'24', sr:'84'},
-        {date:'2026-04-16', fr:'53', sr:'78'},
-        {date:'2026-04-15', fr:'27', sr:'29'},
-        {date:'2026-04-14', fr:'63', sr:'70'},
-        {date:'2026-04-13', fr:'14', sr:'42'},
-        {date:'2026-04-11', fr:'83', sr:'61'},
-        {date:'2026-04-10', fr:'08', sr:'42'},
-        {date:'2026-04-09', fr:'16', sr:'87'},
-        {date:'2026-04-08', fr:'89', sr:'27'},
-        {date:'2026-04-07', fr:'05', sr:'24'},
-        {date:'2026-04-06', fr:'91', sr:'45'},
-        {date:'2026-04-04', fr:'06', sr:'33'},
-        {date:'2026-04-03', fr:'68', sr:'66'},
-        {date:'2026-04-02', fr:'38', sr:'60'},
-        {date:'2026-04-01', fr:'89', sr:'94'}
-    ],
-    4: [
-        {date:'2026-05-30', fr:'70', sr:'31'},
-        {date:'2026-05-29', fr:'72', sr:'96'},
-        {date:'2026-05-28', fr:'41', sr:'10'},
-        {date:'2026-05-27', fr:'20', sr:'88'},
-        {date:'2026-05-26', fr:'20', sr:'13'},
-        {date:'2026-05-25', fr:'98', sr:'46'},
-        {date:'2026-05-23', fr:'54', sr:'50'},
-        {date:'2026-05-22', fr:'86', sr:'60'},
-        {date:'2026-05-21', fr:'37', sr:'57'},
-        {date:'2026-05-20', fr:'81', sr:'62'},
-        {date:'2026-05-19', fr:'67', sr:'41'},
-        {date:'2026-05-18', fr:'20', sr:'51'},
-        {date:'2026-05-16', fr:'07', sr:'40'},
-        {date:'2026-05-15', fr:'67', sr:'68'},
-        {date:'2026-05-14', fr:'69', sr:'68'},
-        {date:'2026-05-13', fr:'32', sr:'80'},
-        {date:'2026-05-12', fr:'06', sr:'42'},
-        {date:'2026-05-11', fr:'08', sr:'26'},
-        {date:'2026-05-09', fr:'29', sr:'33'},
-        {date:'2026-05-08', fr:'88', sr:'60'},
-        {date:'2026-05-07', fr:'23', sr:'35'},
-        {date:'2026-05-06', fr:'61', sr:'76'},
-        {date:'2026-05-05', fr:'57', sr:'10'},
-        {date:'2026-05-04', fr:'03', sr:'95'},
-        {date:'2026-05-02', fr:'10', sr:'48'},
-        {date:'2026-05-01', fr:'11', sr:'48'}
-    ],
-    5: [
-        {date:'2026-06-30', fr:'--', sr:'--'},
-        {date:'2026-06-29', fr:'--', sr:'--'},
-        {date:'2026-06-28', fr:'--', sr:'--'},
-        {date:'2026-06-27', fr:'--', sr:'--'},
-        {date:'2026-06-26', fr:'--', sr:'--'},
-        {date:'2026-06-25', fr:'--', sr:'--'},
-        {date:'2026-06-24', fr:'--', sr:'--'},
-        {date:'2026-06-23', fr:'--', sr:'--'},
-        {date:'2026-06-22', fr:'28', sr:'04'},
-        {date:'2026-06-21', fr:'XX', sr:'XX'},
-        {date:'2026-06-20', fr:'15', sr:'65'},
-        {date:'2026-06-19', fr:'85', sr:'78'},
-        {date:'2026-06-18', fr:'15', sr:'06'},
-        {date:'2026-06-17', fr:'68', sr:'75'},
-        {date:'2026-06-16', fr:'47', sr:'86'},
-        {date:'2026-06-15', fr:'70', sr:'31'},
-        {date:'2026-06-13', fr:'20', sr:'52'},
-        {date:'2026-06-12', fr:'06', sr:'86'},
-        {date:'2026-06-11', fr:'77', sr:'18'},
-        {date:'2026-06-10', fr:'07', sr:'65'},
-        {date:'2026-06-09', fr:'00', sr:'51'},
-        {date:'2026-06-08', fr:'52', sr:'66'},
-        {date:'2026-06-06', fr:'46', sr:'28'},
-        {date:'2026-06-05', fr:'96', sr:'45'},
-        {date:'2026-06-04', fr:'23', sr:'37'},
-        {date:'2026-06-03', fr:'13', sr:'42'},
-        {date:'2026-06-02', fr:'24', sr:'99'},
-        {date:'2026-06-01', fr:'20', sr:'57'}
-    ],
-    6: [], 7: [], 8: [], 9: [], 10: [], 11: []
-};
-
-// ============================================================
-// 🔥 মাস অনুযায়ী ফলাফল দেখানো
-// ============================================================
-function displayMonthResults(monthIndex) {
+async function loadPreviousResultsFromSupabase(monthIndex) {
     const tbody = document.getElementById('resultsTableBody');
     if (!tbody) return;
     
-    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    const data = allMonthData[monthIndex] || [];
+    // লোডিং দেখান
+    tbody.innerHTML = `<tr class="loading-row"><td colspan="3">⏳ Supabase থেকে রিয়েল ডেটা লোড হচ্ছে...</td></tr>`;
     
-    let html = '';
-    if (data.length === 0) {
-        html = `<tr><td colspan="3" class="no-data">${monthNames[monthIndex]} 2026 - No results available yet</td></tr>`;
-    } else {
-        data.forEach(row => {
-            const frDisplay = row.fr === '--' ? '—' : row.fr;
-            const srDisplay = row.sr === '--' ? '—' : row.sr;
-            html += `<tr><td style="padding:8px;">${row.date}</td><td style="padding:8px; font-weight:${row.fr !== '--' ? '700' : '400'}; color:${row.fr !== '--' ? '#2c6e2f' : '#999'};">${frDisplay}</td><td style="padding:8px; font-weight:${row.sr !== '--' ? '700' : '400'}; color:${row.sr !== '--' ? '#c62828' : '#999'};">${srDisplay}</td></tr>`;
-        });
+    try {
+        const year = 2026;
+        const month = String(monthIndex + 1).padStart(2, '0');
+        const firstDay = `${year}-${month}-01`;
+        const lastDay = `${year}-${month}-${new Date(year, monthIndex + 1, 0).getDate()}`;
+        
+        console.log(`📅 Loading Shillong results for ${year}-${month} from Supabase`);
+        
+        const { data, error } = await supabaseClient
+            .from('teer_previous_results')
+            .select('*')
+            .eq('venue', 'shillong')
+            .gte('result_date', firstDay)
+            .lte('result_date', lastDay)
+            .order('result_date', { ascending: false });
+            
+        let html = '';
+        
+        if (!error && data && data.length > 0) {
+            console.log(`✅ Found ${data.length} results from Supabase`);
+            data.forEach(row => {
+                const fr = row.fr_result || '--';
+                const sr = row.sr_result || '--';
+                const frColor = (fr !== '--' && fr !== 'XX') ? '#0d6b3d' : '#8a9aaa';
+                const srColor = (sr !== '--' && sr !== 'XX') ? '#0a3d6b' : '#8a9aaa';
+                html += `<tr>
+                    <td style="padding:8px; font-weight:700; color:#0d0a0a;">${row.result_date}</td>
+                    <td style="padding:8px; font-weight:${(fr !== '--' && fr !== 'XX') ? '700' : '400'}; color:${frColor};">${fr}</td>
+                    <td style="padding:8px; font-weight:${(sr !== '--' && sr !== 'XX') ? '700' : '400'}; color:${srColor};">${sr}</td>
+                </tr>`;
+            });
+        } else {
+            console.log('❌ No data from Supabase, showing empty state');
+            // Supabase এ ডেটা না থাকলে খালি দেখান
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            html = `<tr><td colspan="3" class="no-data">${monthNames[monthIndex]} 2026 - Supabase এ কোনো ডেটা নেই</td></tr>`;
+        }
+        
+        tbody.innerHTML = html;
+        
+    } catch(err) {
+        console.error('❌ Error loading from Supabase:', err);
+        tbody.innerHTML = `<tr><td colspan="3" class="no-data">❌ Supabase সংযোগে সমস্যা! অনুগ্রহ করে পরে চেষ্টা করুন।</td></tr>`;
     }
-    tbody.innerHTML = html;
     
     // Last updated time
     const now = new Date();
     const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    document.getElementById('lastUpdated').innerHTML = `🔄 শেষ আপডেট: ${timeStr} IST`;
+    document.getElementById('lastUpdated').innerHTML = `🔄 শেষ আপডেট: ${timeStr} IST | 📡 Supabase (রিয়েল টাইম)`;
 }
 
 // ============================================================
-// 🔥 সেটআপ মাস সিলেক্টর
+// 🔥 মাস সিলেক্টর সেটআপ
 // ============================================================
 function setupMonthSelector() {
     const select = document.getElementById('monthSelect');
     if (select) {
-        // বর্তমান মাস সেট করুন
         const currentMonth = new Date().getMonth();
         select.value = currentMonth.toString();
-        displayMonthResults(currentMonth);
+        loadPreviousResultsFromSupabase(currentMonth);
         
         select.addEventListener('change', function() {
-            displayMonthResults(parseInt(this.value));
+            loadPreviousResultsFromSupabase(parseInt(this.value));
         });
     }
 }
 
 // ============================================================
-// 🔥 গ্লোবাল ফাংশন - মুল পেজ থেকে কল করার জন্য
+// 🔥 গ্লোবাল ফাংশন - মূল পেজ থেকে কল করার জন্য
 // ============================================================
-// এই ফাংশনটি মুল পেজ থেকে কল করলে Previous Result সাবপেজ আপডেট হবে
 window.updatePreviousResultSubPage = function(monthIndex) {
     if (monthIndex !== undefined) {
         const select = document.getElementById('monthSelect');
         if (select) {
             select.value = monthIndex.toString();
-            displayMonthResults(monthIndex);
+            loadPreviousResultsFromSupabase(monthIndex);
         }
     } else {
-        // বর্তমান মাস দেখান
         const currentMonth = new Date().getMonth();
-        displayMonthResults(currentMonth);
+        loadPreviousResultsFromSupabase(currentMonth);
     }
 };
 
 // ============================================================
-// 🔥 Supabase থেকে ডেটা লোড (যদি প্রয়োজন হয়)
+// 🔥 রিফ্রেশ ফাংশন
 // ============================================================
-async function loadPreviousResultsFromSupabase() {
-    try {
-        const { data, error } = await supabaseClient
-            .from('teer_live_results')
-            .select('*')
-            .eq('venue', 'shillong')
-            .order('result_date', { ascending: false })
-            .limit(30);
-            
-        if (!error && data && data.length > 0) {
-            console.log('✅ Loaded previous results from Supabase:', data.length);
-            // এখানে Supabase ডেটা দিয়ে টেবিল আপডেট করতে পারেন
-        }
-    } catch(err) {
-        console.error('❌ Error loading from Supabase:', err);
+function refreshData() {
+    const select = document.getElementById('monthSelect');
+    if (select) {
+        loadPreviousResultsFromSupabase(parseInt(select.value));
     }
 }
 
@@ -364,19 +219,21 @@ async function loadPreviousResultsFromSupabase() {
 // 📌 DOMContentLoaded
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ Shillong Previous Results Page Loaded');
+    console.log('✅ Shillong Previous Results Page Loaded - Supabase Real Data Mode');
     setupMonthSelector();
     
     // প্রতি 30 সেকেন্ড পর পর আপডেট চেক করুন
     setInterval(function() {
         const select = document.getElementById('monthSelect');
         if (select) {
-            displayMonthResults(parseInt(select.value));
+            loadPreviousResultsFromSupabase(parseInt(select.value));
         }
     }, 30000);
 });
 
 console.log('✅ Shillong Previous Results functions loaded successfully!');
+console.log('📡 Supabase URL:', SUPABASE_URL);
+console.log('📌 Mode: REAL DATA (No demo data)');
 </script>
 </body>
 </html>
