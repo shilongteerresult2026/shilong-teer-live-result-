@@ -71,7 +71,7 @@
         </div>
         <div id="resultDisplayArea">
             <table class="result-display-table">
-                <thead><tr><th>Date</th><th>FR (4:00 PM)</th><th>SR (5:00 PM)</th></tr></thead>
+                <thead><tr><th>Date</th><th>FR (2:00 PM)</th><th>SR (3:30 PM)</th></tr></thead>
                 <tbody id="resultsTableBody"></tbody>
             </table>
         </div>
@@ -100,7 +100,7 @@ async function loadPreviousResultsFromSupabase(monthIndex) {
         const { data, error } = await supabaseClient
             .from('teer_previous_results')
             .select('*')
-            .eq('venue', 'juwai')
+            .eq('venue', 'juwai teer')   // ✅ সঠিক venue নাম
             .gte('result_date', firstDay)
             .lte('result_date', lastDay)
             .order('result_date', { ascending: false });
