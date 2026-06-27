@@ -2,254 +2,164 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Shillong Teer Common Number Today | শিলং তীর কমন নাম্বার</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background: #0f1419; padding: 0.8rem; }
-        .container { max-width: 100%; margin: 0 auto; background: #ffffff; border-radius: 1.2rem; padding: 1rem; }
-        .common-venue-card { background: linear-gradient(135deg, #fffaf2, #fff5e8); border-radius: 0.9rem; padding: 0.8rem; border: 2px solid #e8b86b; margin-bottom: 1rem; }
-        .common-venue-title { background: linear-gradient(95deg, #2c3e50, #1e2f3a); color: #ffecb3; padding: 8px 12px; border-radius: 50px; font-weight: 800; font-size: 0.95rem; margin-bottom: 12px; text-align: center; }
-        .common-table { width: 100%; border-collapse: collapse; background: white; border-radius: 0.7rem; overflow: hidden; }
-        .common-table th { background: #e67e22; color: white; padding: 8px; font-size: 0.85rem; }
-        .common-table td { padding: 10px; text-align: center; border: 1px solid #ffe0bc; font-size: 0.9rem; }
-        .round-cell { font-weight: 800; background: #f5e6d3; color: #9b4b1a; }
-        .direct-num { background: #e67e22; color: white; padding: 4px 10px; border-radius: 40px; font-weight: 800; display: inline-block; }
-        .house-num { background: #1f6392; color: white; padding: 4px 10px; border-radius: 40px; font-weight: 800; display: inline-block; }
-        .ending-num { background: #2c6e2f; color: white; padding: 4px 10px; border-radius: 40px; font-weight: 800; display: inline-block; }
-        .back-btn { display: inline-block; padding: 0.6rem 2rem; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 0.95rem; background: linear-gradient(135deg, #2e7d32, #1b5e20); color: white; border: 2px solid #66bb6a; margin-top: 1rem; }
-        .back-btn:hover { background: linear-gradient(135deg, #388e3c, #1b5e20); }
-        .header-title { text-align: center; margin-bottom: 1rem; }
-        .header-title h1 { font-size: 1.5rem; color: #2e7d32; }
-        .header-title p { color: #666; font-size: 0.9rem; }
-        .common-time-badge { background: linear-gradient(95deg, #2c6e2f, #1f4a21); color: #ffda88; font-size: 0.8rem; padding: 0.4rem; border-radius: 50px; text-align: center; margin-bottom: 1rem; }
-        .last-updated { text-align: center; font-size: 0.75rem; color: #888; margin-top: 0.5rem; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Poppins', sans-serif; }
+        body { background: #0a0e14; padding: 0.8rem; }
+        .container { max-width: 100%; margin: 0 auto; background: #ffffff; border-radius: 1.2rem; padding: 0.8rem; box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+        
+        /* ===== হেডার ===== */
+        .header-title { text-align: center; margin-bottom: 0.8rem; padding-bottom: 0.4rem; border-bottom: 3px solid #0d6b3d; }
+        .header-title h1 { font-size: 1.6rem; color: #0d0a0a; font-weight: 800; }
+        .header-title p { color: #4a3a2a; font-size: 0.95rem; font-weight: 600; }
+        
+        /* ===== হোম বাটন ===== */
+        .back-btn { display: inline-block; padding: 0.6rem 2rem; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 1rem; background: linear-gradient(135deg, #0d6b3d, #0a4d2a); color: #ffffff; border: 2px solid #1a8a55; margin-top: 0.8rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(13,107,61,0.3); }
+        .back-btn:hover { background: linear-gradient(135deg, #1a8a55, #0d6b3d); transform: scale(1.05); }
+        
+        /* ===== উপরের লিংক সেকশন ===== */
+        .top-link-section { display: flex; gap: 0.8rem; justify-content: center; margin-bottom: 0.5rem; flex-wrap: wrap; }
+        .top-link-section a { padding: 0.6rem 1.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.3s ease; text-align: center; min-width: 140px; }
+        .top-link-section a:hover { transform: scale(1.05); }
+        .btn-shillong-live { background: #0d6b3d; color: white; }
+        .btn-khanapara-live { background: #0a3d6b; color: white; }
+        
+        /* ===== ডিপ রেডে তারিখ ===== */
+        .date-display { text-align: center; font-size: 1.2rem; font-weight: 800; color: #cc0000; margin: 0.5rem 0 0.8rem 0; padding: 0.3rem; background: #fdf8f0; border-radius: 50px; border: 2px solid #cc0000; }
+        
+        /* ===== কমন টেবিল ===== */
+        .common-venue-card { background: #f0f6fa; border-radius: 1rem; padding: 1rem; margin-bottom: 1rem; border: 3px solid #4a8ab5; }
+        .common-venue-title { background: #0d6b3d; color: #ffffff; padding: 12px 16px; border-radius: 50px; font-weight: 800; font-size: 1.2rem; margin-bottom: 12px; text-align: center; }
+        .common-table { width: 100%; border-collapse: collapse; background: #ffffff; border-radius: 0.8rem; overflow: hidden; border: 2px solid #4a8ab5; font-size: 1.1rem; table-layout: fixed; }
+        .common-table th { background: #0d6b3d; color: #ffffff; padding: 14px 10px; font-size: 1rem; font-weight: 700; text-align: center; }
+        .common-table td { padding: 14px 10px; text-align: center; border: 1px solid #4a8ab5; font-size: 1rem; font-weight: 600; }
+        .common-table th:first-child { width: 14%; }
+        .common-table th:nth-child(2) { width: 38%; }
+        .common-table th:nth-child(3) { width: 24%; }
+        .common-table th:nth-child(4) { width: 24%; }
+        .round-cell { font-weight: 800; background: #d0dce8; color: #0a3d6b; font-size: 1.1rem; }
+        .round-cell span { font-size: 0.75rem; font-weight: 400; display: block; }
+        .direct-num { background: #0d6b3d; color: white; padding: 6px 14px; border-radius: 40px; font-weight: 800; font-size: 1.1rem; display: inline-block; }
+        .house-num { background: #0a4d2a; color: white; padding: 6px 14px; border-radius: 40px; font-weight: 800; font-size: 1.1rem; display: inline-block; }
+        .ending-num { background: #8b0000; color: white; padding: 6px 14px; border-radius: 40px; font-weight: 800; font-size: 1.1rem; display: inline-block; }
+        
+        /* ===== নিচের লিংক সেকশন ===== */
+        .bottom-link-section { display: flex; gap: 0.8rem; justify-content: center; margin-top: 1rem; flex-wrap: wrap; }
+        .bottom-link-section a { padding: 0.6rem 1.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.3s ease; text-align: center; min-width: 140px; }
+        .bottom-link-section a:hover { transform: scale(1.05); }
+        .btn-previous-shillong { background: #0a5a30; color: white; }
+        .btn-morning-live { background: #e6a800; color: #1a0a00; }
+        
+        /* ===== মোবাইল রেস্পন্সিভ ===== */
         @media (max-width: 768px) {
-            .container { padding: 0.6rem; }
-            .common-table th, .common-table td { padding: 4px 6px; font-size: 0.7rem; }
-            .direct-num, .house-num, .ending-num { padding: 2px 5px; font-size: 0.75rem; }
-            .header-title h1 { font-size: 1.2rem; }
+            body { padding: 0.4rem; }
+            .container { padding: 0.5rem; }
+            .header-title h1 { font-size: 1.3rem; }
+            .header-title p { font-size: 0.8rem; }
+            .date-display { font-size: 1rem; }
+            .common-table { font-size: 0.9rem; }
+            .common-table th { font-size: 0.85rem; padding: 10px 6px; }
+            .common-table td { font-size: 0.85rem; padding: 10px 6px; }
+            .common-venue-card { padding: 0.8rem; }
+            .common-venue-title { font-size: 1rem; padding: 10px 12px; }
+            .direct-num, .house-num, .ending-num { font-size: 0.9rem; padding: 4px 10px; }
+            .round-cell { font-size: 0.95rem; }
+            .back-btn { font-size: 0.85rem; padding: 0.5rem 1.5rem; }
+            .top-link-section a, .bottom-link-section a { font-size: 0.8rem; padding: 0.5rem 1rem; min-width: 120px; }
+        }
+        @media (max-width: 480px) {
+            body { padding: 0.2rem; }
+            .container { padding: 0.4rem; }
+            .header-title h1 { font-size: 1.1rem; }
+            .header-title p { font-size: 0.7rem; }
+            .date-display { font-size: 0.85rem; padding: 0.2rem; }
+            .common-table { font-size: 0.75rem; }
+            .common-table th { font-size: 0.7rem; padding: 8px 4px; }
+            .common-table td { font-size: 0.7rem; padding: 8px 4px; }
+            .common-venue-card { padding: 0.6rem; }
+            .common-venue-title { font-size: 0.85rem; padding: 8px 10px; }
+            .direct-num, .house-num, .ending-num { font-size: 0.75rem; padding: 3px 8px; }
+            .round-cell { font-size: 0.8rem; }
+            .round-cell span { font-size: 0.55rem; }
+            .back-btn { font-size: 0.75rem; padding: 0.4rem 1rem; }
+            .top-link-section, .bottom-link-section { gap: 0.4rem; }
+            .top-link-section a, .bottom-link-section a { font-size: 0.7rem; padding: 0.4rem 0.8rem; min-width: 100px; }
         }
     </style>
 </head>
 <body>
 <div class="container">
+    <!-- ===== হেডার ===== -->
     <div class="header-title">
-        <h1>🎯 Shillong Teer Common Number Today</h1>
-        <p>শিলং তীর আজকের কমন নাম্বার</p>
+        <h1>🎯 Shillong Teer Common Number Today <span style="background:#0d6b3d; color:white; font-size:0.7rem; padding:0.15rem 0.8rem; border-radius:30px; margin-left:6px;">🟢 LIVE</span></h1>
+        <p>শিলং তীর আজকের কমন নাম্বার (২০২৬) - ডাইরেক্ট, হাউজ ও এন্ডিং ডিজিট</p>
     </div>
-    <div class="common-time-badge">⭐ TODAY'S COMMON NUMBERS (7 Formula Analysis) | আজকের কমন নাম্বার (৭ ফর্মুলা বিশ্লেষণ)</div>
     
-    <!-- 🔥 Container for common numbers - এই ID দিয়ে JavaScript আপডেট করবে -->
-    <div id="commonContainer"></div>
+    <!-- ===== টেবিলের উপরে ২টি লিংক ===== -->
+    <div class="top-link-section">
+        <a href="shillong-teer-result.html" class="btn-shillong-live">🏹 শিলং তীর লাইভ রেজাল্ট</a>
+        <a href="khanapara-teer-result.html" class="btn-khanapara-live">🏹 খানাপাড়া তীর লাইভ রেজাল্ট</a>
+    </div>
     
-    <div style="text-align: center; margin-top: 1.5rem;">
+    <!-- ===== ডিপ রেডে তারিখ ===== -->
+    <div class="date-display" id="dateDisplay">📅 Sunday, 28 June 2026</div>
+    
+    <!-- ===== কমন টেবিল ===== -->
+    <div class="common-venue-card">
+        <div class="common-venue-title">🎯 SHILLONG TEER - TODAY'S COMMON NUMBERS</div>
+        <table class="common-table">
+            <thead>
+                <tr>
+                    <th>Round</th>
+                    <th>Direct Numbers</th>
+                    <th>House Digit</th>
+                    <th>Ending Digit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="round-cell">FR <span>(4:00 PM)</span></td>
+                    <td><span class="direct-num">47, 68</span></td>
+                    <td><span class="house-num">4, 6</span></td>
+                    <td><span class="ending-num">7, 8</span></td>
+                </tr>
+                <tr>
+                    <td class="round-cell">SR <span>(5:00 PM)</span></td>
+                    <td><span class="direct-num">86, 15</span></td>
+                    <td><span class="house-num">8, 1</span></td>
+                    <td><span class="ending-num">6, 5</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- ===== টেবিলের নিচে ২টি লিংক ===== -->
+    <div class="bottom-link-section">
+        <a href="morning-teer-result.html" class="btn-morning-live">🌅 মর্নিং তীর লাইভ রেজাল্ট</a>
+        <a href="shillong-previous.html" class="btn-previous-shillong">📜 শিলং তীর পূর্ববর্তী ফলাফল</a>
+    </div>
+    
+    <!-- ===== হোম বাটন ===== -->
+    <div style="text-align: center; margin-top: 1rem;">
         <a href="index.html" class="back-btn">⬅️ Back to Home | হোমে ফিরুন</a>
     </div>
-    
-    <div class="last-updated" id="lastUpdated">⏳ আপডেট হচ্ছে...</div>
 </div>
 
 <script>
-// ============================================================
-// Supabase Setup
-// ============================================================
-const SUPABASE_URL = 'https://bwjjqidmeooyojjvtqjs.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3ampxaWRtZW9veW9qanZ0cWpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NDIxMTAsImV4cCI6MjA5NjUxODExMH0.sRbG-Pwd8kgy94e9g7uuWhAj0-mH6JjOC7KXARxLIEk';
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-// ============================================================
-// 🔥 IST TIME ZONE FIX
-// ============================================================
-function getTodayIST() {
+// ===== ইংরেজিতে তারিখ দেখানোর জন্য =====
+function showDate() {
     const now = new Date();
-    const istOffset = 5.5 * 60 * 60 * 1000;
-    const istTime = new Date(now.getTime() + istOffset);
-    return istTime.toISOString().split('T')[0];
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const dateStr = now.toLocaleDateString('en-US', options);
+    document.getElementById('dateDisplay').innerHTML = '📅 ' + dateStr;
 }
 
-// ============================================================
-// 🔥 ডিফল্ট কমন নাম্বার ডেটা (Supabase এ ডেটা না থাকলে)
-// ============================================================
-const defaultCommonData = {
-    result_date: getTodayIST(),
-    
-    // Shillong (শুধু Shillong দেখাবে)
-    shillong_fr_direct: '47, 68, 23',
-    shillong_fr_house: '4, 6',
-    shillong_fr_ending: '7, 8',
-    shillong_sr_direct: '86, 15, 70',
-    shillong_sr_house: '8, 1',
-    shillong_sr_ending: '6, 5'
-};
-
-// ============================================================
-// 🔥 Shillong Common Number Load - Supabase থেকে
-// ============================================================
-async function loadCommonNumbers() {
-    try {
-        const today = getTodayIST();
-        console.log('📅 Loading Shillong Common Numbers for:', today);
-        
-        const { data, error } = await supabaseClient
-            .from('teer_common_numbers')
-            .select('*')
-            .eq('result_date', today)
-            .limit(1);
-            
-        const container = document.getElementById('commonContainer');
-        if (!container) return;
-        
-        if (!error && data && data.length > 0) {
-            // শুধু Shillong এর ডেটা রেন্ডার করুন
-            renderCommonNumbers(data[0]);
-        } else {
-            // ডেটা না থাকলে ডিফল্ট দেখান
-            renderDefaultCommonNumbers();
-        }
-        
-        // Last updated time
-        const now = new Date();
-        const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        document.getElementById('lastUpdated').innerHTML = `🔄 শেষ আপডেট: ${timeStr} IST`;
-        
-    } catch(err) {
-        console.error('❌ Error loading common numbers:', err);
-        renderDefaultCommonNumbers();
-    }
-}
-
-// ============================================================
-// 🔥 কমন নাম্বার রেন্ডার (Supabase ডেটা থেকে)
-// ============================================================
-function renderCommonNumbers(data) {
-    const container = document.getElementById('commonContainer');
-    if (!container) return;
-    
-    // শুধু Shillong দেখাবে
-    const prefix = 'shillong';
-    const venueName = 'SHILLONG TEER';
-    
-    const frDirect = data[`${prefix}_fr_direct`] || '--';
-    const frHouse = data[`${prefix}_fr_house`] || '--';
-    const frEnding = data[`${prefix}_fr_ending`] || '--';
-    const srDirect = data[`${prefix}_sr_direct`] || '--';
-    const srHouse = data[`${prefix}_sr_house`] || '--';
-    const srEnding = data[`${prefix}_sr_ending`] || '--';
-    
-    container.innerHTML = `
-        <div class="common-venue-card">
-            <div class="common-venue-title">🔢 ${venueName} - COMMON NUMBERS</div>
-            <table class="common-table">
-                <thead>
-                    <tr>
-                        <th>ROUND</th>
-                        <th>🔢 DIRECT NUMBER</th>
-                        <th>🏠 HOUSE DIGIT</th>
-                        <th>🎯 ENDING DIGIT</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="round-cell">FIRST ROUND (FR)</td>
-                        <td><span class="direct-num">${frDirect}</span></td>
-                        <td><span class="house-num">${frHouse}</span></td>
-                        <td><span class="ending-num">${frEnding}</span></td>
-                    </tr>
-                    <tr>
-                        <td class="round-cell">SECOND ROUND (SR)</td>
-                        <td><span class="direct-num">${srDirect}</span></td>
-                        <td><span class="house-num">${srHouse}</span></td>
-                        <td><span class="ending-num">${srEnding}</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    `;
-}
-
-// ============================================================
-// 🔥 ডিফল্ট কমন নাম্বার রেন্ডার (Supabase এ ডেটা না থাকলে)
-// ============================================================
-function renderDefaultCommonNumbers() {
-    const container = document.getElementById('commonContainer');
-    if (!container) return;
-    
-    const data = defaultCommonData;
-    const prefix = 'shillong';
-    const venueName = 'SHILLONG TEER';
-    
-    const frDirect = data[`${prefix}_fr_direct`] || '--';
-    const frHouse = data[`${prefix}_fr_house`] || '--';
-    const frEnding = data[`${prefix}_fr_ending`] || '--';
-    const srDirect = data[`${prefix}_sr_direct`] || '--';
-    const srHouse = data[`${prefix}_sr_house`] || '--';
-    const srEnding = data[`${prefix}_sr_ending`] || '--';
-    
-    container.innerHTML = `
-        <div class="common-venue-card">
-            <div class="common-venue-title">🔢 ${venueName} - COMMON NUMBERS</div>
-            <table class="common-table">
-                <thead>
-                    <tr>
-                        <th>ROUND</th>
-                        <th>🔢 DIRECT NUMBER</th>
-                        <th>🏠 HOUSE DIGIT</th>
-                        <th>🎯 ENDING DIGIT</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="round-cell">FIRST ROUND (FR)</td>
-                        <td><span class="direct-num">${frDirect}</span></td>
-                        <td><span class="house-num">${frHouse}</span></td>
-                        <td><span class="ending-num">${frEnding}</span></td>
-                    </tr>
-                    <tr>
-                        <td class="round-cell">SECOND ROUND (SR)</td>
-                        <td><span class="direct-num">${srDirect}</span></td>
-                        <td><span class="house-num">${srHouse}</span></td>
-                        <td><span class="ending-num">${srEnding}</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    `;
-}
-
-// ============================================================
-// 🔥 গ্লোবাল ফাংশন - মুল পেজ থেকে কল করার জন্য
-// ============================================================
-// এই ফাংশনটি মুল পেজ থেকে কল করলে Shillong Common সাবপেজ আপডেট হবে
-window.updateShillongCommonSubPage = function(commonData) {
-    const container = document.getElementById('commonContainer');
-    if (!container) return;
-    
-    if (commonData) {
-        renderCommonNumbers(commonData);
-    } else {
-        renderDefaultCommonNumbers();
-    }
-    
-    // Last updated time
-    const now = new Date();
-    const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    document.getElementById('lastUpdated').innerHTML = `🔄 শেষ আপডেট: ${timeStr} IST`;
-};
-
-// ============================================================
-// 📌 DOMContentLoaded
-// ============================================================
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ Shillong Common Number Page Loaded');
-    loadCommonNumbers();
-    
-    // প্রতি 30 সেকেন্ড পর পর আপডেট চেক করুন (কমন নাম্বার কম আপডেট হয়)
-    setInterval(loadCommonNumbers, 30000);
+    showDate();
+    console.log('✅ Shillong Common Number Page Loaded Successfully!');
 });
-
-console.log('✅ Shillong Common Number functions loaded successfully!');
 </script>
 </body>
 </html>
