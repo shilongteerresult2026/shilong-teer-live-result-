@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
-    <!-- ===== মূল পেজ ===== -->
+    <!-- ===== হোমপেজ ===== -->
     <url>
         <loc>https://shillongteerliveresult.in/</loc>
-        <lastmod>2026-06-27</lastmod>
+        <lastmod>2026-06-28</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://shillongteerliveresult.in/index.html</loc>
+        <lastmod>2026-06-28</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
@@ -12,109 +18,121 @@
     <!-- ===== লাইভ রেজাল্ট পেজ ===== -->
     <url>
         <loc>https://shillongteerliveresult.in/shillong-teer-result.html</loc>
-        <lastmod>2026-06-27</lastmod>
+        <lastmod>2026-06-28</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://shillongteerliveresult.in/khanapara-teer-result.html</loc>
-        <lastmod>2026-06-27</lastmod>
+        <lastmod>2026-06-28</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://shillongteerliveresult.in/juwai-teer-result.html</loc>
-        <lastmod>2026-06-27</lastmod>
+        <lastmod>2026-06-28</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://shillongteerliveresult.in/morning-teer-result.html</loc>
-        <lastmod>2026-06-27</lastmod>
+        <lastmod>2026-06-28</lastmod>
         <changefreq>daily</changefreq>
-        <priority>0.8</priority>
+        <priority>0.9</priority>
     </url>
     <url>
         <loc>https://shillongteerliveresult.in/night-teer-result.html</loc>
-        <lastmod>2026-06-27</lastmod>
+        <lastmod>2026-06-28</lastmod>
         <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <!-- ===== প্রিভিয়াস রেজাল্ট পেজ (NEW) ===== -->
-    <url>
-        <loc>https://shillongteerliveresult.in/shillong-previous.html</loc>
-        <lastmod>2026-06-27</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://shillongteerliveresult.in/khanapara-previous.html</loc>
-        <lastmod>2026-06-27</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://shillongteerliveresult.in/juwai-previous.html</loc>
-        <lastmod>2026-06-27</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://shillongteerliveresult.in/morning-previous.html</loc>
-        <lastmod>2026-06-27</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://shillongteerliveresult.in/night-previous.html</loc>
-        <lastmod>2026-06-27</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.7</priority>
+        <priority>0.9</priority>
     </url>
     
     <!-- ===== কমন নাম্বার পেজ ===== -->
     <url>
         <loc>https://shillongteerliveresult.in/shillong-common.html</loc>
-        <lastmod>2026-06-27</lastmod>
+        <lastmod>2026-06-28</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://shillongteerliveresult.in/khanapara-common.html</loc>
-        <lastmod>2026-06-27</lastmod>
+        <lastmod>2026-06-28</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://shillongteerliveresult.in/juwai-common.html</loc>
+        <lastmod>2026-06-28</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://shillongteerliveresult.in/morning-common.html</loc>
+        <lastmod>2026-06-28</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://shillongteerliveresult.in/night-common.html</loc>
+        <lastmod>2026-06-28</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- ===== পূর্ববর্তী ফলাফল পেজ ===== -->
+    <url>
+        <loc>https://shillongteerliveresult.in/shillong-previous.html</loc>
+        <lastmod>2026-06-28</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://shillongteerliveresult.in/juwai-common.html</loc>
-        <lastmod>2026-06-27</lastmod>
+        <loc>https://shillongteerliveresult.in/khanapara-previous.html</loc>
+        <lastmod>2026-06-28</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://shillongteerliveresult.in/juwai-previous.html</loc>
+        <lastmod>2026-06-28</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://shillongteerliveresult.in/morning-previous.html</loc>
+        <lastmod>2026-06-28</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://shillongteerliveresult.in/night-previous.html</loc>
+        <lastmod>2026-06-28</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     
-    <!-- ===== স্ট্যাটিক পেজ ===== -->
+    <!-- ===== অন্যান্য পেজ ===== -->
     <url>
         <loc>https://shillongteerliveresult.in/about.html</loc>
-        <lastmod>2026-06-27</lastmod>
+        <lastmod>2026-06-28</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://shillongteerliveresult.in/contact.html</loc>
-        <lastmod>2026-06-27</lastmod>
+        <lastmod>2026-06-28</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://shillongteerliveresult.in/privacy.html</loc>
-        <lastmod>2026-06-27</lastmod>
+        <lastmod>2026-06-28</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.4</priority>
     </url>
     <url>
         <loc>https://shillongteerliveresult.in/terms.html</loc>
-        <lastmod>2026-06-27</lastmod>
+        <lastmod>2026-06-28</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.4</priority>
     </url>
