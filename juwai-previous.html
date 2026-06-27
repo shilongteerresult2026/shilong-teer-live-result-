@@ -72,7 +72,9 @@
         <div id="resultDisplayArea">
             <table class="result-display-table">
                 <thead><tr><th>Date</th><th>FR (2:00 PM)</th><th>SR (3:30 PM)</th></tr></thead>
-                <tbody id="resultsTableBody"></tbody>
+                <tbody id="resultsTableBody">
+                    <tr><td colspan="3" style="text-align:center;padding:20px;color:#8a7a6a;">Loading...</td></tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -83,10 +85,23 @@
 </div>
 
 <script>
+// ============================================================
+// 🔥 Supabase Setup with CORS Headers
+// ============================================================
 const SUPABASE_URL = 'https://bwjjqidmeooyojjvtqjs.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3ampxaWRtZW9veW9qanZ0cWpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NDIxMTAsImV4cCI6MjA5NjUxODExMH0.sRbG-Pwd8kgy94e9g7uuWhAj0-mH6JjOC7KXARxLIEk';
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const SUPABASE_ANON_KEY = 'sb_publishable__qokEKHuO9i1LVn24Hxp3g_4MZQ7wIg';
 
+// CORS Headers যোগ করে Supabase Client তৈরি করুন
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    }
+});
+
+// ============================================================
+// 🔥 Load Previous Results
+// ============================================================
 async function loadPreviousResultsFromSupabase(monthIndex) {
     const tbody = document.getElementById('resultsTableBody');
     if (!tbody) return;
@@ -100,7 +115,7 @@ async function loadPreviousResultsFromSupabase(monthIndex) {
         const { data, error } = await supabaseClient
             .from('teer_previous_results')
             .select('*')
-            .eq('venue', 'juwai teer')   // ✅ সঠিক venue নাম
+            .eq('venue', 'juwai teer')
             .gte('result_date', firstDay)
             .lte('result_date', lastDay)
             .order('result_date', { ascending: false });
