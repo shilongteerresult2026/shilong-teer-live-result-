@@ -2,51 +2,72 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khanapara Teer Result Today | খানাপাড়া তীর রেজাল্ট</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Khanapara Teer Live Result Today | খানাপাড়া তীর লাইভ রেজাল্ট টুডে</title>
+    <meta name="description" content="Khanapara Teer Live Result Today. Get live FR & SR results for Khanapara Teer. Daily updated Khanapara Teer live result at 4:00 PM & 5:00 PM IST. খানাপাড়া তীর লাইভ রেজাল্ট টুডে।">
+    <meta name="keywords" content="Khanapara Teer Live Result, Khanapara Teer Result Today, Khanapara Teer Live, Khanapara Teer FR SR Result, Khanapara Teer Today Result, Khanapara Teer 4pm Result, Khanapara Teer 5pm Result, Khanapara Teer Live Today, খানাপাড়া তীর লাইভ রেজাল্ট, খানাপাড়া তীর আজকের রেজাল্ট, Khanapara Teer Result Live, Khanapara Teer FR Result, Khanapara Teer SR Result, Khanapara Teer Result 2026, Khanapara Teer Live Result Today 2026">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background: #0f1419; padding: 0.8rem; }
-        .container { max-width: 100%; margin: 0 auto; background: #ffffff; border-radius: 1.2rem; padding: 1rem; }
-        .result-card { background: #ffffff; border-radius: 0.9rem; padding: 0.8rem; border: 2px solid #f5b642; border-top: 4px solid #0d47a1; }
-        .venue-header { background: #0d47a1; border-radius: 50px; padding: 0.35rem 0.8rem; text-align: center; margin-bottom: 0.6rem; }
-        .venue-name { font-size: 1rem; font-weight: 800; color: #ffe6b3; }
-        .info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; flex-wrap: wrap; }
-        .date-box { background: #ece3d8; font-size: 0.8rem; font-weight: 600; padding: 0.25rem 0.8rem; border-radius: 50px; }
-        .flash-waiting { background: #dc2626; color: white; font-size: 0.75rem; font-weight: bold; padding: 0.25rem 0.8rem; border-radius: 30px; animation: flashWaiting 0.8s infinite; display: inline-block; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Poppins', sans-serif; }
+        body { background: #0a0e14; padding: 0.8rem; }
+        .container { max-width: 100%; margin: 0 auto; background: #ffffff; border-radius: 1.2rem; padding: 1rem; box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+        
+        .header-title { text-align: center; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 4px solid #0d47a1; }
+        .header-title h1 { font-size: 1.8rem; color: #0d47a1; font-weight: 900; }
+        .header-title p { color: #4a3a2a; font-size: 1rem; font-weight: 600; }
+        
+        .result-card { background: #ffffff; border-radius: 0.9rem; padding: 1rem; border: 3px solid #000000; border-top: 5px solid #0d47a1; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+        .venue-header { background: linear-gradient(135deg, #0d47a1, #0a2a5e); border-radius: 50px; padding: 0.5rem 0.8rem; text-align: center; margin-bottom: 0.8rem; border: 2px solid #000000; }
+        .venue-name { font-size: 1.1rem; font-weight: 800; color: #ffffff; letter-spacing: 1px; }
+        .info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; flex-wrap: wrap; gap: 5px; }
+        .date-box { background: #ece3d8; font-size: 0.9rem; font-weight: 700; padding: 0.3rem 1rem; border-radius: 50px; color: #1a0a0a; border: 2px solid #000000; }
+        .flash-waiting { background: #dc2626; color: white; font-size: 0.8rem; font-weight: bold; padding: 0.3rem 1rem; border-radius: 30px; animation: flashWaiting 0.8s infinite; display: inline-block; border: 2px solid #000000; }
         @keyframes flashWaiting { 0%,100% { background: #dc2626; } 50% { background: #ff0000; } }
-        .live-result-badge { background: #dc2626; color: white; font-size: 0.8rem; font-weight: bold; padding: 0.25rem 0.9rem; border-radius: 30px; animation: flashLive 0.6s infinite; display: inline-block; }
+        .live-result-badge { background: #dc2626; color: white; font-size: 0.8rem; font-weight: bold; padding: 0.3rem 1rem; border-radius: 30px; animation: flashLive 0.6s infinite; display: inline-block; border: 2px solid #000000; }
         @keyframes flashLive { 0%,100% { background: #dc2626; } 50% { background: #ff3333; box-shadow: 0 0 8px #ff4444; } }
         .live-result-badge::before { content: "●"; animation: blinkDot 0.5s infinite; }
         @keyframes blinkDot { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
-        .timing-dual { display: flex; gap: 0.8rem; margin: 0.6rem 0; }
-        .fr-box, .sr-box { flex: 1; text-align: center; background: #faf3e8; border-radius: 0.8rem; padding: 0.5rem; border: 1px solid #e8d5c0; }
-        .result-number { font-size: 1.6rem; font-weight: 900; background: #f5f0e8; display: inline-block; padding: 0.2rem 1rem; border-radius: 40px; color: #0d47a1; }
-        .waiting-number-display { background: #dc2626; color: white; font-size: 0.8rem; font-weight: bold; padding: 0.3rem 0.7rem; border-radius: 40px; display: inline-block; animation: blinkWaiting 0.6s infinite; }
+        .timing-dual { display: flex; gap: 1rem; margin: 0.8rem 0; }
+        .fr-box, .sr-box { flex: 1; text-align: center; background: #faf3e8; border-radius: 0.8rem; padding: 0.8rem; border: 2px solid #000000; }
+        .fr-box div:first-child, .sr-box div:first-child { font-weight: 700; color: #1a0a0a; margin-bottom: 0.3rem; }
+        .result-number { font-size: 1.8rem; font-weight: 900; background: #f5f0e8; display: inline-block; padding: 0.3rem 1.5rem; border-radius: 40px; color: #0d47a1; border: 2px solid #000000; }
+        .waiting-number-display { background: #dc2626; color: white; font-size: 0.9rem; font-weight: bold; padding: 0.4rem 1rem; border-radius: 40px; display: inline-block; animation: blinkWaiting 0.6s infinite; border: 2px solid #000000; }
         @keyframes blinkWaiting { 0%,100% { opacity: 1; background: #dc2626; } 50% { opacity: 0.7; background: #ff0000; } }
-        .back-btn { display: inline-block; padding: 0.6rem 2rem; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 0.95rem; background: linear-gradient(135deg, #0d47a1, #0a2a5e); color: white; border: 2px solid #42a5f5; margin-top: 1rem; }
-        .back-btn:hover { background: linear-gradient(135deg, #1565c0, #0a2a5e); }
-        .header-title { text-align: center; margin-bottom: 1rem; }
-        .header-title h1 { font-size: 1.5rem; color: #0d47a1; }
-        .header-title p { color: #666; font-size: 0.9rem; }
-        .last-updated { text-align: center; font-size: 0.75rem; color: #888; margin-top: 0.5rem; }
+        
+        .back-btn { display: inline-block; padding: 0.7rem 2.5rem; border-radius: 12px; font-weight: 700; text-decoration: none; font-size: 1rem; background: linear-gradient(135deg, #0d47a1, #0a2a5e); color: white; border: 3px solid #000000; margin-top: 1rem; transition: all 0.4s ease; box-shadow: 0 6px 25px rgba(13,71,161,0.3); }
+        .back-btn:hover { background: linear-gradient(135deg, #1565c0, #0a2a5e); transform: translateY(-3px) scale(1.02); }
+        
+        .last-updated { text-align: center; font-size: 0.75rem; color: #6c7a89; margin-top: 0.5rem; font-weight: 600; }
+        
         @media (max-width: 768px) {
             .container { padding: 0.6rem; }
-            .result-number { font-size: 1.2rem; }
+            .header-title h1 { font-size: 1.4rem; }
+            .result-number { font-size: 1.4rem; padding: 0.2rem 1rem; }
             .timing-dual { flex-direction: column; }
-            .header-title h1 { font-size: 1.2rem; }
+            .fr-box, .sr-box { padding: 0.5rem; }
+            .venue-name { font-size: 0.95rem; }
+            .back-btn { font-size: 0.85rem; padding: 0.5rem 1.5rem; }
+        }
+        @media (max-width: 480px) {
+            .container { padding: 0.4rem; }
+            .header-title h1 { font-size: 1.1rem; }
+            .header-title p { font-size: 0.7rem; }
+            .result-number { font-size: 1.2rem; padding: 0.15rem 0.8rem; }
+            .date-box { font-size: 0.7rem; padding: 0.2rem 0.6rem; }
+            .flash-waiting, .live-result-badge { font-size: 0.65rem; padding: 0.2rem 0.6rem; }
+            .waiting-number-display { font-size: 0.75rem; padding: 0.3rem 0.8rem; }
+            .back-btn { font-size: 0.75rem; padding: 0.4rem 1rem; }
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header-title">
-        <h1>🏹 Khanapara Teer Result Today</h1>
-        <p>খানাপাড়া তীর আজকের রেজাল্ট</p>
+        <h1>🏹 Khanapara Teer Live Result Today <span style="background:linear-gradient(135deg,#0d47a1,#0a2a5e); color:white; font-size:0.7rem; padding:0.2rem 0.8rem; border-radius:12px; margin-left:6px; border:2px solid #000000; box-shadow:0 4px 12px rgba(13,71,161,0.3);">🔵 LIVE</span></h1>
+        <p>খানাপাড়া তীর আজকের লাইভ রেজাল্ট (২০২৬) - FR & SR আপডেট</p>
     </div>
     
-    <!-- 🔥 Container for result - এই ID দিয়ে JavaScript আপডেট করবে -->
+    <!-- 🔥 Container for result -->
     <div id="khanaparaResultContainer"></div>
     
     <div style="text-align: center; margin-top: 1.5rem;">
@@ -61,7 +82,7 @@
 // Supabase Setup
 // ============================================================
 const SUPABASE_URL = 'https://bwjjqidmeooyojjvtqjs.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3ampxaWRtZW9veW9qanZ0cWpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NDIxMTAsImV4cCI6MjA5NjUxODExMH0.sRbG-Pwd8kgy94e9g7uuWhAj0-mH6JjOC7KXARxLIEk';
+const SUPABASE_ANON_KEY = 'sb_publishable__qokEKHuO9i1LVn24Hxp3g_4MZQ7wIg';
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ============================================================
@@ -81,12 +102,12 @@ function isWaitingForKhanapara(roundType) {
     const now = new Date();
     const hours = now.getHours();
     const minutes = now.getMinutes();
-    const currentTime = hours + minutes/60;
+    const totalMinutes = hours * 60 + minutes;
     
     if (roundType === 'fr') {
-        return currentTime < 16; // 4:00 PM এর আগে
+        return totalMinutes < 960; // 4:00 PM এর আগে
     } else if (roundType === 'sr') {
-        return currentTime < 17; // 5:00 PM এর আগে
+        return totalMinutes < 1020; // 5:00 PM এর আগে
     }
     return false;
 }
@@ -97,7 +118,6 @@ function isWaitingForKhanapara(roundType) {
 async function loadKhanaparaResult() {
     try {
         const today = getTodayIST();
-        console.log('📅 Loading Khanapara result for:', today);
         
         const { data, error } = await supabaseClient
             .from('teer_live_results')
@@ -116,7 +136,6 @@ async function loadKhanaparaResult() {
             srResult = data[0].sr_result || '--';
         }
         
-        // WAITING চেক
         const isFRWaiting = isWaitingForKhanapara('fr');
         const isSRWaiting = isWaitingForKhanapara('sr');
         
@@ -142,18 +161,17 @@ async function loadKhanaparaResult() {
                 </div>
                 <div class="timing-dual">
                     <div class="fr-box">
-                        <div>FIRST ROUND (4:00 PM)</div>
+                        <div>🎯 FIRST ROUND (4:00 PM)</div>
                         ${frDisplay}
                     </div>
                     <div class="sr-box">
-                        <div>SECOND ROUND (5:00 PM)</div>
+                        <div>🎯 SECOND ROUND (5:00 PM)</div>
                         ${srDisplay}
                     </div>
                 </div>
             </div>
         `;
         
-        // Last updated time
         const now = new Date();
         const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
         document.getElementById('lastUpdated').innerHTML = `🔄 শেষ আপডেট: ${timeStr} IST`;
@@ -173,12 +191,12 @@ async function loadKhanaparaResult() {
                     </div>
                     <div class="timing-dual">
                         <div class="fr-box">
-                            <div>FIRST ROUND (4:00 PM)</div>
-                            <div class="waiting-number-display">⏳ WAITING</div>
+                            <div>🎯 FIRST ROUND (4:00 PM)</div>
+                            <span class="waiting-number-display">⏳ WAITING</span>
                         </div>
                         <div class="sr-box">
-                            <div>SECOND ROUND (5:00 PM)</div>
-                            <div class="waiting-number-display">⏳ WAITING</div>
+                            <div>🎯 SECOND ROUND (5:00 PM)</div>
+                            <span class="waiting-number-display">⏳ WAITING</span>
                         </div>
                     </div>
                 </div>
@@ -188,15 +206,14 @@ async function loadKhanaparaResult() {
 }
 
 // ============================================================
-// 🔥 গ্লোবাল ফাংশন - মুল পেজ থেকে কল করার জন্য
+// 🔥 গ্লোবাল ফাংশন - মূল পেজ থেকে কল করার জন্য
 // ============================================================
-// এই ফাংশনটি মুল পেজ থেকে কল করলে Khanapara সাবপেজ আপডেট হবে
 window.updateKhanaparaSubPage = function(liveData) {
     const container = document.getElementById('khanaparaResultContainer');
     if (!container) return;
     
     const today = getTodayIST();
-    const data = liveData.khanapara || { fr: '--', sr: '--' };
+    const data = liveData && liveData.khanapara ? liveData.khanapara : { fr: '--', sr: '--' };
     
     const isFRWaiting = isWaitingForKhanapara('fr');
     const isSRWaiting = isWaitingForKhanapara('sr');
@@ -223,18 +240,17 @@ window.updateKhanaparaSubPage = function(liveData) {
             </div>
             <div class="timing-dual">
                 <div class="fr-box">
-                    <div>FIRST ROUND (4:00 PM)</div>
+                    <div>🎯 FIRST ROUND (4:00 PM)</div>
                     ${frDisplay}
                 </div>
                 <div class="sr-box">
-                    <div>SECOND ROUND (5:00 PM)</div>
+                    <div>🎯 SECOND ROUND (5:00 PM)</div>
                     ${srDisplay}
                 </div>
             </div>
         </div>
     `;
     
-    // Last updated time
     const now = new Date();
     const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     document.getElementById('lastUpdated').innerHTML = `🔄 শেষ আপডেট: ${timeStr} IST`;
@@ -244,14 +260,13 @@ window.updateKhanaparaSubPage = function(liveData) {
 // 📌 DOMContentLoaded
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ Khanapara Teer Page Loaded');
+    console.log('✅ Khanapara Teer Live Page Loaded');
     loadKhanaparaResult();
     
-    // প্রতি 10 সেকেন্ড পর পর আপডেট চেক করুন
     setInterval(loadKhanaparaResult, 10000);
 });
 
-console.log('✅ Khanapara Teer functions loaded successfully!');
+console.log('✅ Khanapara Teer Live functions loaded successfully!');
 </script>
 </body>
 </html>
