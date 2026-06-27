@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Night Teer Common Number Today | নাইট তীর কমন নাম্বার</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Poppins', sans-serif; }
+        body { background: #0a0e14; padding: 0.8rem; }
+        .container { max-width: 100%; margin: 0 auto; background: #ffffff; border-radius: 1.2rem; padding: 0.8rem; box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+        
+        .header-title { text-align: center; margin-bottom: 0.8rem; padding-bottom: 0.4rem; border-bottom: 4px solid #000000; }
+        .header-title h1 { font-size: 1.8rem; color: #0d0a0a; font-weight: 900; }
+        .header-title p { color: #4a3a2a; font-size: 1rem; font-weight: 600; }
+        
+        .back-btn { display: inline-block; padding: 0.8rem 2.5rem; border-radius: 12px; font-weight: 700; text-decoration: none; font-size: 1.1rem; background: linear-gradient(135deg, #1a0a0a, #0d0a0a); color: #ffffff; border: 3px solid #000000; margin-top: 0.8rem; transition: all 0.4s ease; box-shadow: 0 8px 30px rgba(0,0,0,0.35); }
+        .back-btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+        
+        .top-link-section { display: flex; gap: 1rem; justify-content: center; margin-bottom: 0.5rem; flex-wrap: wrap; }
+        .top-link-section a { padding: 0.7rem 1.8rem; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 1rem; transition: all 0.4s ease; text-align: center; min-width: 150px; border: 3px solid #000000; }
+        .top-link-section a:hover { transform: translateY(-3px) scale(1.03); }
+        .btn-shillong-live { background: linear-gradient(135deg, #0d6b3d, #0a4d2a); color: white; box-shadow: 0 6px 25px rgba(13,107,61,0.3); }
+        .btn-khanapara-live { background: linear-gradient(135deg, #0a3d6b, #062a4a); color: white; box-shadow: 0 6px 25px rgba(10,61,107,0.3); }
+        
+        .date-display { text-align: center; font-size: 1.3rem; font-weight: 900; color: #ff0000; margin: 0.5rem 0 0.8rem 0; padding: 0.4rem; background: linear-gradient(135deg, #fff5f5, #ffe6e6); border-radius: 12px; border: 3px solid #000000; box-shadow: 0 4px 20px rgba(255,0,0,0.15); transition: all 0.3s ease; }
+        .date-display:hover { transform: scale(1.02); }
+        
+        .common-venue-card { background: linear-gradient(135deg, #f8faff, #eef4fa); border-radius: 12px; padding: 1.2rem; margin-bottom: 1rem; border: 3px solid #000000; box-shadow: 0 8px 35px rgba(0,0,0,0.1); transition: all 0.4s ease; }
+        .common-venue-card:hover { box-shadow: 0 12px 45px rgba(0,0,0,0.15); transform: translateY(-2px); }
+        
+        .common-venue-title { background: linear-gradient(135deg, #1a0a0a, #0d0a0a); color: #ffffff; padding: 16px 20px; border-radius: 12px; font-weight: 900; font-size: 1.3rem; margin-bottom: 16px; text-align: center; border: 3px solid #000000; box-shadow: 0 6px 25px rgba(0,0,0,0.3); transition: all 0.4s ease; }
+        .common-venue-title:hover { transform: scale(1.01); }
+        
+        .common-table { width: 100%; border-collapse: collapse; background: #ffffff; border-radius: 12px; overflow: hidden; border: 3px solid #000000; font-size: 1.4rem; table-layout: fixed; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+        .common-table th { background: linear-gradient(135deg, #1a0a0a, #0d0a0a); color: #ffffff; padding: 18px 14px; font-size: 1.2rem; font-weight: 800; text-align: center; border: 2px solid #000000; }
+        .common-table td { padding: 18px 14px; text-align: center; border: 2px solid #000000; font-size: 1.3rem; font-weight: 700; transition: all 0.3s ease; }
+        .common-table tr:hover td { background: #f0f7ff; }
+        .common-table th:first-child { width: 14%; }
+        .common-table th:nth-child(2) { width: 38%; }
+        .common-table th:nth-child(3) { width: 24%; }
+        .common-table th:nth-child(4) { width: 24%; }
+        .round-cell { font-weight: 800; background: linear-gradient(135deg, #f0f0f0, #e0e0e0); color: #1a0a0a; font-size: 1.4rem; border: 2px solid #000000; }
+        .round-cell span { font-size: 0.8rem; font-weight: 400; display: block; color: #4a3a2a; }
+        .direct-num { background: linear-gradient(135deg, #0066ff, #0044cc); color: white; padding: 10px 22px; border-radius: 12px; font-weight: 800; font-size: 1.5rem; display: inline-block; box-shadow: 0 4px 15px rgba(0,102,255,0.25); border: 2px solid #000000; transition: all 0.3s ease; }
+        .direct-num:hover { transform: scale(1.05); }
+        .house-num { background: linear-gradient(135deg, #ffcc00, #e6b800); color: #1a0a00; padding: 10px 22px; border-radius: 12px; font-weight: 800; font-size: 1.5rem; display: inline-block; box-shadow: 0 4px 15px rgba(255,204,0,0.25); border: 2px solid #000000; transition: all 0.3s ease; }
+        .house-num:hover { transform: scale(1.05); }
+        .ending-num { background: linear-gradient(135deg, #8b0000, #660000); color: white; padding: 10px 22px; border-radius: 12px; font-weight: 800; font-size: 1.5rem; display: inline-block; box-shadow: 0 4px 15px rgba(139,0,0,0.25); border: 2px solid #000000; transition: all 0.3s ease; }
+        .ending-num:hover { transform: scale(1.05); }
+        
+        .bottom-link-section { display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; flex-wrap: wrap; }
+        .bottom-link-section a { padding: 0.7rem 1.8rem; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 1rem; transition: all 0.4s ease; text-align: center; min-width: 150px; border: 3px solid #000000; }
+        .bottom-link-section a:hover { transform: translateY(-3px) scale(1.03); }
+        .btn-morning-live { background: linear-gradient(135deg, #e6a800, #cc9900); color: #1a0a00; box-shadow: 0 6px 25px rgba(230,168,0,0.3); }
+        .btn-juwai-live { background: linear-gradient(135deg, #0a2a5a, #061a3a); color: white; box-shadow: 0 6px 25px rgba(10,42,90,0.3); }
+        
+        @media (max-width: 768px) {
+            body { padding: 0.4rem; }
+            .container { padding: 0.5rem; }
+            .header-title h1 { font-size: 1.4rem; }
+            .header-title p { font-size: 0.85rem; }
+            .date-display { font-size: 1.1rem; padding: 0.3rem; }
+            .common-table { font-size: 1.1rem; }
+            .common-table th { font-size: 1rem; padding: 14px 10px; }
+            .common-table td { font-size: 1rem; padding: 14px 10px; }
+            .common-venue-card { padding: 0.8rem; }
+            .common-venue-title { font-size: 1.05rem; padding: 12px 14px; }
+            .direct-num, .house-num, .ending-num { font-size: 1.2rem; padding: 8px 16px; }
+            .round-cell { font-size: 1.1rem; }
+            .back-btn { font-size: 0.9rem; padding: 0.6rem 1.8rem; }
+            .top-link-section a, .bottom-link-section a { font-size: 0.85rem; padding: 0.5rem 1.2rem; min-width: 120px; }
+        }
+        @media (max-width: 480px) {
+            body { padding: 0.2rem; }
+            .container { padding: 0.4rem; }
+            .header-title h1 { font-size: 1.1rem; }
+            .header-title p { font-size: 0.7rem; }
+            .date-display { font-size: 0.9rem; padding: 0.2rem; }
+            .common-table { font-size: 0.85rem; }
+            .common-table th { font-size: 0.75rem; padding: 10px 6px; }
+            .common-table td { font-size: 0.8rem; padding: 10px 6px; }
+            .common-venue-card { padding: 0.6rem; }
+            .common-venue-title { font-size: 0.85rem; padding: 8px 10px; }
+            .direct-num, .house-num, .ending-num { font-size: 0.9rem; padding: 6px 12px; }
+            .round-cell { font-size: 0.85rem; }
+            .round-cell span { font-size: 0.5rem; }
+            .back-btn { font-size: 0.75rem; padding: 0.4rem 1rem; }
+            .top-link-section, .bottom-link-section { gap: 0.4rem; }
+            .top-link-section a, .bottom-link-section a { font-size: 0.7rem; padding: 0.4rem 0.8rem; min-width: 90px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header-title">
+        <h1>🌙 Night Teer Common Number Today <span style="background:linear-gradient(135deg,#1a0a0a,#0d0a0a); color:white; font-size:0.8rem; padding:0.2rem 1rem; border-radius:12px; margin-left:6px; border:2px solid #000000; box-shadow:0 4px 15px rgba(0,0,0,0.3);">⚫ LIVE</span></h1>
+        <p>নাইট তীর আজকের কমন নাম্বার (২০২৬) - ডাইরেক্ট, হাউজ ও এন্ডিং ডিজিট</p>
+    </div>
+    
+    <div class="top-link-section">
+        <a href="shillong-teer-result.html" class="btn-shillong-live">🏹 শিলং তীর লাইভ রেজাল্ট</a>
+        <a href="khanapara-teer-result.html" class="btn-khanapara-live">🏹 খানাপাড়া তীর লাইভ রেজাল্ট</a>
+    </div>
+    
+    <div class="date-display" id="dateDisplay">📅 Sunday, 28 June 2026</div>
+    
+    <div class="common-venue-card">
+        <div class="common-venue-title">🌙 NIGHT TEER - TODAY'S COMMON NUMBERS</div>
+        <table class="common-table">
+            <thead>
+                <tr>
+                    <th>Round</th>
+                    <th>Direct Numbers</th>
+                    <th>House Digit</th>
+                    <th>Ending Digit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="round-cell">FR <span>(11:10 PM)</span></td>
+                    <td><span class="direct-num">52, 77</span></td>
+                    <td><span class="house-num">5, 7</span></td>
+                    <td><span class="ending-num">2, 1</span></td>
+                </tr>
+                <tr>
+                    <td class="round-cell">SR <span>(12:10 AM)</span></td>
+                    <td><span class="direct-num">88, 43</span></td>
+                    <td><span class="house-num">8, 4</span></td>
+                    <td><span class="ending-num">8, 3</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="bottom-link-section">
+        <a href="morning-teer-result.html" class="btn-morning-live">🌅 মর্নিং তীর লাইভ রেজাল্ট</a>
+        <a href="juwai-teer-result.html" class="btn-juwai-live">🏹 জুওয়াই তীর লাইভ রেজাল্ট</a>
+    </div>
+    
+    <div style="text-align: center; margin-top: 1rem;">
+        <a href="index.html" class="back-btn">⬅️ Back to Home | হোমে ফিরুন</a>
+    </div>
+</div>
+
+<script>
+function showDate() {
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const dateStr = now.toLocaleDateString('en-US', options);
+    document.getElementById('dateDisplay').innerHTML = '📅 ' + dateStr;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    showDate();
+    console.log('✅ Night Common Number Page Loaded Successfully!');
+});
+</script>
+</body>
+</html>
