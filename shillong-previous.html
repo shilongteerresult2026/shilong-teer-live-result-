@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Shillong Teer Previous Results | শিলং তীর পূর্ববর্তী ফলাফল</title>
+    <title>Shillong Teer Previous Results</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Poppins', sans-serif; }
@@ -14,7 +14,6 @@
         .header-title p { color: #4a3a2a; font-size: 0.9rem; font-weight: 600; }
         .back-btn { display: inline-block; padding: 0.6rem 2rem; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 0.95rem; background: linear-gradient(135deg, #0a5a30, #064a25); color: #ffffff; border: 2px solid #1a7a4a; margin-top: 1rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(10,90,48,0.3); }
         .back-btn:hover { background: linear-gradient(135deg, #1a7a4a, #0a5a30); transform: scale(1.05); }
-        
         .monthwise-section { background: #fdf8f0; border-radius: 1rem; padding: 1rem; margin: 1rem 0; border: 2px solid #e8dcc8; }
         .monthwise-title { font-size: 1.1rem; font-weight: 800; color: #0d0a0a; text-align: center; }
         .selector-container { display: flex; gap: 0.8rem; justify-content: center; margin: 0.8rem 0; flex-wrap: wrap; }
@@ -24,15 +23,8 @@
         .result-display-table th { background: #0a3d6b; color: #ffffff; padding: 10px; font-size: 0.95rem; font-weight: 700; }
         .result-display-table td { padding: 8px; text-align: center; border-bottom: 1px solid #e8dcc8; font-size: 0.9rem; color: #0d0a0a; font-weight: 600; }
         .result-display-table tr:hover { background: #f5ead6; }
-        .no-data { text-align: center; padding: 20px; color: #8a7a6a; font-size: 0.9rem; font-weight: 600; }
-        .last-updated { text-align: center; font-size: 0.75rem; color: #6c7a89; margin-top: 0.5rem; font-weight: 600; }
-        .loading-row td { text-align: center; padding: 20px; color: #0a3d6b; font-weight: 600; }
-        
         .live-badge { display: inline-block; background: #cc0000; color: white; font-size: 0.7rem; font-weight: bold; padding: 0.15rem 0.8rem; border-radius: 30px; animation: pulseRed 1s infinite; margin-left: 8px; }
         @keyframes pulseRed { 0%,100% { background: #cc0000; } 50% { background: #ff0000; box-shadow: 0 0 10px rgba(204,0,0,0.3); } }
-        
-        .data-source { text-align: center; font-size: 0.7rem; color: #0a3d6b; font-weight: 600; margin-top: 0.2rem; }
-        
         @media (max-width: 768px) {
             .container { padding: 0.6rem; }
             .result-display-table { font-size: 0.75rem; }
@@ -55,11 +47,11 @@
 <div class="container">
     <div class="header-title">
         <h1>📅 Shillong Teer Previous Results <span class="live-badge">🔴 LIVE</span></h1>
-        <p>শিলং তীর পূর্ববর্তী ফলাফল (২০২৬) - Supabase থেকে রিয়েল টাইম আপডেট</p>
+        <p>শিলং তীর পূর্ববর্তী ফলাফল (২০২৬)</p>
     </div>
     
     <div class="monthwise-section">
-        <div class="monthwise-title">📅 SHILLONG TEER - PREVIOUS RESULTS (ALL MONTHS)</div>
+        <div class="monthwise-title">📅 SHILLONG TEER - PREVIOUS RESULTS</div>
         <div class="selector-container">
             <select id="monthSelect">
                 <option value="0">January 2026</option>
@@ -79,56 +71,30 @@
         <div id="resultDisplayArea">
             <table class="result-display-table">
                 <thead><tr><th>Date</th><th>FR (4:00 PM)</th><th>SR (5:00 PM)</th></tr></thead>
-                <tbody id="resultsTableBody">
-                    <tr class="loading-row"><td colspan="3">⏳ Supabase থেকে রিয়েল ডেটা লোড হচ্ছে...</td></tr>
-                </tbody>
+                <tbody id="resultsTableBody"></tbody>
             </table>
         </div>
-        <div class="data-source">📡 ডেটা সোর্স: Supabase (রিয়েল টাইম)</div>
     </div>
     
     <div style="text-align: center; margin-top: 1.5rem;">
         <a href="index.html" class="back-btn">⬅️ Back to Home | হোমে ফিরুন</a>
     </div>
-    
-    <div class="last-updated" id="lastUpdated">⏳ আপডেট হচ্ছে...</div>
 </div>
 
 <script>
-// ============================================================
-// Supabase Setup
-// ============================================================
 const SUPABASE_URL = 'https://bwjjqidmeooyojjvtqjs.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3ampxaWRtZW9veW9qanZ0cWpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NDIxMTAsImV4cCI6MjA5NjUxODExMH0.sRbG-Pwd8kgy94e9g7uuWhAj0-mH6JjOC7KXARxLIEk';
+const SUPABASE_ANON_KEY = 'sb_publishable__qokEKHuO9i1LVn24Hxp3g_4MZQ7wIg';
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// ============================================================
-// 🔥 IST TIME ZONE FIX
-// ============================================================
-function getTodayIST() {
-    const now = new Date();
-    const istOffset = 5.5 * 60 * 60 * 1000;
-    const istTime = new Date(now.getTime() + istOffset);
-    return istTime.toISOString().split('T')[0];
-}
-
-// ============================================================
-// 🔥 সব ডেটা Supabase থেকে লোড করুন (কোনো ডেমো ডেটা নেই)
-// ============================================================
 async function loadPreviousResultsFromSupabase(monthIndex) {
     const tbody = document.getElementById('resultsTableBody');
     if (!tbody) return;
-    
-    // লোডিং দেখান
-    tbody.innerHTML = `<tr class="loading-row"><td colspan="3">⏳ Supabase থেকে রিয়েল ডেটা লোড হচ্ছে...</td></tr>`;
     
     try {
         const year = 2026;
         const month = String(monthIndex + 1).padStart(2, '0');
         const firstDay = `${year}-${month}-01`;
         const lastDay = `${year}-${month}-${new Date(year, monthIndex + 1, 0).getDate()}`;
-        
-        console.log(`📅 Loading Shillong results for ${year}-${month} from Supabase`);
         
         const { data, error } = await supabaseClient
             .from('teer_previous_results')
@@ -141,7 +107,6 @@ async function loadPreviousResultsFromSupabase(monthIndex) {
         let html = '';
         
         if (!error && data && data.length > 0) {
-            console.log(`✅ Found ${data.length} results from Supabase`);
             data.forEach(row => {
                 const fr = row.fr_result || '--';
                 const sr = row.sr_result || '--';
@@ -154,34 +119,22 @@ async function loadPreviousResultsFromSupabase(monthIndex) {
                 </tr>`;
             });
         } else {
-            console.log('❌ No data from Supabase, showing empty state');
-            // Supabase এ ডেটা না থাকলে খালি দেখান
             const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-            html = `<tr><td colspan="3" class="no-data">${monthNames[monthIndex]} 2026 - Supabase এ কোনো ডেটা নেই</td></tr>`;
+            html = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8a7a6a;">${monthNames[monthIndex]} 2026 - No data available</td></tr>`;
         }
         
         tbody.innerHTML = html;
         
     } catch(err) {
-        console.error('❌ Error loading from Supabase:', err);
-        tbody.innerHTML = `<tr><td colspan="3" class="no-data">❌ Supabase সংযোগে সমস্যা! অনুগ্রহ করে পরে চেষ্টা করুন।</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8a7a6a;">No data available</td></tr>`;
     }
-    
-    // Last updated time
-    const now = new Date();
-    const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    document.getElementById('lastUpdated').innerHTML = `🔄 শেষ আপডেট: ${timeStr} IST | 📡 Supabase (রিয়েল টাইম)`;
 }
 
-// ============================================================
-// 🔥 মাস সিলেক্টর সেটআপ
-// ============================================================
 function setupMonthSelector() {
     const select = document.getElementById('monthSelect');
     if (select) {
-        const currentMonth = new Date().getMonth();
-        select.value = currentMonth.toString();
-        loadPreviousResultsFromSupabase(currentMonth);
+        select.value = '5';
+        loadPreviousResultsFromSupabase(5);
         
         select.addEventListener('change', function() {
             loadPreviousResultsFromSupabase(parseInt(this.value));
@@ -189,40 +142,8 @@ function setupMonthSelector() {
     }
 }
 
-// ============================================================
-// 🔥 গ্লোবাল ফাংশন - মূল পেজ থেকে কল করার জন্য
-// ============================================================
-window.updatePreviousResultSubPage = function(monthIndex) {
-    if (monthIndex !== undefined) {
-        const select = document.getElementById('monthSelect');
-        if (select) {
-            select.value = monthIndex.toString();
-            loadPreviousResultsFromSupabase(monthIndex);
-        }
-    } else {
-        const currentMonth = new Date().getMonth();
-        loadPreviousResultsFromSupabase(currentMonth);
-    }
-};
-
-// ============================================================
-// 🔥 রিফ্রেশ ফাংশন
-// ============================================================
-function refreshData() {
-    const select = document.getElementById('monthSelect');
-    if (select) {
-        loadPreviousResultsFromSupabase(parseInt(select.value));
-    }
-}
-
-// ============================================================
-// 📌 DOMContentLoaded
-// ============================================================
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ Shillong Previous Results Page Loaded - Supabase Real Data Mode');
     setupMonthSelector();
-    
-    // প্রতি 30 সেকেন্ড পর পর আপডেট চেক করুন
     setInterval(function() {
         const select = document.getElementById('monthSelect');
         if (select) {
@@ -230,10 +151,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 30000);
 });
-
-console.log('✅ Shillong Previous Results functions loaded successfully!');
-console.log('📡 Supabase URL:', SUPABASE_URL);
-console.log('📌 Mode: REAL DATA (No demo data)');
 </script>
 </body>
 </html>
