@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Juwai Teer Previous Results | জুওয়াই তীর পূর্ববর্তী ফলাফল</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Poppins', sans-serif; }
+        body { background: #0a0e14; padding: 0.8rem; }
+        .container { max-width: 100%; margin: 0 auto; background: #ffffff; border-radius: 1.2rem; padding: 1rem; box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+        .header-title { text-align: center; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid #0a2a5a; }
+        .header-title h1 { font-size: 1.5rem; color: #0d0a0a; font-weight: 800; }
+        .header-title p { color: #4a3a2a; font-size: 0.9rem; font-weight: 600; }
+        .back-btn { display: inline-block; padding: 0.6rem 2rem; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 0.95rem; background: linear-gradient(135deg, #0a2a5a, #061a3a); color: #ffffff; border: 2px solid #1a4a8a; margin-top: 1rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(10,42,90,0.3); }
+        .back-btn:hover { background: linear-gradient(135deg, #1a4a8a, #0a2a5a); transform: scale(1.05); }
+        .monthwise-section { background: #f0f6fa; border-radius: 1rem; padding: 1rem; margin: 1rem 0; border: 2px solid #4a7ab5; }
+        .monthwise-title { font-size: 1.1rem; font-weight: 800; color: #0a2a5a; text-align: center; }
+        .selector-container { display: flex; gap: 0.8rem; justify-content: center; margin: 0.8rem 0; flex-wrap: wrap; }
+        .selector-container select { padding: 0.5rem 1rem; border-radius: 50px; border: 2px solid #4a7ab5; background: white; font-weight: 700; cursor: pointer; font-size: 0.9rem; color: #0a2a5a; }
+        .selector-container select:focus { border-color: #0a2a5a; outline: none; }
+        .result-display-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: #ffffff; border-radius: 0.7rem; overflow: hidden; border: 1px solid #4a7ab5; }
+        .result-display-table th { background: #0a2a5a; color: #ffffff; padding: 10px; font-size: 0.95rem; font-weight: 700; }
+        .result-display-table td { padding: 8px; text-align: center; border-bottom: 1px solid #4a7ab5; font-size: 0.9rem; color: #0d0a0a; font-weight: 600; }
+        .result-display-table tr:hover { background: #e3ecf5; }
+        .no-data { text-align: center; padding: 20px; color: #8a7a6a; font-size: 0.9rem; font-weight: 600; }
+        .last-updated { text-align: center; font-size: 0.75rem; color: #6c7a89; margin-top: 0.5rem; font-weight: 600; }
+        .loading-row td { text-align: center; padding: 20px; color: #0a2a5a; font-weight: 600; }
+        .live-badge { display: inline-block; background: #0a2a5a; color: white; font-size: 0.7rem; font-weight: bold; padding: 0.15rem 0.8rem; border-radius: 30px; animation: pulseBlueDeep 1s infinite; margin-left: 8px; }
+        @keyframes pulseBlueDeep { 0%,100% { background: #0a2a5a; } 50% { background: #1a4a8a; box-shadow: 0 0 10px rgba(10,42,90,0.3); } }
+        .data-source { text-align: center; font-size: 0.7rem; color: #0a2a5a; font-weight: 600; margin-top: 0.2rem; }
+        @media (max-width: 768px) {
+            .container { padding: 0.6rem; }
+            .result-display-table { font-size: 0.75rem; }
+            .result-display-table th { font-size: 0.75rem; padding: 6px; }
+            .result-display-table td { font-size: 0.7rem; padding: 5px; }
+            .header-title h1 { font-size: 1.2rem; }
+            .selector-container select { font-size: 0.7rem; padding: 0.25rem 0.5rem; }
+            .monthwise-title { font-size: 0.85rem; }
+            .back-btn { font-size: 0.8rem; padding: 0.4rem 1.2rem; }
+        }
+        @media (max-width: 480px) {
+            .result-display-table { font-size: 0.6rem; display: block; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+            .result-display-table th, .result-display-table td { padding: 3px 4px; font-size: 0.55rem; min-width: 45px; }
+            .result-display-table th:first-child, .result-display-table td:first-child { min-width: 60px; }
+            .header-title h1 { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header-title">
+        <h1>📅 Juwai Teer Previous Results <span class="live-badge">🔵 LIVE</span></h1>
+        <p>জুওয়াই তীর পূর্ববর্তী ফলাফল (২০২৬) - Supabase থেকে রিয়েল টাইম আপডেট</p>
+    </div>
+    
+    <div class="monthwise-section">
+        <div class="monthwise-title">📅 JUWAI TEER - PREVIOUS RESULTS (ALL MONTHS)</div>
+        <div class="selector-container">
+            <select id="monthSelect">
+                <option value="0">January 2026</option>
+                <option value="1">February 2026</option>
+                <option value="2">March 2026</option>
+                <option value="3">April 2026</option>
+                <option value="4">May 2026</option>
+                <option value="5" selected>June 2026</option>
+                <option value="6">July 2026</option>
+                <option value="7">August 2026</option>
+                <option value="8">September 2026</option>
+                <option value="9">October 2026</option>
+                <option value="10">November 2026</option>
+                <option value="11">December 2026</option>
+            </select>
+        </div>
+        <div id="resultDisplayArea">
+            <table class="result-display-table">
+                <thead><tr><th>Date</th><th>FR (4:00 PM)</th><th>SR (5:00 PM)</th></tr></thead>
+                <tbody id="resultsTableBody">
+                    <tr class="loading-row"><td colspan="3">⏳ Supabase থেকে রিয়েল ডেটা লোড হচ্ছে...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="data-source">📡 ডেটা সোর্স: Supabase (রিয়েল টাইম)</div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 1.5rem;">
+        <a href="index.html" class="back-btn">⬅️ Back to Home | হোমে ফিরুন</a>
+    </div>
+    
+    <div class="last-updated" id="lastUpdated">⏳ আপডেট হচ্ছে...</div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://bwjjqidmeooyojjvtqjs.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3ampxaWRtZW9veW9qanZ0cWpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NDIxMTAsImV4cCI6MjA5NjUxODExMH0.sRbG-Pwd8kgy94e9g7uuWhAj0-mH6JjOC7KXARxLIEk';
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+async function loadPreviousResultsFromSupabase(monthIndex) {
+    const tbody = document.getElementById('resultsTableBody');
+    if (!tbody) return;
+    
+    tbody.innerHTML = `<tr class="loading-row"><td colspan="3">⏳ Supabase থেকে রিয়েল ডেটা লোড হচ্ছে...</td></tr>`;
+    
+    try {
+        const year = 2026;
+        const month = String(monthIndex + 1).padStart(2, '0');
+        const firstDay = `${year}-${month}-01`;
+        const lastDay = `${year}-${month}-${new Date(year, monthIndex + 1, 0).getDate()}`;
+        
+        const { data, error } = await supabaseClient
+            .from('teer_previous_results')
+            .select('*')
+            .eq('venue', 'juwai')
+            .gte('result_date', firstDay)
+            .lte('result_date', lastDay)
+            .order('result_date', { ascending: false });
+            
+        let html = '';
+        
+        if (!error && data && data.length > 0) {
+            data.forEach(row => {
+                const fr = row.fr_result || '--';
+                const sr = row.sr_result || '--';
+                const frColor = (fr !== '--' && fr !== 'XX') ? '#0d6b3d' : '#8a9aaa';
+                const srColor = (sr !== '--' && sr !== 'XX') ? '#0a3d6b' : '#8a9aaa';
+                html += `<tr>
+                    <td style="padding:8px; font-weight:700; color:#0d0a0a;">${row.result_date}</td>
+                    <td style="padding:8px; font-weight:${(fr !== '--' && fr !== 'XX') ? '700' : '400'}; color:${frColor};">${fr}</td>
+                    <td style="padding:8px; font-weight:${(sr !== '--' && sr !== 'XX') ? '700' : '400'}; color:${srColor};">${sr}</td>
+                </tr>`;
+            });
+        } else {
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            html = `<tr><td colspan="3" class="no-data">${monthNames[monthIndex]} 2026 - Supabase এ কোনো ডেটা নেই</td></tr>`;
+        }
+        
+        tbody.innerHTML = html;
+        
+    } catch(err) {
+        console.error('❌ Error loading from Supabase:', err);
+        tbody.innerHTML = `<tr><td colspan="3" class="no-data">❌ Supabase সংযোগে সমস্যা! অনুগ্রহ করে পরে চেষ্টা করুন।</td></tr>`;
+    }
+    
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    document.getElementById('lastUpdated').innerHTML = `🔄 শেষ আপডেট: ${timeStr} IST | 📡 Supabase (রিয়েল টাইম)`;
+}
+
+function setupMonthSelector() {
+    const select = document.getElementById('monthSelect');
+    if (select) {
+        const currentMonth = new Date().getMonth();
+        select.value = currentMonth.toString();
+        loadPreviousResultsFromSupabase(currentMonth);
+        
+        select.addEventListener('change', function() {
+            loadPreviousResultsFromSupabase(parseInt(this.value));
+        });
+    }
+}
+
+// 🔥 গ্লোবাল ফাংশন - মূল পেজ থেকে কল করার জন্য
+window.updateJuwaiPreviousSubPage = function(monthIndex) {
+    if (monthIndex !== undefined) {
+        const select = document.getElementById('monthSelect');
+        if (select) {
+            select.value = monthIndex.toString();
+            loadPreviousResultsFromSupabase(monthIndex);
+        }
+    } else {
+        const currentMonth = new Date().getMonth();
+        loadPreviousResultsFromSupabase(currentMonth);
+    }
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('✅ Juwai Previous Results Page Loaded - Supabase Real Data Mode');
+    setupMonthSelector();
+    
+    setInterval(function() {
+        const select = document.getElementById('monthSelect');
+        if (select) {
+            loadPreviousResultsFromSupabase(parseInt(select.value));
+        }
+    }, 30000);
+});
+
+console.log('✅ Juwai Previous Results functions loaded successfully!');
+</script>
+</body>
+</html>
