@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Night Teer Previous Results | নাইট তীর পূর্ববর্তী ফলাফল</title>
+    <title>Night Teer Previous Results</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Poppins', sans-serif; }
@@ -23,12 +23,8 @@
         .result-display-table th { background: #0a3d6b; color: #ffffff; padding: 10px; font-size: 0.95rem; font-weight: 700; }
         .result-display-table td { padding: 8px; text-align: center; border-bottom: 1px solid #4a8ab5; font-size: 0.9rem; color: #0d0a0a; font-weight: 600; }
         .result-display-table tr:hover { background: #e3f0ff; }
-        .no-data { text-align: center; padding: 20px; color: #8a7a6a; font-size: 0.9rem; font-weight: 600; }
-        .last-updated { text-align: center; font-size: 0.75rem; color: #6c7a89; margin-top: 0.5rem; font-weight: 600; }
-        .loading-row td { text-align: center; padding: 20px; color: #0a3d6b; font-weight: 600; }
         .live-badge { display: inline-block; background: #1a0a0a; color: white; font-size: 0.7rem; font-weight: bold; padding: 0.15rem 0.8rem; border-radius: 30px; animation: pulseDark 1s infinite; margin-left: 8px; }
         @keyframes pulseDark { 0%,100% { background: #1a0a0a; } 50% { background: #3d2a2a; box-shadow: 0 0 10px rgba(26,10,10,0.3); } }
-        .data-source { text-align: center; font-size: 0.7rem; color: #0a3d6b; font-weight: 600; margin-top: 0.2rem; }
         @media (max-width: 768px) {
             .container { padding: 0.6rem; }
             .result-display-table { font-size: 0.75rem; }
@@ -51,11 +47,11 @@
 <div class="container">
     <div class="header-title">
         <h1>🌙 Night Teer Previous Results <span class="live-badge">⚫ LIVE</span></h1>
-        <p>নাইট তীর পূর্ববর্তী ফলাফল (২০২৬) - Supabase থেকে রিয়েল টাইম আপডেট</p>
+        <p>নাইট তীর পূর্ববর্তী ফলাফল (২০২৬)</p>
     </div>
     
     <div class="monthwise-section">
-        <div class="monthwise-title">📅 NIGHT TEER - PREVIOUS RESULTS (ALL MONTHS)</div>
+        <div class="monthwise-title">📅 NIGHT TEER - PREVIOUS RESULTS</div>
         <div class="selector-container">
             <select id="monthSelect">
                 <option value="0">January 2026</option>
@@ -74,32 +70,25 @@
         </div>
         <div id="resultDisplayArea">
             <table class="result-display-table">
-                <thead><tr><th>Date</th><th>FR (4:00 PM)</th><th>SR (5:00 PM)</th></tr></thead>
-                <tbody id="resultsTableBody">
-                    <tr class="loading-row"><td colspan="3">⏳ Supabase থেকে রিয়েল ডেটা লোড হচ্ছে...</td></tr>
-                </tbody>
+                <thead><tr><th>Date</th><th>FR (11:10 PM)</th><th>SR (12:10 AM)</th></tr></thead>
+                <tbody id="resultsTableBody"></tbody>
             </table>
         </div>
-        <div class="data-source">📡 ডেটা সোর্স: Supabase (রিয়েল টাইম)</div>
     </div>
     
     <div style="text-align: center; margin-top: 1.5rem;">
         <a href="index.html" class="back-btn">⬅️ Back to Home | হোমে ফিরুন</a>
     </div>
-    
-    <div class="last-updated" id="lastUpdated">⏳ আপডেট হচ্ছে...</div>
 </div>
 
 <script>
 const SUPABASE_URL = 'https://bwjjqidmeooyojjvtqjs.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3ampxaWRtZW9veW9qanZ0cWpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NDIxMTAsImV4cCI6MjA5NjUxODExMH0.sRbG-Pwd8kgy94e9g7uuWhAj0-mH6JjOC7KXARxLIEk';
+const SUPABASE_ANON_KEY = 'sb_publishable__qokEKHuO9i1LVn24Hxp3g_4MZQ7wIg';
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 async function loadPreviousResultsFromSupabase(monthIndex) {
     const tbody = document.getElementById('resultsTableBody');
     if (!tbody) return;
-    
-    tbody.innerHTML = `<tr class="loading-row"><td colspan="3">⏳ Supabase থেকে রিয়েল ডেটা লোড হচ্ছে...</td></tr>`;
     
     try {
         const year = 2026;
@@ -110,7 +99,7 @@ async function loadPreviousResultsFromSupabase(monthIndex) {
         const { data, error } = await supabaseClient
             .from('teer_previous_results')
             .select('*')
-            .eq('venue', 'night')
+            .eq('venue', 'night teer')
             .gte('result_date', firstDay)
             .lte('result_date', lastDay)
             .order('result_date', { ascending: false });
@@ -131,27 +120,21 @@ async function loadPreviousResultsFromSupabase(monthIndex) {
             });
         } else {
             const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-            html = `<tr><td colspan="3" class="no-data">${monthNames[monthIndex]} 2026 - Supabase এ কোনো ডেটা নেই</td></tr>`;
+            html = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8a7a6a;">${monthNames[monthIndex]} 2026 - No data available</td></tr>`;
         }
         
         tbody.innerHTML = html;
         
     } catch(err) {
-        console.error('❌ Error loading from Supabase:', err);
-        tbody.innerHTML = `<tr><td colspan="3" class="no-data">❌ Supabase সংযোগে সমস্যা! অনুগ্রহ করে পরে চেষ্টা করুন।</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8a7a6a;">No data available</td></tr>`;
     }
-    
-    const now = new Date();
-    const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    document.getElementById('lastUpdated').innerHTML = `🔄 শেষ আপডেট: ${timeStr} IST | 📡 Supabase (রিয়েল টাইম)`;
 }
 
 function setupMonthSelector() {
     const select = document.getElementById('monthSelect');
     if (select) {
-        const currentMonth = new Date().getMonth();
-        select.value = currentMonth.toString();
-        loadPreviousResultsFromSupabase(currentMonth);
+        select.value = '5';
+        loadPreviousResultsFromSupabase(5);
         
         select.addEventListener('change', function() {
             loadPreviousResultsFromSupabase(parseInt(this.value));
@@ -159,24 +142,8 @@ function setupMonthSelector() {
     }
 }
 
-// 🔥 গ্লোবাল ফাংশন - মূল পেজ থেকে কল করার জন্য
-window.updateNightPreviousSubPage = function(monthIndex) {
-    if (monthIndex !== undefined) {
-        const select = document.getElementById('monthSelect');
-        if (select) {
-            select.value = monthIndex.toString();
-            loadPreviousResultsFromSupabase(monthIndex);
-        }
-    } else {
-        const currentMonth = new Date().getMonth();
-        loadPreviousResultsFromSupabase(currentMonth);
-    }
-};
-
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ Night Previous Results Page Loaded - Supabase Real Data Mode');
     setupMonthSelector();
-    
     setInterval(function() {
         const select = document.getElementById('monthSelect');
         if (select) {
@@ -184,8 +151,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 30000);
 });
-
-console.log('✅ Night Previous Results functions loaded successfully!');
 </script>
 </body>
 </html>
