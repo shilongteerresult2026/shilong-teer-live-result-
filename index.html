@@ -39,6 +39,17 @@
     <!-- HilltopAds Verification Meta Tag -->
     <meta name="50064c663ff903c2e60fcbe064af79fac42c5954" content="50064c663ff903c2e60fcbe064af79fac42c5954" />
 
+    <!-- OneSignal Push Notification -->
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+        window.OneSignalDeferred = window.OneSignalDeferred || [];
+        OneSignalDeferred.push(function(OneSignal) {
+            OneSignal.init({
+                appId: "YOUR_ONESIGNAL_APP_ID",
+            });
+        });
+    </script>
+
     <!-- 🔥 Schema.org Structured Data for Teer Results -->
     <script type="application/ld+json">
     {
@@ -892,11 +903,19 @@
     .dream-chart-note { font-size: 0.85rem; color: #4a6a7a; text-align: center; margin-top: 0.6rem; }
 
     /* ============================================================ */
-    /* 🔥 ইতিহাস - ক্রিম ব্যাকগ্রাউন্ড + কালো মোটা ফন্ট */
+    /* 🔥 ইতিহাস - ক্রিম ব্যাকগ্রাউন্ড + ব্লু হেডিং */
     /* ============================================================ */
     .history-section-direct { margin: 1rem 0; }
     .history-card { background: #fdf8f0; border-radius: 1rem; margin-bottom: 1rem; border: 1px solid #e8dcc8; overflow: hidden; }
-    .history-title { background: #f5ead6; color: #1a0a0a; padding: 12px 16px; font-weight: 900; font-size: 1rem; border-bottom: 2px solid #dcc8b0; }
+    .history-title { 
+        background: #0a3d6b; 
+        color: #ffffff; 
+        padding: 12px 16px; 
+        font-weight: 900; 
+        font-size: 1rem; 
+        border-bottom: 2px solid #1a5a8a;
+        border-radius: 12px 12px 0 0;
+    }
     .history-content { 
         padding: 1rem 1.2rem; 
         background: #fdf8f0; 
@@ -938,7 +957,7 @@
     .bn-text { color: #cc0000; font-size: 0.9rem; display: inline; margin-left: 8px; font-weight: 700; }
 
     /* ============================================================ */
-    /* 🔥 স্ট্র্যাটেজি আর্টিকেল - ক্রিম ব্যাকগ্রাউন্ড + কালো মোটা ফন্ট */
+    /* 🔥 স্ট্র্যাটেজি আর্টিকেল - ব্লু হেডিং */
     /* ============================================================ */
     .strategy-article-section {
         background: #fdf8f0;
@@ -948,21 +967,27 @@
         border: 2px solid #e8dcc8;
     }
     .strategy-article-title {
+        background: #0a3d6b;
+        color: #ffffff;
+        padding: 14px 20px;
+        border-radius: 12px;
         font-size: 1.2rem;
         font-weight: 900;
-        color: #0d0a0a;
         text-align: center;
         margin-bottom: 1rem;
-        border-bottom: 2px solid #dcc8b0;
-        padding-bottom: 10px;
+        border: 2px solid #1a5a8a;
+        box-shadow: 0 4px 15px rgba(10, 61, 107, 0.3);
     }
     .strategy-article-subtitle {
+        background: #0a3d6b;
+        color: #ffffff;
+        padding: 10px 16px;
+        border-radius: 8px;
         font-size: 1.05rem;
         font-weight: 800;
-        color: #0d0a0a;
         margin: 1.2rem 0 0.6rem;
-        border-left: 4px solid #cc0000;
-        padding-left: 12px;
+        border-left: 4px solid #ffcc00;
+        box-shadow: 0 2px 10px rgba(10, 61, 107, 0.2);
     }
     .strategy-article-text {
         font-size: 0.95rem;
@@ -1014,7 +1039,7 @@
     }
 
     /* ============================================================ */
-    /* 🔥 স্ট্র্যাটেজি সেকশন - ক্রিম */
+    /* 🔥 স্ট্র্যাটেজি সেকশন - ব্লু হেডিং */
     /* ============================================================ */
     .strategy-section {
         background: #fdf8f0;
@@ -1024,21 +1049,27 @@
         border: 2px solid #e8dcc8;
     }
     .strategy-title {
+        background: #0a3d6b;
+        color: #ffffff;
+        padding: 14px 20px;
+        border-radius: 12px;
         font-size: 1.1rem;
         font-weight: 800;
-        color: #0d0a0a;
         text-align: center;
         margin-bottom: 1rem;
-        border-bottom: 2px solid #dcc8b0;
-        padding-bottom: 8px;
+        border: 2px solid #1a5a8a;
+        box-shadow: 0 4px 15px rgba(10, 61, 107, 0.3);
     }
     .strategy-subtitle {
+        background: #0a3d6b;
+        color: #ffffff;
+        padding: 10px 16px;
+        border-radius: 8px;
         font-size: 1rem;
         font-weight: 700;
-        color: #0d0a0a;
         margin: 1rem 0 0.5rem;
-        border-left: 3px solid #cc0000;
-        padding-left: 10px;
+        border-left: 4px solid #ffcc00;
+        box-shadow: 0 2px 10px rgba(10, 61, 107, 0.2);
     }
     .strategy-text {
         font-size: 0.95rem;
@@ -1076,10 +1107,20 @@
     }
 
     /* ============================================================ */
-    /* 🔥 FAQ - ক্রিম */
+    /* 🔥 FAQ - ব্লু হেডিং */
     /* ============================================================ */
     .faq-section { background: #fdf8f0; border-radius: 1rem; padding: 1rem; margin: 1rem 0; border: 2px solid #e8dcc8; }
-    .faq-title { font-size: 1.05rem; font-weight: 800; margin-bottom: 1rem; border-left: 5px solid #cc0000; padding-left: 12px; color: #0d0a0a; }
+    .faq-title {
+        background: #0a3d6b;
+        color: #ffffff;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-size: 1.05rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        border: 2px solid #1a5a8a;
+        box-shadow: 0 4px 15px rgba(10, 61, 107, 0.3);
+    }
     .faq-item { background: #ffffff; border-radius: 0.8rem; margin-bottom: 0.8rem; overflow: hidden; border: 1px solid #e8dcc8; }
     .faq-question { cursor: pointer; display: flex; justify-content: space-between; padding: 12px 15px; font-weight: 700; font-size: 0.95rem; color: #0d0a0a; background: #fdf8f0; }
     .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; background: #ffffff; padding: 0 15px; font-size: 0.9rem; line-height: 1.5; color: #0d0a0a; font-weight: 600; }
@@ -1554,9 +1595,9 @@
     <!-- ===== শিলং তীর স্লাইডার (ডিপ ইয়েলো) ===== -->
     <div class="slider-container">
         <div class="slider-track">
-            <a href="shillong-teer-result.html">🏹 Shillong Teer - FR: 4:00 PM | SR: 5:00 PM</a>
-            <a href="khanapara-teer-result.html">🏹 Khanapara Teer - FR: 4:00 PM | SR: 5:00 PM</a>
-            <a href="juwai-teer-result.html">🏹 Juwai Teer - FR: 2:00 PM | SR: 3:30 PM</a>
+            <a href="shillong-teer-result.html">🏹 Shillong Teer - FR: 4:15 PM | SR: 5:10 PM</a>
+            <a href="khanapara-teer-result.html">🏹 Khanapara Teer - FR: 4:10 PM | SR: 5:05 PM</a>
+            <a href="juwai-teer-result.html">🏹 Juwai Teer - FR: 2:30 PM | SR: 3:15 PM</a>
             <a href="morning-teer-result.html">🌅 Morning Teer - FR: 10:30 AM | SR: 11:30 AM</a>
             <a href="night-teer-result.html">🌙 Night Teer - FR: 11:10 PM | SR: 12:10 AM</a>
         </div>
@@ -1601,7 +1642,7 @@
         </div>
         <div id="resultDisplayArea">
             <table class="result-display-table">
-                <thead><tr><th>Date</th><th>FR (4:00 PM)</th><th>SR (5:00 PM)</th></tr></thead>
+                <thead><tr><th>Date</th><th>FR (4:15 PM)</th><th>SR (5:10 PM)</th></tr></thead>
                 <tbody id="resultsTableBody"></tbody>
             </table>
         </div>
@@ -1676,7 +1717,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 🔥 DETAILED HISTORY (ক্রিম ব্যাকগ্রাউন্ড) -->
+    <!-- 🔥 DETAILED HISTORY (ক্রিম ব্যাকগ্রাউন্ড + ব্লু হেডিং) -->
     <!-- ============================================================ -->
     <div class="history-section-direct">
         <h2 style="color:#0d0a0a; border-left:4px solid #cc0000; padding-left:12px; font-size:1.05rem; margin-bottom:0.8rem; font-weight:800;">📜 COMPLETE HISTORY & TRADITIONAL BACKGROUND | সম্পূর্ণ ইতিহাস ও ঐতিহ্য</h2>
@@ -1705,7 +1746,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 🔥 WINNING STRATEGY & EXPERT ADVICE (ক্রিম ব্যাকগ্রাউন্ড) -->
+    <!-- 🔥 WINNING STRATEGY & EXPERT ADVICE (ব্লু হেডিং) -->
     <!-- ============================================================ -->
     <div class="strategy-article-section">
         <div class="strategy-article-title">🏆 WINNING STRATEGY & EXPERT ADVICE | জয়ের কৌশল ও বিশেষজ্ঞ পরামর্শ</div>
@@ -1729,7 +1770,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 🔥 PREVIOUS RESULT ANALYSIS (ক্রিম ব্যাকগ্রাউন্ড) -->
+    <!-- 🔥 PREVIOUS RESULT ANALYSIS (ব্লু হেডিং) -->
     <!-- ============================================================ -->
     <div class="strategy-section">
         <div class="strategy-title">📊 PREVIOUS RESULT ANALYSIS - COMPLETE GUIDE | পূর্ববর্তী ফলাফল বিশ্লেষণ - সম্পূর্ণ গাইড</div>
@@ -1860,7 +1901,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- ❓ FAQ SECTION (ক্রিম) -->
+    <!-- ❓ FAQ SECTION (ব্লু হেডিং) -->
     <!-- ============================================================ -->
     <div class="faq-section">
         <div class="faq-title">❓ FREQUENTLY ASKED QUESTIONS (FAQ) - 20 QUESTIONS | প্রায়শই জিজ্ঞাসিত প্রশ্ন - ২০টি প্রশ্ন</div>
@@ -1944,6 +1985,103 @@ const SUPABASE_ANON_KEY = 'sb_publishable__qokEKHuO9i1LVn24Hxp3g_4MZQ7wIg';
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ============================================================
+// 🔥 গ্লোবাল ফাংশন - প্রিভিয়াস পেজ আপডেটের জন্য
+// ============================================================
+window.updateJuwaiPreviousSubPage = function(monthIndex) {
+    console.log('🔄 Juwai Previous: Update requested');
+};
+
+window.updateMorningPreviousSubPage = function(monthIndex) {
+    console.log('🔄 Morning Previous: Update requested');
+};
+
+window.updateKhanaparaPreviousSubPage = function(monthIndex) {
+    console.log('🔄 Khanapara Previous: Update requested');
+};
+
+window.updateNightPreviousSubPage = function(monthIndex) {
+    console.log('🔄 Night Previous: Update requested');
+};
+
+window.updateShillongPreviousSubPage = function(monthIndex) {
+    console.log('🔄 Shillong Previous: Update requested');
+};
+
+// ============================================================
+// 🔥 সব প্রিভিয়াস পেজ আপডেট - মূল পেজ থেকে কল করার জন্য
+// ============================================================
+function updateAllPreviousPages(venueName) {
+    const currentMonth = new Date().getMonth();
+    
+    try {
+        if (venueName) {
+            const venueMap = {
+                'juwai teer': 'updateJuwaiPreviousSubPage',
+                'morning teer': 'updateMorningPreviousSubPage',
+                'khanapara teer': 'updateKhanaparaPreviousSubPage',
+                'night teer': 'updateNightPreviousSubPage',
+                'shillong teer': 'updateShillongPreviousSubPage'
+            };
+            
+            const funcName = venueMap[venueName];
+            if (funcName && typeof window[funcName] === 'function') {
+                window[funcName](currentMonth);
+                console.log(`✅ ${venueName} previous page updated!`);
+            }
+        } else {
+            if (typeof window.updateJuwaiPreviousSubPage === 'function') {
+                window.updateJuwaiPreviousSubPage(currentMonth);
+            }
+            if (typeof window.updateMorningPreviousSubPage === 'function') {
+                window.updateMorningPreviousSubPage(currentMonth);
+            }
+            if (typeof window.updateKhanaparaPreviousSubPage === 'function') {
+                window.updateKhanaparaPreviousSubPage(currentMonth);
+            }
+            if (typeof window.updateNightPreviousSubPage === 'function') {
+                window.updateNightPreviousSubPage(currentMonth);
+            }
+            if (typeof window.updateShillongPreviousSubPage === 'function') {
+                window.updateShillongPreviousSubPage(currentMonth);
+            }
+            console.log('✅ All previous pages updated!');
+        }
+    } catch(e) {
+        console.log('⚠️ Previous pages update error:', e);
+    }
+}
+
+// ============================================================
+// 🔥 Supabase রিয়েল-টাইম সাবস্ক্রিপশন
+// ============================================================
+function setupRealtimeSubscription() {
+    const channel = supabaseClient
+        .channel('teer_previous_results_changes')
+        .on(
+            'postgres_changes',
+            {
+                event: 'INSERT',
+                schema: 'public',
+                table: 'teer_previous_results'
+            },
+            (payload) => {
+                console.log('🔄 New result added! Updating previous pages...');
+                const newData = payload.new;
+                if (newData && newData.venue) {
+                    updateAllPreviousPages(newData.venue);
+                } else {
+                    updateAllPreviousPages();
+                }
+            }
+        )
+        .subscribe((status) => {
+            console.log('📡 Realtime subscription:', status);
+        });
+    
+    return channel;
+}
+
+// ============================================================
 // 🔥 IST TIME ZONE FIX
 // ============================================================
 function getTodayIST() {
@@ -1964,115 +2102,107 @@ function getNightDate() {
 }
 
 // ============================================================
-// 🔥 WAITING চেক
+// 🔥 WAITING চেক - সঠিক সময় অনুযায়ী
 // ============================================================
-function isNightWaiting(roundType) {
-    const now = new Date();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const totalMinutes = hours * 60 + minutes;
-    if (roundType === 'fr') {
-        return totalMinutes >= 1380 && totalMinutes < 1390;
-    } else if (roundType === 'sr') {
-        return totalMinutes >= 0 && totalMinutes < 10;
-    }
-    return false;
-}
-
 function isWaitingForVenue(venueId, roundType) {
     const now = new Date();
     const hours = now.getHours();
     const minutes = now.getMinutes();
-    const currentTime = hours + minutes/60;
-    if (venueId === 'night') return isNightWaiting(roundType);
-    if (venueId === 'morning') {
-        if (roundType === 'fr') return currentTime < 10.5;
-        if (roundType === 'sr') return currentTime < 11.5;
-    } else if (venueId === 'juwai') {
-        if (roundType === 'fr') return currentTime < 14;
-        if (roundType === 'sr') return currentTime < 15.5;
-    } else if (venueId === 'shillong' || venueId === 'khanapara') {
-        if (roundType === 'fr') return currentTime < 16;
-        if (roundType === 'sr') return currentTime < 17;
+    const totalMinutes = hours * 60 + minutes;
+    
+    const timings = {
+        shillong: { fr: 16.25 * 60, sr: 17.166 * 60 },
+        khanapara: { fr: 16.166 * 60, sr: 17.083 * 60 },
+        juwai: { fr: 14.5 * 60, sr: 15.25 * 60 },
+        morning: { fr: 10.5 * 60, sr: 11.5 * 60 },
+        night: { fr: 23.166 * 60, sr: 24.166 * 60 }
+    };
+    
+    const venueTime = timings[venueId];
+    if (!venueTime) return false;
+    
+    const roundTime = roundType === 'fr' ? venueTime.fr : venueTime.sr;
+    const waitingStart = roundTime - 10;
+    
+    if (venueId === 'night') {
+        if (roundType === 'fr') {
+            return totalMinutes >= (23 * 60) && totalMinutes < (23 * 60 + 10);
+        } else if (roundType === 'sr') {
+            return totalMinutes >= 0 && totalMinutes < 10;
+        }
     }
-    return false;
+    
+    return totalMinutes >= waitingStart && totalMinutes < roundTime;
 }
 
 // ============================================================
-// 📊 DREAM CHART DATA
+// ⏳ কাউন্টডাউন - সঠিক সময় অনুযায়ী
 // ============================================================
-const dreamChartData = [
-    { dream: "Snake / সাপ", direct: "05, 33, 77", house: "7", ending: "1" },
-    { dream: "Tiger / বাঘ", direct: "28, 44, 66", house: "3", ending: "9" },
-    { dream: "Lion / সিংহ", direct: "32, 55, 88", house: "8", ending: "4" },
-    { dream: "Elephant / হাতি", direct: "47, 70, 99", house: "6", ending: "0" },
-    { dream: "Horse / ঘোড়া", direct: "19, 41, 63", house: "2", ending: "4" },
-    { dream: "Dog / কুকুর", direct: "24, 46, 68", house: "6", ending: "9" },
-    { dream: "Cat / বিড়াল", direct: "18, 40, 62", house: "0", ending: "5" },
-    { dream: "Water / পানি", direct: "02, 24, 46", house: "1", ending: "3" },
-    { dream: "Fire / আগুন", direct: "03, 25, 47", house: "5", ending: "2" },
-    { dream: "Money / টাকা", direct: "22, 44, 66", house: "4", ending: "8" },
-    { dream: "Gold / সোনা", direct: "23, 45, 67", house: "7", ending: "6" },
-    { dream: "Moon / চাঁদ", direct: "15, 37, 59", house: "9", ending: "1" },
-    { dream: "Sun / সূর্য", direct: "08, 30, 52", house: "2", ending: "7" },
-    { dream: "Rain / বৃষ্টি", direct: "07, 29, 51", house: "8", ending: "3" },
-    { dream: "Bird / পাখি", direct: "12, 34, 56", house: "3", ending: "6" },
-    { dream: "Fish / মাছ", direct: "09, 31, 53", house: "1", ending: "4" }
-];
-
-function renderDreamChart() { 
-    let html = ''; 
-    dreamChartData.forEach(item => { 
-        html += `<tr><td style="padding:10px;"><strong>${item.dream}</strong></td><td style="padding:10px;">${item.direct}</td><td style="padding:10px;">${item.house}</td><td style="padding:10px;">${item.ending}</td>`; 
-    }); 
-    document.getElementById('dreamChartBody').innerHTML = html; 
+function startAllCountdowns() {
+    const venues = ['shillong', 'khanapara', 'juwai', 'morning', 'night'];
+    
+    setInterval(() => {
+        venues.forEach(venue => {
+            updateVenueCountdown(venue);
+        });
+    }, 1000);
 }
 
-function dreamToNum(t){ 
-    if(!t) return 24; 
-    let m={
-        "snake":5, "tiger":28, "lion":32, "elephant":47, "horse":19, "dog":24, "cat":18, 
-        "water":2, "fire":3, "money":22, "gold":23, "moon":15, "sun":8, "rain":7, 
-        "bird":12, "fish":9, "সাপ":5, "বাঘ":28, "সিংহ":32, "হাতি":47, "ঘোড়া":19, 
-        "কুকুর":24, "বিড়াল":18, "পানি":2, "আগুন":3, "টাকা":22, "সোনা":23, 
-        "চাঁদ":15, "সূর্য":8, "বৃষ্টি":7, "পাখি":12, "মাছ":9
-    }; 
-    let l=t.toLowerCase(); 
-    for(let [k,v] of Object.entries(m)) if(l.includes(k)) return v; 
-    let h=0; 
-    for(let i=0;i<l.length;i++) h=((h<<5)-h)+l.charCodeAt(i); 
-    return Math.abs(h)%100||24; 
+function updateVenueCountdown(venueId) {
+    const el = document.getElementById(`countdown_${venueId}`);
+    if (!el) return;
+    
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const totalMinutes = hours * 60 + minutes;
+    
+    const timings = {
+        shillong: { fr: 16.25 * 60, sr: 17.166 * 60 },
+        khanapara: { fr: 16.166 * 60, sr: 17.083 * 60 },
+        juwai: { fr: 14.5 * 60, sr: 15.25 * 60 },
+        morning: { fr: 10.5 * 60, sr: 11.5 * 60 },
+        night: { fr: 23.166 * 60, sr: 24.166 * 60 }
+    };
+    
+    let nextTime = null;
+    const venueTimes = timings[venueId];
+    if (!venueTimes) return;
+    
+    if (totalMinutes < venueTimes.fr) {
+        nextTime = venueTimes.fr;
+    } else if (totalMinutes < venueTimes.sr) {
+        nextTime = venueTimes.sr;
+    } else {
+        nextTime = venueTimes.fr + (24 * 60);
+    }
+    
+    let diff = nextTime - totalMinutes;
+    if (diff < 0) diff += 24 * 60;
+    
+    const hrs = Math.floor(diff / 60);
+    const mins = Math.floor(diff % 60);
+    const secs = Math.floor((diff % 1) * 60);
+    
+    el.textContent = `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 }
 
-function getHENumbers(n){ 
-    let x=n%100; 
-    return { 
-        house:[((x*3+7)%10).toString(),((x*5+11)%10).toString()], 
-        ending:[((x*9+17)%10).toString(),((x*11+23)%10).toString()] 
-    }; 
-}
-
 // ============================================================
-// 🔥 গ্লোবাল ভেরিয়েবল
-// ============================================================
-let globalLiveData = {};
-let globalCommonData = null;
-
-// ============================================================
-// 🔥 লাইভ রেজাল্ট লোড
+// 🔥 লাইভ রেজাল্ট লোড (আগের দিনের ডেটা দেখাবে যখন WAITING নয়)
 // ============================================================
 async function loadTodayResults() {
     try {
         const today = getTodayIST();
         const nightDate = getNightDate();
-        console.log('📅 Today (IST):', today);
-        console.log('🌙 Night Date:', nightDate);
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        const yesterdayStr = yesterday.toISOString().split('T')[0];
         
         const venues = ['shillong', 'khanapara', 'juwai', 'morning'];
         const liveData = {};
         
         for (const venue of venues) {
-            const { data, error } = await supabaseClient
+            let { data, error } = await supabaseClient
                 .from('teer_live_results')
                 .select('*')
                 .eq('venue', venue)
@@ -2083,6 +2213,22 @@ async function loadTodayResults() {
                     fr: data[0].fr_result || '--',
                     sr: data[0].sr_result || '--'
                 };
+            } else {
+                const { data: prevData, error: prevError } = await supabaseClient
+                    .from('teer_live_results')
+                    .select('*')
+                    .eq('venue', venue)
+                    .eq('result_date', yesterdayStr)
+                    .limit(1);
+                    
+                if (!prevError && prevData && prevData.length > 0) {
+                    liveData[venue] = {
+                        fr: prevData[0].fr_result || '--',
+                        sr: prevData[0].sr_result || '--'
+                    };
+                } else {
+                    liveData[venue] = { fr: '--', sr: '--' };
+                }
             }
         }
         
@@ -2097,11 +2243,12 @@ async function loadTodayResults() {
                 fr: nightData[0].fr_result || '--',
                 sr: nightData[0].sr_result || '--'
             };
+        } else {
+            liveData['night'] = { fr: '--', sr: '--' };
         }
         
         globalLiveData = liveData;
         renderTodayResults(liveData, today, nightDate);
-        updateAllSubPages(liveData);
         
     } catch(err) {
         console.error('❌ Error loading live results:', err);
@@ -2111,11 +2258,11 @@ async function loadTodayResults() {
 
 function renderTodayResults(liveData, todayDate, nightDate) {
     const venues = [
-        { id: 'shillong', name: 'SHILLONG TEER', time1: '4:00 PM', time2: '5:00 PM', date: todayDate, 
+        { id: 'shillong', name: 'SHILLONG TEER', time1: '4:15 PM', time2: '5:10 PM', date: todayDate, 
           prevLink: 'shillong-previous.html', commonLink: 'shillong-common.html', commonClass: 'btn-common-small' },
-        { id: 'khanapara', name: 'KHANAPARA TEER', time1: '4:00 PM', time2: '5:00 PM', date: todayDate,
+        { id: 'khanapara', name: 'KHANAPARA TEER', time1: '4:10 PM', time2: '5:05 PM', date: todayDate,
           prevLink: 'khanapara-previous.html', commonLink: 'khanapara-common.html', commonClass: 'btn-common-small-khanapara' },
-        { id: 'juwai', name: 'JUWAI TEER', time1: '2:00 PM', time2: '3:30 PM', date: todayDate,
+        { id: 'juwai', name: 'JUWAI TEER', time1: '2:30 PM', time2: '3:15 PM', date: todayDate,
           prevLink: 'juwai-previous.html', commonLink: 'juwai-common.html', commonClass: 'btn-common-small-juwai' },
         { id: 'morning', name: 'MORNING TEER', time1: '10:30 AM', time2: '11:30 AM', date: todayDate,
           prevLink: 'morning-previous.html', commonLink: 'morning-common.html', commonClass: 'btn-common-small-morning' },
@@ -2146,8 +2293,17 @@ function renderTodayResults(liveData, todayDate, nightDate) {
         const badgeClass = hasData ? 'live-result-badge' : 'flash-waiting';
         const badgeText = hasData ? '🔴 LIVE' : '⏳ WAITING';
         
+        const countdownId = `countdown_${v.id}`;
+        
         html += `
             <div class="result-card">
+                <div style="background: #0a3d6b; border-radius: 8px; padding: 0.2rem 0.5rem; margin-bottom: 0.4rem; text-align: center; border: 1px solid #ffcc00;">
+                    <div style="color: #ffcc00; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.5px;">
+                        ⏳ NEXT ROUND IN: 
+                        <span id="${countdownId}" style="font-weight: 800; color: #ffffff; background: #000000; padding: 0.05rem 0.5rem; border-radius: 4px; font-size: 0.7rem;">--:--:--</span>
+                    </div>
+                </div>
+                
                 <div class="venue-header">
                     <span class="venue-name">🎯 ${v.name}</span>
                 </div>
@@ -2174,19 +2330,15 @@ function renderTodayResults(liveData, todayDate, nightDate) {
     });
     
     grid.innerHTML = html;
-}
-
-function updateAllSubPages(liveData) {
-    // This function is for subpages - keeping as is
+    setTimeout(startAllCountdowns, 500);
 }
 
 // ============================================================
-// 🔥 কমন নাম্বার লোড
+// 🔥 কমন নাম্বার লোড (Supabase থেকে Real Data)
 // ============================================================
 async function loadCommonNumbers() {
     try {
         const today = getTodayIST();
-        console.log('📅 Loading Common Numbers for:', today);
         
         const { data, error } = await supabaseClient
             .from('teer_common_numbers')
@@ -2199,7 +2351,6 @@ async function loadCommonNumbers() {
         
         if (!error && data && data.length > 0) {
             const commonData = data[0];
-            globalCommonData = commonData;
             renderCommonNumbersFromDB(commonData);
         } else {
             renderCommonNumbers();
@@ -2214,58 +2365,45 @@ async function loadCommonNumbers() {
 function renderCommonNumbersFromDB(data) {
     const container = document.getElementById('commonTablesContainer');
     if (!container) return;
-    renderCommonNumbers();
-}
-
-function renderCommonNumbers() {
-    const container = document.getElementById('commonTablesContainer');
-    if (!container) return;
-    
-    const defaultData = {
-        shillong_fr_direct: '47, 68, 23',
-        shillong_fr_house: '4, 6',
-        shillong_fr_ending: '7, 8',
-        shillong_sr_direct: '86, 15, 70',
-        shillong_sr_house: '8, 1',
-        shillong_sr_ending: '6, 5',
-        khanapara_fr_direct: '35, 72, 19',
-        khanapara_fr_house: '3, 7',
-        khanapara_fr_ending: '5, 2',
-        khanapara_sr_direct: '64, 91, 28',
-        khanapara_sr_house: '6, 9',
-        khanapara_sr_ending: '4, 1',
-        juwai_fr_direct: '52, 77, 31',
-        juwai_fr_house: '5, 7',
-        juwai_fr_ending: '2, 1',
-        juwai_sr_direct: '88, 43, 66',
-        juwai_sr_house: '8, 4',
-        juwai_sr_ending: '8, 3'
-    };
     
     const venues = [
         { id: 'shillong', name: 'SHILLONG TEER' },
         { id: 'khanapara', name: 'KHANAPARA TEER' },
-        { id: 'juwai', name: 'JUWAI TEER' }
+        { id: 'juwai', name: 'JUWAI TEER' },
+        { id: 'morning', name: 'MORNING TEER' },
+        { id: 'night', name: 'NIGHT TEER' }
     ];
     
     let html = '';
     venues.forEach(venue => {
         const v = venue.id;
+        const frDirect = data[`${v}_fr_direct`] || '--';
+        const frHouse = data[`${v}_fr_house`] || '--';
+        const frEnding = data[`${v}_fr_ending`] || '--';
+        const srDirect = data[`${v}_sr_direct`] || '--';
+        const srHouse = data[`${v}_sr_house`] || '--';
+        const srEnding = data[`${v}_sr_ending`] || '--';
+        
+        let time1 = '4:00 PM', time2 = '5:00 PM';
+        if (v === 'morning') { time1 = '10:30 AM'; time2 = '11:30 AM'; }
+        else if (v === 'juwai') { time1 = '2:30 PM'; time2 = '3:15 PM'; }
+        else if (v === 'night') { time1 = '11:10 PM'; time2 = '12:10 AM'; }
+        
         html += `
             <div class="common-venue-card">
                 <div class="common-venue-title">🎯 ${venue.name} - COMMON NUMBERS</div>
                 <table class="common-table">
                     <thead><tr><th>Round</th><th>Direct Numbers</th><th>House Digit</th><th>Ending Digit</th></tr></thead>
                     <tbody>
-                        <tr><td class="round-cell">FR</td>
-                            <td><span class="direct-num">${defaultData[`${v}_fr_direct`] || '--'}</span></td>
-                            <td><span class="house-num">${defaultData[`${v}_fr_house`] || '--'}</span></td>
-                            <td><span class="ending-num">${defaultData[`${v}_fr_ending`] || '--'}</span></td>
+                        <tr><td class="round-cell">FR (${time1})</td>
+                            <td><span class="direct-num">${frDirect}</span></td>
+                            <td><span class="house-num">${frHouse}</span></td>
+                            <td><span class="ending-num">${frEnding}</span></td>
                         </tr>
-                        <tr><td class="round-cell">SR</td>
-                            <td><span class="direct-num">${defaultData[`${v}_sr_direct`] || '--'}</span></td>
-                            <td><span class="house-num">${defaultData[`${v}_sr_house`] || '--'}</span></td>
-                            <td><span class="ending-num">${defaultData[`${v}_sr_ending`] || '--'}</span></td>
+                        <tr><td class="round-cell">SR (${time2})</td>
+                            <td><span class="direct-num">${srDirect}</span></td>
+                            <td><span class="house-num">${srHouse}</span></td>
+                            <td><span class="ending-num">${srEnding}</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -2273,6 +2411,26 @@ function renderCommonNumbers() {
         `;
     });
     container.innerHTML = html;
+}
+
+function renderCommonNumbers() {
+    const container = document.getElementById('commonTablesContainer');
+    if (!container) return;
+    
+    const defaultData = {
+        shillong_fr_direct: '47, 68', shillong_fr_house: '4, 6', shillong_fr_ending: '7, 8',
+        shillong_sr_direct: '86, 15', shillong_sr_house: '8, 1', shillong_sr_ending: '6, 5',
+        khanapara_fr_direct: '35, 72', khanapara_fr_house: '3, 7', khanapara_fr_ending: '5, 2',
+        khanapara_sr_direct: '64, 91', khanapara_sr_house: '6, 9', khanapara_sr_ending: '4, 1',
+        juwai_fr_direct: '52, 77', juwai_fr_house: '5, 7', juwai_fr_ending: '2, 1',
+        juwai_sr_direct: '88, 43', juwai_sr_house: '8, 4', juwai_sr_ending: '8, 3',
+        morning_fr_direct: '52, 77', morning_fr_house: '5, 7', morning_fr_ending: '2, 1',
+        morning_sr_direct: '88, 43', morning_sr_house: '8, 4', morning_sr_ending: '8, 3',
+        night_fr_direct: '52, 77', night_fr_house: '5, 7', night_fr_ending: '2, 1',
+        night_sr_direct: '88, 43', night_sr_house: '8, 4', night_sr_ending: '8, 3'
+    };
+    
+    renderCommonNumbersFromDB(defaultData);
 }
 
 // ============================================================
@@ -2455,43 +2613,6 @@ function subscribeNewsletter() {
 }
 
 // ============================================================
-// 🔥 সাবপেজ আপডেট ফাংশন - মূল পেজ থেকে কল করার জন্য
-// ============================================================
-function updateAllSubPages() {
-    console.log('🔄 Updating all subpages...');
-    
-    try {
-        if (typeof window.updateShillongPreviousSubPage === 'function') {
-            window.updateShillongPreviousSubPage();
-        }
-    } catch(e) {}
-    
-    try {
-        if (typeof window.updateKhanaparaPreviousSubPage === 'function') {
-            window.updateKhanaparaPreviousSubPage();
-        }
-    } catch(e) {}
-    
-    try {
-        if (typeof window.updateJuwaiPreviousSubPage === 'function') {
-            window.updateJuwaiPreviousSubPage();
-        }
-    } catch(e) {}
-    
-    try {
-        if (typeof window.updateMorningPreviousSubPage === 'function') {
-            window.updateMorningPreviousSubPage();
-        }
-    } catch(e) {}
-    
-    try {
-        if (typeof window.updateNightPreviousSubPage === 'function') {
-            window.updateNightPreviousSubPage();
-        }
-    } catch(e) {}
-}
-
-// ============================================================
 // 📌 DOMContentLoaded
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
@@ -2501,9 +2622,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     setInterval(loadTodayResults, 10000);
     setInterval(loadCommonNumbers, 30000);
-    
-    // 🔥 সাবপেজ আপডেট - প্রতি 30 সেকেন্ড পর পর
-    setInterval(updateAllSubPages, 30000);
     
     document.getElementById('monthSelect').value = '5';
     displayMonthResults(5);
@@ -2558,6 +2676,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     console.log('✅ All done!');
+    
+    // 🔥 অটো-আপডেট সিস্টেম শুরু করুন
+    setupRealtimeSubscription();
+    console.log('✅ Auto-update system initialized');
 });
 
 function closeModals() {
@@ -2569,7 +2691,64 @@ function showBangla() { alert("বাংলা ভার্সন সক্র�
 function showEnglish() { alert("English version active. Site is fully bilingual."); }
 
 console.log('✅ All functions loaded successfully!');
-console.log('🔄 Subpage auto-update enabled (every 30 seconds)');
+console.log('🔄 Auto-update system enabled for previous results!');
+
+// ============================================================
+// 📊 DREAM CHART DATA
+// ============================================================
+const dreamChartData = [
+    { dream: "Snake / সাপ", direct: "05, 33, 77", house: "7", ending: "1" },
+    { dream: "Tiger / বাঘ", direct: "28, 44, 66", house: "3", ending: "9" },
+    { dream: "Lion / সিংহ", direct: "32, 55, 88", house: "8", ending: "4" },
+    { dream: "Elephant / হাতি", direct: "47, 70, 99", house: "6", ending: "0" },
+    { dream: "Horse / ঘোড়া", direct: "19, 41, 63", house: "2", ending: "4" },
+    { dream: "Dog / কুকুর", direct: "24, 46, 68", house: "6", ending: "9" },
+    { dream: "Cat / বিড়াল", direct: "18, 40, 62", house: "0", ending: "5" },
+    { dream: "Water / পানি", direct: "02, 24, 46", house: "1", ending: "3" },
+    { dream: "Fire / আগুন", direct: "03, 25, 47", house: "5", ending: "2" },
+    { dream: "Money / টাকা", direct: "22, 44, 66", house: "4", ending: "8" },
+    { dream: "Gold / সোনা", direct: "23, 45, 67", house: "7", ending: "6" },
+    { dream: "Moon / চাঁদ", direct: "15, 37, 59", house: "9", ending: "1" },
+    { dream: "Sun / সূর্য", direct: "08, 30, 52", house: "2", ending: "7" },
+    { dream: "Rain / বৃষ্টি", direct: "07, 29, 51", house: "8", ending: "3" },
+    { dream: "Bird / পাখি", direct: "12, 34, 56", house: "3", ending: "6" },
+    { dream: "Fish / মাছ", direct: "09, 31, 53", house: "1", ending: "4" }
+];
+
+function renderDreamChart() { 
+    let html = ''; 
+    dreamChartData.forEach(item => { 
+        html += `<tr><td style="padding:10px;"><strong>${item.dream}</strong></td><td style="padding:10px;">${item.direct}</td><td style="padding:10px;">${item.house}</td><td style="padding:10px;">${item.ending}</td></tr>`;
+    }); 
+    document.getElementById('dreamChartBody').innerHTML = html; 
+}
+
+function dreamToNum(t){ 
+    if(!t) return 24; 
+    let m={
+        "snake":5, "tiger":28, "lion":32, "elephant":47, "horse":19, "dog":24, "cat":18, 
+        "water":2, "fire":3, "money":22, "gold":23, "moon":15, "sun":8, "rain":7, 
+        "bird":12, "fish":9, "সাপ":5, "বাঘ":28, "সিংহ":32, "হাতি":47, "ঘোড়া":19, 
+        "কুকুর":24, "বিড়াল":18, "পানি":2, "আগুন":3, "টাকা":22, "সোনা":23, 
+        "চাঁদ":15, "সূর্য":8, "বৃষ্টি":7, "পাখি":12, "মাছ":9
+    }; 
+    let l=t.toLowerCase(); 
+    for(let [k,v] of Object.entries(m)) if(l.includes(k)) return v; 
+    let h=0; 
+    for(let i=0;i<l.length;i++) h=((h<<5)-h)+l.charCodeAt(i); 
+    return Math.abs(h)%100||24; 
+}
+
+function getHENumbers(n){ 
+    let x=n%100; 
+    return { 
+        house:[((x*3+7)%10).toString(),((x*5+11)%10).toString()], 
+        ending:[((x*9+17)%10).toString(),((x*11+23)%10).toString()] 
+    }; 
+}
+
+let globalLiveData = {};
+let globalCommonData = null;
 </script>
 
 <!-- Monetag Popunder Ad Code -->
