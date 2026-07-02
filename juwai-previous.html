@@ -100,7 +100,7 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
 });
 
 // ============================================================
-// 🔥 Load Previous Results
+// 🔥 Load Previous Results from Supabase
 // ============================================================
 async function loadPreviousResultsFromSupabase(monthIndex) {
     const tbody = document.getElementById('resultsTableBody');
@@ -112,6 +112,7 @@ async function loadPreviousResultsFromSupabase(monthIndex) {
         const firstDay = `${year}-${month}-01`;
         const lastDay = `${year}-${month}-${new Date(year, monthIndex + 1, 0).getDate()}`;
         
+        // Query ALL results for the selected month, ordered by date descending
         const { data, error } = await supabaseClient
             .from('teer_previous_results')
             .select('*')
@@ -123,6 +124,7 @@ async function loadPreviousResultsFromSupabase(monthIndex) {
         let html = '';
         
         if (!error && data && data.length > 0) {
+            // Show all results for the month
             data.forEach(row => {
                 const fr = row.fr_result || '--';
                 const sr = row.sr_result || '--';
@@ -142,31 +144,59 @@ async function loadPreviousResultsFromSupabase(monthIndex) {
         tbody.innerHTML = html;
         
     } catch(err) {
-        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8a7a6a;">No data available</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8a7a6a;">Error loading data. Please try again.</td></tr>`;
     }
 }
 
+// ============================================================
+// 🔥 Setup Month Selector
+// ============================================================
 function setupMonthSelector() {
     const select = document.getElementById('monthSelect');
     if (select) {
+        // Set default to June 2026
         select.value = '5';
         loadPreviousResultsFromSupabase(5);
         
+        // Load data when month changes
         select.addEventListener('change', function() {
             loadPreviousResultsFromSupabase(parseInt(this.value));
         });
     }
 }
 
+// ============================================================
+// 🔥 গ্লোবাল ফাংশন - মূল পেজ থেকে কল করার জন্য
+// ============================================================
+window.updateJuwaiPreviousSubPage = function(monthIndex) {
+    if (monthIndex !== undefined) {
+        const select = document.getElementById('monthSelect');
+        if (select) {
+            select.value = monthIndex.toString();
+            loadPreviousResultsFromSupabase(monthIndex);
+        }
+    } else {
+        loadPreviousResultsFromSupabase(5);
+    }
+};
+
+// ============================================================
+// 🔥 AUTO REFRESH - প্রতি ১০ সেকেন্ডে আপডেট
+// ============================================================
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('✅ Juwai Teer Previous Results Page Loaded');
     setupMonthSelector();
+    
+    // প্রতি ১০ সেকেন্ডে Auto Refresh
     setInterval(function() {
         const select = document.getElementById('monthSelect');
         if (select) {
             loadPreviousResultsFromSupabase(parseInt(select.value));
         }
-    }, 30000);
+    }, 10000);
 });
+
+console.log('✅ Juwai Teer Previous Results functions loaded successfully!');
 </script>
 </body>
 </html>
