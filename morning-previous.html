@@ -59,7 +59,7 @@
                 <option value="2">March 2026</option>
                 <option value="3">April 2026</option>
                 <option value="4">May 2026</option>
-                <option value="5" selected>June 2026</option>
+                <option value="5">June 2026</option>
                 <option value="6">July 2026</option>
                 <option value="7">August 2026</option>
                 <option value="8">September 2026</option>
@@ -86,16 +86,24 @@ const SUPABASE_URL = 'https://bwjjqidmeooyojjvtqjs.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable__qokEKHuO9i1LVn24Hxp3g_4MZQ7wIg';
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+function getCurrentMonthIndex() {
+    const now = new Date();
+    const currentMonth = now.getMonth();
+    const currentYear = now.getFullYear();
+    if (currentYear === 2026 && currentMonth >= 0 && currentMonth <= 11) {
+        return currentMonth;
+    }
+    return 5;
+}
+
 async function loadPreviousResultsFromSupabase(monthIndex) {
     const tbody = document.getElementById('resultsTableBody');
     if (!tbody) return;
-    
     try {
         const year = 2026;
         const month = String(monthIndex + 1).padStart(2, '0');
         const firstDay = `${year}-${month}-01`;
         const lastDay = `${year}-${month}-${new Date(year, monthIndex + 1, 0).getDate()}`;
-        
         const { data, error } = await supabaseClient
             .from('teer_previous_results')
             .select('*')
@@ -103,9 +111,7 @@ async function loadPreviousResultsFromSupabase(monthIndex) {
             .gte('result_date', firstDay)
             .lte('result_date', lastDay)
             .order('result_date', { ascending: false });
-            
         let html = '';
-        
         if (!error && data && data.length > 0) {
             data.forEach(row => {
                 const fr = row.fr_result || '--';
@@ -122,9 +128,7 @@ async function loadPreviousResultsFromSupabase(monthIndex) {
             const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             html = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8a7a6a;">${monthNames[monthIndex]} 2026 - No data available</td></tr>`;
         }
-        
         tbody.innerHTML = html;
-        
     } catch(err) {
         tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8a7a6a;">No data available</td></tr>`;
     }
@@ -133,18 +137,15 @@ async function loadPreviousResultsFromSupabase(monthIndex) {
 function setupMonthSelector() {
     const select = document.getElementById('monthSelect');
     if (select) {
-        select.value = '5';
-        loadPreviousResultsFromSupabase(5);
-        
+        const currentMonth = getCurrentMonthIndex();
+        select.value = currentMonth.toString();
+        loadPreviousResultsFromSupabase(currentMonth);
         select.addEventListener('change', function() {
             loadPreviousResultsFromSupabase(parseInt(this.value));
         });
     }
 }
 
-// ============================================================
-// 🔥 গ্লোবাল ফাংশন - মূল পেজ থেকে কল করার জন্য
-// ============================================================
 window.updateMorningPreviousSubPage = function(monthIndex) {
     if (monthIndex !== undefined) {
         const select = document.getElementById('monthSelect');
@@ -153,18 +154,14 @@ window.updateMorningPreviousSubPage = function(monthIndex) {
             loadPreviousResultsFromSupabase(monthIndex);
         }
     } else {
-        loadPreviousResultsFromSupabase(5);
+        const currentMonth = getCurrentMonthIndex();
+        loadPreviousResultsFromSupabase(currentMonth);
     }
 };
 
-// ============================================================
-// 🔥 AUTO REFRESH - প্রতি ১০ সেকেন্ডে আপডেট
-// ============================================================
 document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ Morning Previous Results Page Loaded');
     setupMonthSelector();
-    
-    // প্রতি ১০ সেকেন্ডে Auto Refresh
     setInterval(function() {
         const select = document.getElementById('monthSelect');
         if (select) {
@@ -172,7 +169,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 10000);
 });
-
 console.log('✅ Morning Previous Results functions loaded successfully!');
 </script>
 </body>
