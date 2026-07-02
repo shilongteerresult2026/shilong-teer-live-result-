@@ -142,15 +142,38 @@ function setupMonthSelector() {
     }
 }
 
+// ============================================================
+// 🔥 গ্লোবাল ফাংশন - মূল পেজ থেকে কল করার জন্য
+// ============================================================
+window.updateNightPreviousSubPage = function(monthIndex) {
+    if (monthIndex !== undefined) {
+        const select = document.getElementById('monthSelect');
+        if (select) {
+            select.value = monthIndex.toString();
+            loadPreviousResultsFromSupabase(monthIndex);
+        }
+    } else {
+        loadPreviousResultsFromSupabase(5);
+    }
+};
+
+// ============================================================
+// 🔥 AUTO REFRESH - প্রতি ১০ সেকেন্ডে আপডেট
+// ============================================================
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('✅ Night Previous Results Page Loaded');
     setupMonthSelector();
+    
+    // প্রতি ১০ সেকেন্ডে Auto Refresh
     setInterval(function() {
         const select = document.getElementById('monthSelect');
         if (select) {
             loadPreviousResultsFromSupabase(parseInt(select.value));
         }
-    }, 30000);
+    }, 10000);
 });
+
+console.log('✅ Night Previous Results functions loaded successfully!');
 </script>
 </body>
 </html>
