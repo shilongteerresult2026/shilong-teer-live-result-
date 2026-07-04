@@ -2027,8 +2027,10 @@ const SUPABASE_ANON_KEY = 'sb_publishable__qokEKHuO9i1LVn24Hxp3g_4MZQ7wIg';
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ============================================================
-// 🔥 শুধু Shillong Teer Previous Results
+// 🔥 সব ভেন্যুর জন্য Previous Results Load ফাংশন
 // ============================================================
+
+// 1. Shillong Teer Previous Results
 async function loadShillongPrevious(monthIndex) {
     const tbody = document.getElementById('resultsTableShillong');
     if (!tbody) return;
@@ -2053,12 +2055,182 @@ async function loadShillongPrevious(monthIndex) {
             data.forEach(row => {
                 const fr = row.fr_result || '--';
                 const sr = row.sr_result || '--';
-                const frColor = (fr !== '--' && fr !== 'XX') ? '#0d6b3d' : '#8a9aaa';
-                const srColor = (sr !== '--' && sr !== 'XX') ? '#0a3d6b' : '#8a9aaa';
                 html += `<tr>
                     <td style="padding:8px; font-weight:700; color:#0d0a0a;">${row.result_date}</td>
-                    <td style="padding:8px; font-weight:${(fr !== '--' && fr !== 'XX') ? '700' : '400'}; color:${frColor};">${fr}</td>
-                    <td style="padding:8px; font-weight:${(sr !== '--' && sr !== 'XX') ? '700' : '400'}; color:${srColor};">${sr}</td>
+                    <td style="padding:8px; font-weight:700; color:#0d6b3d;">${fr}</td>
+                    <td style="padding:8px; font-weight:700; color:#0a3d6b;">${sr}</td>
+                </tr>`;
+            });
+        } else {
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            html = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8a7a6a;">${monthNames[monthIndex]} 2026 - No data available</td></tr>`;
+        }
+        
+        tbody.innerHTML = html;
+        
+    } catch(err) {
+        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8a7a6a;">No data available</td></tr>`;
+    }
+}
+
+// 2. Khanapara Teer Previous Results
+async function loadKhanaparaPrevious(monthIndex) {
+    const tbody = document.getElementById('resultsTableKhanapara');
+    if (!tbody) return;
+    
+    try {
+        const year = 2026;
+        const month = String(monthIndex + 1).padStart(2, '0');
+        const firstDay = `${year}-${month}-01`;
+        const lastDay = `${year}-${month}-${new Date(year, monthIndex + 1, 0).getDate()}`;
+        
+        const { data, error } = await supabaseClient
+            .from('teer_previous_results')
+            .select('*')
+            .eq('venue', 'khanapara')
+            .gte('result_date', firstDay)
+            .lte('result_date', lastDay)
+            .order('result_date', { ascending: false });
+            
+        let html = '';
+        
+        if (!error && data && data.length > 0) {
+            data.forEach(row => {
+                const fr = row.fr_result || '--';
+                const sr = row.sr_result || '--';
+                html += `<tr>
+                    <td style="padding:8px; font-weight:700; color:#0d0a0a;">${row.result_date}</td>
+                    <td style="padding:8px; font-weight:700; color:#0a3d6b;">${fr}</td>
+                    <td style="padding:8px; font-weight:700; color:#0a3d6b;">${sr}</td>
+                </tr>`;
+            });
+        } else {
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            html = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8a7a6a;">${monthNames[monthIndex]} 2026 - No data available</td></tr>`;
+        }
+        
+        tbody.innerHTML = html;
+        
+    } catch(err) {
+        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8a7a6a;">No data available</td></tr>`;
+    }
+}
+
+// 3. Juwai Teer Previous Results
+async function loadJuwaiPrevious(monthIndex) {
+    const tbody = document.getElementById('resultsTableJuwai');
+    if (!tbody) return;
+    
+    try {
+        const year = 2026;
+        const month = String(monthIndex + 1).padStart(2, '0');
+        const firstDay = `${year}-${month}-01`;
+        const lastDay = `${year}-${month}-${new Date(year, monthIndex + 1, 0).getDate()}`;
+        
+        const { data, error } = await supabaseClient
+            .from('teer_previous_results')
+            .select('*')
+            .eq('venue', 'juwai')
+            .gte('result_date', firstDay)
+            .lte('result_date', lastDay)
+            .order('result_date', { ascending: false });
+            
+        let html = '';
+        
+        if (!error && data && data.length > 0) {
+            data.forEach(row => {
+                const fr = row.fr_result || '--';
+                const sr = row.sr_result || '--';
+                html += `<tr>
+                    <td style="padding:8px; font-weight:700; color:#0d0a0a;">${row.result_date}</td>
+                    <td style="padding:8px; font-weight:700; color:#0a2a5a;">${fr}</td>
+                    <td style="padding:8px; font-weight:700; color:#0a2a5a;">${sr}</td>
+                </tr>`;
+            });
+        } else {
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            html = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8a7a6a;">${monthNames[monthIndex]} 2026 - No data available</td></tr>`;
+        }
+        
+        tbody.innerHTML = html;
+        
+    } catch(err) {
+        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8a7a6a;">No data available</td></tr>`;
+    }
+}
+
+// 4. Morning Teer Previous Results
+async function loadMorningPrevious(monthIndex) {
+    const tbody = document.getElementById('resultsTableMorning');
+    if (!tbody) return;
+    
+    try {
+        const year = 2026;
+        const month = String(monthIndex + 1).padStart(2, '0');
+        const firstDay = `${year}-${month}-01`;
+        const lastDay = `${year}-${month}-${new Date(year, monthIndex + 1, 0).getDate()}`;
+        
+        const { data, error } = await supabaseClient
+            .from('teer_previous_results')
+            .select('*')
+            .eq('venue', 'morning')
+            .gte('result_date', firstDay)
+            .lte('result_date', lastDay)
+            .order('result_date', { ascending: false });
+            
+        let html = '';
+        
+        if (!error && data && data.length > 0) {
+            data.forEach(row => {
+                const fr = row.fr_result || '--';
+                const sr = row.sr_result || '--';
+                html += `<tr>
+                    <td style="padding:8px; font-weight:700; color:#0d0a0a;">${row.result_date}</td>
+                    <td style="padding:8px; font-weight:700; color:#cc9900;">${fr}</td>
+                    <td style="padding:8px; font-weight:700; color:#cc9900;">${sr}</td>
+                </tr>`;
+            });
+        } else {
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            html = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8a7a6a;">${monthNames[monthIndex]} 2026 - No data available</td></tr>`;
+        }
+        
+        tbody.innerHTML = html;
+        
+    } catch(err) {
+        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:20px;color:#8a7a6a;">No data available</td></tr>`;
+    }
+}
+
+// 5. Night Teer Previous Results
+async function loadNightPrevious(monthIndex) {
+    const tbody = document.getElementById('resultsTableNight');
+    if (!tbody) return;
+    
+    try {
+        const year = 2026;
+        const month = String(monthIndex + 1).padStart(2, '0');
+        const firstDay = `${year}-${month}-01`;
+        const lastDay = `${year}-${month}-${new Date(year, monthIndex + 1, 0).getDate()}`;
+        
+        const { data, error } = await supabaseClient
+            .from('teer_previous_results')
+            .select('*')
+            .eq('venue', 'night')
+            .gte('result_date', firstDay)
+            .lte('result_date', lastDay)
+            .order('result_date', { ascending: false });
+            
+        let html = '';
+        
+        if (!error && data && data.length > 0) {
+            data.forEach(row => {
+                const fr = row.fr_result || '--';
+                const sr = row.sr_result || '--';
+                html += `<tr>
+                    <td style="padding:8px; font-weight:700; color:#0d0a0a;">${row.result_date}</td>
+                    <td style="padding:8px; font-weight:700; color:#3d2a2a;">${fr}</td>
+                    <td style="padding:8px; font-weight:700; color:#3d2a2a;">${sr}</td>
                 </tr>`;
             });
         } else {
@@ -2074,12 +2246,12 @@ async function loadShillongPrevious(monthIndex) {
 }
 
 // ============================================================
-// 🔥 Setup - শুধু Shillong
+// 🔥 সব ভেন্যুর Selector Setup
 // ============================================================
 function setupShillongSelector() {
     const select = document.getElementById('monthSelectShillong');
     if (select) {
-        const currentMonth = 6; // July 2026
+        const currentMonth = 6;
         select.value = currentMonth.toString();
         loadShillongPrevious(currentMonth);
         select.addEventListener('change', function() {
@@ -2088,21 +2260,51 @@ function setupShillongSelector() {
     }
 }
 
-// ============================================================
-// 🔥 গ্লোবাল ফাংশন - প্রিভিয়াস পেজ আপডেটের জন্য
-// ============================================================
-window.updateShillongPreviousSubPage = function(monthIndex) {
-    if (monthIndex !== undefined) {
-        const select = document.getElementById('monthSelectShillong');
-        if (select) {
-            select.value = monthIndex.toString();
-            loadShillongPrevious(monthIndex);
-        }
-    } else {
+function setupAllSelectors() {
+    // Khanapara
+    const selectKhanapara = document.getElementById('monthSelectKhanapara');
+    if (selectKhanapara) {
         const currentMonth = 6;
-        loadShillongPrevious(currentMonth);
+        selectKhanapara.value = currentMonth.toString();
+        loadKhanaparaPrevious(currentMonth);
+        selectKhanapara.addEventListener('change', function() {
+            loadKhanaparaPrevious(parseInt(this.value));
+        });
     }
-};
+    
+    // Juwai
+    const selectJuwai = document.getElementById('monthSelectJuwai');
+    if (selectJuwai) {
+        const currentMonth = 6;
+        selectJuwai.value = currentMonth.toString();
+        loadJuwaiPrevious(currentMonth);
+        selectJuwai.addEventListener('change', function() {
+            loadJuwaiPrevious(parseInt(this.value));
+        });
+    }
+    
+    // Morning
+    const selectMorning = document.getElementById('monthSelectMorning');
+    if (selectMorning) {
+        const currentMonth = 6;
+        selectMorning.value = currentMonth.toString();
+        loadMorningPrevious(currentMonth);
+        selectMorning.addEventListener('change', function() {
+            loadMorningPrevious(parseInt(this.value));
+        });
+    }
+    
+    // Night
+    const selectNight = document.getElementById('monthSelectNight');
+    if (selectNight) {
+        const currentMonth = 6;
+        selectNight.value = currentMonth.toString();
+        loadNightPrevious(currentMonth);
+        selectNight.addEventListener('change', function() {
+            loadNightPrevious(parseInt(this.value));
+        });
+    }
+}
 
 // ============================================================
 // 🔥 IST TIME ZONE FIX
@@ -2213,8 +2415,6 @@ function updateVenueCountdown(venueId) {
 // ============================================================
 // 🔥 অটো-সেভ লাইভ রেজাল্ট টু প্রিভিয়াস রেজাল্ট (Supabase)
 // ============================================================
-
-// 🔹 ফাংশন: লাইভ রেজাল্টকে প্রিভিয়াস রেজাল্টে সেভ করা
 async function saveLiveResultToPrevious(venue, frResult, srResult, resultDate) {
     if (!frResult || !srResult || frResult === '--' || srResult === '--') {
         console.log(`⏳ ${venue}: Skipping save - incomplete data`);
@@ -2222,7 +2422,6 @@ async function saveLiveResultToPrevious(venue, frResult, srResult, resultDate) {
     }
 
     try {
-        // ১. চেক করুন এই তারিখের ডেটা ইতিমধ্যে আছে কিনা
         const { data: existing, error: checkError } = await supabaseClient
             .from('teer_previous_results')
             .select('*')
@@ -2236,7 +2435,6 @@ async function saveLiveResultToPrevious(venue, frResult, srResult, resultDate) {
         }
 
         if (existing && existing.length > 0) {
-            // ২. যদি থাকে, UPDATE করুন
             const { error: updateError } = await supabaseClient
                 .from('teer_previous_results')
                 .update({
@@ -2252,7 +2450,6 @@ async function saveLiveResultToPrevious(venue, frResult, srResult, resultDate) {
                 console.log(`✅ Updated ${venue} previous result for ${resultDate}: FR=${frResult}, SR=${srResult}`);
             }
         } else {
-            // ৩. না থাকলে, INSERT করুন
             const { error: insertError } = await supabaseClient
                 .from('teer_previous_results')
                 .insert({
@@ -2276,7 +2473,7 @@ async function saveLiveResultToPrevious(venue, frResult, srResult, resultDate) {
 }
 
 // ============================================================
-// 🔥 লাইভ রেজাল্ট লোড (আগের দিনের ডেটা দেখাবে যখন WAITING নয়)
+// 🔥 লাইভ রেজাল্ট লোড
 // ============================================================
 async function loadTodayResults() {
     try {
@@ -2302,7 +2499,6 @@ async function loadTodayResults() {
                     sr: data[0].sr_result || '--'
                 };
                 
-                // ✅ অটো-সেভ করুন (যদি ডেটা ভ্যালিড হয়)
                 if (data[0].fr_result && data[0].fr_result !== '--' && 
                     data[0].sr_result && data[0].sr_result !== '--') {
                     await saveLiveResultToPrevious(venue, data[0].fr_result, data[0].sr_result, today);
@@ -2326,7 +2522,7 @@ async function loadTodayResults() {
             }
         }
         
-        // 🟢 Night Teer
+        // Night Teer
         const { data: nightData, error: nightError } = await supabaseClient
             .from('teer_live_results')
             .select('*')
@@ -2349,20 +2545,34 @@ async function loadTodayResults() {
         globalLiveData = liveData;
         renderTodayResults(liveData, today, nightDate);
         
-        // 🔥 মেটা ট্যাগ আপডেট করুন (শিলং তীরের ডেটা দিয়ে)
         if (liveData.shillong) {
-            updateMetaTags(
-                'Shillong Teer',
-                liveData.shillong.fr || '--',
-                liveData.shillong.sr || '--',
-                today
-            );
+            updateMetaTags('Shillong Teer', liveData.shillong.fr || '--', liveData.shillong.sr || '--', today);
         }
         
-        // ✅ প্রিভিয়াস রেজাল্ট রিলোড করুন (সর্বশেষ ডেটা দেখাতে)
-        const monthSelect = document.getElementById('monthSelectShillong');
-        if (monthSelect) {
-            loadShillongPrevious(parseInt(monthSelect.value));
+        // ✅ সব ভেন্যুর প্রিভিয়াস রেজাল্ট রিলোড করুন
+        const selectShillong = document.getElementById('monthSelectShillong');
+        if (selectShillong) {
+            loadShillongPrevious(parseInt(selectShillong.value));
+        }
+        
+        const selectKhanapara = document.getElementById('monthSelectKhanapara');
+        if (selectKhanapara) {
+            loadKhanaparaPrevious(parseInt(selectKhanapara.value));
+        }
+        
+        const selectJuwai = document.getElementById('monthSelectJuwai');
+        if (selectJuwai) {
+            loadJuwaiPrevious(parseInt(selectJuwai.value));
+        }
+        
+        const selectMorning = document.getElementById('monthSelectMorning');
+        if (selectMorning) {
+            loadMorningPrevious(parseInt(selectMorning.value));
+        }
+        
+        const selectNight = document.getElementById('monthSelectNight');
+        if (selectNight) {
+            loadNightPrevious(parseInt(selectNight.value));
         }
         
     } catch(err) {
@@ -2449,7 +2659,7 @@ function renderTodayResults(liveData, todayDate, nightDate) {
 }
 
 // ============================================================
-// 🔥 কমন নাম্বার লোড (Supabase থেকে Real Data)
+// 🔥 কমন নাম্বার লোড
 // ============================================================
 async function loadCommonNumbers() {
     try {
@@ -2668,7 +2878,7 @@ function subscribeNewsletter() {
 }
 
 // ============================================================
-// 🔥 অটো মেটা ট্যাগ আপডেট ফাংশন (তারিখ সহ)
+// 🔥 অটো মেটা ট্যাগ আপডেট ফাংশন
 // ============================================================
 function updateMetaTags(venue, frResult, srResult, date) {
     const formattedDate = date.split('-').reverse().join('.');
@@ -2728,6 +2938,63 @@ function updateMetaTags(venue, frResult, srResult, date) {
 }
 
 // ============================================================
+// 📊 DREAM CHART DATA
+// ============================================================
+const dreamChartData = [
+    { dream: "Snake / সাপ", direct: "05, 33, 77", house: "7", ending: "1" },
+    { dream: "Tiger / বাঘ", direct: "28, 44, 66", house: "3", ending: "9" },
+    { dream: "Lion / সিংহ", direct: "32, 55, 88", house: "8", ending: "4" },
+    { dream: "Elephant / হাতি", direct: "47, 70, 99", house: "6", ending: "0" },
+    { dream: "Horse / ঘোড়া", direct: "19, 41, 63", house: "2", ending: "4" },
+    { dream: "Dog / কুকুর", direct: "24, 46, 68", house: "6", ending: "9" },
+    { dream: "Cat / বিড়াল", direct: "18, 40, 62", house: "0", ending: "5" },
+    { dream: "Water / পানি", direct: "02, 24, 46", house: "1", ending: "3" },
+    { dream: "Fire / আগুন", direct: "03, 25, 47", house: "5", ending: "2" },
+    { dream: "Money / টাকা", direct: "22, 44, 66", house: "4", ending: "8" },
+    { dream: "Gold / সোনা", direct: "23, 45, 67", house: "7", ending: "6" },
+    { dream: "Moon / চাঁদ", direct: "15, 37, 59", house: "9", ending: "1" },
+    { dream: "Sun / সূর্য", direct: "08, 30, 52", house: "2", ending: "7" },
+    { dream: "Rain / বৃষ্টি", direct: "07, 29, 51", house: "8", ending: "3" },
+    { dream: "Bird / পাখি", direct: "12, 34, 56", house: "3", ending: "6" },
+    { dream: "Fish / মাছ", direct: "09, 31, 53", house: "1", ending: "4" }
+];
+
+function renderDreamChart() { 
+    let html = ''; 
+    dreamChartData.forEach(item => { 
+        html += `<tr><td style="padding:10px;"><strong>${item.dream}</strong></td><td style="padding:10px;">${item.direct}</td><td style="padding:10px;">${item.house}</td><td style="padding:10px;">${item.ending}</td></tr>`;
+    }); 
+    document.getElementById('dreamChartBody').innerHTML = html; 
+}
+
+function dreamToNum(t){ 
+    if(!t) return 24; 
+    let m={
+        "snake":5, "tiger":28, "lion":32, "elephant":47, "horse":19, "dog":24, "cat":18, 
+        "water":2, "fire":3, "money":22, "gold":23, "moon":15, "sun":8, "rain":7, 
+        "bird":12, "fish":9, "সাপ":5, "বাঘ":28, "সিংহ":32, "হাতি":47, "ঘোড়া":19, 
+        "কুকুর":24, "বিড়াল":18, "পানি":2, "আগুন":3, "টাকা":22, "সোনা":23, 
+        "চাঁদ":15, "সূর্য":8, "বৃষ্টি":7, "পাখি":12, "মাছ":9
+    }; 
+    let l=t.toLowerCase(); 
+    for(let [k,v] of Object.entries(m)) if(l.includes(k)) return v; 
+    let h=0; 
+    for(let i=0;i<l.length;i++) h=((h<<5)-h)+l.charCodeAt(i); 
+    return Math.abs(h)%100||24; 
+}
+
+function getHENumbers(n){ 
+    let x=n%100; 
+    return { 
+        house:[((x*3+7)%10).toString(),((x*5+11)%10).toString()], 
+        ending:[((x*9+17)%10).toString(),((x*11+23)%10).toString()] 
+    }; 
+}
+
+let globalLiveData = {};
+let globalCommonData = null;
+
+// ============================================================
 // 📌 DOMContentLoaded
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
@@ -2738,8 +3005,9 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(loadTodayResults, 10000);
     setInterval(loadCommonNumbers, 30000);
     
-    // ✅ শুধু Shillong Previous Results লোড করুন
+    // ✅ সব ভেন্যুর Selector Setup
     setupShillongSelector();
+    setupAllSelectors();
     
     renderDreamChart();
     loadTrendingNumbers();
@@ -2799,63 +3067,6 @@ function showBangla() { alert("বাংলা ভার্সন সক্র�
 function showEnglish() { alert("English version active. Site is fully bilingual."); }
 
 console.log('✅ All functions loaded successfully!');
-
-// ============================================================
-// 📊 DREAM CHART DATA
-// ============================================================
-const dreamChartData = [
-    { dream: "Snake / সাপ", direct: "05, 33, 77", house: "7", ending: "1" },
-    { dream: "Tiger / বাঘ", direct: "28, 44, 66", house: "3", ending: "9" },
-    { dream: "Lion / সিংহ", direct: "32, 55, 88", house: "8", ending: "4" },
-    { dream: "Elephant / হাতি", direct: "47, 70, 99", house: "6", ending: "0" },
-    { dream: "Horse / ঘোড়া", direct: "19, 41, 63", house: "2", ending: "4" },
-    { dream: "Dog / কুকুর", direct: "24, 46, 68", house: "6", ending: "9" },
-    { dream: "Cat / বিড়াল", direct: "18, 40, 62", house: "0", ending: "5" },
-    { dream: "Water / পানি", direct: "02, 24, 46", house: "1", ending: "3" },
-    { dream: "Fire / আগুন", direct: "03, 25, 47", house: "5", ending: "2" },
-    { dream: "Money / টাকা", direct: "22, 44, 66", house: "4", ending: "8" },
-    { dream: "Gold / সোনা", direct: "23, 45, 67", house: "7", ending: "6" },
-    { dream: "Moon / চাঁদ", direct: "15, 37, 59", house: "9", ending: "1" },
-    { dream: "Sun / সূর্য", direct: "08, 30, 52", house: "2", ending: "7" },
-    { dream: "Rain / বৃষ্টি", direct: "07, 29, 51", house: "8", ending: "3" },
-    { dream: "Bird / পাখি", direct: "12, 34, 56", house: "3", ending: "6" },
-    { dream: "Fish / মাছ", direct: "09, 31, 53", house: "1", ending: "4" }
-];
-
-function renderDreamChart() { 
-    let html = ''; 
-    dreamChartData.forEach(item => { 
-        html += `<tr><td style="padding:10px;"><strong>${item.dream}</strong></td><td style="padding:10px;">${item.direct}</td><td style="padding:10px;">${item.house}</td><td style="padding:10px;">${item.ending}</td></tr>`;
-    }); 
-    document.getElementById('dreamChartBody').innerHTML = html; 
-}
-
-function dreamToNum(t){ 
-    if(!t) return 24; 
-    let m={
-        "snake":5, "tiger":28, "lion":32, "elephant":47, "horse":19, "dog":24, "cat":18, 
-        "water":2, "fire":3, "money":22, "gold":23, "moon":15, "sun":8, "rain":7, 
-        "bird":12, "fish":9, "সাপ":5, "বাঘ":28, "সিংহ":32, "হাতি":47, "ঘোড়া":19, 
-        "কুকুর":24, "বিড়াল":18, "পানি":2, "আগুন":3, "টাকা":22, "সোনা":23, 
-        "চাঁদ":15, "সূর্য":8, "বৃষ্টি":7, "পাখি":12, "মাছ":9
-    }; 
-    let l=t.toLowerCase(); 
-    for(let [k,v] of Object.entries(m)) if(l.includes(k)) return v; 
-    let h=0; 
-    for(let i=0;i<l.length;i++) h=((h<<5)-h)+l.charCodeAt(i); 
-    return Math.abs(h)%100||24; 
-}
-
-function getHENumbers(n){ 
-    let x=n%100; 
-    return { 
-        house:[((x*3+7)%10).toString(),((x*5+11)%10).toString()], 
-        ending:[((x*9+17)%10).toString(),((x*11+23)%10).toString()] 
-    }; 
-}
-
-let globalLiveData = {};
-let globalCommonData = null;
 </script>
 
 <!-- Monetag Popunder Ad Code -->
