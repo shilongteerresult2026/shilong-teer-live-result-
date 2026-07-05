@@ -1,6 +1,46 @@
-# robots.txt for Shillong Teer Live Result
+# ============================================================
+# 🔥 ROBOTS.TXT - Shillong Teer Live Result
+# ============================================================
+# This file controls which pages search engines can crawl
+# Last Updated: 2026-07-05
+# ============================================================
 
+# ============================================================
+# 🔥 Allow all search engines to crawl
+# ============================================================
 User-agent: *
 Allow: /
 
+# ============================================================
+# 🔥 Disallow - যেসব পেজ ক্রল করতে দেবেন না
+# ============================================================
+Disallow: /admin/
+Disallow: /login/
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /cgi-bin/
+Disallow: /temp/
+Disallow: /backup/
+Disallow: /logs/
+Disallow: /cache/
+
+# ============================================================
+# 🔥 Sitemap Location
+# ============================================================
 Sitemap: https://shillongteerliveresult.in/sitemap.xml
+
+# ============================================================
+# 🔥 Crawl Delay (optional - slows down crawling)
+# ============================================================
+Crawl-delay: 1
+
+# ============================================================
+# 🔥 Host (optional - specifies the preferred domain)
+# ============================================================
+Host: https://shillongteerliveresult.in
+
+# ============================================================
+# 🔥 Additional Settings
+# ============================================================
+# Respect the nofollow meta tags
+# Respect the noindex meta tags
