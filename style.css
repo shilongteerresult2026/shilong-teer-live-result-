@@ -444,11 +444,30 @@ body {
 }
 
 /* ============================================================ */
-/* 🔥 কমন নাম্বার ভেন্যু কার্ড - ফন্ট বড় করা হয়েছে */
+/* 🔥 কমন নাম্বার ভেন্যু কার্ড - HD ডিপ ব্লু কালার + বক্স অ্যাডজাস্ট */
 /* ============================================================ */
 .common-venues-container { display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; }
 .common-venue-card { background: #f0f6fa; border-radius: 0.9rem; padding: 1rem; border: 2px solid #4a8ab5; }
-.common-venue-title { background: #0a3d6b; color: #ffffff; padding: 16px 20px; border-radius: 12px; font-weight: 900; font-size: 1.5rem; margin-bottom: 16px; text-align: center; border: 2px solid #000000; box-shadow: 0 6px 25px rgba(10,61,107,0.3); }
+.common-venue-title { 
+    background: linear-gradient(135deg, #003366, #004488, #003366);
+    background-size: 200% 200%;
+    animation: gradientShiftHD 5s ease-in-out infinite;
+    color: #ffffff; 
+    padding: 16px 20px; 
+    border-radius: 12px; 
+    font-weight: 900; 
+    font-size: 1.5rem; 
+    margin-bottom: 16px; 
+    text-align: center; 
+    border: 2px solid #002244; 
+    box-shadow: 0 6px 25px rgba(0, 51, 102, 0.4);
+    letter-spacing: 0.5px;
+}
+@keyframes gradientShiftHD {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
 .common-table { 
     width: 100%; 
@@ -457,33 +476,34 @@ body {
     border-radius: 12px; 
     overflow: hidden; 
     border: 2px solid #000000; 
-    font-size: 1.3rem; 
+    font-size: 1.2rem; 
     table-layout: fixed; 
     box-shadow: 0 4px 20px rgba(0,0,0,0.06); 
 }
 
 .common-table th { 
-    background: linear-gradient(135deg, #0a3d6b, #1a5a8a, #0a3d6b);
+    background: linear-gradient(135deg, #003366, #0055aa, #003366);
     background-size: 200% 200%;
-    animation: gradientShift 4s ease-in-out infinite;
+    animation: gradientShiftHD 5s ease-in-out infinite;
     color: #ffffff; 
-    padding: 16px 14px; 
-    font-size: 1.1rem; 
+    padding: 14px 12px; 
+    font-size: 1rem; 
     font-weight: 800; 
     text-align: center; 
-    border: 2px solid #000000; 
+    border: 2px solid #002244; 
+    letter-spacing: 0.5px;
 }
-@keyframes gradientShift {
+@keyframes gradientShiftHD {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
 .common-table td { 
-    padding: 16px 14px; 
+    padding: 12px 10px; 
     text-align: center; 
     border: 2px solid #000000; 
-    font-size: 1.5rem; 
+    font-size: 1.3rem; 
     font-weight: 700; 
     transition: all 0.3s ease; 
 }
@@ -498,58 +518,73 @@ body {
     font-weight: 800; 
     background: linear-gradient(135deg, #fff0f0, #ffe6e6); 
     color: #8b0000; 
-    font-size: 1.3rem; 
+    font-size: 1.2rem; 
     border: 2px solid #000000; 
 }
 .round-cell span { 
-    font-size: 0.75rem; 
+    font-size: 0.7rem; 
     font-weight: 400; 
     display: block; 
     color: #4a3a2a; 
 }
 
+/* 🔥 ডিরেক্ট নম্বর - বক্স ছোট করে টেক্সট অ্যাডজাস্ট */
 .direct-num { 
     background: linear-gradient(135deg, #0066ff, #0044cc); 
     color: white; 
-    padding: 8px 16px; 
-    border-radius: 12px; 
+    padding: 4px 10px; 
+    border-radius: 8px; 
     font-weight: 800; 
-    font-size: 1.8rem; 
+    font-size: 1.4rem; 
     display: inline-block; 
-    box-shadow: 0 4px 15px rgba(0,102,255,0.25); 
+    box-shadow: 0 3px 12px rgba(0,102,255,0.25); 
     border: 2px solid #000000; 
     transition: all 0.3s ease; 
-    min-width: 55px;
+    min-width: 42px;
+    max-width: 100%;
+    line-height: 1.3;
+    text-align: center;
+    word-break: break-all;
 }
 .direct-num:hover { transform: scale(1.05); }
 
+/* 🔥 হাউস নম্বর - বক্স ছোট করে টেক্সট অ্যাডজাস্ট */
 .house-num { 
     background: linear-gradient(135deg, #ffcc00, #e6b800); 
     color: #1a0a00; 
-    padding: 8px 16px; 
-    border-radius: 12px; 
+    padding: 4px 10px; 
+    border-radius: 8px; 
     font-weight: 800; 
-    font-size: 1.8rem; 
+    font-size: 1.4rem; 
     display: inline-block; 
-    box-shadow: 0 4px 15px rgba(255,204,0,0.25); 
+    box-shadow: 0 3px 12px rgba(255,204,0,0.25); 
     border: 2px solid #000000; 
     transition: all 0.3s ease; 
-    min-width: 55px;
+    min-width: 42px;
+    max-width: 100%;
+    line-height: 1.3;
+    text-align: center;
+    word-break: break-all;
 }
 .house-num:hover { transform: scale(1.05); }
 
+/* 🔥 শেষ নম্বর - বক্স ছোট করে টেক্সট অ্যাডজাস্ট */
 .ending-num { 
     background: linear-gradient(135deg, #8b0000, #660000); 
     color: white; 
-    padding: 8px 16px; 
-    border-radius: 12px; 
+    padding: 4px 10px; 
+    border-radius: 8px; 
     font-weight: 800; 
-    font-size: 1.8rem; 
+    font-size: 1.4rem; 
     display: inline-block; 
-    box-shadow: 0 4px 15px rgba(139,0,0,0.25); 
+    box-shadow: 0 3px 12px rgba(139,0,0,0.25); 
     border: 2px solid #000000; 
     transition: all 0.3s ease; 
-    min-width: 55px;
+    min-width: 42px;
+    max-width: 100%;
+    line-height: 1.3;
+    text-align: center;
+    word-break: break-all;
 }
 .ending-num:hover { transform: scale(1.05); }
 
@@ -1489,11 +1524,11 @@ body {
     /* কমন নাম্বার বক্স - মোবাইলে বড় রাখা হয়েছে */
     .common-venue-card { padding: 0.8rem; }
     .common-venue-title { font-size: 1.2rem; padding: 14px 16px; }
-    .common-table { font-size: 1.1rem; }
-    .common-table th { font-size: 0.95rem; padding: 12px 10px; }
-    .common-table td { font-size: 1.2rem; padding: 12px 10px; }
-    .direct-num, .house-num, .ending-num { font-size: 1.4rem; padding: 6px 12px; min-width: 45px; }
-    .round-cell { font-size: 1.1rem; }
+    .common-table { font-size: 1rem; }
+    .common-table th { font-size: 0.85rem; padding: 10px 8px; }
+    .common-table td { font-size: 1.1rem; padding: 10px 8px; }
+    .direct-num, .house-num, .ending-num { font-size: 1.2rem; padding: 4px 8px; min-width: 38px; }
+    .round-cell { font-size: 1rem; }
     
     .monthwise-section { padding: 1rem; }
     .monthwise-title { font-size: 1.2rem; }
@@ -1589,12 +1624,12 @@ body {
     /* কমন নাম্বার বক্স - ছোট মোবাইলে বড় রাখা হয়েছে */
     .common-venue-card { padding: 0.5rem; }
     .common-venue-title { font-size: 1rem; padding: 12px 14px; }
-    .common-table { font-size: 0.9rem; }
-    .common-table th { font-size: 0.8rem; padding: 8px 6px; }
-    .common-table td { font-size: 1rem; padding: 10px 6px; }
-    .direct-num, .house-num, .ending-num { font-size: 1.1rem; padding: 5px 10px; min-width: 38px; }
-    .round-cell { font-size: 0.9rem; }
-    .round-cell span { font-size: 0.55rem; }
+    .common-table { font-size: 0.85rem; }
+    .common-table th { font-size: 0.75rem; padding: 8px 5px; }
+    .common-table td { font-size: 0.95rem; padding: 8px 5px; }
+    .direct-num, .house-num, .ending-num { font-size: 1rem; padding: 3px 7px; min-width: 32px; }
+    .round-cell { font-size: 0.85rem; }
+    .round-cell span { font-size: 0.5rem; }
     
     .monthwise-section { padding: 0.8rem; }
     .monthwise-title { font-size: 1rem; }
@@ -1637,12 +1672,12 @@ body {
     .card-footer-buttons { flex-direction: column; align-items: stretch; gap: 0.4rem; }
     .card-footer-buttons a { width: 100%; text-align: center; font-size: 0.75rem; padding: 0.25rem 1rem; }
     .common-table th { 
-        background: linear-gradient(135deg, #0a3d6b, #1a5a8a, #0a3d6b);
+        background: linear-gradient(135deg, #003366, #0055aa, #003366);
         background-size: 200% 200%;
-        animation: gradientShift 4s ease-in-out infinite;
-        border: 2px solid #000000;
-        font-size: 0.75rem;
-        padding: 8px 5px;
+        animation: gradientShiftHD 5s ease-in-out infinite;
+        border: 2px solid #002244;
+        font-size: 0.7rem;
+        padding: 6px 4px;
     }
     .faq-answer.show { max-height: 500px; }
     .btn { font-size: 0.8rem; padding: 0.4rem 1.2rem; }
@@ -1666,24 +1701,4 @@ body {
     .comment-item .c-body .c-text { font-size: 0.75rem; }
     .disclaimer-footer { font-size: 0.65rem; padding: 0.8rem; }
     .footer-links a { font-size: 0.7rem; padding: 0.2rem 0.5rem; }
-}
-
-/* ============================================================ */
-/* 🔥 কমন টেবিল হেডারের জন্য প্রিমিয়াম গ্রেডিয়েন্ট অ্যানিমেশন */
-/* ============================================================ */
-.common-table th {
-    background: linear-gradient(135deg, #0a3d6b, #1a5a8a, #0a3d6b);
-    background-size: 200% 200%;
-    animation: gradientShift 4s ease-in-out infinite;
-    border: 2px solid #000000;
-    color: #ffffff;
-    padding: 16px 14px;
-    font-size: 1.1rem;
-    font-weight: 800;
-    text-align: center;
-}
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
 }
