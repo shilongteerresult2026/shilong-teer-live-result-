@@ -1,1720 +1,429 @@
 /* ============================================================ */
-/* 🔥 ডিপ কালার থিম - ডিপ রেড, ডিপ স্কাই, ডিপ ব্লু, ডিপ আলট্রা গ্রিন */
+/* 🔥 ক্লিক রেট বাড়ানোর জন্য CSS - শুধু বাটন ও সিএসএস পরিবর্তন */
 /* ============================================================ */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
-}
 
-body {
-    background: #0a0e14;
-    padding: 0.8rem;
-    font-size: 18px;
-    line-height: 1.6;
-}
-
-.container {
-    max-width: 100%;
-    margin: 0 auto;
-    background: #ffffff;
-    border-radius: 1.2rem;
-    padding: 1rem;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
-}
-
-/* ============================================================ */
-/* 🔥 Logo Style */
-/* ============================================================ */
-.site-logo {
-    max-width: 180px;
-    height: auto;
-    margin-bottom: 10px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* ============================================================ */
-/* 🔥 Performance & SEO Optimization */
-/* ============================================================ */
-html {
-    scroll-behavior: smooth;
-}
-
-img[loading="lazy"] {
-    background: #f0f0f0;
-}
-
-img, video, iframe {
-    aspect-ratio: auto;
-    max-width: 100%;
-    height: auto;
-}
-
-body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-}
-
-@media print {
-    .no-print { display: none; }
-    body { background: white; padding: 0; }
-    .container { box-shadow: none; border-radius: 0; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-/* ============================================================ */
-/* 🔥 ল্যাঙ্গুয়েজ বার - ডিপ স্কাই */
-/* ============================================================ */
-.language-bar {
-    background: #0a3d6b;
-    padding: 0.5rem;
-    text-align: center;
-    border-radius: 50px;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    box-shadow: 0 4px 15px rgba(10, 61, 107, 0.3);
-}
-.language-bar a {
-    color: #ffffff;
-    text-decoration: none;
-    margin: 0 12px;
-    font-weight: 700;
-    padding: 0.4rem 1.2rem;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-}
-.language-bar a:hover {
-    background: #1a5a8a;
-    transform: scale(1.05);
-}
-
-/* ============================================================ */
-/* 🔥 সাইট ব্র্যান্ড - ডিপ রেড + ডিপ গ্রিন */
-/* ============================================================ */
-.site-brand {
-    background: linear-gradient(135deg, #1a0a0a, #2d0a0a, #0d1a0d);
-    border-radius: 1rem;
-    padding: 1rem;
-    text-align: center;
-    border-bottom: 4px solid #cc0000;
-    margin-bottom: 1rem;
-    box-shadow: 0 4px 20px rgba(204, 0, 0, 0.15);
-}
-
-.name-box {
+/* ===== 1. CTA মেইন বাটন - বড়, আকর্ষণীয়, অ্যানিমেটেড ===== */
+.cta-main-btn {
     display: inline-block;
-    background: #ffffff;
-    border: 2px solid #cc0000;
-    border-radius: 60px;
-    padding: 0.5rem 1.5rem;
-    margin: 0.2rem auto;
-}
-.name-box h1 {
-    font-size: 1.3rem;
-    letter-spacing: -0.2px;
-    color: #1a0a0a;
-    font-weight: 800;
-    white-space: normal;
-}
-.name-box .bn-title {
-    font-size: 1rem;
-    color: #cc0000;
-    margin-top: 3px;
-    font-weight: 700;
-}
-.domain {
-    font-family: monospace;
-    background: rgba(255,255,255,0.06);
-    display: inline-block;
-    padding: 0.3rem 1.2rem;
-    border-radius: 40px;
-    font-size: 0.9rem;
-    color: #c0a0a0;
-    margin-top: 0.3rem;
-    border: 1px solid rgba(255,255,255,0.05);
-}
-.live-badge-main {
-    background: #cc0000;
-    display: inline-block;
-    padding: 0.4rem 1.5rem;
-    border-radius: 40px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: white;
-    margin-top: 0.4rem;
-    animation: pulseRedDeep 1s infinite;
-    box-shadow: 0 0 20px rgba(204, 0, 0, 0.3);
-}
-@keyframes pulseRedDeep {
-    0%, 100% { background: #cc0000; box-shadow: 0 0 20px rgba(204, 0, 0, 0.3); }
-    50% { background: #ff0000; box-shadow: 0 0 40px rgba(255, 0, 0, 0.5); }
-}
-
-/* ============================================================ */
-/* 🔥 স্লাইডার - ডিপ ইয়েলো */
-/* ============================================================ */
-.slider-container {
-    overflow: hidden;
-    background: linear-gradient(135deg, #e6a800, #cc9900, #b38600);
-    border-radius: 0.6rem;
-    padding: 0.5rem 0.8rem;
-    margin-bottom: 1rem;
-    border: 3px solid #ffcc00;
-    box-shadow: 0 4px 25px rgba(204, 153, 0, 0.4);
-}
-.slider-track {
-    display: flex;
-    animation: slideLeftToRight 10s linear infinite;
-    white-space: nowrap;
-}
-.slider-track a {
-    display: inline-block;
-    padding: 0 2rem;
-    font-size: 1.1rem;
-    font-weight: 900;
-    color: #1a0a00 !important;
-    text-decoration: none;
-    text-shadow: 0 1px 3px rgba(255, 215, 0, 0.2);
-}
-.slider-track a:hover {
-    color: #ffffff !important;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-}
-@keyframes slideLeftToRight {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(0%); }
-}
-
-/* ============================================================ */
-/* 🔥 SEO হেডিং - ডিপ স্কাই, ডিপ গ্রিন, ডিপ রেড (বড় করা হয়েছে) */
-/* ============================================================ */
-.seo-h2 {
-    background: linear-gradient(95deg, #0d6b3d, #0a4d2a);
-    color: #ffffff;
-    padding: 16px 20px;
-    border-radius: 50px;
-    font-size: 1.3rem;
-    text-align: center;
-    margin: 18px 0;
-    font-weight: 800;
-    box-shadow: 0 4px 15px rgba(13, 107, 61, 0.3);
-}
-.seo-h2-orange {
-    background: linear-gradient(95deg, #cc0000, #8b0000);
-    color: #ffffff;
-    padding: 16px 20px;
-    border-radius: 50px;
-    font-size: 1.3rem;
-    text-align: center;
-    margin: 18px 0;
-    font-weight: 800;
-    box-shadow: 0 4px 15px rgba(204, 0, 0, 0.3);
-}
-.seo-h2-dark {
-    background: linear-gradient(95deg, #0a3d6b, #062a4a);
-    color: #ffffff;
-    padding: 16px 20px;
-    border-radius: 50px;
-    font-size: 1.3rem;
-    text-align: center;
-    margin: 18px 0;
-    font-weight: 800;
-    box-shadow: 0 4px 15px rgba(10, 61, 107, 0.3);
-}
-
-/* ============================================================ */
-/* 🔥 কমন টাইম ব্যাজ - ডিপ গ্রিন */
-/* ============================================================ */
-.common-time-badge {
-    background: linear-gradient(95deg, #0d6b3d, #0a4d2a);
-    color: #ffffff;
-    font-size: 0.95rem;
-    padding: 0.6rem;
-    border-radius: 50px;
-    text-align: center;
-    margin-bottom: 1rem;
-    box-shadow: 0 4px 15px rgba(13, 107, 61, 0.2);
-}
-
-/* ============================================================ */
-/* 🔥 ড্রিম কার্ড - সাদা ব্যাকগ্রাউন্ড */
-/* ============================================================ */
-.dream-card {
-    background: #f8faff;
-    border-radius: 1rem;
-    padding: 1.2rem;
-    margin-bottom: 1rem;
-    border: 2px solid #0a3d6b;
-}
-.dream-title {
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: #0a3d6b;
-    text-align: center;
-}
-.dream-subtitle {
-    font-size: 0.95rem;
-    color: #0d6b3d;
-    text-align: center;
-    margin-top: 3px;
-    font-weight: 600;
-}
-.dream-flex {
-    display: flex;
-    gap: 0.8rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 0.8rem 0;
-}
-.dream-input {
-    padding: 0.7rem 1.4rem;
-    border-radius: 60px;
-    border: 2px solid #4a8ab5;
-    width: 220px;
-    background: #ffffff;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-.dream-input:focus {
-    border-color: #0a3d6b;
-    outline: none;
-    box-shadow: 0 0 0 4px rgba(10, 61, 107, 0.15);
-}
-.dream-btn {
-    background: #0a3d6b;
-    border: none;
-    padding: 0.7rem 1.4rem;
-    border-radius: 60px;
-    font-weight: bold;
-    color: white;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-.dream-btn:hover {
-    background: #062a4a;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(10, 61, 107, 0.4);
-}
-.dream-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #ffffff;
-    border-radius: 0.8rem;
-    overflow: hidden;
-    margin-top: 0.8rem;
-    border: 2px solid #4a8ab5;
-}
-.dream-table th {
-    background: #0a3d6b;
-    color: #ffffff;
-    padding: 14px;
-    font-size: 1.1rem;
-    font-weight: 700;
-}
-.dream-table td {
-    padding: 14px;
-    background: #f0f6fa;
-    text-align: center;
-    font-size: 1.3rem;
-}
-.number-group {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-.dream-num-box {
-    background: #c0dce8;
-    min-width: 70px;
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    font-weight: 800;
-    color: #0a3d6b;
-    font-size: 1.3rem;
-    border: 2px solid #4a8ab5;
-}
-
-/* ============================================================ */
-/* 🔥 রেজাল্ট কার্ড - ডিপ স্কাই বর্ডার */
-/* ============================================================ */
-.results-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-.result-card {
-    background: #ffffff;
-    border-radius: 0.9rem;
-    padding: 1rem;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-    border: 2px solid #4a8ab5;
-    border-top: 4px solid #0a3d6b;
-    transition: all 0.3s ease;
-}
-.result-card:hover {
-    border-color: #0a3d6b;
-    box-shadow: 0 4px 25px rgba(10, 61, 107, 0.1);
-}
-.result-card .venue-header {
-    background: #0a3d6b;
-    border-radius: 50px;
-    padding: 0.5rem 1rem;
-    text-align: center;
-    margin-bottom: 0.6rem;
-}
-.result-card .venue-name {
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: #ffffff;
-}
-.result-card .info-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.6rem;
-    flex-wrap: wrap;
-    gap: 5px;
-}
-.result-card .date-box {
-    background: #c0dce8;
-    font-size: 0.95rem;
-    font-weight: 600;
-    padding: 0.3rem 1rem;
-    border-radius: 50px;
-    color: #0a3d6b;
-}
-.result-card .flash-waiting {
-    background: #cc0000;
-    color: white;
-    font-size: 0.85rem;
-    font-weight: bold;
-    padding: 0.3rem 1rem;
-    border-radius: 30px;
-    animation: flashWaiting 0.8s infinite;
-}
-@keyframes flashWaiting { 0%,100% { background: #cc0000; } 50% { background: #ff0000; } }
-.result-card .live-result-badge {
-    background: #cc0000;
-    color: white;
-    font-size: 0.9rem;
-    font-weight: bold;
-    padding: 0.3rem 1rem;
-    border-radius: 30px;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    animation: flashLive 0.6s infinite;
-}
-@keyframes flashLive { 0%,100% { background: #cc0000; } 50% { background: #ff0000; box-shadow: 0 0 15px rgba(204, 0, 0, 0.4); } }
-.result-card .live-result-badge::before { content: "●"; animation: blinkDot 0.5s infinite; }
-@keyframes blinkDot { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
-.result-card .timing-dual { display: flex; gap: 0.8rem; margin: 0.6rem 0; }
-.result-card .fr-box, .result-card .sr-box { flex: 1; text-align: center; background: #f0f6fa; border-radius: 0.8rem; padding: 0.6rem; border: 1px solid #4a8ab5; }
-.result-card .result-number { font-size: 1.8rem; font-weight: 900; background: #c0dce8; display: inline-block; padding: 0.3rem 1.2rem; border-radius: 40px; color: #0a3d6b; }
-.result-card .waiting-number-display { background: #cc0000; color: white; font-size: 0.9rem; font-weight: bold; padding: 0.3rem 1rem; border-radius: 40px; display: inline-block; animation: blinkWaiting 0.6s infinite; }
-@keyframes blinkWaiting { 0%,100% { opacity: 1; background: #cc0000; } 50% { opacity: 0.7; background: #ff0000; } }
-
-/* ===== ফুটার বাটন - প্রিভিয়াস + কমন পাশাপাশি ===== */
-.card-footer-buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.8rem;
-    margin-top: 0.8rem;
-    padding-top: 0.6rem;
-    border-top: 1px solid #4a8ab5;
-    flex-wrap: wrap;
-}
-.card-footer-buttons a {
-    font-size: 0.9rem;
-    padding: 0.3rem 1.4rem;
-}
-
-/* ============================================================ */
-/* 🔥 কমন নাম্বার ভেন্যু কার্ড - রাউন্ড রো বড় + ডিরেক্ট রো ছোট */
-/* ============================================================ */
-.common-venues-container { display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; }
-.common-venue-card { background: #f0f6fa; border-radius: 0.9rem; padding: 1rem; border: 2px solid #4a8ab5; }
-.common-venue-title { 
-    background: linear-gradient(135deg, #003366, #004488, #003366);
+    background: linear-gradient(135deg, #cc0000, #ff0000, #cc0000);
     background-size: 200% 200%;
-    animation: gradientShiftHD 5s ease-in-out infinite;
-    color: #ffffff; 
-    padding: 16px 20px; 
-    border-radius: 12px; 
-    font-weight: 900; 
-    font-size: 1.5rem; 
-    margin-bottom: 16px; 
-    text-align: center; 
-    border: 2px solid #002244; 
-    box-shadow: 0 6px 25px rgba(0, 51, 102, 0.4);
-    letter-spacing: 0.5px;
+    animation: ctaGradient 2s ease-in-out infinite;
+    color: white;
+    padding: 18px 45px;
+    font-size: 1.4rem;
+    font-weight: 900;
+    border-radius: 60px;
+    text-decoration: none;
+    box-shadow: 0 8px 35px rgba(204, 0, 0, 0.5);
+    border: 3px solid #ffffff;
+    transition: all 0.3s ease;
+    text-align: center;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
 }
-@keyframes gradientShiftHD {
+
+.cta-main-btn::after {
+    content: '👉';
+    margin-left: 10px;
+    animation: handWave 1s infinite;
+}
+
+@keyframes handWave {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(15deg); }
+}
+
+.cta-main-btn:hover {
+    transform: scale(1.08) translateY(-3px);
+    box-shadow: 0 12px 50px rgba(204, 0, 0, 0.7);
+    background: linear-gradient(135deg, #ff0000, #cc0000);
+}
+
+.cta-main-btn:active {
+    transform: scale(0.95);
+}
+
+@keyframes ctaGradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-.common-table { 
-    width: 100%; 
-    border-collapse: collapse; 
-    background: #ffffff; 
-    border-radius: 12px; 
-    overflow: hidden; 
-    border: 2px solid #000000; 
-    font-size: 1.2rem; 
-    table-layout: fixed; 
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06); 
-}
-
-.common-table th { 
-    background: linear-gradient(135deg, #003366, #0055aa, #003366);
-    background-size: 200% 200%;
-    animation: gradientShiftHD 5s ease-in-out infinite;
-    color: #ffffff; 
-    padding: 14px 12px; 
-    font-size: 1rem; 
-    font-weight: 800; 
-    text-align: center; 
-    border: 2px solid #002244; 
-    letter-spacing: 0.5px;
-}
-
-.common-table td { 
-    padding: 12px 10px; 
-    text-align: center; 
-    border: 2px solid #000000; 
-    font-size: 1.3rem; 
-    font-weight: 700; 
-    transition: all 0.3s ease; 
-}
-.common-table tr:hover td { background: #f0f7ff; }
-
-/* 🔥 কলামের宽度 - রাউন্ড বড়, ডিরেক্ট ছোট */
-.common-table th:first-child { 
-    width: 18%;  /* রাউন্ড কলাম - আগে 12% ছিল, এখন 18% বড় করা হয়েছে */
-}
-.common-table th:nth-child(2) { 
-    width: 32%;  /* ডিরেক্ট কলাম - আগে 40% ছিল, এখন 32% ছোট করা হয়েছে */
-}
-.common-table th:nth-child(3) { 
-    width: 25%;  /* হাউস কলাম */
-}
-.common-table th:nth-child(4) { 
-    width: 25%;  /* শেষ কলাম */
-}
-
-.round-cell { 
-    font-weight: 800; 
-    background: linear-gradient(135deg, #fff0f0, #ffe6e6); 
-    color: #8b0000; 
-    font-size: 1.2rem; 
-    border: 2px solid #000000; 
-}
-.round-cell span { 
-    font-size: 0.7rem; 
-    font-weight: 400; 
-    display: block; 
-    color: #4a3a2a; 
-}
-
-/* 🔥 ডিরেক্ট নম্বর - বক্স ছোট করে টেক্সট অ্যাডজাস্ট */
-.direct-num { 
-    background: linear-gradient(135deg, #0066ff, #0044cc); 
-    color: white; 
-    padding: 4px 8px; 
-    border-radius: 8px; 
-    font-weight: 800; 
-    font-size: 1.3rem; 
-    display: inline-block; 
-    box-shadow: 0 3px 12px rgba(0,102,255,0.25); 
-    border: 2px solid #000000; 
-    transition: all 0.3s ease; 
-    min-width: 38px;
-    max-width: 100%;
-    line-height: 1.3;
-    text-align: center;
-    word-break: break-all;
-}
-.direct-num:hover { transform: scale(1.05); }
-
-/* 🔥 হাউস নম্বর - বক্স ছোট করে টেক্সট অ্যাডজাস্ট */
-.house-num { 
-    background: linear-gradient(135deg, #ffcc00, #e6b800); 
-    color: #1a0a00; 
-    padding: 4px 8px; 
-    border-radius: 8px; 
-    font-weight: 800; 
-    font-size: 1.3rem; 
-    display: inline-block; 
-    box-shadow: 0 3px 12px rgba(255,204,0,0.25); 
-    border: 2px solid #000000; 
-    transition: all 0.3s ease; 
-    min-width: 38px;
-    max-width: 100%;
-    line-height: 1.3;
-    text-align: center;
-    word-break: break-all;
-}
-.house-num:hover { transform: scale(1.05); }
-
-/* 🔥 শেষ নম্বর - বক্স ছোট করে টেক্সট অ্যাডজাস্ট */
-.ending-num { 
-    background: linear-gradient(135deg, #8b0000, #660000); 
-    color: white; 
-    padding: 4px 8px; 
-    border-radius: 8px; 
-    font-weight: 800; 
-    font-size: 1.3rem; 
-    display: inline-block; 
-    box-shadow: 0 3px 12px rgba(139,0,0,0.25); 
-    border: 2px solid #000000; 
-    transition: all 0.3s ease; 
-    min-width: 38px;
-    max-width: 100%;
-    line-height: 1.3;
-    text-align: center;
-    word-break: break-all;
-}
-.ending-num:hover { transform: scale(1.05); }
-
-/* ============================================================ */
-/* 🔥 মন্থওয়াইজ সেকশন - প্রিভিয়াস রেজাল্ট (বড় করা হয়েছে) */
-/* ============================================================ */
-.monthwise-section { 
-    background: #f0f6fa; 
-    border-radius: 1rem; 
-    padding: 1.5rem; 
-    margin: 1rem 0; 
-    border: 2px solid #4a8ab5; 
-}
-.monthwise-title { 
-    font-size: 1.4rem; 
-    font-weight: 700; 
-    color: #0a3d6b; 
-    text-align: center; 
-    margin-bottom: 0.8rem;
-}
-.selector-container { 
-    display: flex; 
-    gap: 1rem; 
-    justify-content: center; 
-    margin: 0.8rem 0; 
-    flex-wrap: wrap; 
-}
-.selector-container select { 
-    padding: 0.7rem 1.5rem; 
-    border-radius: 50px; 
-    border: 2px solid #4a8ab5; 
-    background: #ffffff; 
-    font-weight: 600; 
-    cursor: pointer; 
-    font-size: 1.1rem; 
-    color: #0a3d6b; 
-}
-.selector-container select:focus { border-color: #0a3d6b; outline: none; }
-.result-display-table { 
-    width: 100%; 
-    border-collapse: collapse; 
-    font-size: 1.1rem; 
-    background: #ffffff; 
-    border-radius: 0.7rem; 
-    overflow: hidden; 
-    border: 1px solid #4a8ab5; 
-}
-.result-display-table th { 
-    background: #0a3d6b; 
-    color: #ffffff; 
-    padding: 14px; 
-    font-size: 1.1rem; 
-    font-weight: 700; 
-}
-.result-display-table td { 
-    padding: 14px; 
-    text-align: center; 
-    border-bottom: 1px solid #4a8ab5; 
-    font-size: 1.3rem; 
-}
-
-/* ============================================================ */
-/* 🔥 প্রিভিয়াস বাটন - ডিপ আলট্রা গ্রিন */
-/* ============================================================ */
-.btn-previous-sky {
+/* ===== 2. সেকেন্ডারি CTA বাটন - রেজাল্ট কার্ডের জন্য ===== */
+.cta-secondary-btn {
     display: inline-block;
-    padding: 0.4rem 1.8rem;
-    border-radius: 50px;
+    background: linear-gradient(135deg, #0a3d6b, #1a5a8a);
+    color: white;
+    padding: 12px 30px;
+    font-size: 1.1rem;
     font-weight: 700;
-    font-size: 0.9rem;
+    border-radius: 50px;
     text-decoration: none;
-    background: linear-gradient(135deg, #0a5a30, #064a25);
-    color: #ffffff;
-    border: 2px solid #1a7a4a;
+    box-shadow: 0 4px 20px rgba(10, 61, 107, 0.3);
+    border: 2px solid #4a8ab5;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(10, 90, 48, 0.4);
     text-align: center;
-    animation: glowUltraGreen 2s ease-in-out infinite alternate;
-}
-@keyframes glowUltraGreen {
-    0% { box-shadow: 0 4px 15px rgba(10, 90, 48, 0.4); }
-    100% { box-shadow: 0 4px 30px rgba(10, 90, 48, 0.6), 0 0 50px rgba(10, 90, 48, 0.15); }
-}
-.btn-previous-sky:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 30px rgba(10, 90, 48, 0.6);
-    background: linear-gradient(135deg, #1a7a4a, #0a5a30);
 }
 
-/* ============================================================ */
-/* 🔥 কমন নাম্বার বাটন - ছোট, ডানদিকে */
-/* ============================================================ */
-.btn-common-small {
-    display: inline-block;
-    padding: 0.4rem 1.4rem;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    text-decoration: none;
-    background: linear-gradient(135deg, #0d6b3d, #0a4d2a);
-    color: #ffffff;
-    border: 2px solid #1a8a55;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(13, 107, 61, 0.2);
-    text-align: center;
-}
-.btn-common-small:hover {
+.cta-secondary-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 25px rgba(13, 107, 61, 0.4);
-    background: linear-gradient(135deg, #1a8a55, #0d6b3d);
-}
-
-.btn-common-small-khanapara {
-    display: inline-block;
-    padding: 0.4rem 1.4rem;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    text-decoration: none;
-    background: linear-gradient(135deg, #0a3d6b, #062a4a);
-    color: #ffffff;
-    border: 2px solid #1a5a8a;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(10, 61, 107, 0.2);
-    text-align: center;
-}
-.btn-common-small-khanapara:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 25px rgba(10, 61, 107, 0.4);
+    box-shadow: 0 6px 30px rgba(10, 61, 107, 0.5);
     background: linear-gradient(135deg, #1a5a8a, #0a3d6b);
 }
 
-.btn-common-small-juwai {
-    display: inline-block;
-    padding: 0.4rem 1.4rem;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    text-decoration: none;
-    background: linear-gradient(135deg, #0a2a5a, #061a3a);
-    color: #ffffff;
-    border: 2px solid #1a4a8a;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(10, 42, 90, 0.2);
-    text-align: center;
-}
-.btn-common-small-juwai:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 25px rgba(10, 42, 90, 0.4);
-    background: linear-gradient(135deg, #1a4a8a, #0a2a5a);
-}
-
-.btn-common-small-night {
-    display: inline-block;
-    padding: 0.4rem 1.4rem;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    text-decoration: none;
-    background: linear-gradient(135deg, #1a0a0a, #0d0a0a);
-    color: #ffffff;
-    border: 2px solid #3d2a2a;
-    transition: all 0.3s ease;
-    text-align: center;
-}
-.btn-common-small-night:hover {
-    transform: scale(1.05);
-    background: linear-gradient(135deg, #3d2a2a, #1a0a0a);
-}
-
-.btn-common-small-morning {
-    display: inline-block;
-    padding: 0.4rem 1.4rem;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    text-decoration: none;
-    background: linear-gradient(135deg, #e6a800, #cc9900);
-    color: #1a0a00;
-    border: 2px solid #ffcc00;
-    transition: all 0.3s ease;
-    text-align: center;
-}
-.btn-common-small-morning:hover {
-    transform: scale(1.05);
-    background: linear-gradient(135deg, #ffcc00, #e6a800);
-}
-
-/* ============================================================ */
-/* 🔥 নেভিগেশন বাটন - ডিপ কালার */
-/* ============================================================ */
+/* ===== 3. নেভিগেশন বাটন - বড় ও আকর্ষণীয় ===== */
 .nav-btn-main {
     display: inline-block;
-    padding: 0.8rem 2.5rem;
+    padding: 14px 35px;
+    border-radius: 50px;
+    font-weight: 800;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
+.nav-btn-main:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 35px rgba(0,0,0,0.15);
+}
+
+/* ===== 4. কমন বাটন - ছোট কিন্তু আকর্ষণীয় ===== */
+.btn-common-small,
+.btn-common-small-khanapara,
+.btn-common-small-juwai,
+.btn-common-small-night,
+.btn-common-small-morning {
+    display: inline-block;
+    padding: 10px 22px;
     border-radius: 50px;
     font-weight: 700;
+    font-size: 0.9rem;
     text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn-common-small:hover,
+.btn-common-small-khanapara:hover,
+.btn-common-small-juwai:hover,
+.btn-common-small-night:hover,
+.btn-common-small-morning:hover {
+    transform: scale(1.06);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+}
+
+/* ===== 5. প্রিভিয়াস বাটন - আলট্রা গ্রিন ===== */
+.btn-previous-sky {
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    background: linear-gradient(135deg, #0a5a30, #064a25, #0a5a30);
+    background-size: 200% 200%;
+    animation: ultraGreenGlow 3s ease-in-out infinite;
+    color: #ffffff;
+    border: 2px solid #1a7a4a;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(10, 90, 48, 0.4);
+    text-align: center;
+}
+
+.btn-previous-sky:hover {
+    transform: scale(1.06);
+    box-shadow: 0 6px 35px rgba(10, 90, 48, 0.6);
+}
+
+@keyframes ultraGreenGlow {
+    0% { box-shadow: 0 4px 20px rgba(10, 90, 48, 0.4); }
+    50% { box-shadow: 0 4px 40px rgba(10, 90, 48, 0.7), 0 0 60px rgba(10, 90, 48, 0.15); }
+    100% { box-shadow: 0 4px 20px rgba(10, 90, 48, 0.4); }
+}
+
+/* ===== 6. ড্রিম বাটন ===== */
+.dream-btn {
+    background: linear-gradient(135deg, #0a3d6b, #1a5a8a);
+    border: none;
+    padding: 14px 30px;
+    border-radius: 60px;
+    font-weight: 800;
+    color: white;
+    cursor: pointer;
     font-size: 1.1rem;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 20px rgba(10, 61, 107, 0.3);
+    border: 2px solid #4a8ab5;
 }
-.nav-btn-main:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+
+.dream-btn:hover {
+    background: linear-gradient(135deg, #1a5a8a, #0a3d6b);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 35px rgba(10, 61, 107, 0.5);
 }
-.nav-btn-small {
+
+/* ===== 7. OMG10 ফ্ল্যাশ বাটন - আরও আকর্ষণীয় ===== */
+.omg10-flash {
     display: inline-block;
-    padding: 0.5rem 1.5rem;
-    border-radius: 50px;
-    font-weight: 700;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-}
-.nav-btn-small:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-.btn-row-three {
-    display: flex;
-    gap: 0.8rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 0.2rem 0 0.8rem 0;
-}
-.btn-row-three a {
-    flex: 1;
-    min-width: 100px;
-    max-width: 180px;
-    text-align: center;
-}
-
-/* -------- বাটন কালার -------- */
-.btn-shillong-result { background: linear-gradient(135deg, #0d6b3d, #0a4d2a); color: white; border: 2px solid #1a8a55; box-shadow: 0 4px 15px rgba(13, 107, 61, 0.2); }
-.btn-shillong-result:hover { background: linear-gradient(135deg, #1a8a55, #0d6b3d); }
-.btn-khanapara { background: linear-gradient(135deg, #0a3d6b, #062a4a); color: white; border: 2px solid #1a5a8a; box-shadow: 0 4px 15px rgba(10, 61, 107, 0.3); }
-.btn-khanapara:hover { background: linear-gradient(135deg, #1a5a8a, #0a3d6b); }
-.btn-juwai { background: linear-gradient(135deg, #0a2a5a, #061a3a); color: white; border: 2px solid #1a4a8a; box-shadow: 0 4px 15px rgba(10, 42, 90, 0.3); }
-.btn-juwai:hover { background: linear-gradient(135deg, #1a4a8a, #0a2a5a); }
-.btn-morning { background: linear-gradient(135deg, #e6a800, #cc9900); color: #1a0a00; border: 2px solid #ffcc00; }
-.btn-morning:hover { background: linear-gradient(135deg, #ffcc00, #e6a800); }
-.btn-night { background: linear-gradient(135deg, #1a0a0a, #0d0a0a); color: white; border: 2px solid #3d2a2a; }
-.btn-night:hover { background: linear-gradient(135deg, #3d2a2a, #1a0a0a); }
-.btn-previous { background: linear-gradient(135deg, #0a5a30, #064a25); color: white; border: 2px solid #1a7a4a; box-shadow: 0 4px 15px rgba(10, 90, 48, 0.3); }
-.btn-previous:hover { background: linear-gradient(135deg, #1a7a4a, #0a5a30); }
-
-/* ============================================================ */
-/* 🔥 ড্রিম চার্ট (বড় করা হয়েছে) */
-/* ============================================================ */
-.dream-chart-section { 
-    background: #f0f6fa; 
-    border-radius: 1rem; 
-    padding: 1.5rem; 
-    margin: 1rem 0; 
-    border: 2px solid #4a8ab5; 
-}
-.dream-chart-title { 
-    font-size: 1.4rem; 
-    font-weight: 700; 
-    color: #0a3d6b; 
-    text-align: center; 
-    margin-bottom: 0.8rem;
-}
-.dream-chart-table { 
-    width: 100%; 
-    border-collapse: collapse; 
-    font-size: 1.1rem; 
-    background: #ffffff; 
-    border-radius: 0.7rem; 
-    overflow: hidden; 
-    border: 1px solid #4a8ab5; 
-}
-.dream-chart-table th { 
-    background: #0a3d6b; 
-    color: #ffffff; 
-    padding: 16px; 
-    font-size: 1.1rem; 
-    font-weight: 700; 
-}
-.dream-chart-table td { 
-    padding: 14px; 
-    text-align: center; 
-    border-bottom: 1px solid #4a8ab5; 
-    font-size: 1.3rem; 
-}
-.dream-chart-note { 
-    font-size: 0.95rem; 
-    color: #4a6a7a; 
-    text-align: center; 
-    margin-top: 0.6rem; 
-}
-
-/* ============================================================ */
-/* 🔥 ইতিহাস - ক্রিম ব্যাকগ্রাউন্ড + ব্লু হেডিং - ফন্ট বড় করা */
-/* ============================================================ */
-.history-section-direct { margin: 1rem 0; }
-.history-card { background: #fdf8f0; border-radius: 1rem; margin-bottom: 1rem; border: 1px solid #e8dcc8; overflow: hidden; }
-.history-title { 
-    background: #0a3d6b; 
-    color: #ffffff; 
-    padding: 16px 20px; 
-    font-weight: 900; 
-    font-size: 1.3rem; 
-    border-bottom: 2px solid #1a5a8a;
-    border-radius: 12px 12px 0 0;
-}
-.history-content { 
-    padding: 1.2rem 1.5rem; 
-    background: #fdf8f0; 
-    font-size: 1.3rem; 
-    line-height: 1.8; 
-    color: #0d0a0a; 
-    font-weight: 700;
-}
-.history-content p { font-weight: 700; color: #0d0a0a; }
-.history-content strong { color: #1a0a0a; font-weight: 900; }
-.highlight-box { background: #f5ead6; border-left: 4px solid #cc0000; padding: 0.8rem 1rem; border-radius: 0.6rem; margin: 0.8rem 0; }
-.highlight-box strong { color: #1a0a0a; font-weight: 900; }
-.rule-list { list-style: none; padding-left: 0; }
-.rule-list li { padding: 0.4rem 0; display: flex; align-items: center; gap: 8px; font-size: 1.1rem; color: #0d0a0a; font-weight: 700; }
-.rule-list li:before { content: "🏹"; font-size: 0.95rem; }
-.bn-text { color: #cc0000; font-size: 1.1rem; display: inline; margin-left: 8px; font-weight: 700; }
-
-/* ============================================================ */
-/* 🔥 স্ট্র্যাটেজি আর্টিকেল - ব্লু হেডিং - ফন্ট বড় করা */
-/* ============================================================ */
-.strategy-article-section {
-    background: #fdf8f0;
-    border-radius: 1rem;
-    padding: 1.8rem;
-    margin: 1.5rem 0;
-    border: 2px solid #e8dcc8;
-}
-.strategy-article-title {
-    background: #0a3d6b;
-    color: #ffffff;
-    padding: 18px 24px;
-    border-radius: 12px;
-    font-size: 1.6rem;
+    background: linear-gradient(135deg, #8b0000, #cc0000, #ff0000, #cc0000);
+    background-size: 300% 300%;
+    animation: omg10Gradient 2s ease-in-out infinite;
+    color: white;
+    padding: 18px 40px;
+    border-radius: 60px;
     font-weight: 900;
+    font-size: 1.3rem;
+    text-decoration: none;
+    box-shadow: 0 4px 30px rgba(204, 0, 0, 0.4);
+    border: 3px solid #ffcc00;
+    transition: transform 0.2s;
     text-align: center;
-    margin-bottom: 1rem;
-    border: 2px solid #1a5a8a;
-    box-shadow: 0 4px 15px rgba(10, 61, 107, 0.3);
-}
-.strategy-article-subtitle {
-    background: #0a3d6b;
-    color: #ffffff;
-    padding: 14px 20px;
-    border-radius: 8px;
-    font-size: 1.3rem;
-    font-weight: 800;
-    margin: 1.2rem 0 0.6rem;
-    border-left: 4px solid #ffcc00;
-    box-shadow: 0 2px 10px rgba(10, 61, 107, 0.2);
-}
-.strategy-article-text {
-    font-size: 1.3rem;
-    line-height: 1.8;
-    color: #0d0a0a;
-    margin-bottom: 0.6rem;
-    font-weight: 700;
-}
-.strategy-article-list {
-    margin: 0.5rem 0 0.6rem 1.8rem;
-    font-size: 1.2rem;
-    line-height: 1.7;
-    color: #0d0a0a;
-    font-weight: 700;
-}
-.strategy-article-list li { margin-bottom: 8px; }
-.strategy-article-highlight {
-    background: #f5ead6;
-    border-left: 4px solid #cc0000;
-    padding: 1rem;
-    border-radius: 0.6rem;
-    margin: 1rem 0;
-    font-size: 1.2rem;
-    color: #0d0a0a;
-    line-height: 1.7;
-    font-weight: 700;
-}
-.strategy-article-pro-tip {
-    background: #f5ead6;
-    border-radius: 0.7rem;
-    padding: 1rem;
-    margin-top: 1rem;
-    border-left: 4px solid #e6a800;
-}
-.strategy-article-pro-tip-text {
-    color: #0d0a0a;
-    font-size: 1.2rem;
-    font-weight: 800;
-}
-.tip-badge {
-    display: inline-block;
-    background: #cc0000;
-    color: #ffffff;
-    font-size: 0.9rem;
-    padding: 0.05rem 0.6rem;
-    border-radius: 30px;
-    margin-right: 8px;
-    font-weight: 800;
 }
 
-/* ============================================================ */
-/* 🔥 স্ট্র্যাটেজি সেকশন - ব্লু হেডিং */
-/* ============================================================ */
-.strategy-section {
-    background: #fdf8f0;
-    border-radius: 1rem;
-    padding: 1.5rem;
-    margin: 1rem 0;
-    border: 2px solid #e8dcc8;
+.omg10-flash:hover {
+    transform: scale(1.06);
+    box-shadow: 0 8px 50px rgba(204, 0, 0, 0.6);
 }
-.strategy-title {
-    background: #0a3d6b;
-    color: #ffffff;
-    padding: 16px 22px;
-    border-radius: 12px;
-    font-size: 1.4rem;
-    font-weight: 800;
-    text-align: center;
-    margin-bottom: 1rem;
-    border: 2px solid #1a5a8a;
-    box-shadow: 0 4px 15px rgba(10, 61, 107, 0.3);
+
+@keyframes omg10Gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
-.strategy-subtitle {
-    background: #0a3d6b;
-    color: #ffffff;
-    padding: 14px 20px;
-    border-radius: 8px;
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin: 1rem 0 0.5rem;
-    border-left: 4px solid #ffcc00;
-    box-shadow: 0 2px 10px rgba(10, 61, 107, 0.2);
-}
-.strategy-text {
-    font-size: 1.2rem;
-    line-height: 1.7;
-    color: #0d0a0a;
-    margin-bottom: 0.6rem;
-    font-weight: 700;
-}
-.strategy-list {
-    margin: 0.5rem 0 0.6rem 1.5rem;
+
+/* ===== 8. হোয়াটসঅ্যাপ বাটন ===== */
+.whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(95deg, #25D366, #128C7E);
+    color: white;
+    padding: 16px 35px;
+    border-radius: 60px;
     font-size: 1.15rem;
-    line-height: 1.6;
-    color: #0d0a0a;
     font-weight: 700;
-}
-.strategy-list li { margin-bottom: 8px; }
-.pro-tip {
-    background: #f5ead6;
-    border-radius: 0.7rem;
-    padding: 0.8rem;
-    margin-top: 0.8rem;
-    border-left: 3px solid #e6a800;
-}
-.pro-tip-text { color: #0d0a0a; font-size: 1.05rem; font-weight: 800; }
-.strategy-highlight {
-    background: #f5ead6;
-    border-left: 3px solid #cc0000;
-    padding: 0.8rem;
-    border-radius: 0.6rem;
-    margin: 0.8rem 0;
-    font-size: 1.05rem;
-    color: #0d0a0a;
-    line-height: 1.55;
-    font-weight: 700;
-}
-
-/* ============================================================ */
-/* 🔥 FAQ - ব্লু হেডিং (বড় করা হয়েছে) */
-/* ============================================================ */
-.faq-section { background: #fdf8f0; border-radius: 1rem; padding: 1.5rem; margin: 1rem 0; border: 2px solid #e8dcc8; }
-.faq-title {
-    background: #0a3d6b;
-    color: #ffffff;
-    padding: 16px 20px;
-    border-radius: 12px;
-    font-size: 1.4rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-    border: 2px solid #1a5a8a;
-    box-shadow: 0 4px 15px rgba(10, 61, 107, 0.3);
-}
-.faq-item { background: #ffffff; border-radius: 0.8rem; margin-bottom: 0.8rem; overflow: hidden; border: 1px solid #e8dcc8; }
-.faq-question { cursor: pointer; display: flex; justify-content: space-between; padding: 16px 20px; font-weight: 700; font-size: 1.2rem; color: #0d0a0a; background: #fdf8f0; }
-.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; background: #ffffff; padding: 0 20px; font-size: 1.2rem; line-height: 1.6; color: #0d0a0a; font-weight: 600; }
-.faq-answer.show { max-height: 500px; padding: 14px 20px; }
-.faq-icon { font-size: 1rem; font-weight: bold; color: #cc0000; }
-
-/* ============================================================ */
-/* 🔥 ভিআইপি - ডিপ গ্রিন */
-/* ============================================================ */
-.vip-premium { background: #f0f6fa; border-radius: 1rem; padding: 1.2rem; margin: 1rem 0; border: 2px solid #4a8ab5; }
-.vip-title { font-size: 1.3rem; font-weight: 800; color: #0a3d6b; }
-.locked-blur { filter: blur(3px); background: #4a8ab5; padding: 0.3rem 0.8rem; border-radius: 30px; display: inline-block; font-size: 0.95rem; color: #ffffff; }
-.vip-btn { background: #0d6b3d; border: none; padding: 0.6rem; border-radius: 60px; font-weight: bold; width: 100%; margin-top: 0.5rem; color: white; cursor: pointer; font-size: 1.1rem; transition: all 0.3s ease; }
-.vip-btn:hover { background: #0a4d2a; transform: scale(1.02); }
-.txn-field { width: 100%; padding: 0.6rem; border-radius: 60px; margin: 0.5rem 0; border: 2px solid #4a8ab5; font-size: 1rem; color: #0a3d6b; }
-.txn-field:focus { border-color: #0a3d6b; outline: none; }
-
-/* ============================================================ */
-/* 🔥 হোয়াটসঅ্যাপ বাটন */
-/* ============================================================ */
-.whatsapp-btn-container { text-align: center; margin: 1rem 0; }
-.whatsapp-btn { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(95deg, #25D366, #128C7E); color: white; padding: 0.8rem 1.5rem; border-radius: 60px; font-size: 1.1rem; font-weight: bold; text-decoration: none; animation: whatsappFlash 0.8s infinite alternate; }
-@keyframes whatsappFlash { 0% { background: #25D366; } 100% { background: #128C7E; } }
-
-/* ============================================================ */
-/* 🔥 ডিসক্লেইমার - গা dark ় নীল (চোখে আরামদায়ক) */
-/* ============================================================ */
-.disclaimer-footer {
-    margin-top: 1rem;
-    padding: 1.5rem;
-    background: #0a2a5a;
-    border: 2px solid #1a4a8a;
-    border-radius: 0.8rem;
-    font-size: 0.9rem;
-    color: #e8e8e8;
-    text-align: center;
-    font-weight: 600;
-    line-height: 1.8;
-    box-shadow: 0 4px 15px rgba(10, 42, 90, 0.3);
-}
-.disclaimer-footer strong { color: #ffcc00; }
-.disclaimer-footer a { color: #4a8ab5; text-decoration: underline; }
-.disclaimer-footer a:hover { color: #ffcc00; }
-
-/* ============================================================ */
-/* 🔥 ফুটার - সমস্ত ইন্টারনাল লিংক */
-/* ============================================================ */
-.footer-links {
-    text-align: center;
-    margin-top: 1.2rem;
-    padding-top: 1rem;
-    border-top: 2px solid #e8dcc8;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.3rem;
-}
-.footer-links a {
-    color: #0a3d6b;
     text-decoration: none;
-    margin: 0 4px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    background: #f0f6fa;
+    box-shadow: 0 4px 25px rgba(37, 211, 102, 0.3);
     transition: all 0.3s ease;
-}
-.footer-links a:hover {
-    background: #0a3d6b;
-    color: #ffffff;
-    text-decoration: none;
+    border: 2px solid rgba(255,255,255,0.2);
 }
 
-/* ============================================================ */
-/* 🔥 মোডাল */
-/* ============================================================ */
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 10000; align-items: center; justify-content: center; }
-.modal-card { background: #ffffff; width: 90%; max-width: 420px; border-radius: 0.9rem; padding: 1rem; color: #0a3d6b; border: 2px solid #4a8ab5; }
-.close-modal { float: right; font-size: 1.5rem; cursor: pointer; color: #8b0000; }
-.close-modal:hover { color: #cc0000; }
-.prev-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-.prev-table th { background: #0a3d6b; color: #ffffff; padding: 6px; text-align: center; }
-.prev-table td { padding: 6px; text-align: center; border-bottom: 1px solid #4a8ab5; }
-
-/* ============================================================ */
-/* 🔥 সোশ্যাল শেয়ার - ক্রিম */
-/* ============================================================ */
-.social-share-container {
-    background: #fdf8f0;
-    border-radius: 1rem;
-    padding: 1rem 1.2rem;
-    margin: 0.8rem 0 0.3rem 0;
-    border: 2px solid #e8dcc8;
-    text-align: center;
+.whatsapp-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 40px rgba(37, 211, 102, 0.5);
 }
-.share-title { font-size: 1rem; font-weight: 700; color: #0d0a0a; margin-bottom: 0.5rem; }
-.share-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+
+/* ===== 9. সোশ্যাল শেয়ার বাটন ===== */
 .share-btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 0.5rem 1rem;
+    gap: 8px;
+    padding: 12px 22px;
     border-radius: 50px;
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: white;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
-.share-btn:hover { transform: translateY(-2px) scale(1.05); }
-.share-btn.facebook { background: #1877F2; }
-.share-btn.facebook:hover { background: #166fe5; }
-.share-btn.whatsapp { background: #25D366; }
-.share-btn.whatsapp:hover { background: #1da851; }
-.share-btn.twitter { background: #000000; }
-.share-btn.twitter:hover { background: #1a1a1a; }
-.share-btn.telegram { background: #0088cc; }
-.share-btn.telegram:hover { background: #0077b3; }
-.share-btn.copy { background: #6c7a89; }
-.share-btn.copy:hover { background: #4a5a6a; }
 
-/* ============================================================ */
-/* 🔥 ট্রেন্ডিং সেকশন - ক্রিম */
-/* ============================================================ */
-.section-trending { margin: 1.5rem 0; }
-.trending-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 0.8rem;
-    margin: 1rem 0;
+.share-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 30px rgba(0,0,0,0.2);
 }
-.trending-item {
-    text-align: center;
-    padding: 0.8rem;
-    background: #fdf8f0;
-    border-radius: 0.8rem;
-    border: 2px solid #e8dcc8;
-}
-.trending-item .t-number { font-size: 2rem; font-weight: 900; color: #0d0a0a; }
-.trending-item .t-count { font-size: 0.75rem; color: #6c7a89; }
-.trending-item .t-hot { color: #cc0000; font-size: 0.8rem; font-weight: 700; }
 
-/* ============================================================ */
-/* 🔥 লিডারবোর্ড - ক্রিম */
-/* ============================================================ */
-.section-leaderboard { margin: 1.5rem 0; }
-.leaderboard-table { overflow-x: auto; }
-.leaderboard-table table {
+/* ===== 10. VIP বাটন ===== */
+.vip-btn {
+    background: linear-gradient(135deg, #0d6b3d, #0a4d2a);
+    border: none;
+    padding: 14px;
+    border-radius: 60px;
+    font-weight: 700;
     width: 100%;
-    border-collapse: collapse;
-    background: #fdf8f0;
-    border-radius: 0.8rem;
-    overflow: hidden;
-    border: 2px solid #e8dcc8;
-}
-.leaderboard-table th { background: #0a3d6b; color: #ffffff; padding: 14px; font-size: 0.95rem; text-align: center; }
-.leaderboard-table td { padding: 14px; text-align: center; font-size: 1rem; color: #0d0a0a; border-bottom: 1px solid #e8dcc8; font-weight: 600; }
-.leaderboard-table .rank-1 { color: #e6a800; font-weight: 900; }
-.leaderboard-table .rank-2 { color: #4a8ab5; font-weight: 700; }
-.leaderboard-table .rank-3 { color: #0d6b3d; font-weight: 700; }
-
-/* ============================================================ */
-/* 🔥 কমেন্ট সিস্টেম - ক্রিম */
-/* ============================================================ */
-.section-comments { margin: 1.5rem 0; }
-.comment-box {
-    background: #fdf8f0;
-    border-radius: 1rem;
-    padding: 1.5rem;
-    border: 2px solid #e8dcc8;
-}
-.comment-box textarea {
-    width: 100%;
-    padding: 1rem;
-    border-radius: 0.8rem;
-    border: 2px solid #e8dcc8;
-    background: #ffffff;
-    color: #0d0a0a;
-    font-size: 1rem;
-    min-height: 80px;
-    resize: vertical;
-    outline: none;
-    font-weight: 500;
-}
-.comment-box textarea:focus { border-color: #cc0000; }
-.comment-input-row {
-    display: flex;
-    gap: 0.5rem;
     margin-top: 0.5rem;
-    flex-wrap: wrap;
-}
-.comment-input-row input {
-    flex: 1;
-    padding: 0.8rem 1rem;
-    border-radius: 50px;
-    border: 2px solid #e8dcc8;
-    background: #ffffff;
-    color: #0d0a0a;
-    outline: none;
-    min-width: 120px;
-    font-weight: 500;
-}
-.comment-input-row input:focus { border-color: #cc0000; }
-.comment-input-row button {
-    padding: 0.8rem 1.5rem;
-    border-radius: 50px;
-    background: #0a3d6b;
-    border: none;
-    color: #ffffff;
-    font-weight: 700;
+    color: white;
     cursor: pointer;
+    font-size: 1.1rem;
     transition: all 0.3s ease;
-    font-size: 1rem;
+    border: 2px solid #1a8a55;
+    box-shadow: 0 4px 20px rgba(13, 107, 61, 0.3);
 }
-.comment-input-row button:hover { background: #062a4a; transform: scale(1.02); }
-.comment-list { margin-top: 1rem; max-height: 300px; overflow-y: auto; }
-.comment-item {
-    padding: 0.8rem;
-    border-bottom: 1px solid #e8dcc8;
-    display: flex;
-    gap: 0.8rem;
-}
-.comment-item .c-avatar {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #0a3d6b, #0d6b3d);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    color: #ffffff;
-    flex-shrink: 0;
-    font-size: 1rem;
-}
-.comment-item .c-body .c-name { font-weight: 700; color: #0a3d6b; font-size: 0.95rem; }
-.comment-item .c-body .c-text { font-size: 0.9rem; color: #0d0a0a; font-weight: 500; }
-.comment-item .c-body .c-time { font-size: 0.7rem; color: #6c7a89; }
 
-/* ============================================================ */
-/* 🔥 নিউজলেটার - ক্রিম */
-/* ============================================================ */
-.section-newsletter { margin: 1.5rem 0; }
-.newsletter-box {
-    background: linear-gradient(135deg, #f5ead6, #e8dcc8);
-    border-radius: 1.2rem;
-    padding: 2rem;
-    text-align: center;
-    border: 2px solid #dcc8b0;
+.vip-btn:hover {
+    background: linear-gradient(135deg, #0a4d2a, #0d6b3d);
+    transform: scale(1.02);
+    box-shadow: 0 6px 35px rgba(13, 107, 61, 0.5);
 }
-.newsletter-box h3 { font-size: 1.4rem; color: #0d0a0a; font-weight: 800; }
-.newsletter-box p { font-size: 1rem; color: #3d2a1a; margin: 0.3rem 0 0.8rem; font-weight: 600; }
-.newsletter-form {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-.newsletter-form input {
-    padding: 0.8rem 1.2rem;
-    border-radius: 50px;
-    border: 2px solid #dcc8b0;
-    background: #ffffff;
-    color: #0d0a0a;
-    width: 280px;
-    outline: none;
-    font-weight: 500;
-    font-size: 1rem;
-}
-.newsletter-form input:focus { border-color: #cc0000; }
+
+/* ===== 11. সাবস্ক্রাইব বাটন ===== */
 .newsletter-form button {
-    padding: 0.8rem 1.8rem;
+    padding: 14px 35px;
     border-radius: 50px;
-    background: #cc0000;
+    background: linear-gradient(135deg, #cc0000, #8b0000);
+    border: none;
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 20px rgba(204, 0, 0, 0.3);
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
+.newsletter-form button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 35px rgba(204, 0, 0, 0.5);
+    background: linear-gradient(135deg, #8b0000, #cc0000);
+}
+
+/* ===== 12. কমেন্ট পোস্ট বাটন ===== */
+.comment-input-row button {
+    padding: 14px 30px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #0a3d6b, #1a5a8a);
     border: none;
     color: #ffffff;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 1rem;
-}
-.newsletter-form button:hover { background: #8b0000; transform: scale(1.02); }
-.newsletter-msg { margin-top: 0.5rem; font-size: 0.9rem; color: #cc0000; font-weight: 600; }
-
-/* ============================================================ */
-/* 🔥 গাইড সেকশন - ক্রিম */
-/* ============================================================ */
-.section-guide { margin: 1.5rem 0; }
-.guide-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1rem;
-    margin: 1rem 0;
-}
-.guide-step {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-    background: #fdf8f0;
-    padding: 1.2rem;
-    border-radius: 1rem;
-    border: 2px solid #e8dcc8;
-}
-.guide-step .step-number { font-size: 2.2rem; font-weight: 900; color: #cc0000; min-width: 45px; text-align: center; }
-.guide-step .step-text h4 { color: #0d0a0a; font-size: 1.1rem; font-weight: 700; }
-.guide-step .step-text p { color: #4a3a2a; font-size: 0.95rem; line-height: 1.5; font-weight: 500; }
-
-/* ============================================================ */
-/* 🔥 অ্যাবাউট সেকশন - ক্রিম */
-/* ============================================================ */
-.section-about { margin: 1.5rem 0; }
-.about-content {
-    background: #fdf8f0;
-    border-radius: 1rem;
-    padding: 1.5rem;
-    border: 2px solid #e8dcc8;
-}
-.about-content p { color: #0d0a0a; font-size: 1.05rem; line-height: 1.6; margin-bottom: 0.5rem; font-weight: 600; }
-.about-stats {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 1rem;
-    flex-wrap: wrap;
-}
-.about-stat {
-    text-align: center;
-    padding: 0.5rem 1.5rem;
-    background: #ffffff;
-    border-radius: 50px;
-    border: 2px solid #e8dcc8;
-    font-size: 0.95rem;
-    color: #4a3a2a;
-    font-weight: 500;
-}
-.about-stat span { display: block; font-size: 1.8rem; font-weight: 900; color: #cc0000; }
-
-/* ============================================================ */
-/* 🔥 টোস্ট নোটিফিকেশন */
-/* ============================================================ */
-.toast-notification {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #0a3d6b;
-    color: #ffffff;
-    padding: 14px 28px;
-    border-radius: 50px;
-    font-size: 1rem;
-    font-weight: 600;
-    z-index: 99999;
-    border: 2px solid #4a8ab5;
-    box-shadow: 0 4px 25px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 20px rgba(10, 61, 107, 0.3);
 }
 
-/* ============================================================ */
-/* 🔥 OMG10 ফ্ল্যাশ */
-/* ============================================================ */
-.omg10-flash {
-    animation: omg10Flash 0.8s infinite alternate;
-    border: 2px solid #fff;
-    position: relative;
-    overflow: hidden;
-}
-.omg10-flash::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
-    animation: omg10Shine 1.5s infinite;
-}
-@keyframes omg10Flash {
-    0% { box-shadow: 0 0 10px rgba(204, 0, 0, 0.2); transform: scale(1); }
-    50% { box-shadow: 0 0 25px rgba(204, 0, 0, 0.4); transform: scale(1.02); }
-    100% { box-shadow: 0 0 10px rgba(204, 153, 0, 0.2); transform: scale(1); }
-}
-@keyframes omg10Shine {
-    0% { transform: translateX(-100%) rotate(45deg); }
-    100% { transform: translateX(100%) rotate(45deg); }
-}
-.omg10-text {
-    animation: omg10TextPulse 0.8s infinite alternate;
-}
-@keyframes omg10TextPulse {
-    0% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.2); }
-    100% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
+.comment-input-row button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 35px rgba(10, 61, 107, 0.5);
 }
 
-/* ============================================================ */
-/* 🔥 মোবাইল রেস্পন্সিভ CSS */
-/* ============================================================ */
+/* ===== 13. মোবাইল রেস্পন্সিভ - বাটন সাইজ অ্যাডজাস্ট ===== */
 @media (max-width: 768px) {
-    body { 
-        padding: 0.5rem; 
-        font-size: 17px; 
-        background: #0a0e14; 
+    .cta-main-btn {
+        padding: 16px 30px;
+        font-size: 1.2rem;
+        width: 100%;
+        max-width: 350px;
     }
-    .container { 
-        padding: 0.8rem; 
-        border-radius: 1rem; 
+    .omg10-flash {
+        padding: 14px 25px;
+        font-size: 1.1rem;
+        width: 100%;
+        max-width: 350px;
     }
-    .language-bar { 
-        padding: 0.4rem; 
-        font-size: 0.9rem; 
-        flex-wrap: wrap; 
+    .whatsapp-btn {
+        padding: 14px 25px;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 350px;
+        justify-content: center;
     }
-    .language-bar a { 
-        margin: 0 5px; 
-        padding: 0.3rem 0.9rem; 
-        font-size: 0.85rem; 
+    .nav-btn-main {
+        padding: 12px 25px;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 200px;
     }
-    .site-brand { padding: 0.6rem; }
-    .site-logo { max-width: 150px; }
-    .name-box { padding: 0.4rem 1rem; }
-    .name-box h1 { font-size: 1.1rem; }
-    .name-box .bn-title { font-size: 0.85rem; }
-    .domain { font-size: 0.8rem; padding: 0.25rem 0.8rem; }
-    .live-badge-main { font-size: 0.8rem; padding: 0.3rem 1rem; }
-    
-    .seo-h2, .seo-h2-orange, .seo-h2-dark { 
-        padding: 14px 16px; 
-        font-size: 1.1rem; 
-        margin: 14px 0; 
+    .share-btn {
+        padding: 10px 16px;
+        font-size: 0.8rem;
     }
-    .dream-card { padding: 0.8rem; }
-    .dream-title { font-size: 1.2rem; }
-    .dream-subtitle { font-size: 0.9rem; }
-    .dream-input { width: 160px; padding: 0.6rem 1rem; font-size: 0.9rem; }
-    .dream-btn { padding: 0.6rem 1rem; font-size: 0.9rem; }
-    .dream-num-box { min-width: 60px; padding: 0.4rem 0.8rem; font-size: 1.1rem; }
-    
-    .result-card { padding: 0.6rem; }
-    .venue-name { font-size: 1rem; }
-    .date-box { font-size: 0.8rem; padding: 0.25rem 0.8rem; }
-    .fr-box, .sr-box { padding: 0.4rem; }
-    .result-number { font-size: 1.5rem; padding: 0.2rem 0.9rem; }
-    .waiting-number-display { font-size: 0.8rem; padding: 0.25rem 0.6rem; }
-    .timing-dual { flex-direction: column; gap: 0.4rem; }
-    .info-row { flex-direction: column; align-items: flex-start; gap: 4px; }
-    
-    /* কমন নাম্বার বক্স - মোবাইলে অ্যাডজাস্ট */
-    .common-venue-card { padding: 0.8rem; }
-    .common-venue-title { font-size: 1.2rem; padding: 14px 16px; }
-    .common-table { font-size: 1rem; }
-    .common-table th { font-size: 0.85rem; padding: 10px 8px; }
-    .common-table td { font-size: 1.1rem; padding: 10px 8px; }
-    .direct-num, .house-num, .ending-num { font-size: 1.2rem; padding: 4px 8px; min-width: 38px; }
-    .round-cell { font-size: 1rem; }
-    
-    /* কলামের宽度 - মোবাইলে অ্যাডজাস্ট */
-    .common-table th:first-child { width: 20%; }
-    .common-table th:nth-child(2) { width: 30%; }
-    .common-table th:nth-child(3) { width: 25%; }
-    .common-table th:nth-child(4) { width: 25%; }
-    
-    .monthwise-section { padding: 1rem; }
-    .monthwise-title { font-size: 1.2rem; }
-    .selector-container select { font-size: 0.95rem; padding: 0.5rem 1rem; }
-    .result-display-table th { font-size: 1rem; padding: 10px; }
-    .result-display-table td { font-size: 1.1rem; padding: 10px; }
-    
-    .dream-chart-section { padding: 1rem; }
-    .dream-chart-title { font-size: 1.2rem; }
-    .dream-chart-table th { font-size: 1rem; padding: 12px; }
-    .dream-chart-table td { font-size: 1.1rem; padding: 12px; }
-    
-    .history-title { font-size: 1.1rem; padding: 14px 16px; }
-    .history-content { padding: 1rem; font-size: 1.1rem; }
-    .strategy-title { font-size: 1.2rem; }
-    .strategy-subtitle { font-size: 1.05rem; }
-    .strategy-text, .strategy-list { font-size: 1.05rem; }
-    .strategy-article-text { font-size: 1.1rem; }
-    .strategy-article-list { font-size: 1.05rem; }
-    .strategy-article-title { font-size: 1.3rem; }
-    .strategy-article-subtitle { font-size: 1.1rem; }
-    
-    .faq-title { font-size: 1.2rem; }
-    .faq-question { font-size: 1.05rem; padding: 14px 16px; }
-    .faq-answer { font-size: 1.05rem; padding: 0 16px; }
-    .faq-answer.show { padding: 12px 16px; }
-    
-    .vip-title { font-size: 1.1rem; }
-    .whatsapp-btn { font-size: 0.95rem; padding: 0.6rem 1.2rem; }
-    .disclaimer-footer { font-size: 0.8rem; padding: 1rem; }
-    .footer-links a { font-size: 0.8rem; margin: 0 4px; }
-    .bn-text { font-size: 0.95rem; }
-    .pro-tip-text { font-size: 0.95rem; }
-    .strategy-highlight { font-size: 0.95rem; }
-    .locked-blur { font-size: 0.8rem; }
-    .txn-field { font-size: 0.9rem; }
-    .modal-card { padding: 0.8rem; }
-    .rule-list li { font-size: 0.95rem; }
-    .prev-btn { font-size: 0.8rem; padding: 0.25rem 0.7rem; }
-    .result-display-table { font-size: 0.85rem; display: block; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
-    .result-display-table th, .result-display-table td { padding: 6px 10px; font-size: 1rem; min-width: 65px; }
-    .result-display-table th:first-child, .result-display-table td:first-child { min-width: 85px; }
-    .selector-container { gap: 0.5rem; flex-wrap: wrap; }
-    .selector-container select { font-size: 0.85rem; padding: 0.4rem 0.8rem; max-width: 100%; width: auto; }
-    .card-footer-buttons { flex-direction: column; align-items: stretch; gap: 0.5rem; }
-    .card-footer-buttons a { width: 100%; text-align: center; font-size: 0.85rem; padding: 0.3rem 1.2rem; }
-    .guide-content { grid-template-columns: 1fr; }
-    .about-stats { flex-direction: column; align-items: center; }
-    .strategy-list { margin-left: 0.8rem; }
-    .highlight-box { padding: 0.6rem; }
-    .faq-answer.show { max-height: 600px; }
+    .btn-common-small,
+    .btn-common-small-khanapara,
+    .btn-common-small-juwai,
+    .btn-common-small-night,
+    .btn-common-small-morning {
+        padding: 8px 18px;
+        font-size: 0.8rem;
+        width: 100%;
+        max-width: 180px;
+    }
+    .cta-secondary-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 280px;
+    }
+    .dream-btn {
+        padding: 12px 25px;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 200px;
+    }
+    .vip-btn {
+        padding: 12px;
+        font-size: 1rem;
+    }
+    .newsletter-form button {
+        padding: 12px 25px;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 200px;
+    }
+    .comment-input-row button {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 200px;
+    }
 }
 
 @media (max-width: 480px) {
-    body { 
-        padding: 0.3rem; 
-        font-size: 15px; 
-        background: #0a0e14; 
+    .cta-main-btn {
+        padding: 14px 20px;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 300px;
     }
-    .container { 
-        padding: 0.5rem; 
-        border-radius: 0.8rem; 
+    .omg10-flash {
+        padding: 12px 20px;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 300px;
     }
-    .language-bar { 
-        padding: 0.25rem; 
-        font-size: 0.75rem; 
+    .whatsapp-btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 300px;
     }
-    .language-bar a { 
-        padding: 0.2rem 0.6rem; 
-        font-size: 0.7rem; 
-        margin: 0 3px; 
+    .nav-btn-main {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 160px;
     }
-    .site-logo { max-width: 110px; }
-    .name-box h1 { font-size: 0.9rem; }
-    .name-box .bn-title { font-size: 0.7rem; }
-    .seo-h2, .seo-h2-orange, .seo-h2-dark { 
-        padding: 10px 12px; 
-        font-size: 0.9rem; 
-        margin: 10px 0; 
-    }
-    .dream-flex { flex-direction: column; align-items: center; gap: 0.5rem; }
-    .dream-input { width: 100%; max-width: 220px; padding: 0.5rem 0.8rem; font-size: 0.85rem; }
-    .dream-btn { padding: 0.5rem 0.8rem; font-size: 0.85rem; }
-    .number-group { gap: 0.5rem; }
-    .dream-num-box { min-width: 50px; font-size: 0.95rem; padding: 0.3rem 0.6rem; }
-    .dream-table th, .dream-table td { padding: 6px; font-size: 1rem; }
-    
-    .result-card { padding: 0.4rem; }
-    .venue-name { font-size: 0.9rem; }
-    .result-number { font-size: 1.3rem; padding: 0.2rem 0.7rem; }
-    .waiting-number-display { font-size: 0.7rem; }
-    
-    /* কমন নাম্বার বক্স - ছোট মোবাইলে অ্যাডজাস্ট */
-    .common-venue-card { padding: 0.5rem; }
-    .common-venue-title { font-size: 1rem; padding: 12px 14px; }
-    .common-table { font-size: 0.85rem; }
-    .common-table th { font-size: 0.75rem; padding: 8px 5px; }
-    .common-table td { font-size: 0.95rem; padding: 8px 5px; }
-    .direct-num, .house-num, .ending-num { font-size: 1rem; padding: 3px 7px; min-width: 32px; }
-    .round-cell { font-size: 0.85rem; }
-    .round-cell span { font-size: 0.5rem; }
-    
-    /* কলামের宽度 - ছোট মোবাইলে অ্যাডজাস্ট */
-    .common-table th:first-child { width: 22%; }
-    .common-table th:nth-child(2) { width: 28%; }
-    .common-table th:nth-child(3) { width: 25%; }
-    .common-table th:nth-child(4) { width: 25%; }
-    
-    .monthwise-section { padding: 0.8rem; }
-    .monthwise-title { font-size: 1rem; }
-    .selector-container select { font-size: 0.8rem; padding: 0.4rem 0.7rem; }
-    .result-display-table th { font-size: 0.85rem; padding: 8px; }
-    .result-display-table td { font-size: 0.95rem; padding: 8px; }
-    
-    .dream-chart-section { padding: 0.8rem; }
-    .dream-chart-title { font-size: 1rem; }
-    .dream-chart-table th { font-size: 0.85rem; padding: 10px; }
-    .dream-chart-table td { font-size: 0.95rem; padding: 10px; }
-    
-    .history-content { font-size: 0.95rem; padding: 0.8rem; }
-    .history-title { font-size: 0.95rem; padding: 12px 14px; }
-    .strategy-text, .strategy-list { font-size: 0.95rem; }
-    .strategy-article-text { font-size: 0.95rem; }
-    .strategy-article-list { font-size: 0.9rem; }
-    .strategy-article-title { font-size: 1.1rem; }
-    .strategy-title { font-size: 1rem; }
-    .strategy-subtitle { font-size: 0.9rem; }
-    .strategy-list { margin-left: 0.6rem; }
-    .tip-badge { font-size: 0.7rem; padding: 0.05rem 0.4rem; }
-    
-    .faq-title { font-size: 1rem; }
-    .faq-question { font-size: 0.9rem; padding: 12px 14px; }
-    .faq-answer { font-size: 0.9rem; padding: 0 14px; }
-    .faq-answer.show { padding: 10px 14px; }
-    
-    .domain { font-size: 0.7rem; padding: 0.2rem 0.6rem; }
-    .live-badge-main { font-size: 0.7rem; padding: 0.2rem 0.8rem; }
-    .result-display-table { font-size: 0.7rem; }
-    .result-display-table th, .result-display-table td { padding: 5px 8px; font-size: 0.85rem; min-width: 55px; }
-    .result-display-table th:first-child, .result-display-table td:first-child { min-width: 70px; }
-    .selector-container select { font-size: 0.75rem; padding: 0.3rem 0.6rem; }
-    .calc-group input { font-size: 0.9rem; padding: 0.4rem 0.6rem; }
-    .result-item .r-value { font-size: 1.2rem; }
-    .trending-grid { grid-template-columns: repeat(3, 1fr); }
-    .guide-step { flex-direction: column; align-items: center; text-align: center; }
-    .about-stat span { font-size: 1.3rem; }
-    .card-footer-buttons { flex-direction: column; align-items: stretch; gap: 0.4rem; }
-    .card-footer-buttons a { width: 100%; text-align: center; font-size: 0.75rem; padding: 0.25rem 1rem; }
-    .common-table th { 
-        background: linear-gradient(135deg, #003366, #0055aa, #003366);
-        background-size: 200% 200%;
-        animation: gradientShiftHD 5s ease-in-out infinite;
-        border: 2px solid #002244;
+    .share-btn {
+        padding: 8px 14px;
         font-size: 0.7rem;
-        padding: 6px 4px;
     }
-    .faq-answer.show { max-height: 500px; }
-    .btn { font-size: 0.8rem; padding: 0.4rem 1.2rem; }
-    .common-time-badge { font-size: 0.75rem; padding: 0.4rem; }
-    .share-title { font-size: 0.8rem; }
-    .share-btn { font-size: 0.7rem; padding: 0.3rem 0.7rem; }
-    .newsletter-box h3 { font-size: 1.1rem; }
-    .newsletter-box p { font-size: 0.85rem; }
-    .newsletter-form input { font-size: 0.85rem; padding: 0.5rem 0.8rem; width: 200px; }
-    .newsletter-form button { font-size: 0.85rem; padding: 0.5rem 1.2rem; }
-    .guide-step .step-number { font-size: 1.8rem; min-width: 35px; }
-    .guide-step .step-text h4 { font-size: 0.9rem; }
-    .guide-step .step-text p { font-size: 0.8rem; }
-    .about-content p { font-size: 0.9rem; }
-    .about-stat { font-size: 0.8rem; padding: 0.3rem 1rem; }
-    .about-stat span { font-size: 1.3rem; }
-    .comment-box textarea { font-size: 0.85rem; }
-    .comment-input-row input { font-size: 0.85rem; padding: 0.5rem 0.8rem; }
-    .comment-input-row button { font-size: 0.85rem; padding: 0.5rem 1rem; }
-    .comment-item .c-body .c-name { font-size: 0.8rem; }
-    .comment-item .c-body .c-text { font-size: 0.75rem; }
-    .disclaimer-footer { font-size: 0.65rem; padding: 0.8rem; }
-    .footer-links a { font-size: 0.7rem; padding: 0.2rem 0.5rem; }
+    .btn-common-small,
+    .btn-common-small-khanapara,
+    .btn-common-small-juwai,
+    .btn-common-small-night,
+    .btn-common-small-morning {
+        padding: 6px 14px;
+        font-size: 0.7rem;
+        width: 100%;
+        max-width: 150px;
+    }
+    .cta-secondary-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 240px;
+    }
+    .dream-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 180px;
+    }
 }
