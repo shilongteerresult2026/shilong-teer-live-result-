@@ -62,14 +62,17 @@
     <meta name="monetag" content="e3a0521c07fdafddf5dcf60165108aa8" />
     <meta name="50064c663ff903c2e60fcbe064af79fac42c5954" content="50064c663ff903c2e60fcbe064af79fac42c5954" />
 
-    <!-- OneSignal Push Notification -->
+    <!-- ============================================================ -->
+    <!-- 🔥 OneSignal Push Notification - App ID সেট করা হয়েছে -->
+    <!-- ============================================================ -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
         window.OneSignalDeferred = window.OneSignalDeferred || [];
-        OneSignalDeferred.push(function(OneSignal) {
-            OneSignal.init({
-                appId: "YOUR_ONESIGNAL_APP_ID",
+        OneSignalDeferred.push(async function(OneSignal) {
+            await OneSignal.init({
+                appId: "9e5d3865-bf91-4412-8899-0dcc95be75b9",
             });
+            console.log("OneSignal initialized successfully!");
         });
     </script>
 
