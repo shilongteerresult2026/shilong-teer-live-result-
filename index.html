@@ -1195,57 +1195,66 @@
     .faq-icon { font-size: 1rem; font-weight: bold; color: #cc0000; }
 
     /* ============================================================ */
-    /* 🔥 WHATSAPP SECTION - শিলং তীর লাইভ রেজাল্ট গ্রুপ (VIP এর জায়গায়) */
+    /* 🔥 WHATSAPP SECTION - Shillong Teer Live Result Official Team */
     /* ============================================================ */
     .whatsapp-section {
-        margin: 1.5rem 0;
+        margin: 1.5rem auto;
+        max-width: 85%;
     }
 
     .whatsapp-card {
-        background: linear-gradient(145deg, #1a2a1a, #0d1a0d);
+        background: #ffffff;
         border-radius: 1.2rem;
-        padding: 1.5rem;
+        padding: 1.8rem 1.5rem;
         border: 2px solid #25D366;
-        box-shadow: 0 4px 30px rgba(37, 211, 102, 0.15);
+        box-shadow: 0 4px 30px rgba(10, 61, 107, 0.2), 0 0 50px rgba(10, 61, 107, 0.06);
         text-align: center;
         transition: all 0.3s ease;
     }
 
     .whatsapp-card:hover {
         transform: translateY(-3px);
-        box-shadow: 0 8px 45px rgba(37, 211, 102, 0.25);
+        box-shadow: 0 8px 45px rgba(10, 61, 107, 0.3), 0 0 70px rgba(10, 61, 107, 0.1);
     }
 
-    .whatsapp-header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.8rem;
+    .whatsapp-logo {
         margin-bottom: 0.5rem;
     }
 
-    .whatsapp-icon {
-        font-size: 2.2rem;
-        animation: whatsappPulse 2s infinite;
+    .whatsapp-logo-img {
+        max-width: 65px;
+        height: auto;
+        border-radius: 12px;
+        border: 2px solid #25D366;
+        padding: 0.2rem;
+        background: #ffffff;
+        transition: all 0.3s ease;
     }
 
-    @keyframes whatsappPulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.1); }
+    .whatsapp-logo-img:hover {
+        transform: scale(1.05);
+        border-color: #0a3d6b;
     }
 
-    .whatsapp-header h3 {
+    .whatsapp-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    .whatsapp-title {
         font-size: 1.3rem;
         font-weight: 800;
-        color: #25D366;
-        text-shadow: 0 0 20px rgba(37, 211, 102, 0.2);
+        color: #0a3d6b;
+        margin: 0;
         letter-spacing: 0.5px;
     }
 
-    .whatsapp-body p {
-        color: #b8c8b8;
+    .whatsapp-desc {
         font-size: 1rem;
-        margin-bottom: 1rem;
+        color: #4a6a7a;
+        margin: 0;
         font-weight: 500;
     }
 
@@ -1255,51 +1264,67 @@
         gap: 0.6rem;
         background: linear-gradient(145deg, #25D366, #128C7E);
         color: #ffffff;
-        padding: 0.8rem 2.5rem;
+        padding: 0.7rem 2.2rem;
         border-radius: 60px;
-        font-size: 1.1rem;
+        font-size: 1rem;
         font-weight: 700;
         text-decoration: none;
         border: 2px solid #25D366;
         box-shadow: 0 4px 25px rgba(37, 211, 102, 0.3);
         transition: all 0.3s ease;
+        margin-top: 0.3rem;
     }
 
     .whatsapp-join-btn:hover {
         transform: scale(1.06);
         box-shadow: 0 8px 40px rgba(37, 211, 102, 0.5);
         background: linear-gradient(145deg, #128C7E, #075E54);
-        color: #ffffff;
     }
 
     .whatsapp-join-btn i {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
     }
 
-    /* মোবাইল রেস্পন্সিভ */
     @media (max-width: 768px) {
-        .whatsapp-header h3 {
+        .whatsapp-section {
+            max-width: 92%;
+        }
+        .whatsapp-title {
             font-size: 1.1rem;
+        }
+        .whatsapp-desc {
+            font-size: 0.9rem;
         }
         .whatsapp-join-btn {
             padding: 0.6rem 1.8rem;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+        }
+        .whatsapp-logo-img {
+            max-width: 55px;
         }
     }
 
     @media (max-width: 480px) {
-        .whatsapp-header {
-            flex-direction: column;
-            gap: 0.3rem;
+        .whatsapp-section {
+            max-width: 100%;
         }
-        .whatsapp-header h3 {
+        .whatsapp-card {
+            padding: 1.2rem 1rem;
+        }
+        .whatsapp-title {
             font-size: 0.95rem;
+        }
+        .whatsapp-desc {
+            font-size: 0.8rem;
         }
         .whatsapp-join-btn {
             padding: 0.5rem 1.5rem;
             font-size: 0.85rem;
             width: 100%;
             justify-content: center;
+        }
+        .whatsapp-logo-img {
+            max-width: 45px;
         }
     }
 
@@ -1808,9 +1833,47 @@
         </a>
     </div>
 
-    <!-- ===== কমন নাম্বার (ডিপ গ্রিন) ===== -->
+    <!-- ============================================================ -->
+    <!-- 🔥 WHATSAPP SECTION (সব Heading-এর উপরে) -->
+    <!-- ============================================================ -->
+    <div class="whatsapp-section">
+        <div class="whatsapp-card">
+            <!-- Logo (উপরে ছোট করে) -->
+            <div class="whatsapp-logo">
+                <img src="your-logo.png" alt="Shillong Teer Live Result" class="whatsapp-logo-img">
+            </div>
+            
+            <!-- Content -->
+            <div class="whatsapp-content">
+                <h3 class="whatsapp-title">Shillong Teer Live Result Official Team</h3>
+                <p class="whatsapp-desc">Daily Results, Tips & Expert Predictions</p>
+                <a href="https://whatsapp.com/channel/0029VaFbrQmLSmbjX5WOYp2d" 
+                   target="_blank" 
+                   class="whatsapp-join-btn">
+                    <i class="fab fa-whatsapp"></i> Join WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 🔥 কমন নাম্বার (হেডিং ১) -->
+    <!-- ============================================================ -->
     <h2 class="seo-h2">🔢 Shillong Teer Common Number Today | আজকের শিলং তীর কমন নাম্বার</h2>
+
+    <!-- ============================================================ -->
+    <!-- 🔥 Sub-Heading (হেডিং ২) -->
+    <!-- ============================================================ -->
     <div class="common-time-badge">⭐ TODAY'S COMMON NUMBERS (7 Formula Analysis) | আজকের কমন নাম্বার (৭ ফর্মুলা বিশ্লেষণ)</div>
+
+    <!-- ============================================================ -->
+    <!-- 🔥 Venue Heading (হেডিং ৩) -->
+    <!-- ============================================================ -->
+    <div class="common-venue-title">🎯 SHILLONG TEER - COMMON NUMBERS</div>
+
+    <!-- ============================================================ -->
+    <!-- 🔥 Common Numbers Table -->
+    <!-- ============================================================ -->
     <div class="common-venues-container" id="commonTablesContainer"></div>
 
     <!-- ============================================================ -->
@@ -1839,30 +1902,6 @@
             <thead><tr><th>Date</th><th>FR (4:15 PM)</th><th>SR (5:10 PM)</th></tr></thead>
             <tbody id="resultsTableShillong"></tbody>
         </table>
-    </div>
-    
-    <!-- ============================================================ -->
-    <!-- 🔥 WHATSAPP SECTION (VIP এর জায়গায়) -->
-    <!-- ============================================================ -->
-    <div class="whatsapp-section">
-        <div class="whatsapp-card">
-            <div class="whatsapp-header">
-                <span class="whatsapp-icon">💬</span>
-                <h3>Shillong Teer Live Result Group</h3>
-            </div>
-            <div class="whatsapp-body">
-                <p>📢 Daily results, tips & expert predictions</p>
-                <a href="https://whatsapp.com/channel/0029VaFbrQmLSmbjX5WOYp2d" 
-                   target="_blank" 
-                   class="whatsapp-join-btn">
-                    <i class="fab fa-whatsapp"></i> Join WhatsApp
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div class="whatsapp-btn-container" style="display: none;">
-        <a href="https://whatsapp.com/channel/0029VaFbrQmLSmbjX5WOYp2d" target="_blank" class="whatsapp-btn">📱 VIP GUTI - JOIN WHATSAPP CHANNEL ✨</a>
     </div>
 
     <!-- ============================================================ -->
