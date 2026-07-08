@@ -809,36 +809,6 @@ body {
 }
 .selector-container select:focus { border-color: #0a3d6b; outline: none; box-shadow: 0 0 0 4px rgba(10, 61, 107, 0.15); }
 
-/* 🔥 প্রিভিয়াস রেজাল্ট - ফন্ট ও ডিজিট বড় করা হয়েছে 🔥 */
-.result-display-table { 
-    width: 100%; 
-    border-collapse: collapse; 
-    font-size: 1.4rem;  /* ⬅️ আগে 1.1rem ছিল, বড় করা */
-    background: #ffffff; 
-    border-radius: 0.7rem; 
-    overflow: hidden; 
-    border: 2px solid #4a8ab5; 
-}
-.result-display-table th { 
-    background: linear-gradient(135deg, #0a3d6b, #1a6b9a);
-    color: #ffffff; 
-    padding: 18px 20px;  /* ⬅️ আগে 14px ছিল, বড় করা */
-    font-size: 1.3rem;  /* ⬅️ আগে 1.1rem ছিল, বড় করা */
-    font-weight: 800; 
-}
-.result-display-table td { 
-    padding: 18px 20px;  /* ⬅️ আগে 14px ছিল, বড় করা */
-    text-align: center; 
-    border-bottom: 2px solid #4a8ab5; 
-    font-size: 1.5rem;  /* ⬅️ আগে 1.3rem ছিল, বড় করা */
-    font-weight: 700;
-}
-.result-display-table td:not(:first-child) {
-    font-size: 1.6rem;  /* ⬅️ ডিজিটগুলো বড় */
-    font-weight: 900;
-    color: #0a3d6b;
-}
-
 /* ============================================================ */
 /* 🔥 প্রিভিয়াস বাটন - প্রাণবন্ত আলট্রা গ্রিন */
 /* ============================================================ */
@@ -2283,6 +2253,113 @@ body {
 }
 
 /* ============================================================ */
+/* 🔥 প্রিভিয়াস রেজাল্ট চার্ট ও বাটন - ফন্ট 1rem করা */
+/* ============================================================ */
+
+/* প্রিভিয়াস চার্ট টেবিল */
+.result-display-table,
+.result-display-table table,
+.result-display-table td,
+.result-display-table th,
+.monthwise-section table,
+.monthwise-section td,
+.monthwise-section th,
+.prev-table,
+.prev-table td,
+.prev-table th {
+    font-size: 1rem !important;
+}
+
+.result-display-table td,
+.monthwise-section td,
+.prev-table td {
+    padding: 10px 14px !important;
+    font-size: 1rem !important;
+}
+
+.result-display-table td:not(:first-child),
+.monthwise-section td:not(:first-child),
+.prev-table td:not(:first-child) {
+    font-size: 1rem !important;
+}
+
+.result-display-table th,
+.monthwise-section th,
+.prev-table th {
+    padding: 10px 14px !important;
+    font-size: 1rem !important;
+}
+
+/* প্রিভিয়াস বাটন */
+.btn-previous-sky,
+.btn-previous,
+a.btn-previous-sky,
+a.btn-previous,
+button.btn-previous-sky,
+button.btn-previous,
+.previous-btn,
+.view-previous-btn,
+.show-previous-btn {
+    font-size: 1rem !important;
+    padding: 0.4rem 1.5rem !important;
+}
+
+/* মোবাইলের জন্য */
+@media (max-width: 768px) {
+    .result-display-table td,
+    .monthwise-section td,
+    .prev-table td {
+        font-size: 0.85rem !important;
+        padding: 8px 10px !important;
+    }
+    .result-display-table td:not(:first-child),
+    .monthwise-section td:not(:first-child),
+    .prev-table td:not(:first-child) {
+        font-size: 0.85rem !important;
+    }
+    .result-display-table th,
+    .monthwise-section th,
+    .prev-table th {
+        font-size: 0.85rem !important;
+        padding: 8px 10px !important;
+    }
+    .btn-previous-sky,
+    .btn-previous,
+    a.btn-previous-sky,
+    a.btn-previous {
+        font-size: 0.85rem !important;
+        padding: 0.3rem 1.2rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .result-display-table td,
+    .monthwise-section td,
+    .prev-table td {
+        font-size: 0.75rem !important;
+        padding: 6px 8px !important;
+    }
+    .result-display-table td:not(:first-child),
+    .monthwise-section td:not(:first-child),
+    .prev-table td:not(:first-child) {
+        font-size: 0.75rem !important;
+    }
+    .result-display-table th,
+    .monthwise-section th,
+    .prev-table th {
+        font-size: 0.75rem !important;
+        padding: 6px 8px !important;
+    }
+    .btn-previous-sky,
+    .btn-previous,
+    a.btn-previous-sky,
+    a.btn-previous {
+        font-size: 0.75rem !important;
+        padding: 0.25rem 1rem !important;
+    }
+}
+
+/* ============================================================ */
 /* 🔥 মোবাইল রেস্পন্সিভ - প্রাণবন্ত */
 /* ============================================================ */
 @media (max-width: 768px) {
@@ -2316,12 +2393,6 @@ body {
         line-height: 45px;
         border-width: 3px;
     }
-    
-    /* প্রিভিয়াস রেজাল্ট মোবাইলে */
-    .result-display-table { font-size: 1.1rem; }
-    .result-display-table th { font-size: 1rem; padding: 12px 14px; }
-    .result-display-table td { font-size: 1.2rem; padding: 12px 14px; }
-    .result-display-table td:not(:first-child) { font-size: 1.3rem; }
     
     .common-venue-card { padding: 0.6rem; }
     .common-venue-title { font-size: 1.2rem; padding: 12px 16px; }
@@ -2392,12 +2463,6 @@ body {
         line-height: 38px;
         border-width: 2.5px;
     }
-    
-    /* প্রিভিয়াস রেজাল্ট ছোট মোবাইলে */
-    .result-display-table { font-size: 0.9rem; }
-    .result-display-table th { font-size: 0.8rem; padding: 8px 10px; }
-    .result-display-table td { font-size: 1rem; padding: 8px 10px; }
-    .result-display-table td:not(:first-child) { font-size: 1.1rem; }
     
     .common-venue-card { padding: 0.4rem; }
     .common-venue-title { font-size: 0.95rem; padding: 8px 10px; }
