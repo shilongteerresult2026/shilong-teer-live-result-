@@ -968,6 +968,57 @@ let globalLiveData = {};
 let globalCommonData = null;
 
 // ============================================================
+// 🔥 REALTIME SUBSCRIPTIONS (নতুন যোগ করা)
+// ============================================================
+
+function subscribeToCommonNumbers() {
+    const channel = supabaseClient
+        .channel('common-numbers-changes')
+        .on(
+            'postgres_changes',
+            {
+                event: 'UPDATE',
+                schema: 'public',
+                table: 'teer_common_numbers'
+            },
+            (payload) => {
+                console.log('🔄 কমন নাম্বার আপডেট হয়েছে:', payload.new);
+                const today = getTodayIST();
+                if (payload.new && payload.new.result_date === today) {
+                    renderCommonNumbersFromDB(payload.new);
+                } else {
+                    loadCommonNumbers();
+                }
+            }
+        )
+        .subscribe((status) => {
+            console.log('📡 Realtime (Common) স্ট্যাটাস:', status);
+        });
+    return channel;
+}
+
+function subscribeToLiveResults() {
+    const channel = supabaseClient
+        .channel('live-results-changes')
+        .on(
+            'postgres_changes',
+            {
+                event: 'UPDATE',
+                schema: 'public',
+                table: 'teer_live_results'
+            },
+            (payload) => {
+                console.log('🔄 লাইভ রেজাল্ট আপডেট হয়েছে:', payload.new);
+                loadTodayResults();
+            }
+        )
+        .subscribe((status) => {
+            console.log('📡 Realtime (Live) স্ট্যাটাস:', status);
+        });
+    return channel;
+}
+
+// ============================================================
 // 📌 DOMContentLoaded
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
@@ -984,6 +1035,10 @@ document.addEventListener('DOMContentLoaded', function() {
     renderDreamChart();
     loadTrendingNumbers();
     loadLeaderboard();
+    
+    // 🔥 Realtime সাবস্ক্রিপশন চালু করুন
+    subscribeToCommonNumbers();
+    subscribeToLiveResults();
     
     document.getElementById('predictDreamBtn').addEventListener('click', function() {
         let inp = document.getElementById('dreamInput').value.trim();
