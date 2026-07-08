@@ -1425,57 +1425,66 @@ body {
 }
 
 /* ============================================================ */
-/* 🔥 WHATSAPP SECTION - শিলং তীর লাইভ রেজাল্ট গ্রুপ (VIP এর জায়গায়) */
+/* 🔥 WHATSAPP SECTION - Shillong Teer Live Result Official Team */
 /* ============================================================ */
 .whatsapp-section {
-    margin: 1.5rem 0;
+    margin: 1.5rem auto;
+    max-width: 85%;
 }
 
 .whatsapp-card {
-    background: linear-gradient(145deg, #1a2a1a, #0d1a0d);
+    background: #ffffff;
     border-radius: 1.2rem;
-    padding: 1.5rem;
+    padding: 1.8rem 1.5rem;
     border: 2px solid #25D366;
-    box-shadow: 0 4px 30px rgba(37, 211, 102, 0.15);
+    box-shadow: 0 4px 30px rgba(10, 61, 107, 0.2), 0 0 50px rgba(10, 61, 107, 0.06);
     text-align: center;
     transition: all 0.3s ease;
 }
 
 .whatsapp-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 45px rgba(37, 211, 102, 0.25);
+    box-shadow: 0 8px 45px rgba(10, 61, 107, 0.3), 0 0 70px rgba(10, 61, 107, 0.1);
 }
 
-.whatsapp-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.8rem;
+.whatsapp-logo {
     margin-bottom: 0.5rem;
 }
 
-.whatsapp-icon {
-    font-size: 2.2rem;
-    animation: whatsappPulse 2s infinite;
+.whatsapp-logo-img {
+    max-width: 65px;
+    height: auto;
+    border-radius: 12px;
+    border: 2px solid #25D366;
+    padding: 0.2rem;
+    background: #ffffff;
+    transition: all 0.3s ease;
 }
 
-@keyframes whatsappPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+.whatsapp-logo-img:hover {
+    transform: scale(1.05);
+    border-color: #0a3d6b;
 }
 
-.whatsapp-header h3 {
+.whatsapp-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.whatsapp-title {
     font-size: 1.3rem;
     font-weight: 800;
-    color: #25D366;
-    text-shadow: 0 0 20px rgba(37, 211, 102, 0.2);
+    color: #0a3d6b;
+    margin: 0;
     letter-spacing: 0.5px;
 }
 
-.whatsapp-body p {
-    color: #b8c8b8;
+.whatsapp-desc {
     font-size: 1rem;
-    margin-bottom: 1rem;
+    color: #4a6a7a;
+    margin: 0;
     font-weight: 500;
 }
 
@@ -1485,45 +1494,59 @@ body {
     gap: 0.6rem;
     background: linear-gradient(145deg, #25D366, #128C7E);
     color: #ffffff;
-    padding: 0.8rem 2.5rem;
+    padding: 0.7rem 2.2rem;
     border-radius: 60px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 700;
     text-decoration: none;
     border: 2px solid #25D366;
     box-shadow: 0 4px 25px rgba(37, 211, 102, 0.3);
     transition: all 0.3s ease;
+    margin-top: 0.3rem;
 }
 
 .whatsapp-join-btn:hover {
     transform: scale(1.06);
     box-shadow: 0 8px 40px rgba(37, 211, 102, 0.5);
     background: linear-gradient(145deg, #128C7E, #075E54);
-    color: #ffffff;
 }
 
 .whatsapp-join-btn i {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
 }
 
 /* মোবাইল রেস্পন্সিভ */
 @media (max-width: 768px) {
-    .whatsapp-header h3 {
+    .whatsapp-section {
+        max-width: 92%;
+    }
+    .whatsapp-title {
         font-size: 1.1rem;
+    }
+    .whatsapp-desc {
+        font-size: 0.9rem;
     }
     .whatsapp-join-btn {
         padding: 0.6rem 1.8rem;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
+    }
+    .whatsapp-logo-img {
+        max-width: 55px;
     }
 }
 
 @media (max-width: 480px) {
-    .whatsapp-header {
-        flex-direction: column;
-        gap: 0.3rem;
+    .whatsapp-section {
+        max-width: 100%;
     }
-    .whatsapp-header h3 {
+    .whatsapp-card {
+        padding: 1.2rem 1rem;
+    }
+    .whatsapp-title {
         font-size: 0.95rem;
+    }
+    .whatsapp-desc {
+        font-size: 0.8rem;
     }
     .whatsapp-join-btn {
         padding: 0.5rem 1.5rem;
@@ -1531,36 +1554,9 @@ body {
         width: 100%;
         justify-content: center;
     }
-}
-
-/* ============================================================ */
-/* 🔥 হোয়াটসঅ্যাপ বাটন - প্রাণবন্ত */
-/* ============================================================ */
-.whatsapp-btn-container { text-align: center; margin: 1rem 0; }
-.whatsapp-btn { 
-    display: inline-flex; 
-    align-items: center; 
-    gap: 8px; 
-    background: linear-gradient(135deg, #25D366, #128C7E, #25D366);
-    background-size: 200% 200%;
-    animation: whatsappGradient 2s ease-in-out infinite;
-    color: white; 
-    padding: 0.8rem 1.5rem; 
-    border-radius: 60px; 
-    font-size: 1.1rem; 
-    font-weight: bold; 
-    text-decoration: none; 
-    box-shadow: 0 4px 30px rgba(37, 211, 102, 0.3);
-    border: 2px solid #66ff99;
-}
-@keyframes whatsappGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-.whatsapp-btn:hover {
-    transform: scale(1.06);
-    box-shadow: 0 8px 45px rgba(37, 211, 102, 0.5);
+    .whatsapp-logo-img {
+        max-width: 45px;
+    }
 }
 
 /* ============================================================ */
