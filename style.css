@@ -1425,71 +1425,112 @@ body {
 }
 
 /* ============================================================ */
-/* 🔥 ভিআইপি - প্রাণবন্ত ডিপ গ্রিন */
+/* 🔥 WHATSAPP SECTION - শিলং তীর লাইভ রেজাল্ট গ্রুপ (VIP এর জায়গায়) */
 /* ============================================================ */
-.vip-premium { 
-    background: linear-gradient(135deg, #f0f6fa, #e6f3ff);
-    border-radius: 1rem; 
-    padding: 1.2rem; 
-    margin: 1rem 0; 
-    border: 2px solid #4a8ab5; 
+.whatsapp-section {
+    margin: 1.5rem 0;
 }
-.vip-title { 
-    font-size: 1.3rem; 
-    font-weight: 800; 
-    background: linear-gradient(135deg, #0a3d6b, #1a6b9a);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-.locked-blur { 
-    filter: blur(3px); 
-    background: #4a8ab5; 
-    padding: 0.3rem 0.8rem; 
-    border-radius: 30px; 
-    display: inline-block; 
-    font-size: 0.95rem; 
-    color: #ffffff; 
-}
-.vip-btn { 
-    background: linear-gradient(135deg, #00cc66, #009944, #00cc66);
-    background-size: 200% 200%;
-    animation: vipBtnGradient 3s ease-in-out infinite;
-    border: none; 
-    padding: 0.6rem; 
-    border-radius: 60px; 
-    font-weight: bold; 
-    width: 100%; 
-    margin-top: 0.5rem; 
-    color: white; 
-    cursor: pointer; 
-    font-size: 1.1rem; 
+
+.whatsapp-card {
+    background: linear-gradient(145deg, #1a2a1a, #0d1a0d);
+    border-radius: 1.2rem;
+    padding: 1.5rem;
+    border: 2px solid #25D366;
+    box-shadow: 0 4px 30px rgba(37, 211, 102, 0.15);
+    text-align: center;
     transition: all 0.3s ease;
-    border: 2px solid #66ff99;
-    box-shadow: 0 4px 20px rgba(0, 204, 102, 0.2);
 }
-@keyframes vipBtnGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+
+.whatsapp-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 45px rgba(37, 211, 102, 0.25);
 }
-.vip-btn:hover { 
-    transform: scale(1.03);
-    box-shadow: 0 6px 35px rgba(0, 204, 102, 0.4);
+
+.whatsapp-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-bottom: 0.5rem;
 }
-.txn-field { 
-    width: 100%; 
-    padding: 0.6rem; 
-    border-radius: 60px; 
-    margin: 0.5rem 0; 
-    border: 2px solid #4a8ab5; 
-    font-size: 1rem; 
-    color: #0a3d6b;
-    transition: all 0.3s ease; 
+
+.whatsapp-icon {
+    font-size: 2.2rem;
+    animation: whatsappPulse 2s infinite;
 }
-.txn-field:focus { 
-    border-color: #0a3d6b; 
-    outline: none; 
-    box-shadow: 0 0 0 4px rgba(10, 61, 107, 0.15);
+
+@keyframes whatsappPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.whatsapp-header h3 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #25D366;
+    text-shadow: 0 0 20px rgba(37, 211, 102, 0.2);
+    letter-spacing: 0.5px;
+}
+
+.whatsapp-body p {
+    color: #b8c8b8;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.whatsapp-join-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: linear-gradient(145deg, #25D366, #128C7E);
+    color: #ffffff;
+    padding: 0.8rem 2.5rem;
+    border-radius: 60px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 2px solid #25D366;
+    box-shadow: 0 4px 25px rgba(37, 211, 102, 0.3);
+    transition: all 0.3s ease;
+}
+
+.whatsapp-join-btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 8px 40px rgba(37, 211, 102, 0.5);
+    background: linear-gradient(145deg, #128C7E, #075E54);
+    color: #ffffff;
+}
+
+.whatsapp-join-btn i {
+    font-size: 1.4rem;
+}
+
+/* মোবাইল রেস্পন্সিভ */
+@media (max-width: 768px) {
+    .whatsapp-header h3 {
+        font-size: 1.1rem;
+    }
+    .whatsapp-join-btn {
+        padding: 0.6rem 1.8rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .whatsapp-header {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+    .whatsapp-header h3 {
+        font-size: 0.95rem;
+    }
+    .whatsapp-join-btn {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.85rem;
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 /* ============================================================ */
