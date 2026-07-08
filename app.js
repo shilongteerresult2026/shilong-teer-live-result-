@@ -338,10 +338,16 @@ function isWaitingForVenue(venueId, roundType) {
 // ============================================================
 // ⏳ কাউন্টডাউন - সঠিক সময় অনুযায়ী
 // ============================================================
+let countdownInterval = null;
+
 function startAllCountdowns() {
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+    }
+    
     const venues = ['shillong', 'khanapara', 'juwai', 'morning', 'night'];
     
-    setInterval(() => {
+    countdownInterval = setInterval(() => {
         venues.forEach(venue => {
             updateVenueCountdown(venue);
         });
@@ -520,7 +526,7 @@ async function loadTodayResults() {
         renderTodayResults(liveData, today, nightDate);
         
         // ============================================================
-        // 🔥 সব ভেন্যুর জন্য Meta Tags আপডেট করুন (নতুন যোগ করা অংশ)
+        // 🔥 সব ভেন্যুর জন্য Meta Tags আপডেট করুন
         // ============================================================
         const venueList = ['shillong', 'khanapara', 'juwai', 'morning', 'night'];
         const venueNameMap = {
@@ -531,7 +537,6 @@ async function loadTodayResults() {
             night: 'Night Teer'
         };
 
-        // যে ভেন্যুতে ফলাফল আছে, সেটার জন্য মেটা ট্যাগ আপডেট করুন
         for (const v of venueList) {
             if (liveData[v] && liveData[v].fr !== '--') {
                 updateMetaTags(venueNameMap[v], liveData[v].fr, liveData[v].sr, today);
@@ -647,7 +652,7 @@ function renderTodayResults(liveData, todayDate, nightDate) {
     });
     
     grid.innerHTML = html;
-    setTimeout(startAllCountdowns, 500);
+    startAllCountdowns();
 }
 
 // ============================================================
@@ -1054,11 +1059,12 @@ function subscribeToLiveResults() {
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ DOM Loaded - Loading results...');
+    
     loadTodayResults();
     loadCommonNumbers();
     
-    setInterval(loadTodayResults, 10000);
-    setInterval(loadCommonNumbers, 30000);
+    subscribeToCommonNumbers();
+    subscribeToLiveResults();
     
     setupShillongSelector();
     setupAllSelectors();
@@ -1066,10 +1072,6 @@ document.addEventListener('DOMContentLoaded', function() {
     renderDreamChart();
     loadTrendingNumbers();
     loadLeaderboard();
-    
-    // 🔥 Realtime সাবস্ক্রিপশন চালু করুন
-    subscribeToCommonNumbers();
-    subscribeToLiveResults();
     
     document.getElementById('predictDreamBtn').addEventListener('click', function() {
         let inp = document.getElementById('dreamInput').value.trim();
@@ -1091,20 +1093,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.querySelector('.faq-icon').innerHTML = a.classList.contains('show') ? '−' : '+';
             }
         });
-    });
-    
-    document.getElementById('payNowBtn').addEventListener('click', function() {
-        window.location.href = "upi://pay?pa=7628988767@airtel&pn=Teer%20VIP&am=1500&cu=INR";
-    });
-    
-    document.getElementById('verifyPaymentBtn').addEventListener('click', function() {
-        let txn = document.getElementById('transactionIdInput').value.trim();
-        if(txn.length >= 5) {
-            localStorage.setItem('teer_vip_status', 'active');
-            document.getElementById('vipMessage').innerHTML = "✅ VIP UNLOCKED!";
-        } else {
-            document.getElementById('vipMessage').innerHTML = "❌ Invalid TXN ID";
-        }
     });
     
     document.getElementById('closeLiveModalBtn').addEventListener('click', closeModals);
