@@ -968,7 +968,7 @@ let globalLiveData = {};
 let globalCommonData = null;
 
 // ============================================================
-// 🔥 REALTIME SUBSCRIPTIONS (নতুন যোগ করা)
+// 🔥 REALTIME SUBSCRIPTIONS
 // ============================================================
 
 function subscribeToCommonNumbers() {
@@ -1007,8 +1007,20 @@ function subscribeToLiveResults() {
                 schema: 'public',
                 table: 'teer_live_results'
             },
-            (payload) => {
+            async (payload) => {
                 console.log('🔄 লাইভ রেজাল্ট আপডেট হয়েছে:', payload.new);
+                
+                const newData = payload.new;
+                const venue = newData.venue;
+                const frResult = newData.fr_result || '--';
+                const srResult = newData.sr_result || '--';
+                const resultDate = newData.result_date;
+                
+                if (frResult !== '--' && srResult !== '--') {
+                    await saveLiveResultToPrevious(venue, frResult, srResult, resultDate);
+                    console.log(`✅ ${venue} রেজাল্ট প্রিভিয়াসে সেভ হয়েছে: FR=${frResult}, SR=${srResult}`);
+                }
+                
                 loadTodayResults();
             }
         )
