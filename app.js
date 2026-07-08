@@ -338,16 +338,10 @@ function isWaitingForVenue(venueId, roundType) {
 // ============================================================
 // ⏳ কাউন্টডাউন - সঠিক সময় অনুযায়ী
 // ============================================================
-let countdownInterval = null;
-
 function startAllCountdowns() {
-    if (countdownInterval) {
-        clearInterval(countdownInterval);
-    }
-    
     const venues = ['shillong', 'khanapara', 'juwai', 'morning', 'night'];
     
-    countdownInterval = setInterval(() => {
+    setInterval(() => {
         venues.forEach(venue => {
             updateVenueCountdown(venue);
         });
@@ -652,7 +646,7 @@ function renderTodayResults(liveData, todayDate, nightDate) {
     });
     
     grid.innerHTML = html;
-    startAllCountdowns();
+    setTimeout(startAllCountdowns, 500);
 }
 
 // ============================================================
@@ -881,7 +875,7 @@ function updateMetaTags(venue, frResult, srResult, date) {
     const formattedDate = date.split('-').reverse().join('.');
     
     if (venue === 'Shillong Teer') {
-        document.title = `Shillong Teer Result ${formattedDate} | Live Updates`;
+        document.title = `Shillong Teer Result ${formattedDate} | Shillong Teer Common Number Today`;
     } else {
         document.title = `${venue} Result ${formattedDate} - FR: ${frResult} | SR: ${srResult} | Live Teer`;
     }
@@ -889,16 +883,16 @@ function updateMetaTags(venue, frResult, srResult, date) {
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
         if (venue === 'Shillong Teer') {
-            metaDesc.content = `Shillong Teer result ${formattedDate}: FR ${frResult}, SR ${srResult}. Get live updates, house digits & expert predictions for Khanapara, Juwai, Morning & Night Teer.`;
+            metaDesc.content = `Shillong Teer result ${formattedDate}: FR ${frResult}, SR ${srResult}. Get Shillong Teer Common Number Today, Khanapara, Juwai, Morning & Night Teer results with expert predictions.`;
         } else {
-            metaDesc.content = `Today's ${venue} result: FR ${frResult}, SR ${srResult}. Get live Teer results with expert predictions. Updated on ${formattedDate}.`;
+            metaDesc.content = `Today's ${venue} result: FR ${frResult}, SR ${srResult}. Get live Teer results with common numbers and expert predictions. Updated on ${formattedDate}.`;
         }
     }
     
     const ogTitle = document.querySelector('meta[property="og:title"]');
     if (ogTitle) {
         if (venue === 'Shillong Teer') {
-            ogTitle.content = `Shillong Teer Result ${formattedDate} | Live Updates`;
+            ogTitle.content = `Shillong Teer Result ${formattedDate} | Shillong Teer Common Number Today`;
         } else {
             ogTitle.content = `${venue} Result ${formattedDate} - FR: ${frResult} | SR: ${srResult}`;
         }
@@ -907,7 +901,7 @@ function updateMetaTags(venue, frResult, srResult, date) {
     const ogDesc = document.querySelector('meta[property="og:description"]');
     if (ogDesc) {
         if (venue === 'Shillong Teer') {
-            ogDesc.content = `Shillong Teer result ${formattedDate}: FR ${frResult}, SR ${srResult}. Get live updates & expert predictions.`;
+            ogDesc.content = `Shillong Teer result ${formattedDate}: FR ${frResult}, SR ${srResult}. Get Common Number Today and live Teer updates.`;
         } else {
             ogDesc.content = `Today's ${venue} result: FR ${frResult}, SR ${srResult}. Updated on ${formattedDate}.`;
         }
@@ -916,7 +910,7 @@ function updateMetaTags(venue, frResult, srResult, date) {
     const twTitle = document.querySelector('meta[name="twitter:title"]');
     if (twTitle) {
         if (venue === 'Shillong Teer') {
-            twTitle.content = `Shillong Teer Result ${formattedDate} | Live Updates`;
+            twTitle.content = `Shillong Teer Result ${formattedDate} | Shillong Teer Common Number Today`;
         } else {
             twTitle.content = `${venue} Result ${formattedDate} - FR: ${frResult} | SR: ${srResult}`;
         }
@@ -925,7 +919,7 @@ function updateMetaTags(venue, frResult, srResult, date) {
     const twDesc = document.querySelector('meta[name="twitter:description"]');
     if (twDesc) {
         if (venue === 'Shillong Teer') {
-            twDesc.content = `Shillong Teer result ${formattedDate}: FR ${frResult}, SR ${srResult}. Get live updates.`;
+            twDesc.content = `Shillong Teer result ${formattedDate}: FR ${frResult}, SR ${srResult}. Get Common Number Today.`;
         } else {
             twDesc.content = `Today's ${venue} result: FR ${frResult}, SR ${srResult}. Updated on ${formattedDate}.`;
         }
@@ -1059,12 +1053,11 @@ function subscribeToLiveResults() {
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ DOM Loaded - Loading results...');
-    
     loadTodayResults();
     loadCommonNumbers();
     
-    subscribeToCommonNumbers();
-    subscribeToLiveResults();
+    setInterval(loadTodayResults, 10000);
+    setInterval(loadCommonNumbers, 30000);
     
     setupShillongSelector();
     setupAllSelectors();
@@ -1072,6 +1065,10 @@ document.addEventListener('DOMContentLoaded', function() {
     renderDreamChart();
     loadTrendingNumbers();
     loadLeaderboard();
+    
+    // 🔥 Realtime সাবস্ক্রিপশন চালু করুন
+    subscribeToCommonNumbers();
+    subscribeToLiveResults();
     
     document.getElementById('predictDreamBtn').addEventListener('click', function() {
         let inp = document.getElementById('dreamInput').value.trim();
@@ -1094,6 +1091,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
+    // ❌ VIP কোড বাদ দেওয়া হয়েছে
     
     document.getElementById('closeLiveModalBtn').addEventListener('click', closeModals);
     document.getElementById('closePrevModalBtn').addEventListener('click', closeModals);
