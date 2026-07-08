@@ -728,11 +728,44 @@
     @keyframes blinkDot { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
     .result-card .timing-dual { display: flex; gap: 0.8rem; margin: 0.6rem 0; }
     .result-card .fr-box, .result-card .sr-box { flex: 1; text-align: center; background: #f0f6fa; border-radius: 0.8rem; padding: 0.5rem; border: 1px solid #4a8ab5; }
-    .result-card .result-number { font-size: 1.6rem; font-weight: 900; background: #c0dce8; display: inline-block; padding: 0.2rem 1rem; border-radius: 40px; color: #0a3d6b; }
-    .result-card .waiting-number-display { background: #cc0000; color: white; font-size: 0.8rem; font-weight: bold; padding: 0.3rem 0.7rem; border-radius: 40px; display: inline-block; animation: blinkWaiting 0.6s infinite; }
-    @keyframes blinkWaiting { 0%,100% { opacity: 1; background: #cc0000; } 50% { opacity: 0.7; background: #ff0000; } }
+    
+    /* ============================================================ */
+    /* 🔥 ডিজিটের চারপাশের সার্কেল - প্রাণবন্ত লাল */
+    /* ============================================================ */
+    .result-card .result-number { 
+        font-size: 2rem; 
+        font-weight: 900; 
+        background: #ffffff;
+        display: inline-block; 
+        padding: 0.3rem 1.2rem; 
+        border-radius: 50%;  /* ⬅️ সার্কেল */
+        color: #0a3d6b;
+        border: 4px solid #ff0000;  /* ⬅️ প্রাণবন্ত লাল */
+        box-shadow: 0 0 30px rgba(255, 0, 0, 0.35), inset 0 0 15px rgba(255, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        min-width: 60px;
+        min-height: 60px;
+        line-height: 60px;
+        text-align: center;
+    }
+    .result-card .result-number:hover {
+        transform: scale(1.08);
+        box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
+    }
+    .result-card .waiting-number-display { 
+        background: linear-gradient(135deg, #ff0000, #cc0000);
+        color: white; 
+        font-size: 0.85rem; 
+        font-weight: bold; 
+        padding: 0.3rem 1rem; 
+        border-radius: 40px; 
+        display: inline-block; 
+        animation: waitingNumberPulse 0.6s infinite;
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+    }
+    @keyframes waitingNumberPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
 
-    /* ===== ফুটার বাটন - প্রিভিয়াস + কমন পাশাপাশি ===== */
+    /* ===== ফুটার বাটন - Previous + Common পাশাপাশি ===== */
     .card-footer-buttons {
         display: flex;
         justify-content: flex-end;
@@ -743,8 +776,138 @@
         flex-wrap: wrap;
     }
     .card-footer-buttons a {
-        font-size: 0.75rem;
-        padding: 0.25rem 1.2rem;
+        font-size: 0.85rem;
+        padding: 0.4rem 1.5rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    /* Previous Button - ডিপ আলট্রা গ্রিন */
+    .btn-previous-sky {
+        display: inline-block;
+        padding: 0.4rem 1.8rem;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-decoration: none;
+        background: linear-gradient(135deg, #00cc66, #009944, #00cc66);
+        background-size: 200% 200%;
+        animation: ultraGreenGlow 3s ease-in-out infinite;
+        color: #ffffff;
+        border: 2px solid #66ff99;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 25px rgba(0, 204, 102, 0.3);
+        text-align: center;
+    }
+    @keyframes ultraGreenGlow {
+        0% { background-position: 0% 50%; box-shadow: 0 4px 20px rgba(0, 204, 102, 0.2); }
+        50% { background-position: 100% 50%; box-shadow: 0 4px 40px rgba(0, 204, 102, 0.5); }
+        100% { background-position: 0% 50%; box-shadow: 0 4px 20px rgba(0, 204, 102, 0.2); }
+    }
+    .btn-previous-sky:hover {
+        transform: scale(1.06);
+        box-shadow: 0 6px 45px rgba(0, 204, 102, 0.6);
+    }
+
+    /* Common Number Button - ডিপ গ্রিন */
+    .btn-common-small {
+        display: inline-block;
+        padding: 0.4rem 1.4rem;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        text-decoration: none;
+        background: linear-gradient(135deg, #0d6b3d, #0a4d2a);
+        color: #ffffff;
+        border: 2px solid #1a8a55;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(13, 107, 61, 0.2);
+        text-align: center;
+    }
+    .btn-common-small:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 25px rgba(13, 107, 61, 0.4);
+        background: linear-gradient(135deg, #1a8a55, #0d6b3d);
+    }
+    .btn-common-small-khanapara {
+        display: inline-block;
+        padding: 0.4rem 1.4rem;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        text-decoration: none;
+        background: linear-gradient(135deg, #0a3d6b, #062a4a);
+        color: #ffffff;
+        border: 2px solid #1a5a8a;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(10, 61, 107, 0.2);
+        text-align: center;
+    }
+    .btn-common-small-khanapara:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 25px rgba(10, 61, 107, 0.4);
+        background: linear-gradient(135deg, #1a5a8a, #0a3d6b);
+    }
+    .btn-common-small-juwai {
+        display: inline-block;
+        padding: 0.4rem 1.4rem;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        text-decoration: none;
+        background: linear-gradient(135deg, #1a0a5a, #0a2a5a);
+        color: #ffffff;
+        border: 2px solid #3a5a8a;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(10, 42, 90, 0.2);
+        text-align: center;
+    }
+    .btn-common-small-juwai:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 25px rgba(10, 42, 90, 0.4);
+        background: linear-gradient(135deg, #1a4a8a, #0a2a5a);
+    }
+    .btn-common-small-night {
+        display: inline-block;
+        padding: 0.4rem 1.4rem;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        text-decoration: none;
+        background: linear-gradient(135deg, #1a0a0a, #0d0a0a);
+        color: #ffffff;
+        border: 2px solid #3d2a2a;
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+    .btn-common-small-night:hover {
+        transform: scale(1.05);
+        background: linear-gradient(135deg, #3d2a2a, #1a0a0a);
+    }
+    .btn-common-small-morning {
+        display: inline-block;
+        padding: 0.4rem 1.4rem;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        text-decoration: none;
+        background: linear-gradient(135deg, #ffcc00, #ff9900, #ffcc00);
+        background-size: 200% 200%;
+        animation: morningGradient 2s ease-in-out infinite;
+        color: #1a0a00;
+        border: 2px solid #ffcc00;
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+    @keyframes morningGradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .btn-common-small-morning:hover {
+        transform: scale(1.05);
     }
 
     /* ============================================================ */
@@ -762,7 +925,7 @@
     .ending-num { background: #8b0000; color: white; padding: 4px 10px; border-radius: 40px; font-weight: 800; font-size: 0.95rem; display: inline-block; }
 
     /* ============================================================ */
-    /* 🔥 মন্থওয়াইজ সেকশন - প্রিভিয়াস রেজাল্ট (শুধু Shillong) */
+    /* 🔥 মন্থওয়াইজ সেকশন - প্রিভিয়াস রেজাল্ট */
     /* ============================================================ */
     .monthwise-section { background: #f0f6fa; border-radius: 1rem; padding: 1rem; margin: 1rem 0; border: 2px solid #4a8ab5; }
     .monthwise-title { font-size: 1.1rem; font-weight: 700; color: #0a3d6b; text-align: center; }
@@ -772,192 +935,6 @@
     .result-display-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: #ffffff; border-radius: 0.7rem; overflow: hidden; border: 1px solid #4a8ab5; }
     .result-display-table th { background: #0a3d6b; color: #ffffff; padding: 10px; font-size: 0.95rem; font-weight: 700; }
     .result-display-table td { padding: 8px; text-align: center; border-bottom: 1px solid #4a8ab5; font-size: 0.9rem; }
-
-    /* ============================================================ */
-    /* 🔥 প্রিভিয়াস বাটন - ডিপ আলট্রা গ্রিন */
-    /* ============================================================ */
-    .btn-previous-sky {
-        display: inline-block;
-        padding: 0.3rem 1.5rem;
-        border-radius: 50px;
-        font-weight: 700;
-        font-size: 0.8rem;
-        text-decoration: none;
-        background: linear-gradient(135deg, #0a5a30, #064a25);
-        color: #ffffff;
-        border: 2px solid #1a7a4a;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(10, 90, 48, 0.4);
-        text-align: center;
-        animation: glowUltraGreen 2s ease-in-out infinite alternate;
-    }
-    @keyframes glowUltraGreen {
-        0% { box-shadow: 0 4px 15px rgba(10, 90, 48, 0.4); }
-        100% { box-shadow: 0 4px 30px rgba(10, 90, 48, 0.6), 0 0 50px rgba(10, 90, 48, 0.15); }
-    }
-    .btn-previous-sky:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 30px rgba(10, 90, 48, 0.6);
-        background: linear-gradient(135deg, #1a7a4a, #0a5a30);
-    }
-
-    /* ============================================================ */
-    /* 🔥 কমন নাম্বার বাটন - ছোট, ডানদিকে */
-    /* ============================================================ */
-    .btn-common-small {
-        display: inline-block;
-        padding: 0.3rem 1.2rem;
-        border-radius: 50px;
-        font-weight: 700;
-        font-size: 0.75rem;
-        text-decoration: none;
-        background: linear-gradient(135deg, #0d6b3d, #0a4d2a);
-        color: #ffffff;
-        border: 2px solid #1a8a55;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(13, 107, 61, 0.2);
-        text-align: center;
-    }
-    .btn-common-small:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 25px rgba(13, 107, 61, 0.4);
-        background: linear-gradient(135deg, #1a8a55, #0d6b3d);
-    }
-
-    .btn-common-small-khanapara {
-        display: inline-block;
-        padding: 0.3rem 1.2rem;
-        border-radius: 50px;
-        font-weight: 700;
-        font-size: 0.75rem;
-        text-decoration: none;
-        background: linear-gradient(135deg, #0a3d6b, #062a4a);
-        color: #ffffff;
-        border: 2px solid #1a5a8a;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(10, 61, 107, 0.2);
-        text-align: center;
-    }
-    .btn-common-small-khanapara:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 25px rgba(10, 61, 107, 0.4);
-        background: linear-gradient(135deg, #1a5a8a, #0a3d6b);
-    }
-
-    .btn-common-small-juwai {
-        display: inline-block;
-        padding: 0.3rem 1.2rem;
-        border-radius: 50px;
-        font-weight: 700;
-        font-size: 0.75rem;
-        text-decoration: none;
-        background: linear-gradient(135deg, #0a2a5a, #061a3a);
-        color: #ffffff;
-        border: 2px solid #1a4a8a;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(10, 42, 90, 0.2);
-        text-align: center;
-    }
-    .btn-common-small-juwai:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 25px rgba(10, 42, 90, 0.4);
-        background: linear-gradient(135deg, #1a4a8a, #0a2a5a);
-    }
-
-    .btn-common-small-night {
-        display: inline-block;
-        padding: 0.3rem 1.2rem;
-        border-radius: 50px;
-        font-weight: 700;
-        font-size: 0.75rem;
-        text-decoration: none;
-        background: linear-gradient(135deg, #1a0a0a, #0d0a0a);
-        color: #ffffff;
-        border: 2px solid #3d2a2a;
-        transition: all 0.3s ease;
-        text-align: center;
-    }
-    .btn-common-small-night:hover {
-        transform: scale(1.05);
-        background: linear-gradient(135deg, #3d2a2a, #1a0a0a);
-    }
-
-    .btn-common-small-morning {
-        display: inline-block;
-        padding: 0.3rem 1.2rem;
-        border-radius: 50px;
-        font-weight: 700;
-        font-size: 0.75rem;
-        text-decoration: none;
-        background: linear-gradient(135deg, #e6a800, #cc9900);
-        color: #1a0a00;
-        border: 2px solid #ffcc00;
-        transition: all 0.3s ease;
-        text-align: center;
-    }
-    .btn-common-small-morning:hover {
-        transform: scale(1.05);
-        background: linear-gradient(135deg, #ffcc00, #e6a800);
-    }
-
-    /* ============================================================ */
-    /* 🔥 নেভিগেশন বাটন - ডিপ কালার */
-    /* ============================================================ */
-    .nav-btn-main {
-        display: inline-block;
-        padding: 0.6rem 2rem;
-        border-radius: 50px;
-        font-weight: 700;
-        text-decoration: none;
-        font-size: 0.95rem;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-    }
-    .nav-btn-main:hover {
-        transform: translateY(-2px) scale(1.02);
-        box-shadow: 0 6px 25px rgba(0,0,0,0.1);
-    }
-    .nav-btn-small {
-        display: inline-block;
-        padding: 0.4rem 1.2rem;
-        border-radius: 50px;
-        font-weight: 700;
-        text-decoration: none;
-        font-size: 0.8rem;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-    }
-    .nav-btn-small:hover {
-        transform: translateY(-2px) scale(1.05);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    }
-    .btn-row-three {
-        display: flex;
-        gap: 0.8rem;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin: 0.2rem 0 0.8rem 0;
-    }
-    .btn-row-three a {
-        flex: 1;
-        min-width: 100px;
-        max-width: 180px;
-        text-align: center;
-    }
-
-    /* -------- বাটন কালার -------- */
-    .btn-shillong-result { background: linear-gradient(135deg, #0d6b3d, #0a4d2a); color: white; border: 2px solid #1a8a55; box-shadow: 0 4px 15px rgba(13, 107, 61, 0.2); }
-    .btn-shillong-result:hover { background: linear-gradient(135deg, #1a8a55, #0d6b3d); }
-    .btn-khanapara { background: linear-gradient(135deg, #0a3d6b, #062a4a); color: white; border: 2px solid #1a5a8a; box-shadow: 0 4px 15px rgba(10, 61, 107, 0.3); }
-    .btn-khanapara:hover { background: linear-gradient(135deg, #1a5a8a, #0a3d6b); }
-    .btn-juwai { background: linear-gradient(135deg, #0a2a5a, #061a3a); color: white; border: 2px solid #1a4a8a; box-shadow: 0 4px 15px rgba(10, 42, 90, 0.3); }
-    .btn-juwai:hover { background: linear-gradient(135deg, #1a4a8a, #0a2a5a); }
-    .btn-morning { background: linear-gradient(135deg, #e6a800, #cc9900); color: #1a0a00; border: 2px solid #ffcc00; }
-    .btn-morning:hover { background: linear-gradient(135deg, #ffcc00, #e6a800); }
-    .btn-night { background: linear-gradient(135deg, #1a0a0a, #0d0a0a); color: white; border: 2px solid #3d2a2a; }
-    .btn-night:hover { background: linear-gradient(135deg, #3d2a2a, #1a0a0a); }
-    .btn-previous { background: linear-gradient(135deg, #0a5a30, #064a25); color: white; border: 2px solid #1a7a4a; box-shadow: 0 4px 15px rgba(10, 90, 48, 0.3); }
-    .btn-previous:hover { background: linear-gradient(135deg, #1a7a4a, #0a5a30); }
 
     /* ============================================================ */
     /* 🔥 ড্রিম চার্ট */
@@ -974,52 +951,14 @@
     /* ============================================================ */
     .history-section-direct { margin: 1rem 0; }
     .history-card { background: #fdf8f0; border-radius: 1rem; margin-bottom: 1rem; border: 1px solid #e8dcc8; overflow: hidden; }
-    .history-title { 
-        background: #0a3d6b; 
-        color: #ffffff; 
-        padding: 12px 16px; 
-        font-weight: 900; 
-        font-size: 1rem; 
-        border-bottom: 2px solid #1a5a8a;
-        border-radius: 12px 12px 0 0;
-    }
-    .history-content { 
-        padding: 1rem 1.2rem; 
-        background: #fdf8f0; 
-        font-size: 0.95rem; 
-        line-height: 1.7; 
-        color: #0d0a0a; 
-        font-weight: 700;
-    }
-    .history-content p { 
-        font-weight: 700; 
-        color: #0d0a0a; 
-    }
-    .history-content strong { 
-        color: #1a0a0a; 
-        font-weight: 900; 
-    }
-    .highlight-box { 
-        background: #f5ead6; 
-        border-left: 4px solid #cc0000; 
-        padding: 0.8rem 1rem; 
-        border-radius: 0.6rem; 
-        margin: 0.8rem 0; 
-    }
-    .highlight-box strong { 
-        color: #1a0a0a; 
-        font-weight: 900; 
-    }
+    .history-title { background: #0a3d6b; color: #ffffff; padding: 12px 16px; font-weight: 900; font-size: 1rem; border-bottom: 2px solid #1a5a8a; border-radius: 12px 12px 0 0; }
+    .history-content { padding: 1rem 1.2rem; background: #fdf8f0; font-size: 0.95rem; line-height: 1.7; color: #0d0a0a; font-weight: 700; }
+    .history-content p { font-weight: 700; color: #0d0a0a; }
+    .history-content strong { color: #1a0a0a; font-weight: 900; }
+    .highlight-box { background: #f5ead6; border-left: 4px solid #cc0000; padding: 0.8rem 1rem; border-radius: 0.6rem; margin: 0.8rem 0; }
+    .highlight-box strong { color: #1a0a0a; font-weight: 900; }
     .rule-list { list-style: none; padding-left: 0; }
-    .rule-list li { 
-        padding: 0.4rem 0; 
-        display: flex; 
-        align-items: center; 
-        gap: 8px; 
-        font-size: 0.92rem; 
-        color: #0d0a0a; 
-        font-weight: 700; 
-    }
+    .rule-list li { padding: 0.4rem 0; display: flex; align-items: center; gap: 8px; font-size: 0.92rem; color: #0d0a0a; font-weight: 700; }
     .rule-list li:before { content: "🏹"; font-size: 0.95rem; }
     .bn-text { color: #cc0000; font-size: 0.9rem; display: inline; margin-left: 8px; font-weight: 700; }
 
@@ -1207,54 +1146,47 @@
         border-radius: 1.2rem;
         padding: 1.8rem 1.5rem;
         border: 2px solid #25D366;
-        box-shadow: 0 4px 30px rgba(10, 61, 107, 0.2), 0 0 50px rgba(10, 61, 107, 0.06);
+        box-shadow: 0 4px 30px rgba(10, 61, 107, 0.25), 0 0 60px rgba(10, 61, 107, 0.08);
         text-align: center;
         transition: all 0.3s ease;
     }
 
     .whatsapp-card:hover {
         transform: translateY(-3px);
-        box-shadow: 0 8px 45px rgba(10, 61, 107, 0.3), 0 0 70px rgba(10, 61, 107, 0.1);
+        box-shadow: 0 8px 45px rgba(10, 61, 107, 0.35), 0 0 80px rgba(10, 61, 107, 0.12);
     }
 
-    .whatsapp-logo {
-        margin-bottom: 0.5rem;
-    }
-
-    .whatsapp-logo-img {
-        max-width: 65px;
-        height: auto;
-        border-radius: 12px;
-        border: 2px solid #25D366;
-        padding: 0.2rem;
-        background: #ffffff;
-        transition: all 0.3s ease;
-    }
-
-    .whatsapp-logo-img:hover {
-        transform: scale(1.05);
-        border-color: #0a3d6b;
-    }
-
-    .whatsapp-content {
+    .whatsapp-header {
         display: flex;
-        flex-direction: column;
         align-items: center;
-        gap: 0.3rem;
+        justify-content: center;
+        gap: 0.8rem;
+        margin-bottom: 0.3rem;
     }
 
-    .whatsapp-title {
+    .whatsapp-icon {
+        font-size: 2.2rem;
+        animation: whatsappPulse 2s infinite;
+    }
+
+    @keyframes whatsappPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+
+    .whatsapp-header h3 {
         font-size: 1.3rem;
         font-weight: 800;
         color: #0a3d6b;
         margin: 0;
         letter-spacing: 0.5px;
+        text-shadow: 0 0 30px rgba(10, 61, 107, 0.15);
     }
 
-    .whatsapp-desc {
+    .whatsapp-body p {
         font-size: 1rem;
-        color: #4a6a7a;
-        margin: 0;
+        color: #4a7a9a;
+        margin: 0 0 1rem 0;
         font-weight: 500;
     }
 
@@ -1272,7 +1204,6 @@
         border: 2px solid #25D366;
         box-shadow: 0 4px 25px rgba(37, 211, 102, 0.3);
         transition: all 0.3s ease;
-        margin-top: 0.3rem;
     }
 
     .whatsapp-join-btn:hover {
@@ -1285,47 +1216,21 @@
         font-size: 1.3rem;
     }
 
+    /* মোবাইল রেস্পন্সিভ */
     @media (max-width: 768px) {
-        .whatsapp-section {
-            max-width: 92%;
-        }
-        .whatsapp-title {
-            font-size: 1.1rem;
-        }
-        .whatsapp-desc {
-            font-size: 0.9rem;
-        }
-        .whatsapp-join-btn {
-            padding: 0.6rem 1.8rem;
-            font-size: 0.9rem;
-        }
-        .whatsapp-logo-img {
-            max-width: 55px;
-        }
+        .whatsapp-section { max-width: 92%; }
+        .whatsapp-header h3 { font-size: 1.1rem; }
+        .whatsapp-body p { font-size: 0.9rem; }
+        .whatsapp-join-btn { padding: 0.6rem 1.8rem; font-size: 0.9rem; }
     }
 
     @media (max-width: 480px) {
-        .whatsapp-section {
-            max-width: 100%;
-        }
-        .whatsapp-card {
-            padding: 1.2rem 1rem;
-        }
-        .whatsapp-title {
-            font-size: 0.95rem;
-        }
-        .whatsapp-desc {
-            font-size: 0.8rem;
-        }
-        .whatsapp-join-btn {
-            padding: 0.5rem 1.5rem;
-            font-size: 0.85rem;
-            width: 100%;
-            justify-content: center;
-        }
-        .whatsapp-logo-img {
-            max-width: 45px;
-        }
+        .whatsapp-section { max-width: 100%; }
+        .whatsapp-card { padding: 1.2rem 1rem; }
+        .whatsapp-header { flex-direction: column; gap: 0.3rem; }
+        .whatsapp-header h3 { font-size: 0.95rem; }
+        .whatsapp-body p { font-size: 0.8rem; }
+        .whatsapp-join-btn { padding: 0.5rem 1.5rem; font-size: 0.85rem; width: 100%; justify-content: center; }
     }
 
     /* ============================================================ */
@@ -1834,19 +1739,16 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 🔥 WHATSAPP SECTION (সব Heading-এর উপরে) -->
+    <!-- 🔥 WHATSAPP SECTION - সব Heading এর উপরে -->
     <!-- ============================================================ -->
     <div class="whatsapp-section">
         <div class="whatsapp-card">
-            <!-- Logo (উপরে ছোট করে) -->
-            <div class="whatsapp-logo">
-                <img src="your-logo.png" alt="Shillong Teer Live Result" class="whatsapp-logo-img">
+            <div class="whatsapp-header">
+                <span class="whatsapp-icon">💬</span>
+                <h3>Shillong Teer Live Result Official Team</h3>
             </div>
-            
-            <!-- Content -->
-            <div class="whatsapp-content">
-                <h3 class="whatsapp-title">Shillong Teer Live Result Official Team</h3>
-                <p class="whatsapp-desc">Daily Results, Tips & Expert Predictions</p>
+            <div class="whatsapp-body">
+                <p>📢 Daily Results, Tips & Expert Predictions</p>
                 <a href="https://whatsapp.com/channel/0029VaFbrQmLSmbjX5WOYp2d" 
                    target="_blank" 
                    class="whatsapp-join-btn">
@@ -1857,27 +1759,14 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 🔥 কমন নাম্বার (হেডিং ১) -->
+    <!-- 🔥 কমন নাম্বার -->
     <!-- ============================================================ -->
     <h2 class="seo-h2">🔢 Shillong Teer Common Number Today | আজকের শিলং তীর কমন নাম্বার</h2>
-
-    <!-- ============================================================ -->
-    <!-- 🔥 Sub-Heading (হেডিং ২) -->
-    <!-- ============================================================ -->
     <div class="common-time-badge">⭐ TODAY'S COMMON NUMBERS (7 Formula Analysis) | আজকের কমন নাম্বার (৭ ফর্মুলা বিশ্লেষণ)</div>
-
-    <!-- ============================================================ -->
-    <!-- 🔥 Venue Heading (হেডিং ৩) -->
-    <!-- ============================================================ -->
-    <div class="common-venue-title">🎯 SHILLONG TEER - COMMON NUMBERS</div>
-
-    <!-- ============================================================ -->
-    <!-- 🔥 Common Numbers Table -->
-    <!-- ============================================================ -->
     <div class="common-venues-container" id="commonTablesContainer"></div>
 
     <!-- ============================================================ -->
-    <!-- 🔥 PREVIOUS RESULT - শুধু SHILLONG TEER -->
+    <!-- 🔥 PREVIOUS RESULT -->
     <!-- ============================================================ -->
     <h2 class="seo-h2-dark">📅 Shillong Teer Previous Results (2026)</h2>
     <div class="monthwise-section">
@@ -2128,7 +2017,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- ❓ FAQ SECTION (ব্লু হেডিং) - সম্পূর্ণ ২০টি প্রশ্ন -->
+    <!-- ❓ FAQ SECTION -->
     <!-- ============================================================ -->
     <div class="faq-section">
         <div class="faq-title">❓ FREQUENTLY ASKED QUESTIONS (FAQ) - 20 QUESTIONS | প্রায়শই জিজ্ঞাসিত প্রশ্ন - ২০টি প্রশ্ন</div>
@@ -2194,7 +2083,7 @@
     </div>
     
     <!-- ============================================================ -->
-    <!-- 🔥 ফুটার - সমস্ত ইন্টারনাল লিংক যোগ করা হয়েছে -->
+    <!-- 🔥 ফুটার - সমস্ত ইন্টারনাল লিংক -->
     <!-- ============================================================ -->
     <div class="footer-links">
         <a href="about.html">📖 About Us | আমাদের সম্পর্কে</a> | 
@@ -2468,7 +2357,6 @@ function setupShillongSelector() {
 }
 
 function setupAllSelectors() {
-    // Khanapara
     const selectKhanapara = document.getElementById('monthSelectKhanapara');
     if (selectKhanapara) {
         const currentMonth = 6;
@@ -2479,7 +2367,6 @@ function setupAllSelectors() {
         });
     }
     
-    // Juwai
     const selectJuwai = document.getElementById('monthSelectJuwai');
     if (selectJuwai) {
         const currentMonth = 6;
@@ -2490,7 +2377,6 @@ function setupAllSelectors() {
         });
     }
     
-    // Morning
     const selectMorning = document.getElementById('monthSelectMorning');
     if (selectMorning) {
         const currentMonth = 6;
@@ -2501,7 +2387,6 @@ function setupAllSelectors() {
         });
     }
     
-    // Night
     const selectNight = document.getElementById('monthSelectNight');
     if (selectNight) {
         const currentMonth = 6;
@@ -2620,7 +2505,7 @@ function updateVenueCountdown(venueId) {
 }
 
 // ============================================================
-// 🔥 অটো-সেভ লাইভ রেজাল্ট টু প্রিভিয়াস রেজাল্ট (Supabase)
+// 🔥 অটো-সেভ লাইভ রেজাল্ট টু প্রিভিয়াস রেজাল্ট
 // ============================================================
 async function saveLiveResultToPrevious(venue, frResult, srResult, resultDate) {
     if (!frResult || !srResult || frResult === '--' || srResult === '--') {
@@ -2729,7 +2614,6 @@ async function loadTodayResults() {
             }
         }
         
-        // Night Teer
         const { data: nightData, error: nightError } = await supabaseClient
             .from('teer_live_results')
             .select('*')
@@ -2752,11 +2636,28 @@ async function loadTodayResults() {
         globalLiveData = liveData;
         renderTodayResults(liveData, today, nightDate);
         
-        if (liveData.shillong) {
-            updateMetaTags('Shillong Teer', liveData.shillong.fr || '--', liveData.shillong.sr || '--', today);
+        // ============================================================
+        // 🔥 সব ভেন্যুর জন্য Meta Tags আপডেট করুন
+        // ============================================================
+        const venueList = ['shillong', 'khanapara', 'juwai', 'morning', 'night'];
+        const venueNameMap = {
+            shillong: 'Shillong Teer',
+            khanapara: 'Khanapara Teer',
+            juwai: 'Juwai Teer',
+            morning: 'Morning Teer',
+            night: 'Night Teer'
+        };
+
+        for (const v of venueList) {
+            if (liveData[v] && liveData[v].fr !== '--') {
+                updateMetaTags(venueNameMap[v], liveData[v].fr, liveData[v].sr, today);
+                break;
+            }
         }
+        // ============================================================
+        // 🔥 Meta Tags আপডেট অংশ শেষ
+        // ============================================================
         
-        // ✅ সব ভেন্যুর প্রিভিয়াস রেজাল্ট রিলোড করুন
         const selectShillong = document.getElementById('monthSelectShillong');
         if (selectShillong) {
             loadShillongPrevious(parseInt(selectShillong.value));
@@ -3202,6 +3103,69 @@ let globalLiveData = {};
 let globalCommonData = null;
 
 // ============================================================
+// 🔥 REALTIME SUBSCRIPTIONS
+// ============================================================
+
+function subscribeToCommonNumbers() {
+    const channel = supabaseClient
+        .channel('common-numbers-changes')
+        .on(
+            'postgres_changes',
+            {
+                event: 'UPDATE',
+                schema: 'public',
+                table: 'teer_common_numbers'
+            },
+            (payload) => {
+                console.log('🔄 কমন নাম্বার আপডেট হয়েছে:', payload.new);
+                const today = getTodayIST();
+                if (payload.new && payload.new.result_date === today) {
+                    renderCommonNumbersFromDB(payload.new);
+                } else {
+                    loadCommonNumbers();
+                }
+            }
+        )
+        .subscribe((status) => {
+            console.log('📡 Realtime (Common) স্ট্যাটাস:', status);
+        });
+    return channel;
+}
+
+function subscribeToLiveResults() {
+    const channel = supabaseClient
+        .channel('live-results-changes')
+        .on(
+            'postgres_changes',
+            {
+                event: 'UPDATE',
+                schema: 'public',
+                table: 'teer_live_results'
+            },
+            async (payload) => {
+                console.log('🔄 লাইভ রেজাল্ট আপডেট হয়েছে:', payload.new);
+                
+                const newData = payload.new;
+                const venue = newData.venue;
+                const frResult = newData.fr_result || '--';
+                const srResult = newData.sr_result || '--';
+                const resultDate = newData.result_date;
+                
+                if (frResult !== '--' && srResult !== '--') {
+                    await saveLiveResultToPrevious(venue, frResult, srResult, resultDate);
+                    console.log(`✅ ${venue} রেজাল্ট প্রিভিয়াসে সেভ হয়েছে: FR=${frResult}, SR=${srResult}`);
+                }
+                
+                loadTodayResults();
+            }
+        )
+        .subscribe((status) => {
+            console.log('📡 Realtime (Live) স্ট্যাটাস:', status);
+        });
+    return channel;
+}
+
+// ============================================================
 // 📌 DOMContentLoaded
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
@@ -3212,13 +3176,16 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(loadTodayResults, 10000);
     setInterval(loadCommonNumbers, 30000);
     
-    // ✅ সব ভেন্যুর Selector Setup
     setupShillongSelector();
     setupAllSelectors();
     
     renderDreamChart();
     loadTrendingNumbers();
     loadLeaderboard();
+    
+    // 🔥 Realtime সাবস্ক্রিপশন চালু করুন
+    subscribeToCommonNumbers();
+    subscribeToLiveResults();
     
     document.getElementById('predictDreamBtn').addEventListener('click', function() {
         let inp = document.getElementById('dreamInput').value.trim();
