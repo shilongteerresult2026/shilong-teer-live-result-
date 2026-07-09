@@ -572,23 +572,193 @@ body {
 }
 @keyframes waitingNumberPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
 
-/* ===== ফুটার বাটন - প্রিভিয়াস + কমন পাশাপাশি ===== */
+/* ============================================================ */
+/* 🔥 সাবপেজ বাটন - স্লিম + পাশাপাশি + টেক্সট সেন্টার */
+/* ============================================================ */
 .card-footer-buttons {
     display: flex;
-    justify-content: flex-end;
-    gap: 0.8rem;
-    margin-top: 0.8rem;
-    padding-top: 0.6rem;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 0.6rem;
+    padding-top: 0.5rem;
     border-top: 1px solid #4a8ab5;
     flex-wrap: wrap;
 }
+
 .card-footer-buttons a {
-    font-size: 0.85rem;
-    padding: 0.3rem 1.2rem;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.8rem;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
+    flex: 0 1 auto;
+    min-width: 90px;
+    max-width: 140px;
+    text-align: center;
+    letter-spacing: 0.3px;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+/* Previous Button - আলট্রা গ্রিন */
+.btn-previous-sky {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-decoration: none;
+    background: linear-gradient(135deg, #00cc66, #009944, #00cc66);
+    background-size: 200% 200%;
+    animation: ultraGreenGlow 3s ease-in-out infinite;
+    color: #ffffff;
+    border: 2px solid #66ff99;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 25px rgba(0, 204, 102, 0.3);
+    text-align: center;
+}
+
+.btn-previous-sky:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 45px rgba(0, 204, 102, 0.6);
+}
+
+@keyframes ultraGreenGlow {
+    0% { background-position: 0% 50%; box-shadow: 0 4px 20px rgba(0, 204, 102, 0.2); }
+    50% { background-position: 100% 50%; box-shadow: 0 4px 40px rgba(0, 204, 102, 0.5); }
+    100% { background-position: 0% 50%; box-shadow: 0 4px 20px rgba(0, 204, 102, 0.2); }
+}
+
+/* Common Number Button - ডিপ গ্রিন (স্লিম) */
+.btn-common-small,
+.btn-common-small-khanapara,
+.btn-common-small-juwai,
+.btn-common-small-night,
+.btn-common-small-morning {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-align: center;
+    min-width: 90px;
+}
+
+.btn-common-small {
+    background: linear-gradient(135deg, #0d6b3d, #0a4d2a);
+    color: #ffffff;
+    border: 2px solid #1a8a55;
+    box-shadow: 0 4px 15px rgba(13, 107, 61, 0.2);
+}
+.btn-common-small:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 25px rgba(13, 107, 61, 0.4);
+    background: linear-gradient(135deg, #1a8a55, #0d6b3d);
+}
+
+.btn-common-small-khanapara {
+    background: linear-gradient(135deg, #0a3d6b, #062a4a);
+    color: #ffffff;
+    border: 2px solid #1a5a8a;
+    box-shadow: 0 4px 15px rgba(10, 61, 107, 0.2);
+}
+.btn-common-small-khanapara:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 25px rgba(10, 61, 107, 0.4);
+    background: linear-gradient(135deg, #1a5a8a, #0a3d6b);
+}
+
+.btn-common-small-juwai {
+    background: linear-gradient(135deg, #1a0a5a, #0a2a5a);
+    color: #ffffff;
+    border: 2px solid #3a5a8a;
+    box-shadow: 0 4px 15px rgba(10, 42, 90, 0.2);
+}
+.btn-common-small-juwai:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 25px rgba(10, 42, 90, 0.4);
+    background: linear-gradient(135deg, #1a4a8a, #0a2a5a);
+}
+
+.btn-common-small-night {
+    background: linear-gradient(135deg, #1a0a0a, #0d0a0a);
+    color: #ffffff;
+    border: 2px solid #3d2a2a;
+}
+.btn-common-small-night:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #3d2a2a, #1a0a0a);
+}
+
+.btn-common-small-morning {
+    background: linear-gradient(135deg, #ffcc00, #ff9900, #ffcc00);
+    background-size: 200% 200%;
+    animation: morningGradient 2s ease-in-out infinite;
+    color: #1a0a00;
+    border: 2px solid #ffcc00;
+}
+.btn-common-small-morning:hover {
+    transform: scale(1.05);
+}
+
+@keyframes morningGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* মোবাইলে */
+@media (max-width: 768px) {
+    .card-footer-buttons {
+        gap: 0.5rem;
+    }
+    .card-footer-buttons a {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.6rem;
+        min-width: 70px;
+        max-width: 120px;
+    }
+    .btn-previous-sky {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.6rem;
+    }
+    .btn-common-small,
+    .btn-common-small-khanapara,
+    .btn-common-small-juwai,
+    .btn-common-small-night,
+    .btn-common-small-morning {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.6rem;
+        min-width: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-footer-buttons {
+        gap: 0.4rem;
+    }
+    .card-footer-buttons a {
+        font-size: 0.6rem;
+        padding: 0.2rem 0.5rem;
+        min-width: 60px;
+        max-width: 100px;
+    }
+    .btn-previous-sky {
+        font-size: 0.6rem;
+        padding: 0.2rem 0.5rem;
+    }
+    .btn-common-small,
+    .btn-common-small-khanapara,
+    .btn-common-small-juwai,
+    .btn-common-small-night,
+    .btn-common-small-morning {
+        font-size: 0.6rem;
+        padding: 0.2rem 0.5rem;
+        min-width: 60px;
+    }
 }
 
 /* ============================================================ */
@@ -810,278 +980,6 @@ body {
     transition: all 0.3s ease;
 }
 .selector-container select:focus { border-color: #0a3d6b; outline: none; box-shadow: 0 0 0 4px rgba(10, 61, 107, 0.15); }
-
-/* ============================================================ */
-/* 🔥 প্রিভিয়াস বাটন - প্রাণবন্ত আলট্রা গ্রিন */
-/* ============================================================ */
-.btn-previous-sky {
-    display: inline-block;
-    padding: 0.4rem 1.8rem;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    text-decoration: none;
-    background: linear-gradient(135deg, #00cc66, #009944, #00cc66);
-    background-size: 200% 200%;
-    animation: ultraGreenGlow 3s ease-in-out infinite;
-    color: #ffffff;
-    border: 2px solid #66ff99;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 25px rgba(0, 204, 102, 0.3);
-    text-align: center;
-}
-@keyframes ultraGreenGlow {
-    0% { background-position: 0% 50%; box-shadow: 0 4px 20px rgba(0, 204, 102, 0.2); }
-    50% { background-position: 100% 50%; box-shadow: 0 4px 40px rgba(0, 204, 102, 0.5); }
-    100% { background-position: 0% 50%; box-shadow: 0 4px 20px rgba(0, 204, 102, 0.2); }
-}
-.btn-previous-sky:hover {
-    transform: scale(1.06);
-    box-shadow: 0 6px 45px rgba(0, 204, 102, 0.6);
-}
-
-/* ============================================================ */
-/* 🔥 কমন নাম্বার বাটন - প্রাণবন্ত */
-/* ============================================================ */
-.btn-common-small {
-    display: inline-block;
-    padding: 0.4rem 1.4rem;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    text-decoration: none;
-    background: linear-gradient(135deg, #00cc66, #009944);
-    color: #ffffff;
-    border: 2px solid #66ff99;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(0, 204, 102, 0.2);
-    text-align: center;
-}
-.btn-common-small:hover {
-    transform: scale(1.06);
-    box-shadow: 0 6px 35px rgba(0, 204, 102, 0.4);
-}
-
-.btn-common-small-khanapara {
-    display: inline-block;
-    padding: 0.4rem 1.4rem;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    text-decoration: none;
-    background: linear-gradient(135deg, #0a3d6b, #1a6b9a);
-    color: #ffffff;
-    border: 2px solid #4a8ab5;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(10, 61, 107, 0.2);
-    text-align: center;
-}
-.btn-common-small-khanapara:hover {
-    transform: scale(1.06);
-    box-shadow: 0 6px 35px rgba(10, 61, 107, 0.4);
-}
-
-.btn-common-small-juwai {
-    display: inline-block;
-    padding: 0.4rem 1.4rem;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    text-decoration: none;
-    background: linear-gradient(135deg, #1a0a5a, #0a2a5a);
-    color: #ffffff;
-    border: 2px solid #3a5a8a;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(10, 42, 90, 0.2);
-    text-align: center;
-}
-.btn-common-small-juwai:hover {
-    transform: scale(1.06);
-    box-shadow: 0 6px 35px rgba(10, 42, 90, 0.4);
-}
-
-.btn-common-small-night {
-    display: inline-block;
-    padding: 0.4rem 1.4rem;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    text-decoration: none;
-    background: linear-gradient(135deg, #1a0a0a, #0d0a0a, #1a0a0a);
-    background-size: 200% 200%;
-    animation: nightGradient 3s ease-in-out infinite;
-    color: #ffffff;
-    border: 2px solid #3d2a2a;
-    transition: all 0.3s ease;
-    text-align: center;
-}
-@keyframes nightGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-.btn-common-small-night:hover {
-    transform: scale(1.06);
-}
-
-.btn-common-small-morning {
-    display: inline-block;
-    padding: 0.4rem 1.4rem;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    text-decoration: none;
-    background: linear-gradient(135deg, #ffcc00, #ff9900, #ffcc00);
-    background-size: 200% 200%;
-    animation: morningGradient 2s ease-in-out infinite;
-    color: #1a0a00;
-    border: 2px solid #ffcc00;
-    transition: all 0.3s ease;
-    text-align: center;
-}
-@keyframes morningGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-.btn-common-small-morning:hover {
-    transform: scale(1.06);
-}
-
-/* ============================================================ */
-/* 🔥 নেভিগেশন বাটন - প্রাণবন্ত */
-/* ============================================================ */
-.nav-btn-main {
-    display: inline-block;
-    padding: 0.8rem 2.5rem;
-    border-radius: 50px;
-    font-weight: 700;
-    text-decoration: none;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    border: 2px solid rgba(255,255,255,0.2);
-}
-.nav-btn-main:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 8px 35px rgba(0,0,0,0.12);
-}
-.nav-btn-small {
-    display: inline-block;
-    padding: 0.5rem 1.5rem;
-    border-radius: 50px;
-    font-weight: 700;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.04);
-}
-.nav-btn-small:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 4px 25px rgba(0,0,0,0.08);
-}
-.btn-row-three {
-    display: flex;
-    gap: 0.8rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 0.2rem 0 0.8rem 0;
-}
-.btn-row-three a {
-    flex: 1;
-    min-width: 100px;
-    max-width: 180px;
-    text-align: center;
-}
-
-/* -------- বাটন কালার - প্রাণবন্ত -------- */
-.btn-shillong-result { 
-    background: linear-gradient(135deg, #00cc66, #009944, #00cc66);
-    background-size: 200% 200%;
-    animation: btnGreen 3s ease-in-out infinite;
-    color: white; 
-    border: 2px solid #66ff99; 
-    box-shadow: 0 4px 20px rgba(0, 204, 102, 0.2); 
-}
-@keyframes btnGreen {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-.btn-shillong-result:hover { background: linear-gradient(135deg, #009944, #00cc66); }
-
-.btn-khanapara { 
-    background: linear-gradient(135deg, #0a3d6b, #1a6b9a, #0a3d6b);
-    background-size: 200% 200%;
-    animation: btnBlue 3s ease-in-out infinite;
-    color: white; 
-    border: 2px solid #4a8ab5; 
-    box-shadow: 0 4px 20px rgba(10, 61, 107, 0.2); 
-}
-@keyframes btnBlue {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-.btn-khanapara:hover { background: linear-gradient(135deg, #1a6b9a, #0a3d6b); }
-
-.btn-juwai { 
-    background: linear-gradient(135deg, #1a0a5a, #0a2a5a, #1a0a5a);
-    background-size: 200% 200%;
-    animation: btnJuwai 3s ease-in-out infinite;
-    color: white; 
-    border: 2px solid #3a5a8a; 
-    box-shadow: 0 4px 20px rgba(10, 42, 90, 0.2); 
-}
-@keyframes btnJuwai {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-.btn-juwai:hover { background: linear-gradient(135deg, #0a2a5a, #1a0a5a); }
-
-.btn-morning { 
-    background: linear-gradient(135deg, #ffcc00, #ff9900, #ffcc00);
-    background-size: 200% 200%;
-    animation: btnMorning 2s ease-in-out infinite;
-    color: #1a0a00; 
-    border: 2px solid #ffcc00; 
-}
-@keyframes btnMorning {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-.btn-morning:hover { background: linear-gradient(135deg, #ff9900, #ffcc00); }
-
-.btn-night { 
-    background: linear-gradient(135deg, #1a0a0a, #0d0a0a, #1a0a0a);
-    background-size: 200% 200%;
-    animation: btnNight 4s ease-in-out infinite;
-    color: white; 
-    border: 2px solid #3d2a2a; 
-}
-@keyframes btnNight {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-.btn-night:hover { background: linear-gradient(135deg, #0d0a0a, #1a0a0a); }
-
-.btn-previous { 
-    background: linear-gradient(135deg, #00cc66, #009944, #00cc66);
-    background-size: 200% 200%;
-    animation: btnPrev 3s ease-in-out infinite;
-    color: white; 
-    border: 2px solid #66ff99; 
-    box-shadow: 0 4px 20px rgba(0, 204, 102, 0.2); 
-}
-@keyframes btnPrev {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-.btn-previous:hover { background: linear-gradient(135deg, #009944, #00cc66); }
 
 /* ============================================================ */
 /* 🔥 ড্রিম চার্ট */
@@ -2279,64 +2177,7 @@ body {
 }
 
 /* ============================================================ */
-/* 🔥 প্রিভিয়াস বাটন */
-/* ============================================================ */
-.btn-previous-sky,
-.btn-previous,
-a.btn-previous-sky,
-a.btn-previous,
-button.btn-previous-sky,
-button.btn-previous,
-.previous-btn,
-.view-previous-btn,
-.show-previous-btn {
-    font-size: 1rem !important;
-    padding: 0.4rem 1.5rem !important;
-}
-
-/* ============================================================ */
-/* 🔥 সাবপেজ বাটন - পাশাপাশি রাখা (যোগ করা) */
-/* ============================================================ */
-.card-footer-buttons {
-    display: flex;
-    justify-content: center;  /* সেন্টার অ্যালাইন */
-    gap: 0.8rem;
-    margin-top: 0.8rem;
-    padding-top: 0.6rem;
-    border-top: 1px solid #4a8ab5;
-    flex-wrap: wrap;
-}
-
-.card-footer-buttons a {
-    font-size: 0.85rem;
-    padding: 0.4rem 1.5rem;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    flex: 0 1 auto;
-    min-width: 120px;
-    text-align: center;
-}
-
-/* মোবাইলে */
-@media (max-width: 480px) {
-    .card-footer-buttons {
-        flex-direction: row;  /* পাশাপাশি */
-        justify-content: center;
-        gap: 0.5rem;
-    }
-    .card-footer-buttons a {
-        font-size: 0.7rem;
-        padding: 0.25rem 0.8rem;
-        min-width: 80px;
-        flex: 1 1 auto;
-        max-width: 45%;
-    }
-}
-
-/* ============================================================ */
-/* 🔥 প্রিভিয়াস রেজাল্ট চার্ট - Date Format এক লাইনে (যোগ করা) */
+/* 🔥 প্রিভিয়াস রেজাল্ট চার্ট - Date Format এক লাইনে */
 /* ============================================================ */
 .result-display-table td:first-child,
 .result-display-table th:first-child {
@@ -2348,34 +2189,6 @@ button.btn-previous,
 .result-display-table th {
     white-space: nowrap;
     vertical-align: middle;
-}
-
-/* মোবাইলে */
-@media (max-width: 768px) {
-    .result-display-table td:first-child,
-    .result-display-table th:first-child {
-        min-width: 85px;
-        font-size: 0.8rem;
-    }
-    .result-display-table td,
-    .result-display-table th {
-        white-space: nowrap;
-        font-size: 0.8rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .result-display-table td:first-child,
-    .result-display-table th:first-child {
-        min-width: 70px;
-        font-size: 0.7rem;
-    }
-    .result-display-table td,
-    .result-display-table th {
-        white-space: nowrap;
-        font-size: 0.7rem;
-        padding: 4px 6px;
-    }
 }
 
 /* ============================================================ */
@@ -2433,6 +2246,17 @@ button.btn-previous,
     .result-display-table th {
         padding: 10px 12px !important;
         font-size: 0.95rem !important;
+    }
+    
+    .result-display-table td:first-child,
+    .result-display-table th:first-child {
+        min-width: 85px;
+        font-size: 0.8rem;
+    }
+    .result-display-table td,
+    .result-display-table th {
+        white-space: nowrap;
+        font-size: 0.8rem;
     }
     
     .dream-title { font-size: 1.2rem; }
@@ -2518,6 +2342,18 @@ button.btn-previous,
     .result-display-table th {
         padding: 8px 10px !important;
         font-size: 0.8rem !important;
+    }
+    
+    .result-display-table td:first-child,
+    .result-display-table th:first-child {
+        min-width: 70px;
+        font-size: 0.7rem;
+    }
+    .result-display-table td,
+    .result-display-table th {
+        white-space: nowrap;
+        font-size: 0.7rem;
+        padding: 4px 6px;
     }
     
     .dream-title { font-size: 1rem; }
