@@ -240,6 +240,7 @@ function setupShillongSelector() {
 }
 
 function setupAllSelectors() {
+    // Khanapara
     const selectKhanapara = document.getElementById('monthSelectKhanapara');
     if (selectKhanapara) {
         const currentMonth = 6;
@@ -250,6 +251,7 @@ function setupAllSelectors() {
         });
     }
     
+    // Juwai
     const selectJuwai = document.getElementById('monthSelectJuwai');
     if (selectJuwai) {
         const currentMonth = 6;
@@ -260,6 +262,7 @@ function setupAllSelectors() {
         });
     }
     
+    // Morning
     const selectMorning = document.getElementById('monthSelectMorning');
     if (selectMorning) {
         const currentMonth = 6;
@@ -270,6 +273,7 @@ function setupAllSelectors() {
         });
     }
     
+    // Night
     const selectNight = document.getElementById('monthSelectNight');
     if (selectNight) {
         const currentMonth = 6;
@@ -388,7 +392,7 @@ function updateVenueCountdown(venueId) {
 }
 
 // ============================================================
-// 🔥 অটো-সেভ লাইভ রেজাল্ট টু প্রিভিয়াস রেজাল্ট
+// 🔥 অটো-সেভ লাইভ রেজাল্ট টু প্রিভিয়াস রেজাল্ট (Supabase)
 // ============================================================
 async function saveLiveResultToPrevious(venue, frResult, srResult, resultDate) {
     if (!frResult || !srResult || frResult === '--' || srResult === '--') {
@@ -497,6 +501,7 @@ async function loadTodayResults() {
             }
         }
         
+        // Night Teer
         const { data: nightData, error: nightError } = await supabaseClient
             .from('teer_live_results')
             .select('*')
@@ -519,28 +524,11 @@ async function loadTodayResults() {
         globalLiveData = liveData;
         renderTodayResults(liveData, today, nightDate);
         
-        // ============================================================
-        // 🔥 সব ভেন্যুর জন্য Meta Tags আপডেট করুন
-        // ============================================================
-        const venueList = ['shillong', 'khanapara', 'juwai', 'morning', 'night'];
-        const venueNameMap = {
-            shillong: 'Shillong Teer',
-            khanapara: 'Khanapara Teer',
-            juwai: 'Juwai Teer',
-            morning: 'Morning Teer',
-            night: 'Night Teer'
-        };
-
-        for (const v of venueList) {
-            if (liveData[v] && liveData[v].fr !== '--') {
-                updateMetaTags(venueNameMap[v], liveData[v].fr, liveData[v].sr, today);
-                break;
-            }
+        if (liveData.shillong) {
+            updateMetaTags('Shillong Teer', liveData.shillong.fr || '--', liveData.shillong.sr || '--', today);
         }
-        // ============================================================
-        // 🔥 Meta Tags আপডেট অংশ শেষ
-        // ============================================================
         
+        // ✅ সব ভেন্যুর প্রিভিয়াস রেজাল্ট রিলোড করুন
         const selectShillong = document.getElementById('monthSelectShillong');
         if (selectShillong) {
             loadShillongPrevious(parseInt(selectShillong.value));
@@ -986,69 +974,6 @@ let globalLiveData = {};
 let globalCommonData = null;
 
 // ============================================================
-// 🔥 REALTIME SUBSCRIPTIONS
-// ============================================================
-
-function subscribeToCommonNumbers() {
-    const channel = supabaseClient
-        .channel('common-numbers-changes')
-        .on(
-            'postgres_changes',
-            {
-                event: 'UPDATE',
-                schema: 'public',
-                table: 'teer_common_numbers'
-            },
-            (payload) => {
-                console.log('🔄 কমন নাম্বার আপডেট হয়েছে:', payload.new);
-                const today = getTodayIST();
-                if (payload.new && payload.new.result_date === today) {
-                    renderCommonNumbersFromDB(payload.new);
-                } else {
-                    loadCommonNumbers();
-                }
-            }
-        )
-        .subscribe((status) => {
-            console.log('📡 Realtime (Common) স্ট্যাটাস:', status);
-        });
-    return channel;
-}
-
-function subscribeToLiveResults() {
-    const channel = supabaseClient
-        .channel('live-results-changes')
-        .on(
-            'postgres_changes',
-            {
-                event: 'UPDATE',
-                schema: 'public',
-                table: 'teer_live_results'
-            },
-            async (payload) => {
-                console.log('🔄 লাইভ রেজাল্ট আপডেট হয়েছে:', payload.new);
-                
-                const newData = payload.new;
-                const venue = newData.venue;
-                const frResult = newData.fr_result || '--';
-                const srResult = newData.sr_result || '--';
-                const resultDate = newData.result_date;
-                
-                if (frResult !== '--' && srResult !== '--') {
-                    await saveLiveResultToPrevious(venue, frResult, srResult, resultDate);
-                    console.log(`✅ ${venue} রেজাল্ট প্রিভিয়াসে সেভ হয়েছে: FR=${frResult}, SR=${srResult}`);
-                }
-                
-                loadTodayResults();
-            }
-        )
-        .subscribe((status) => {
-            console.log('📡 Realtime (Live) স্ট্যাটাস:', status);
-        });
-    return channel;
-}
-
-// ============================================================
 // 📌 DOMContentLoaded
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
@@ -1059,16 +984,13 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(loadTodayResults, 10000);
     setInterval(loadCommonNumbers, 30000);
     
+    // ✅ সব ভেন্যুর Selector Setup
     setupShillongSelector();
     setupAllSelectors();
     
     renderDreamChart();
     loadTrendingNumbers();
     loadLeaderboard();
-    
-    // 🔥 Realtime সাবস্ক্রিপশন চালু করুন
-    subscribeToCommonNumbers();
-    subscribeToLiveResults();
     
     document.getElementById('predictDreamBtn').addEventListener('click', function() {
         let inp = document.getElementById('dreamInput').value.trim();
@@ -1092,7 +1014,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // ❌ VIP কোড বাদ দেওয়া হয়েছে
+    document.getElementById('payNowBtn').addEventListener('click', function() {
+        window.location.href = "upi://pay?pa=7628988767@airtel&pn=Teer%20VIP&am=1500&cu=INR";
+    });
+    
+    document.getElementById('verifyPaymentBtn').addEventListener('click', function() {
+        let txn = document.getElementById('transactionIdInput').value.trim();
+        if(txn.length >= 5) {
+            localStorage.setItem('teer_vip_status', 'active');
+            document.getElementById('vipMessage').innerHTML = "✅ VIP UNLOCKED!";
+        } else {
+            document.getElementById('vipMessage').innerHTML = "❌ Invalid TXN ID";
+        }
+    });
     
     document.getElementById('closeLiveModalBtn').addEventListener('click', closeModals);
     document.getElementById('closePrevModalBtn').addEventListener('click', closeModals);
