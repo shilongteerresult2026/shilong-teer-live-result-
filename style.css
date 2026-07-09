@@ -2295,6 +2295,90 @@ button.btn-previous,
 }
 
 /* ============================================================ */
+/* 🔥 সাবপেজ বাটন - পাশাপাশি রাখা (যোগ করা) */
+/* ============================================================ */
+.card-footer-buttons {
+    display: flex;
+    justify-content: center;  /* সেন্টার অ্যালাইন */
+    gap: 0.8rem;
+    margin-top: 0.8rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid #4a8ab5;
+    flex-wrap: wrap;
+}
+
+.card-footer-buttons a {
+    font-size: 0.85rem;
+    padding: 0.4rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    flex: 0 1 auto;
+    min-width: 120px;
+    text-align: center;
+}
+
+/* মোবাইলে */
+@media (max-width: 480px) {
+    .card-footer-buttons {
+        flex-direction: row;  /* পাশাপাশি */
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    .card-footer-buttons a {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.8rem;
+        min-width: 80px;
+        flex: 1 1 auto;
+        max-width: 45%;
+    }
+}
+
+/* ============================================================ */
+/* 🔥 প্রিভিয়াস রেজাল্ট চার্ট - Date Format এক লাইনে (যোগ করা) */
+/* ============================================================ */
+.result-display-table td:first-child,
+.result-display-table th:first-child {
+    white-space: nowrap;
+    min-width: 100px;
+}
+
+.result-display-table td,
+.result-display-table th {
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+/* মোবাইলে */
+@media (max-width: 768px) {
+    .result-display-table td:first-child,
+    .result-display-table th:first-child {
+        min-width: 85px;
+        font-size: 0.8rem;
+    }
+    .result-display-table td,
+    .result-display-table th {
+        white-space: nowrap;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .result-display-table td:first-child,
+    .result-display-table th:first-child {
+        min-width: 70px;
+        font-size: 0.7rem;
+    }
+    .result-display-table td,
+    .result-display-table th {
+        white-space: nowrap;
+        font-size: 0.7rem;
+        padding: 4px 6px;
+    }
+}
+
+/* ============================================================ */
 /* 🔥 মোবাইল রেস্পন্সিভ */
 /* ============================================================ */
 @media (max-width: 768px) {
