@@ -519,28 +519,9 @@ async function loadTodayResults() {
         globalLiveData = liveData;
         renderTodayResults(liveData, today, nightDate);
         
-        // ============================================================
-        // 🔥 সব ভেন্যুর জন্য Meta Tags আপডেট করুন (নতুন যোগ করা অংশ)
-        // ============================================================
-        const venueList = ['shillong', 'khanapara', 'juwai', 'morning', 'night'];
-        const venueNameMap = {
-            shillong: 'Shillong Teer',
-            khanapara: 'Khanapara Teer',
-            juwai: 'Juwai Teer',
-            morning: 'Morning Teer',
-            night: 'Night Teer'
-        };
-
-        // যে ভেন্যুতে ফলাফল আছে, সেটার জন্য মেটা ট্যাগ আপডেট করুন
-        for (const v of venueList) {
-            if (liveData[v] && liveData[v].fr !== '--') {
-                updateMetaTags(venueNameMap[v], liveData[v].fr, liveData[v].sr, today);
-                break;
-            }
+        if (liveData.shillong) {
+            updateMetaTags('Shillong Teer', liveData.shillong.fr || '--', liveData.shillong.sr || '--', today);
         }
-        // ============================================================
-        // 🔥 Meta Tags আপডেট অংশ শেষ
-        // ============================================================
         
         const selectShillong = document.getElementById('monthSelectShillong');
         if (selectShillong) {
