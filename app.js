@@ -338,10 +338,16 @@ function isWaitingForVenue(venueId, roundType) {
 // ============================================================
 // ⏳ কাউন্টডাউন - সঠিক সময় অনুযায়ী
 // ============================================================
+let countdownInterval = null;
+
 function startAllCountdowns() {
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+    }
+    
     const venues = ['shillong', 'khanapara', 'juwai', 'morning', 'night'];
     
-    setInterval(() => {
+    countdownInterval = setInterval(() => {
         venues.forEach(venue => {
             updateVenueCountdown(venue);
         });
@@ -1035,11 +1041,12 @@ function subscribeToLiveResults() {
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ DOM Loaded - Loading results...');
+    
     loadTodayResults();
     loadCommonNumbers();
     
-    setInterval(loadTodayResults, 10000);
-    setInterval(loadCommonNumbers, 30000);
+    subscribeToCommonNumbers();
+    subscribeToLiveResults();
     
     setupShillongSelector();
     setupAllSelectors();
@@ -1047,10 +1054,6 @@ document.addEventListener('DOMContentLoaded', function() {
     renderDreamChart();
     loadTrendingNumbers();
     loadLeaderboard();
-    
-    // 🔥 Realtime সাবস্ক্রিপশন চালু করুন
-    subscribeToCommonNumbers();
-    subscribeToLiveResults();
     
     document.getElementById('predictDreamBtn').addEventListener('click', function() {
         let inp = document.getElementById('dreamInput').value.trim();
@@ -1074,19 +1077,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    document.getElementById('payNowBtn').addEventListener('click', function() {
-        window.location.href = "upi://pay?pa=7628988767@airtel&pn=Teer%20VIP&am=1500&cu=INR";
-    });
-    
-    document.getElementById('verifyPaymentBtn').addEventListener('click', function() {
-        let txn = document.getElementById('transactionIdInput').value.trim();
-        if(txn.length >= 5) {
-            localStorage.setItem('teer_vip_status', 'active');
-            document.getElementById('vipMessage').innerHTML = "✅ VIP UNLOCKED!";
-        } else {
-            document.getElementById('vipMessage').innerHTML = "❌ Invalid TXN ID";
-        }
-    });
+    // ❌ VIP কোড বাদ দেওয়া হয়েছে
     
     document.getElementById('closeLiveModalBtn').addEventListener('click', closeModals);
     document.getElementById('closePrevModalBtn').addEventListener('click', closeModals);
