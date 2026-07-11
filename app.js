@@ -6,26 +6,6 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ============================================================
-// 🔥 TEST: Supabase Connection Check
-// ============================================================
-(async function testConnection() {
-    try {
-        const { data, error } = await supabaseClient
-            .from('teer_previous_results')
-            .select('*')
-            .limit(1);
-        
-        if (error) {
-            console.error('❌ Supabase Error:', error);
-        } else {
-            console.log('✅ Supabase Connected Successfully!');
-        }
-    } catch (e) {
-        console.error('❌ Connection Failed:', e);
-    }
-})();
-
-// ============================================================
 // 🔥 Venue Configuration for Previous Results
 // ============================================================
 const venueConfigs = {
@@ -436,18 +416,12 @@ function showToast(message) {
     }, 3000);
 }
 
-// ============================================================
-// 🔗 SOCIAL SHARE
-// ============================================================
-function shareOnFacebook() { window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank'); }
+function shareOnFacebook() { window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank', 'width=600,height=400'); }
 function shareOnWhatsApp() { window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(document.title)}%20-%20${encodeURIComponent(window.location.href)}`, '_blank'); }
-function shareOnTwitter() { window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(document.title)}&url=${encodeURIComponent(window.location.href)}`, '_blank'); }
+function shareOnTwitter() { window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(document.title)}&url=${encodeURIComponent(window.location.href)}`, '_blank', 'width=600,height=400'); }
 function shareOnTelegram() { window.open(`https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(document.title)}`, '_blank'); }
 function copyLink() { navigator.clipboard.writeText(window.location.href).then(() => showToast('✅ লিংক কপি হয়েছে!')).catch(() => showToast('❌ কপি করতে ব্যর্থ!')); }
 
-// ============================================================
-// 💬 COMMENT SYSTEM
-// ============================================================
 function addComment() {
     const nameInput = document.getElementById('commentName');
     const textInput = document.getElementById('commentInput');
@@ -468,7 +442,7 @@ function subscribeNewsletter() {
     const email = document.getElementById('newsletterEmail').value.trim();
     const msg = document.getElementById('newsletterMsg');
     if (!email || !email.includes('@')) { msg.innerHTML = '❌ দয়া করে সঠিক ইমেইল দিন!'; msg.style.color = '#cc0000'; return; }
-    msg.innerHTML = '✅ সাবস্ক্রাইব সম্পূর্ণ!';
+    msg.innerHTML = '✅ সাবস্ক্রাইব সম্পূর্ণ! আমরা শীঘ্রই আপডেট পাঠাব।';
     msg.style.color = '#cc0000';
     document.getElementById('newsletterEmail').value = '';
 }
@@ -478,9 +452,6 @@ function updateMetaTags(venue, frResult, srResult, date) {
     document.title = (venue === 'Shillong Teer') ? `Shillong Teer Result ${formattedDate} | Live Updates` : `${venue} Result ${formattedDate} - FR: ${frResult} | SR: ${srResult} | Live Teer`;
 }
 
-// ============================================================
-// 📖 DREAM CHART (English + অসমীয়া)
-// ============================================================
 const dreamChartData = [
     { dream: "🐍 Snake / সাপ", direct: "05, 33, 77", house: "7", ending: "1" },
     { dream: "🐯 Tiger / বাঘ", direct: "28, 44, 66", house: "3", ending: "9" },
@@ -534,9 +505,6 @@ function subscribeToLiveResults() {
         }).subscribe();
 }
 
-// ============================================================
-// 🔥 DOM CONTENT LOADED
-// ============================================================
 document.addEventListener('DOMContentLoaded', function() {
     loadTodayResults();
     loadCommonNumbers();
@@ -551,10 +519,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if(predictBtn) {
         predictBtn.addEventListener('click', function() {
             let inp = document.getElementById('dreamInput').value.trim();
-            if(!inp) { 
-                alert("🔮 Enter dream word / সপোনৰ শব্দ লিখক"); 
-                return; 
-            }
+            if(!inp) { alert("🔮 Enter dream word / সপোনৰ শব্দ লিখক"); return; }
             let num = dreamToNum(inp);
             let he = getHENumbers(num);
             document.getElementById('dreamDisplayText').innerHTML = `💭 Dream / সপোন: <strong>${inp}</strong> → Number / নম্বৰ: <strong>${num}</strong>`;
@@ -590,7 +555,7 @@ function showEnglish() { alert("English version active."); }
 
 
 // ============================================================
-// 🔥 VIP SYSTEM (Timer + Ad + Unlock) - English + অসমীয়া
+// 🔥 VIP SYSTEM (Timer + Ad + Unlock)
 // ============================================================
 (function initVIPSystem() {
     if (document.readyState === 'loading') {
@@ -607,12 +572,7 @@ function showEnglish() { alert("English version active."); }
         const vipExtraInfo = document.getElementById('vipExtraInfo');
         const vipStatusText = document.getElementById('vipStatusText');
         
-        if (!vipBtn) {
-            console.log('⚠️ VIP button not found');
-            return;
-        }
-
-        console.log('✅ VIP System initializing...');
+        if (!vipBtn) return;
 
         let isUnlocking = false;
         let countdownInterval = null;
@@ -631,7 +591,6 @@ function showEnglish() { alert("English version active."); }
                 const row = data[0];
                 return `${row.shillong_fr_direct || '--'} | ${row.shillong_sr_direct || '--'}`;
             } catch (err) {
-                console.error('❌ VIP load error:', err);
                 return null;
             }
         }
@@ -640,55 +599,38 @@ function showEnglish() { alert("English version active."); }
             let remaining = seconds;
             
             if (vipStatusText) {
-                vipStatusText.textContent = `⏳ Please wait... ${remaining} seconds left / অনুগ্ৰহ কৰি অপেক্ষা কৰক... ${remaining} ছেকেণ্ড বাকী`;
+                vipStatusText.textContent = `⏳ Please wait... ${remaining}s / ${remaining} ছেকেণ্ড বাকী`;
                 vipStatusText.style.color = '#ff9800';
             }
             if (vipBtn) {
-                vipBtn.textContent = `⏳ ${remaining}s / ${remaining} ছেকেণ্ড`;
+                vipBtn.textContent = `⏳ ${remaining}s`;
                 vipBtn.disabled = true;
             }
 
             try {
                 adWindow = window.open('https://omg10.com/4/11160871', '_blank');
-                console.log('📢 Ad opened for VIP unlock');
-            } catch (e) {
-                console.log('⚠️ Ad trigger error:', e);
-            }
+            } catch (e) {}
 
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-                countdownInterval = null;
-            }
+            if (countdownInterval) clearInterval(countdownInterval);
 
             countdownInterval = setInterval(function() {
                 remaining--;
-                
                 if (remaining > 0) {
                     if (vipStatusText) {
-                        vipStatusText.textContent = `⏳ Please wait... ${remaining} seconds left / অনুগ্ৰহ কৰি অপেক্ষা কৰক... ${remaining} ছেকেণ্ড বাকী`;
+                        vipStatusText.textContent = `⏳ Please wait... ${remaining}s / ${remaining} ছেকেণ্ড বাকী`;
                     }
                     if (vipBtn) {
-                        vipBtn.textContent = `⏳ ${remaining}s / ${remaining} ছেকেণ্ড`;
+                        vipBtn.textContent = `⏳ ${remaining}s`;
                     }
                 } else {
                     clearInterval(countdownInterval);
                     countdownInterval = null;
-                    
-                    if (vipBtn) {
-                        vipBtn.textContent = '⏳ Loading... / ল'ড হৈ আছে...';
-                    }
-                    if (vipStatusText) {
-                        vipStatusText.textContent = '⏳ Loading VIP Number... / VIP নম্বৰ ল'ড হৈ আছে...';
-                    }
+                    if (vipBtn) vipBtn.textContent = '⏳ Loading... / ল'ড হৈ আছে...';
+                    if (vipStatusText) vipStatusText.textContent = '⏳ Loading VIP Number... / VIP নম্বৰ ল'ড হৈ আছে...';
                     
                     try {
-                        if (adWindow && !adWindow.closed) {
-                            adWindow.close();
-                            console.log('📢 Ad window closed automatically');
-                        }
-                    } catch (e) {
-                        console.log('⚠️ Cannot close ad window:', e);
-                    }
+                        if (adWindow && !adWindow.closed) adWindow.close();
+                    } catch (e) {}
                     adWindow = null;
                     
                     onComplete();
@@ -697,8 +639,6 @@ function showEnglish() { alert("English version active."); }
         }
 
         window.unlockVIP = async function() {
-            console.log('🔓 Unlock button clicked!');
-            
             if (isUnlocking) {
                 if (vipStatusText) {
                     vipStatusText.textContent = '⏳ Already processing... / ইতিমধ্যে প্ৰক্ৰিয়া চলি আছে...';
@@ -706,7 +646,6 @@ function showEnglish() { alert("English version active."); }
                 }
                 return;
             }
-            
             isUnlocking = true;
 
             if (countdownInterval) {
@@ -721,7 +660,6 @@ function showEnglish() { alert("English version active."); }
             startCountdown(5, async function() {
                 try {
                     const vipNumber = await loadVIPNumberFromSupabase();
-                    
                     if (vipNumber) {
                         if (vipNumberValue) vipNumberValue.textContent = vipNumber;
                         if (vipExtraInfo) {
@@ -734,26 +672,20 @@ function showEnglish() { alert("English version active."); }
                     } else {
                         if (vipNumberValue) vipNumberValue.textContent = '47, 68 | 86, 15';
                         if (vipExtraInfo) {
-                            vipExtraInfo.innerHTML = '⚠️ <span style="color:#ff9800;">[Demo Mode] No data for today, showing default. / [Demo Mode] আজিৰ তথ্য নাই, ডিফল্ট দেখুওৱা হৈছে।</span>';
+                            vipExtraInfo.innerHTML = '⚠️ <span style="color:#ff9800;">[Demo Mode] No data / আজিৰ তথ্য নাই</span>';
                         }
                         if (vipStatusText) {
-                            vipStatusText.textContent = '⚠️ VIP Number loaded (Demo Mode) / VIP নম্বৰ ল'ড হৈছে (Demo Mode)';
+                            vipStatusText.textContent = '⚠️ Demo Mode / ডেমো মোড';
                             vipStatusText.style.color = '#ff9800';
                         }
                     }
-                    
-                    if (vipModal) {
-                        vipModal.classList.add('active');
-                    }
-                    
+                    if (vipModal) vipModal.classList.add('active');
                 } catch (err) {
-                    console.error('❌ VIP unlock error:', err);
                     if (vipStatusText) {
-                        vipStatusText.textContent = '❌ Unlock failed! Try again. / আনলক কৰিব পৰা নাই! আকৌ চেষ্টা কৰক।';
+                        vipStatusText.textContent = '❌ Unlock failed! / আনলক কৰিব পৰা নাই!';
                         vipStatusText.style.color = '#cc0000';
                     }
                 }
-                
                 if (vipBtn) {
                     vipBtn.disabled = false;
                     vipBtn.textContent = '🔓 Unlock Now / এতিয়া আনলক কৰক';
