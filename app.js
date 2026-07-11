@@ -1,9 +1,30 @@
 // ============================================================
-// Supabase Setup
+// 🔥 SUPABASE SETUP (সঠিক Anon Key)
 // ============================================================
 const SUPABASE_URL = 'https://bwjjqidmeooyojjvtqjs.supabase.co';
-const SUPABASE_ANON_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3ampxaWRtZW9veW9qanZ0cWpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NDIxMTAsImV4cCI6MjA5NjUxODExMH0.sRbG-Pwd8kgy94e9g7uuWhAj0-mH6JjOC7KXARxLIEk
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3ampxaWRtZW9veW9qanZ0cWpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NDIxMTAsImV4cCI6MjA5NjUxODExMH0.sRbG-Pwd8kgy94e9g7uuWhAj0-mH6JjOC7KXARxLIEk';
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ============================================================
+// 🔥 TEST: Supabase Connection Check
+// ============================================================
+(async function testConnection() {
+    try {
+        const { data, error } = await supabaseClient
+            .from('teer_previous_results')
+            .select('*')
+            .limit(1);
+        
+        if (error) {
+            console.error('❌ Supabase Error:', error);
+        } else {
+            console.log('✅ Supabase Connected Successfully!');
+            console.log('📊 Sample Data:', data);
+        }
+    } catch (e) {
+        console.error('❌ Connection Failed:', e);
+    }
+})();
 
 // ============================================================
 // 🔥 Venue Configuration for Previous Results
@@ -497,6 +518,9 @@ function getHENumbers(n) { let x=n%100; return { house:[((x*3+7)%10).toString(),
 let globalLiveData = {};
 let globalCommonData = null;
 
+// ============================================================
+// 🔥 Real-time Subscription for Common Numbers
+// ============================================================
 function subscribeToCommonNumbers() {
     return supabaseClient.channel('common-numbers-changes')
         .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'teer_common_numbers' }, (payload) => {
@@ -505,6 +529,9 @@ function subscribeToCommonNumbers() {
         }).subscribe();
 }
 
+// ============================================================
+// 🔥 Real-time Subscription for Live Results
+// ============================================================
 function subscribeToLiveResults() {
     return supabaseClient.channel('live-results-changes')
         .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'teer_live_results' }, async (payload) => {
