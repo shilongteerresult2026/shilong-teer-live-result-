@@ -1,9 +1,30 @@
 // ============================================================
-// 🔥 SUPABASE SETUP
+// 🔥 SUPABASE SETUP (সঠিক Anon Key)
 // ============================================================
 const SUPABASE_URL = 'https://bwjjqidmeooyojjvtqjs.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3ampxaWRtZW9veW9qanZ0cWpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NDIxMTAsImV4cCI6MjA5NjUxODExMH0.sRbG-Pwd8kgy94e9g7uuWhAj0-mH6JjOC7KXARxLIEk';
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ============================================================
+// 🔥 TEST: Supabase Connection Check
+// ============================================================
+(async function testConnection() {
+    try {
+        const { data, error } = await supabaseClient
+            .from('teer_previous_results')
+            .select('*')
+            .limit(1);
+        
+        if (error) {
+            console.error('❌ Supabase Error:', error);
+        } else {
+            console.log('✅ Supabase Connected Successfully!');
+            console.log('📊 Sample Data:', data);
+        }
+    } catch (e) {
+        console.error('❌ Connection Failed:', e);
+    }
+})();
 
 // ============================================================
 // 🔥 Venue Configuration for Previous Results
@@ -17,136 +38,7 @@ const venueConfigs = {
 };
 
 // ============================================================
-// 🔥 IST TIME ZONE FIX
-// ============================================================
-function getTodayIST() {
-    try {
-        return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(new Date());
-    } catch (e) {
-        const now = new Date();
-        const istOffset = 5.5 * 60 * 60 * 1000;
-        return new Date(now.getTime() + istOffset).toISOString().split('T')[0];
-    }
-}
-
-function getNightDate() {
-    const today = getTodayIST();
-    const dateObj = new Date(today);
-    dateObj.setDate(dateObj.getDate() - 1);
-    return dateObj.toISOString().split('T')[0];
-}
-
-// ============================================================
-// 🔥 WAITING CHECK
-// ============================================================
-function isWaitingForVenue(venueId, roundType) {
-    const now = new Date();
-    const totalMinutes = now.getHours() * 60 + now.getMinutes();
-    
-    const timings = {
-        shillong: { fr: 16.25 * 60, sr: 17.166 * 60 },
-        khanapara: { fr: 16.166 * 60, sr: 17.083 * 60 },
-        juwai: { fr: 14.5 * 60, sr: 15.25 * 60 },
-        morning: { fr: 10.5 * 60, sr: 11.5 * 60 },
-        night: { fr: 23.166 * 60, sr: 24.166 * 60 }
-    };
-    
-    const venueTime = timings[venueId];
-    if (!venueTime) return false;
-    
-    const roundTime = roundType === 'fr' ? venueTime.fr : venueTime.sr;
-    const waitingStart = roundTime - 10;
-    
-    if (venueId === 'night') {
-        if (roundType === 'fr') {
-            return totalMinutes >= (23 * 60) && totalMinutes < (23 * 60 + 10);
-        } else if (roundType === 'sr') {
-            return totalMinutes >= 0 && totalMinutes < 10;
-        }
-    }
-    
-    return totalMinutes >= waitingStart && totalMinutes < roundTime;
-}
-
-// ============================================================
-// ⏳ COUNTDOWN
-// ============================================================
-let countdownInterval = null;
-
-function startAllCountdowns() {
-    if (countdownInterval) clearInterval(countdownInterval);
-    const venues = ['shillong', 'khanapara', 'juwai', 'morning', 'night'];
-    countdownInterval = setInterval(() => {
-        venues.forEach(updateVenueCountdown);
-    }, 1000);
-}
-
-function updateVenueCountdown(venueId) {
-    const el = document.getElementById(`countdown_${venueId}`);
-    if (!el) return;
-    
-    const now = new Date();
-    const totalMinutes = now.getHours() * 60 + now.getMinutes();
-    
-    const timings = {
-        shillong: { fr: 16.25 * 60, sr: 17.166 * 60 },
-        khanapara: { fr: 16.166 * 60, sr: 17.083 * 60 },
-        juwai: { fr: 14.5 * 60, sr: 15.25 * 60 },
-        morning: { fr: 10.5 * 60, sr: 11.5 * 60 },
-        night: { fr: 23.166 * 60, sr: 24.166 * 60 }
-    };
-    
-    const venueTimes = timings[venueId];
-    if (!venueTimes) return;
-    
-    let nextTime = null;
-    if (totalMinutes < venueTimes.fr) nextTime = venueTimes.fr;
-    else if (totalMinutes < venueTimes.sr) nextTime = venueTimes.sr;
-    else nextTime = venueTimes.fr + (24 * 60);
-    
-    let diff = nextTime - totalMinutes;
-    if (diff < 0) diff += 24 * 60;
-    
-    const hrs = Math.floor(diff / 60);
-    const mins = Math.floor(diff % 60);
-    const secs = Math.floor((diff % 1) * 60);
-    
-    el.textContent = `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-}
-
-// ============================================================
-// 🔥 AUTO-SAVE LIVE RESULT TO PREVIOUS
-// ============================================================
-async function saveLiveResultToPrevious(venue, frResult, srResult, resultDate) {
-    if (!frResult || !srResult || frResult === '--' || srResult === '--') return;
-
-    try {
-        const { data: existing, error: checkError } = await supabaseClient
-            .from('teer_previous_results')
-            .select('*')
-            .eq('venue', venue)
-            .eq('result_date', resultDate)
-            .limit(1);
-
-        if (checkError) return;
-
-        if (existing && existing.length > 0) {
-            await supabaseClient
-                .from('teer_previous_results')
-                .update({ fr_result: frResult, sr_result: srResult, updated_at: new Date().toISOString() })
-                .eq('id', existing[0].id);
-        } else {
-            await supabaseClient
-                .from('teer_previous_results')
-                .insert({ venue, result_date: resultDate, fr_result: frResult, sr_result: srResult, created_at: new Date().toISOString(), updated_at: new Date().toISOString() });
-        }
-    } catch (err) {
-        console.error(`❌ Error saving ${venue} previous result:`, err);
-    }
-}
-
-// ============================================================
-// 🔥 LOAD PREVIOUS RESULTS
+// 🔥 ডাইনামিক Previous Results Load ফাংশন
 // ============================================================
 async function loadPreviousResults(venue, monthIndex) {
     const config = venueConfigs[venue];
@@ -193,13 +85,18 @@ async function loadPreviousResults(venue, monthIndex) {
     }
 }
 
+// ============================================================
+// 🔥 ডাইনামিক Selector Setup
+// ============================================================
 function setupAllSelectors() {
-    const currentMonth = 6;
+    const currentMonth = 6; // July
+    
     Object.keys(venueConfigs).forEach(venue => {
         const selectElement = document.getElementById(venueConfigs[venue].selectId);
         if (selectElement) {
             selectElement.value = currentMonth.toString();
             loadPreviousResults(venue, currentMonth);
+            
             selectElement.addEventListener('change', function() {
                 loadPreviousResults(venue, parseInt(this.value));
             });
@@ -208,7 +105,143 @@ function setupAllSelectors() {
 }
 
 // ============================================================
-// 🔥 LOAD TODAY RESULTS
+// 🔥 IST TIME ZONE FIX
+// ============================================================
+function getTodayIST() {
+    try {
+        return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(new Date());
+    } catch (e) {
+        const now = new Date();
+        const istOffset = 5.5 * 60 * 60 * 1000;
+        return new Date(now.getTime() + istOffset).toISOString().split('T')[0];
+    }
+}
+
+// ============================================================
+// 🔥 NIGHT TEER - গতকালের তারিখ দেখাবে
+// ============================================================
+function getNightDate() {
+    const today = getTodayIST();
+    const dateObj = new Date(today);
+    dateObj.setDate(dateObj.getDate() - 1);
+    return dateObj.toISOString().split('T')[0];
+}
+
+// ============================================================
+// 🔥 WAITING চেক - সঠিক সময় অনুযায়ী
+// ============================================================
+function isWaitingForVenue(venueId, roundType) {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const totalMinutes = hours * 60 + minutes;
+    
+    const timings = {
+        shillong: { fr: 16.25 * 60, sr: 17.166 * 60 },
+        khanapara: { fr: 16.166 * 60, sr: 17.083 * 60 },
+        juwai: { fr: 14.5 * 60, sr: 15.25 * 60 },
+        morning: { fr: 10.5 * 60, sr: 11.5 * 60 },
+        night: { fr: 23.166 * 60, sr: 24.166 * 60 }
+    };
+    
+    const venueTime = timings[venueId];
+    if (!venueTime) return false;
+    
+    const roundTime = roundType === 'fr' ? venueTime.fr : venueTime.sr;
+    const waitingStart = roundTime - 10;
+    
+    if (venueId === 'night') {
+        if (roundType === 'fr') {
+            return totalMinutes >= (23 * 60) && totalMinutes < (23 * 60 + 10);
+        } else if (roundType === 'sr') {
+            return totalMinutes >= 0 && totalMinutes < 10;
+        }
+    }
+    
+    return totalMinutes >= waitingStart && totalMinutes < roundTime;
+}
+
+// ============================================================
+// ⏳ কাউন্টডাউন
+// ============================================================
+let countdownInterval = null;
+
+function startAllCountdowns() {
+    if (countdownInterval) clearInterval(countdownInterval);
+    const venues = ['shillong', 'khanapara', 'juwai', 'morning', 'night'];
+    countdownInterval = setInterval(() => {
+        venues.forEach(updateVenueCountdown);
+    }, 1000);
+}
+
+function updateVenueCountdown(venueId) {
+    const el = document.getElementById(`countdown_${venueId}`);
+    if (!el) return;
+    
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const totalMinutes = hours * 60 + minutes;
+    
+    const timings = {
+        shillong: { fr: 16.25 * 60, sr: 17.166 * 60 },
+        khanapara: { fr: 16.166 * 60, sr: 17.083 * 60 },
+        juwai: { fr: 14.5 * 60, sr: 15.25 * 60 },
+        morning: { fr: 10.5 * 60, sr: 11.5 * 60 },
+        night: { fr: 23.166 * 60, sr: 24.166 * 60 }
+    };
+    
+    const venueTimes = timings[venueId];
+    if (!venueTimes) return;
+    
+    let nextTime = null;
+    if (totalMinutes < venueTimes.fr) nextTime = venueTimes.fr;
+    else if (totalMinutes < venueTimes.sr) nextTime = venueTimes.sr;
+    else nextTime = venueTimes.fr + (24 * 60);
+    
+    let diff = nextTime - totalMinutes;
+    if (diff < 0) diff += 24 * 60;
+    
+    const hrs = Math.floor(diff / 60);
+    const mins = Math.floor(diff % 60);
+    const secs = Math.floor((diff % 1) * 60);
+    
+    el.textContent = `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+}
+
+// ============================================================
+// 🔥 অটো-সেভ লাইভ রেজাল্ট টু প্রিভিয়াস রেজাল্ট
+// ============================================================
+async function saveLiveResultToPrevious(venue, frResult, srResult, resultDate) {
+    if (!frResult || !srResult || frResult === '--' || srResult === '--') return;
+
+    try {
+        const { data: existing, error: checkError } = await supabaseClient
+            .from('teer_previous_results')
+            .select('*')
+            .eq('venue', venue)
+            .eq('result_date', resultDate)
+            .limit(1);
+
+        if (checkError) return;
+
+        if (existing && existing.length > 0) {
+            await supabaseClient
+                .from('teer_previous_results')
+                .update({ fr_result: frResult, sr_result: srResult, updated_at: new Date().toISOString() })
+                .eq('id', existing[0].id);
+        } else {
+            await supabaseClient
+                .from('teer_previous_results')
+                .insert({ venue, result_date: resultDate, fr_result: frResult, sr_result: srResult, created_at: new Date().toISOString(), updated_at: new Date().toISOString() });
+        }
+    } catch (err) {
+        console.error(`❌ Error saving ${venue} previous result:`, err);
+    }
+}
+
+// ============================================================
+// 🔥 লাইভ রেজাল্ট লোড
 // ============================================================
 async function loadTodayResults() {
     try {
@@ -234,30 +267,39 @@ async function loadTodayResults() {
                     await saveLiveResultToPrevious(venue, data[0].fr_result, data[0].sr_result, today);
                 }
             } else {
-                const { data: prevData } = await supabaseClient
+                const { data: prevData, error: prevError } = await supabaseClient
                     .from('teer_live_results')
                     .select('*')
                     .eq('venue', venue)
                     .eq('result_date', yesterdayStr)
                     .limit(1);
-                liveData[venue] = (prevData && prevData.length > 0) 
+                liveData[venue] = (!prevError && prevData && prevData.length > 0) 
                     ? { fr: prevData[0].fr_result || '--', sr: prevData[0].sr_result || '--' } 
                     : { fr: '--', sr: '--' };
             }
         }
         
-        const { data: nightData } = await supabaseClient
+        const { data: nightData, error: nightError } = await supabaseClient
             .from('teer_live_results')
             .select('*')
             .eq('venue', 'night')
             .eq('result_date', nightDate);
             
-        liveData['night'] = (nightData && nightData.length > 0) 
-            ? { fr: nightData[0].fr_result || '--', sr: nightData[0].sr_result || '--' }
-            : { fr: '--', sr: '--' };
+        if (!nightError && nightData && nightData.length > 0) {
+            liveData['night'] = { fr: nightData[0].fr_result || '--', sr: nightData[0].sr_result || '--' };
+            if (nightData[0].fr_result !== '--' && nightData[0].sr_result !== '--') {
+                await saveLiveResultToPrevious('night', nightData[0].fr_result, nightData[0].sr_result, nightDate);
+            }
+        } else {
+            liveData['night'] = { fr: '--', sr: '--' };
+        }
         
         globalLiveData = liveData;
         renderTodayResults(liveData, today, nightDate);
+        
+        if (liveData.shillong) {
+            updateMetaTags('Shillong Teer', liveData.shillong.fr || '--', liveData.shillong.sr || '--', today);
+        }
         
         Object.keys(venueConfigs).forEach(venue => {
             const select = document.getElementById(venueConfigs[venue].selectId);
@@ -321,7 +363,7 @@ function renderTodayResults(liveData, todayDate, nightDate) {
 }
 
 // ============================================================
-// 🔥 COMMON NUMBERS
+// 🔥 কমন নাম্বার
 // ============================================================
 async function loadCommonNumbers() {
     try {
@@ -453,39 +495,31 @@ function updateMetaTags(venue, frResult, srResult, date) {
 }
 
 const dreamChartData = [
-    { dream: "🐍 Snake / সাপ", direct: "05, 33, 77", house: "7", ending: "1" },
-    { dream: "🐯 Tiger / বাঘ", direct: "28, 44, 66", house: "3", ending: "9" },
-    { dream: "🦁 Lion / সিংহ", direct: "32, 55, 88", house: "8", ending: "4" },
-    { dream: "🐘 Elephant / হাতী", direct: "47, 70, 99", house: "6", ending: "0" },
-    { dream: "🐴 Horse / ঘোঁৰা", direct: "19, 41, 63", house: "2", ending: "4" },
-    { dream: "🐕 Dog / কুকুৰ", direct: "24, 46, 68", house: "6", ending: "9" },
-    { dream: "🐱 Cat / মেকুৰী", direct: "18, 40, 62", house: "0", ending: "5" },
-    { dream: "💧 Water / পানী", direct: "02, 24, 46", house: "1", ending: "3" }
+    { dream: "Snake / সাপ", direct: "05, 33, 77", house: "7", ending: "1" }, { dream: "Tiger / বাঘ", direct: "28, 44, 66", house: "3", ending: "9" },
+    { dream: "Lion / সিংহ", direct: "32, 55, 88", house: "8", ending: "4" }, { dream: "Elephant / হাতি", direct: "47, 70, 99", house: "6", ending: "0" },
+    { dream: "Horse / ঘোড়া", direct: "19, 41, 63", house: "2", ending: "4" }, { dream: "Dog / কুকুর", direct: "24, 46, 68", house: "6", ending: "9" },
+    { dream: "Cat / বিড়াল", direct: "18, 40, 62", house: "0", ending: "5" }, { dream: "Water / পানি", direct: "02, 24, 46", house: "1", ending: "3" }
 ];
 
 function renderDreamChart() { 
-    document.getElementById('dreamChartBody').innerHTML = dreamChartData.map(item => `<tr><td><strong>${item.dream}</strong></td><td>${item.direct}</td><td>${item.house}</td><td>${item.ending}</td></tr>`).join('');
+    document.getElementById('dreamChartBody').innerHTML = dreamChartData.map(item => `<tr><td style="padding:10px;"><strong>${item.dream}</strong></td><td style="padding:10px;">${item.direct}</td><td style="padding:10px;">${item.house}</td><td style="padding:10px;">${item.ending}</td></tr>`).join('');
 }
 
 function dreamToNum(t) { 
     if(!t) return 24; 
-    let m = { 
-        "snake":5, "tiger":28, "lion":32, "elephant":47, "horse":19, "dog":24, "cat":18, "water":2,
-        "সাপ":5, "বাঘ":28, "সিংহ":32, "হাতী":47, "ঘোঁৰা":19, "কুকুৰ":24, "মেকুৰী":18, "পানী":2
-    }; 
+    let m = { "snake":5, "tiger":28, "lion":32, "elephant":47, "horse":19, "dog":24, "cat":18, "water":2, "সাপ":5, "বাঘ":28, "সিংহ":32, "হাতি":47, "ঘোড়া":19, "কুকুর":24, "বিড়াল":18, "পানি":2 }; 
     let l = t.toLowerCase(); 
     for(let [k,v] of Object.entries(m)) if(l.includes(k)) return v; 
     let h=0; for(let i=0;i<l.length;i++) h=((h<<5)-h)+l.charCodeAt(i); 
     return Math.abs(h)%100||24; 
 }
-
 function getHENumbers(n) { let x=n%100; return { house:[((x*3+7)%10).toString(),((x*5+11)%10).toString()], ending:[((x*9+17)%10).toString(),((x*11+23)%10).toString()] }; }
 
 let globalLiveData = {};
 let globalCommonData = null;
 
 // ============================================================
-// 🔥 REAL-TIME SUBSCRIPTIONS
+// 🔥 Real-time Subscription for Common Numbers
 // ============================================================
 function subscribeToCommonNumbers() {
     return supabaseClient.channel('common-numbers-changes')
@@ -495,6 +529,9 @@ function subscribeToCommonNumbers() {
         }).subscribe();
 }
 
+// ============================================================
+// 🔥 Real-time Subscription for Live Results
+// ============================================================
 function subscribeToLiveResults() {
     return supabaseClient.channel('live-results-changes')
         .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'teer_live_results' }, async (payload) => {
@@ -519,10 +556,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if(predictBtn) {
         predictBtn.addEventListener('click', function() {
             let inp = document.getElementById('dreamInput').value.trim();
-            if(!inp) { alert("🔮 Enter dream word / সপোনৰ শব্দ লিখক"); return; }
+            if(!inp) { alert("Enter dream word"); return; }
             let num = dreamToNum(inp);
             let he = getHENumbers(num);
-            document.getElementById('dreamDisplayText').innerHTML = `💭 Dream / সপোন: <strong>${inp}</strong> → Number / নম্বৰ: <strong>${num}</strong>`;
+            document.getElementById('dreamDisplayText').innerHTML = `💭 Dream: <strong>${inp}</strong> → Number: <strong>${num}</strong>`;
             document.getElementById('houseDigit1').innerText = he.house[0]; document.getElementById('houseDigit2').innerText = he.house[1];
             document.getElementById('endingDigit1').innerText = he.ending[0]; document.getElementById('endingDigit2').innerText = he.ending[1];
         });
@@ -550,184 +587,169 @@ function closeModals() {
     if (pm) pm.style.display = 'none';
 }
 
-function showBangla() { alert("বাংলা ভার্সন সক্রিয়।"); }
-function showEnglish() { alert("English version active."); }
+function showBangla() { alert("বাংলা ভার্সন সক্রিয়। পুরো সাইট বাংলা ও ইংরেজিতে দেখা যাচ্ছে।"); }
+function showEnglish() { alert("English version active. Site is fully bilingual."); }
 
 
 // ============================================================
-// 🔥 VIP SYSTEM (Timer + Ad + Unlock)
+// 🔥 VIP SYSTEM (Timer + Ad + Unlock) - Using teer_common_numbers
 // ============================================================
-(function initVIPSystem() {
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setupVIP);
-    } else {
-        setupVIP();
+document.addEventListener('DOMContentLoaded', function() {
+    const vipBtn = document.getElementById('vipUnlockBtn');
+    const vipModal = document.getElementById('vipModal');
+    const vipModalClose = document.getElementById('vipModalClose');
+    const vipNumberValue = document.getElementById('vipNumberValue');
+    const vipExtraInfo = document.getElementById('vipExtraInfo');
+    const vipStatusText = document.getElementById('vipStatusText');
+    
+    if (!vipBtn) return;
+
+    let isUnlocking = false;
+    let countdownInterval = null;
+    let adWindow = null;
+
+    async function loadVIPNumberFromSupabase() {
+        try {
+            const today = getTodayIST();
+            const { data, error } = await supabaseClient
+                .from('teer_common_numbers')
+                .select('*')
+                .eq('result_date', today)
+                .limit(1);
+
+            if (error || !data || data.length === 0) return null;
+            const row = data[0];
+            return `${row.shillong_fr_direct || '--'} | ${row.shillong_sr_direct || '--'}`;
+        } catch (err) {
+            return null;
+        }
     }
 
-    function setupVIP() {
-        const vipBtn = document.getElementById('vipUnlockBtn');
-        const vipModal = document.getElementById('vipModal');
-        const vipModalClose = document.getElementById('vipModalClose');
-        const vipNumberValue = document.getElementById('vipNumberValue');
-        const vipExtraInfo = document.getElementById('vipExtraInfo');
-        const vipStatusText = document.getElementById('vipStatusText');
-        
-        if (!vipBtn) return;
-
-        let isUnlocking = false;
-        let countdownInterval = null;
-        let adWindow = null;
-
-        async function loadVIPNumberFromSupabase() {
-            try {
-                const today = getTodayIST();
-                const { data, error } = await supabaseClient
-                    .from('teer_common_numbers')
-                    .select('*')
-                    .eq('result_date', today)
-                    .limit(1);
-
-                if (error || !data || data.length === 0) return null;
-                const row = data[0];
-                return `${row.shillong_fr_direct || '--'} | ${row.shillong_sr_direct || '--'}`;
-            } catch (err) {
-                return null;
-            }
+    function startCountdown(seconds, onComplete) {
+        let remaining = seconds;
+        if (vipStatusText) {
+            vipStatusText.textContent = `⏳ অনুগ্রহ করে অপেক্ষা করুন... ${remaining} সেকেন্ড বাকি`;
+            vipStatusText.style.color = '#ff9800';
+        }
+        if (vipBtn) {
+            vipBtn.textContent = `⏳ ${remaining}s`;
+            vipBtn.disabled = true;
         }
 
-        function startCountdown(seconds, onComplete) {
-            let remaining = seconds;
-            
+        try {
+            adWindow = window.open('https://omg10.com/4/11160871', '_blank');
+        } catch (e) {}
+
+        if (countdownInterval) clearInterval(countdownInterval);
+
+        countdownInterval = setInterval(function() {
+            remaining--;
+            if (remaining > 0) {
+                if (vipStatusText) vipStatusText.textContent = `⏳ অনুগ্রহ করে অপেক্ষা করুন... ${remaining} সেকেন্ড বাকি`;
+                if (vipBtn) vipBtn.textContent = `⏳ ${remaining}s`;
+            } else {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+                if (vipBtn) vipBtn.textContent = '⏳ লোড হচ্ছে...';
+                if (vipStatusText) vipStatusText.textContent = '⏳ VIP নাম্বার লোড হচ্ছে...';
+                
+                try {
+                    if (adWindow && !adWindow.closed) adWindow.close();
+                } catch (e) {}
+                adWindow = null;
+                
+                onComplete();
+            }
+        }, 1000);
+    }
+
+    window.unlockVIP = async function() {
+        if (isUnlocking) {
             if (vipStatusText) {
-                vipStatusText.textContent = `⏳ Please wait... ${remaining}s / ${remaining} ছেকেণ্ড বাকী`;
+                vipStatusText.textContent = '⏳ ইতিমধ্যে প্রক্রিয়া চলছে...';
                 vipStatusText.style.color = '#ff9800';
             }
-            if (vipBtn) {
-                vipBtn.textContent = `⏳ ${remaining}s`;
-                vipBtn.disabled = true;
-            }
+            return;
+        }
+        isUnlocking = true;
 
-            try {
-                adWindow = window.open('https://omg10.com/4/11160871', '_blank');
-            } catch (e) {}
-
-            if (countdownInterval) clearInterval(countdownInterval);
-
-            countdownInterval = setInterval(function() {
-                remaining--;
-                if (remaining > 0) {
-                    if (vipStatusText) {
-                        vipStatusText.textContent = `⏳ Please wait... ${remaining}s / ${remaining} ছেকেণ্ড বাকী`;
-                    }
-                    if (vipBtn) {
-                        vipBtn.textContent = `⏳ ${remaining}s`;
-                    }
-                } else {
-                    clearInterval(countdownInterval);
-                    countdownInterval = null;
-                    if (vipBtn) vipBtn.textContent = '⏳ Loading... / ল'ড হৈ আছে...';
-                    if (vipStatusText) vipStatusText.textContent = '⏳ Loading VIP Number... / VIP নম্বৰ ল'ড হৈ আছে...';
-                    
-                    try {
-                        if (adWindow && !adWindow.closed) adWindow.close();
-                    } catch (e) {}
-                    adWindow = null;
-                    
-                    onComplete();
-                }
-            }, 1000);
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+        }
+        if (adWindow && !adWindow.closed) {
+            try { adWindow.close(); } catch(e) {}
+            adWindow = null;
         }
 
-        window.unlockVIP = async function() {
-            if (isUnlocking) {
-                if (vipStatusText) {
-                    vipStatusText.textContent = '⏳ Already processing... / ইতিমধ্যে প্ৰক্ৰিয়া চলি আছে...';
-                    vipStatusText.style.color = '#ff9800';
+        startCountdown(5, async function() {
+            try {
+                const vipNumber = await loadVIPNumberFromSupabase();
+                if (vipNumber) {
+                    if (vipNumberValue) vipNumberValue.textContent = vipNumber;
+                    if (vipExtraInfo) vipExtraInfo.innerHTML = '✅ <span style="color:#008000;">VIP Number unlocked successfully! আজকের স্পেশাল নাম্বার।</span>';
+                    if (vipStatusText) {
+                        vipStatusText.textContent = '✅ VIP নাম্বার আনলক সম্পূর্ণ!';
+                        vipStatusText.style.color = '#008000';
+                    }
+                } else {
+                    if (vipNumberValue) vipNumberValue.textContent = '47, 68 | 86, 15';
+                    if (vipExtraInfo) vipExtraInfo.innerHTML = '⚠️ <span style="color:#ff9800;">[Demo Mode] আজকের ডেটা নেই, ডিফল্ট দেখানো হচ্ছে।</span>';
+                    if (vipStatusText) {
+                        vipStatusText.textContent = '⚠️ VIP নাম্বার লোড হয়েছে (Demo Mode)';
+                        vipStatusText.style.color = '#ff9800';
+                    }
                 }
-                return;
+                if (vipModal) vipModal.classList.add('active');
+            } catch (err) {
+                if (vipStatusText) {
+                    vipStatusText.textContent = '❌ VIP আনলক করতে ব্যর্থ! আবার চেষ্টা করুন।';
+                    vipStatusText.style.color = '#cc0000';
+                }
             }
-            isUnlocking = true;
+            if (vipBtn) {
+                vipBtn.disabled = false;
+                vipBtn.textContent = '🔓 আনলক করুন / Unlock Now';
+            }
+            isUnlocking = false;
+        });
+    };
 
+    if (vipBtn) {
+        vipBtn.addEventListener('click', window.unlockVIP);
+    }
+
+    if (vipModalClose) {
+        vipModalClose.addEventListener('click', function() {
+            if (vipModal) vipModal.classList.remove('active');
             if (countdownInterval) {
                 clearInterval(countdownInterval);
                 countdownInterval = null;
             }
-            if (adWindow && !adWindow.closed) {
-                try { adWindow.close(); } catch(e) {}
-                adWindow = null;
+            if (vipBtn) {
+                vipBtn.disabled = false;
+                vipBtn.textContent = '🔓 আনলক করুন / Unlock Now';
             }
+            isUnlocking = false;
+        });
+    }
 
-            startCountdown(5, async function() {
-                try {
-                    const vipNumber = await loadVIPNumberFromSupabase();
-                    if (vipNumber) {
-                        if (vipNumberValue) vipNumberValue.textContent = vipNumber;
-                        if (vipExtraInfo) {
-                            vipExtraInfo.innerHTML = '✅ <span style="color:#008000;">VIP Number unlocked successfully! / VIP নম্বৰ আনলক সম্পূৰ্ণ!</span>';
-                        }
-                        if (vipStatusText) {
-                            vipStatusText.textContent = '✅ VIP Number Unlocked! / VIP নম্বৰ আনলক সম্পূৰ্ণ!';
-                            vipStatusText.style.color = '#008000';
-                        }
-                    } else {
-                        if (vipNumberValue) vipNumberValue.textContent = '47, 68 | 86, 15';
-                        if (vipExtraInfo) {
-                            vipExtraInfo.innerHTML = '⚠️ <span style="color:#ff9800;">[Demo Mode] No data / আজিৰ তথ্য নাই</span>';
-                        }
-                        if (vipStatusText) {
-                            vipStatusText.textContent = '⚠️ Demo Mode / ডেমো মোড';
-                            vipStatusText.style.color = '#ff9800';
-                        }
-                    }
-                    if (vipModal) vipModal.classList.add('active');
-                } catch (err) {
-                    if (vipStatusText) {
-                        vipStatusText.textContent = '❌ Unlock failed! / আনলক কৰিব পৰা নাই!';
-                        vipStatusText.style.color = '#cc0000';
-                    }
-                }
-                if (vipBtn) {
-                    vipBtn.disabled = false;
-                    vipBtn.textContent = '🔓 Unlock Now / এতিয়া আনলক কৰক';
-                }
-                isUnlocking = false;
-            });
-        };
-
-        vipBtn.addEventListener('click', window.unlockVIP);
-
-        if (vipModalClose) {
-            vipModalClose.addEventListener('click', function() {
-                if (vipModal) vipModal.classList.remove('active');
+    if (vipModal) {
+        vipModal.addEventListener('click', function(e) {
+            if (e.target === vipModal) {
+                vipModal.classList.remove('active');
                 if (countdownInterval) {
                     clearInterval(countdownInterval);
                     countdownInterval = null;
                 }
                 if (vipBtn) {
                     vipBtn.disabled = false;
-                    vipBtn.textContent = '🔓 Unlock Now / এতিয়া আনলক কৰক';
+                    vipBtn.textContent = '🔓 আনলক করুন / Unlock Now';
                 }
                 isUnlocking = false;
-            });
-        }
-
-        if (vipModal) {
-            vipModal.addEventListener('click', function(e) {
-                if (e.target === vipModal) {
-                    vipModal.classList.remove('active');
-                    if (countdownInterval) {
-                        clearInterval(countdownInterval);
-                        countdownInterval = null;
-                    }
-                    if (vipBtn) {
-                        vipBtn.disabled = false;
-                        vipBtn.textContent = '🔓 Unlock Now / এতিয়া আনলক কৰক';
-                    }
-                    isUnlocking = false;
-                }
-            });
-        }
-
-        console.log('✅ VIP System (Timer) Loaded Successfully!');
+            }
+        });
     }
-})();
+
+    console.log('✅ VIP System (Timer) Loaded Successfully!');
+});
