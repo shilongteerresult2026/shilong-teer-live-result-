@@ -149,75 +149,153 @@
         }
 
         /* ============================================================ */
-        /* 🔥 SLIDER - Full Text Visible (No Cut-off) */
+        /* 🔥 SLIDER - Slim Box, Domain First, Then Subline */
         /* ============================================================ */
         .slider-container {
             width: 100%;
             overflow: hidden;
             background: #ffffff;
             padding: 12px 0;
-            border-radius: 8px;
-            margin: 10px 0;
+            border-radius: 10px;
+            margin: 12px 0;
+            border: 3px solid #00e676;
+            box-shadow: 0 0 20px rgba(0, 230, 118, 0.3), 0 4px 15px rgba(0,0,0,0.06);
+            text-align: center;
             position: relative;
-            border: 2px solid #1a4d2e;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            animation: borderPulse 2.5s ease-in-out infinite;
         }
-        .slider-track {
+
+        @keyframes borderPulse {
+            0% { border-color: #00e676; box-shadow: 0 0 20px rgba(0, 230, 118, 0.3); }
+            50% { border-color: #69f0ae; box-shadow: 0 0 35px rgba(0, 230, 118, 0.5); }
+            100% { border-color: #00e676; box-shadow: 0 0 20px rgba(0, 230, 118, 0.3); }
+        }
+
+        .slider-wrapper {
             display: flex;
-            gap: 60px;
-            animation: scrollSlider 45s linear infinite;
-            white-space: nowrap;
-            width: max-content;
+            justify-content: center;
             align-items: center;
-            will-change: transform;
+            position: relative;
+            height: 55px;
+            overflow: hidden;
+            width: 100%;
+            padding: 0 8px;
+            box-sizing: border-box;
         }
-        .slider-track a {
+
+        /* Sliding Full Line Text - Slim Version */
+        .slider-text {
+            position: absolute;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 0.8px;
             white-space: nowrap;
-            text-decoration: none;
-            color: #0a3d6b;
-            font-weight: 700;
-            padding: 10px 25px;
-            background: #ffffff;
-            border-radius: 6px;
-            border: 1px solid #e0e0e0;
-            font-size: 1rem;
-            flex-shrink: 0;
-            transition: all 0.3s;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.5s ease;
+            will-change: transform, opacity;
+            padding: 0 15px;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%) translateX(100%);
+            width: 100%;
+            text-align: center;
+            box-sizing: border-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
             display: inline-block;
-            line-height: 1.4;
-            letter-spacing: 0.3px;
-            min-width: auto;
-            width: auto;
-        }
-        .slider-track a:hover {
-            background: #1a4d2e;
-            color: #ffffff;
-            border-color: #1a4d2e;
+            line-height: 1.3;
         }
 
-        /* 4 Language Colors */
-        .slider-track .lang-en { color: #0a3d6b; }
-        .slider-track .lang-hi { color: #e65100; }
-        .slider-track .lang-as { color: #cc0000; }
-        .slider-track .lang-bn { color: #00695c; }
+        /* Domain Part - Dark Blue */
+        .slider-text .domain-part {
+            color: #0d47a1;
+        }
 
-        /* ✅ Proper 4-language sliding - Each language fully visible */
-        /* 4 languages × 5s = 20s per set, 2 sets = 40s, total 45s with buffer */
-        @keyframes scrollSlider {
-            0% { transform: translateX(0); }
-            11% { transform: translateX(0); }
-            15% { transform: translateX(-25%); }
-            26% { transform: translateX(-25%); }
-            30% { transform: translateX(-50%); }
-            41% { transform: translateX(-50%); }
-            45% { transform: translateX(-75%); }
-            56% { transform: translateX(-75%); }
-            60% { transform: translateX(-100%); }
-            71% { transform: translateX(-100%); }
-            75% { transform: translateX(-125%); }
-            86% { transform: translateX(-125%); }
-            90% { transform: translateX(-150%); }
-            100% { transform: translateX(-150%); }
+        /* Separator - Green */
+        .slider-text .sep-part {
+            color: #00e676;
+            margin: 0 6px;
+            font-weight: 300;
+        }
+
+        /* Subline Part - Light Blue */
+        .slider-text .subline-part {
+            color: #1565c0;
+        }
+
+        .slider-text.active {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+        }
+
+        .slider-text.slide-out {
+            opacity: 0;
+            transform: translateY(-50%) translateX(-100%);
+        }
+
+        /* ============================================================ */
+        /* 🔥 RESPONSIVE - Slim Box */
+        /* ============================================================ */
+
+        @media (min-width: 1200px) {
+            .slider-text { font-size: 1.8rem; }
+            .slider-wrapper { height: 60px; }
+            .slider-container { padding: 14px 0; }
+        }
+
+        @media (max-width: 1199px) and (min-width: 769px) {
+            .slider-text { font-size: 1.6rem; }
+            .slider-wrapper { height: 55px; }
+            .slider-container { padding: 12px 0; }
+        }
+
+        @media (max-width: 768px) {
+            .slider-wrapper { height: 50px; }
+            .slider-text { font-size: 1.3rem; padding: 0 12px; }
+            .slider-container { padding: 10px 0; }
+        }
+
+        @media (max-width: 576px) {
+            .slider-wrapper { height: 45px; padding: 0 6px; }
+            .slider-text { 
+                font-size: 1.1rem; 
+                padding: 0 10px; 
+                letter-spacing: 0.4px; 
+            }
+            .slider-container { padding: 8px 0; }
+            .slider-container { border-width: 2px; }
+        }
+
+        @media (max-width: 480px) {
+            .slider-wrapper { height: 40px; padding: 0 5px; }
+            .slider-text { 
+                font-size: 0.95rem; 
+                padding: 0 8px; 
+                letter-spacing: 0.3px; 
+            }
+            .slider-container { padding: 6px 0; }
+        }
+
+        @media (max-width: 400px) {
+            .slider-wrapper { height: 36px; padding: 0 4px; }
+            .slider-text { 
+                font-size: 0.85rem; 
+                padding: 0 6px; 
+                letter-spacing: 0.2px; 
+            }
+            .slider-container { padding: 5px 0; }
+            .slider-container { border-width: 2px; border-radius: 8px; }
+        }
+
+        @media (max-width: 340px) {
+            .slider-wrapper { height: 32px; padding: 0 3px; }
+            .slider-text { 
+                font-size: 0.75rem; 
+                padding: 0 5px; 
+                letter-spacing: 0.1px; 
+            }
+            .slider-container { padding: 4px 0; }
         }
 
         /* WhatsApp Box - Slim + Button Long */
@@ -297,14 +375,10 @@
             .whatsapp-box h3 { font-size: 1.1rem; }
             .whatsapp-box p { font-size: 0.8rem; }
             .whatsapp-box .whatsapp-join-btn { font-size: 0.85rem; padding: 10px 20px; min-width: 150px; }
-            .slider-container { padding: 8px 0; }
-            .slider-track { gap: 20px; }
-            .slider-track a { font-size: 0.7rem; padding: 6px 12px; }
         }
         @media (max-width: 380px) {
             .nav-btn-big { padding: 6px 8px; font-size: 0.6rem; }
             .btn-row-three { gap: 4px; }
-            .slider-track a { font-size: 0.6rem; padding: 5px 10px; gap: 15px; }
         }
     </style>
 </head>
@@ -359,62 +433,13 @@
     <h2 class="seo-h2-orange">🎯 Shillong Teer Result Today Live | আজকের শিলং তীর লাইভ রেজাল্ট</h2>
     
     <!-- ============================================================ -->
-    <!-- 🔥 SLIDER TRACK - Full Text Visible (Proper 4-Language Sliding) -->
+    <!-- 🔥 SLIDER - Slim Box, Domain First, Then Subline -->
     <!-- ============================================================ -->
     <div class="slider-container">
-        <div class="slider-track">
-            <!-- English -->
-            <a href="shillong-teer-result.html" class="lang-en">🏹 shillongteerliveresult.in - Fastest Result Update</a>
-            <a href="khanapara-teer-result.html" class="lang-en">🏹 shillongteerliveresult.in - Fastest Result Update</a>
-            <a href="juwai-teer-result.html" class="lang-en">🏹 shillongteerliveresult.in - Fastest Result Update</a>
-            <a href="morning-teer-result.html" class="lang-en">🌅 shillongteerliveresult.in - Fastest Result Update</a>
-            <a href="night-teer-result.html" class="lang-en">🌙 shillongteerliveresult.in - Fastest Result Update</a>
-            
-            <!-- Hindi -->
-            <a href="shillong-teer-result.html" class="lang-hi">🏹 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
-            <a href="khanapara-teer-result.html" class="lang-hi">🏹 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
-            <a href="juwai-teer-result.html" class="lang-hi">🏹 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
-            <a href="morning-teer-result.html" class="lang-hi">🌅 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
-            <a href="night-teer-result.html" class="lang-hi">🌙 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
-            
-            <!-- Assamese -->
-            <a href="shillong-teer-result.html" class="lang-as">🏹 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
-            <a href="khanapara-teer-result.html" class="lang-as">🏹 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
-            <a href="juwai-teer-result.html" class="lang-as">🏹 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
-            <a href="morning-teer-result.html" class="lang-as">🌅 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
-            <a href="night-teer-result.html" class="lang-as">🌙 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
-            
-            <!-- Bengali -->
-            <a href="shillong-teer-result.html" class="lang-bn">🏹 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
-            <a href="khanapara-teer-result.html" class="lang-bn">🏹 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
-            <a href="juwai-teer-result.html" class="lang-bn">🏹 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
-            <a href="morning-teer-result.html" class="lang-bn">🌅 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
-            <a href="night-teer-result.html" class="lang-bn">🌙 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
-            
-            <!-- Duplicate for seamless loop -->
-            <a href="shillong-teer-result.html" class="lang-en">🏹 shillongteerliveresult.in - Fastest Result Update</a>
-            <a href="khanapara-teer-result.html" class="lang-en">🏹 shillongteerliveresult.in - Fastest Result Update</a>
-            <a href="juwai-teer-result.html" class="lang-en">🏹 shillongteerliveresult.in - Fastest Result Update</a>
-            <a href="morning-teer-result.html" class="lang-en">🌅 shillongteerliveresult.in - Fastest Result Update</a>
-            <a href="night-teer-result.html" class="lang-en">🌙 shillongteerliveresult.in - Fastest Result Update</a>
-            
-            <a href="shillong-teer-result.html" class="lang-hi">🏹 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
-            <a href="khanapara-teer-result.html" class="lang-hi">🏹 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
-            <a href="juwai-teer-result.html" class="lang-hi">🏹 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
-            <a href="morning-teer-result.html" class="lang-hi">🌅 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
-            <a href="night-teer-result.html" class="lang-hi">🌙 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
-            
-            <a href="shillong-teer-result.html" class="lang-as">🏹 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
-            <a href="khanapara-teer-result.html" class="lang-as">🏹 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
-            <a href="juwai-teer-result.html" class="lang-as">🏹 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
-            <a href="morning-teer-result.html" class="lang-as">🌅 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
-            <a href="night-teer-result.html" class="lang-as">🌙 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
-            
-            <a href="shillong-teer-result.html" class="lang-bn">🏹 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
-            <a href="khanapara-teer-result.html" class="lang-bn">🏹 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
-            <a href="juwai-teer-result.html" class="lang-bn">🏹 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
-            <a href="morning-teer-result.html" class="lang-bn">🌅 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
-            <a href="night-teer-result.html" class="lang-bn">🌙 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
+        <div class="slider-wrapper" id="sliderWrapper">
+            <div class="slider-text-container" id="sliderTextContainer" style="position:relative;height:100%;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+                <!-- Full lines will be dynamically inserted here by JavaScript -->
+            </div>
         </div>
     </div>
 
@@ -854,5 +879,85 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="app.js"></script>
 
+<!-- ============================================================ -->
+<!-- 🔥 SLIDER JAVASCRIPT - Slim Box, Domain First, Then Subline -->
+<!-- ============================================================ -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Domain (সব ভাষায় একই থাকবে)
+        var domain = 'shillongteerliveresult.in';
+        
+        // Sublines (ভাষা অনুযায়ী পরিবর্তন হবে)
+        var sublines = [
+            'Fastest Teer Result Update',
+            'দ্রুততম তীর ফলাফল আপডেট',
+            'আটাইতকৈ তীৰ ফলাফল আপডেট',
+            'सबसे तेज़ तीर परिणाम अपडेट'
+        ];
+
+        var container = document.getElementById('sliderTextContainer');
+        var currentIndex = 0;
+        var isTransitioning = false;
+
+        // Create full line: Domain + Subline
+        function createTextElement(subline, index) {
+            var div = document.createElement('div');
+            div.className = 'slider-text';
+            div.id = 'slider-text-' + index;
+            
+            div.innerHTML = 
+                '<span class="domain-part">' + domain + '</span>' +
+                '<span class="sep-part">-</span>' +
+                '<span class="subline-part">' + subline + '</span>';
+            return div;
+        }
+
+        // Add all full lines to the container
+        sublines.forEach(function(subline, index) {
+            var el = createTextElement(subline, index);
+            container.appendChild(el);
+        });
+
+        var allTexts = document.querySelectorAll('.slider-text');
+
+        // Show the first full line immediately
+        function showFirstText() {
+            var first = allTexts[0];
+            first.classList.add('active');
+            currentIndex = 0;
+        }
+
+        // Change to the next full line with smooth overlapping effect
+        function changeText() {
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            var current = allTexts[currentIndex];
+            var nextIndex = (currentIndex + 1) % allTexts.length;
+            var next = allTexts[nextIndex];
+
+            // Bring the next full line in from the right
+            next.classList.add('active');
+
+            // After the new full line has fully appeared, slide the old one out
+            setTimeout(function() {
+                current.classList.remove('active');
+                current.classList.add('slide-out');
+
+                setTimeout(function() {
+                    current.classList.remove('slide-out');
+                    current.classList.remove('active');
+                    current.style.transform = '';
+                    currentIndex = nextIndex;
+                    isTransitioning = false;
+                }, 550);
+            }, 500);
+        }
+
+        // Start the slider
+        setTimeout(showFirstText, 300);
+        setInterval(changeText, 4500);
+    });
+</script>
 </body>
 </html>
