@@ -187,45 +187,46 @@
         </a>
     </div>
 
-    <!-- ===== সোশ্যাল শেয়ার বাটন ===== -->
-    <div class="social-share-container">
-        <div class="share-title">📢 <span>শেয়ার করুন</span></div>
-        <div class="share-buttons">
-            <button onclick="shareOnFacebook()" class="share-btn facebook"><span class="icon">📘</span> Facebook</button>
-            <button onclick="shareOnWhatsApp()" class="share-btn whatsapp"><span class="icon">📱</span> WhatsApp</button>
-            <button onclick="shareOnTwitter()" class="share-btn twitter"><span class="icon">🐦</span> Twitter</button>
-            <button onclick="shareOnTelegram()" class="share-btn telegram"><span class="icon">✈️</span> Telegram</button>
-            <button onclick="copyLink()" class="share-btn copy"><span class="icon">📋</span> কপি লিংক</button>
-        </div>
-    </div>
-
     <!-- ============================================================ -->
-    <!-- 🔥 VIP LOCKED NUMBER BOX -->
+    <!-- 🔥 WHATSAPP SECTION (এখন Social Share এর জায়গায়) -->
     <!-- ============================================================ -->
-    <div style="margin: 15px 0; padding: 15px; border: 2px solid #cc0000; background: linear-gradient(135deg, #fff9e6, #fff0d0); border-radius: 12px; text-align: center; box-shadow: 0 3px 15px rgba(204,0,0,0.1);">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;">
-            <span style="font-size: 2rem;">🔒</span>
-            <h3 style="color: #cc0000; margin: 0; font-size: 1.1rem; font-weight: 900;">🎯 VIP ডাইরেক্ট নাম্বার (100% Locked)</h3>
+    <div class="whatsapp-section">
+        <div class="whatsapp-card">
+            <div class="whatsapp-header">
+                <span class="whatsapp-icon">💬</span>
+                <h3>Shillong Teer Live Result Official Team</h3>
+            </div>
+            <div class="whatsapp-body">
+                <p>📢 Daily Results, Tips & Expert Predictions</p>
+                <a href="https://whatsapp.com/channel/0029VaFbrQmLSmbjX5WOYp2d" target="_blank" class="whatsapp-join-btn">
+                    <i class="fab fa-whatsapp"></i> Join WhatsApp
+                </a>
+            </div>
         </div>
-        <p style="margin: 5px 0 12px 0; font-size: 0.85rem; color: #666;">
-            <span style="background: #ffeb3b; padding: 2px 10px; border-radius: 4px; font-weight: bold;">🚀 [BN]</span> 
-            ফ্রিতে আনলক করে স্পেশাল হিট নাম্বারটি দেখে নিন
-        </p>
-        <button id="vipUnlockBtn" class="vip-unlock-btn">
-            🔓 আনলক করুন / Unlock Now
-        </button>
-        <div id="vipStatusText" style="margin-top: 10px; font-size: 0.85rem; color: #888; min-height: 25px;"></div>
     </div>
 
     <h2 class="seo-h2-orange">🎯 Shillong Teer Result Today Live | আজকের শিলং তীর লাইভ রেজাল্ট</h2>
     
+    <!-- ============================================================ -->
+    <!-- 🔥 SLIDER TRACK - Shillongteerliveresult.in Fastest Result Update -->
+    <!-- ============================================================ -->
     <div class="slider-container">
         <div class="slider-track">
-            <a href="shillong-teer-result.html">🏹 Shillong Teer - FR: 4:15 PM | SR: 5:10 PM</a>
-            <a href="khanapara-teer-result.html">🏹 Khanapara Teer - FR: 4:10 PM | SR: 5:05 PM</a>
-            <a href="juwai-teer-result.html">🏹 Juwai Teer - FR: 2:30 PM | SR: 3:15 PM</a>
-            <a href="morning-teer-result.html">🌅 Morning Teer - FR: 10:30 AM | SR: 11:30 AM</a>
-            <a href="night-teer-result.html">🌙 Night Teer - FR: 11:10 PM | SR: 12:10 AM</a>
+            <a href="shillong-teer-result.html" class="slide-link" data-venue="shillong" data-fr="4:15 PM" data-sr="5:10 PM">
+                🏹 Shillongteerliveresult.in - Fastest Result Update | FR: 4:15 PM | SR: 5:10 PM
+            </a>
+            <a href="khanapara-teer-result.html" class="slide-link" data-venue="khanapara" data-fr="4:10 PM" data-sr="5:05 PM">
+                🏹 Shillongteerliveresult.in - Fastest Result Update | FR: 4:10 PM | SR: 5:05 PM
+            </a>
+            <a href="juwai-teer-result.html" class="slide-link" data-venue="juwai" data-fr="2:30 PM" data-sr="3:15 PM">
+                🏹 Shillongteerliveresult.in - Fastest Result Update | FR: 2:30 PM | SR: 3:15 PM
+            </a>
+            <a href="morning-teer-result.html" class="slide-link" data-venue="morning" data-fr="10:30 AM" data-sr="11:30 AM">
+                🌅 Shillongteerliveresult.in - Fastest Result Update | FR: 10:30 AM | SR: 11:30 AM
+            </a>
+            <a href="night-teer-result.html" class="slide-link" data-venue="night" data-fr="11:10 PM" data-sr="12:10 AM">
+                🌙 Shillongteerliveresult.in - Fastest Result Update | FR: 11:10 PM | SR: 12:10 AM
+            </a>
         </div>
     </div>
 
@@ -246,6 +247,20 @@
     <!-- ===== রেজাল্ট গ্রিড ===== -->
     <div id="resultsGrid" class="results-grid"></div>
 
+    <!-- ============================================================ -->
+    <!-- 🔥 সোশ্যাল শেয়ার বাটন (এখন Results Grid-এর নিচে) -->
+    <!-- ============================================================ -->
+    <div class="social-share-container">
+        <div class="share-title">📢 <span>শেয়ার করুন</span></div>
+        <div class="share-buttons">
+            <button onclick="shareOnFacebook()" class="share-btn facebook"><span class="icon">📘</span> Facebook</button>
+            <button onclick="shareOnWhatsApp()" class="share-btn whatsapp"><span class="icon">📱</span> WhatsApp</button>
+            <button onclick="shareOnTwitter()" class="share-btn twitter"><span class="icon">🐦</span> Twitter</button>
+            <button onclick="shareOnTelegram()" class="share-btn telegram"><span class="icon">✈️</span> Telegram</button>
+            <button onclick="copyLink()" class="share-btn copy"><span class="icon">📋</span> কপি লিংক</button>
+        </div>
+    </div>
+
     <!-- ===== ADSTERA NATIVE BANNER ===== -->
     <div style="margin: 2rem 0; text-align: center; background: #f9f5f0; padding: 1rem; border-radius: 12px;">
         <p style="font-size: 0.85rem; font-weight: bold; color: #555; margin-bottom: 8px; letter-spacing: 0.5px;">💡 Trending News & Teer Tips 💡</p>
@@ -256,22 +271,6 @@
     <!-- Full Page Button -->
     <div style="text-align: center; margin: 0.5rem 0 1.5rem 0;">
         <a href="shillong-teer-result.html" class="nav-btn-main btn-shillong-result">📊 পূর্ণ Shillong Teer ফলাফল দেখুন →</a>
-    </div>
-
-    <!-- ===== WHATSAPP SECTION ===== -->
-    <div class="whatsapp-section">
-        <div class="whatsapp-card">
-            <div class="whatsapp-header">
-                <span class="whatsapp-icon">💬</span>
-                <h3>Shillong Teer Live Result Official Team</h3>
-            </div>
-            <div class="whatsapp-body">
-                <p>📢 Daily Results, Tips & Expert Predictions</p>
-                <a href="https://whatsapp.com/channel/0029VaFbrQmLSmbjX5WOYp2d" target="_blank" class="whatsapp-join-btn">
-                    <i class="fab fa-whatsapp"></i> Join WhatsApp
-                </a>
-            </div>
-        </div>
     </div>
 
     <!-- Common Numbers & Previous Results -->
@@ -296,7 +295,7 @@
             </select>
         </div>
         <table class="result-display-table">
-            <thead><tr><th>Date</th><th>FR (4:15 PM)</th><th>SR (5:10 PM)</th></tr></thead>
+            <thead><tr><th>Date</th><th id="frHeader">FR (4:15 PM)</th><th id="srHeader">SR (5:10 PM)</th></tr></thead>
             <tbody id="resultsTableShillong"></tbody>
         </table>
     </div>
@@ -679,5 +678,116 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="app.js"></script>
 
+<!-- ============================================================ -->
+<!-- 🔥 SLIDER TIME LANGUAGE SWITCHER SCRIPT -->
+<!-- ============================================================ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sliderLinks = document.querySelectorAll('.slider-track .slide-link');
+    
+    // Language data
+    const languages = {
+        bn: { label: 'বাংলা', fr: '৪:১৫ PM', sr: '৫:১০ PM' },
+        en: { label: 'English', fr: '4:15 PM', sr: '5:10 PM' },
+        as: { label: 'অসমীয়া', fr: '৪:১৫ PM', sr: '৫:১০ PM' }
+    };
+    
+    let currentLang = 'en'; // Default English
+    
+    // Store original text for each link
+    const originalTexts = {};
+    sliderLinks.forEach(link => {
+        originalTexts[link.href] = link.textContent;
+    });
+    
+    // Function to update all times
+    function updateTimes(langKey) {
+        const lang = languages[langKey];
+        if (!lang) return;
+        
+        // 1. Update slider links
+        sliderLinks.forEach(link => {
+            const venue = link.dataset.venue;
+            const fr = link.dataset.fr || '4:15 PM';
+            const sr = link.dataset.sr || '5:10 PM';
+            const baseText = link.textContent.replace(/FR: [\d:]+ (AM|PM)/, '').replace(/SR: [\d:]+ (AM|PM)/, '').trim();
+            link.textContent = `${baseText} | FR: ${lang.fr} | SR: ${lang.sr}`;
+        });
+        
+        // 2. Update Results Grid times
+        document.querySelectorAll('.fr-box .result-number, .sr-box .result-number').forEach(el => {
+            const parent = el.closest('.result-card');
+            if (!parent) return;
+            const venueName = parent.querySelector('.venue-name')?.textContent || '';
+            let venue = 'shillong';
+            if (venueName.includes('KHANAPARA')) venue = 'khanapara';
+            else if (venueName.includes('JUWAI')) venue = 'juwai';
+            else if (venueName.includes('MORNING')) venue = 'morning';
+            else if (venueName.includes('NIGHT')) venue = 'night';
+            
+            // Only update actual numbers, not WAITING text
+            if (!el.closest('.waiting-number-display') && !el.closest('.waiting-number-display')?.parentElement) {
+                // For actual results, we keep the numbers as is, only the headers change
+            }
+        });
+        
+        // 3. Update Previous Results table headers
+        const frHeader = document.getElementById('frHeader');
+        const srHeader = document.getElementById('srHeader');
+        if (frHeader) frHeader.textContent = `FR (${lang.fr})`;
+        if (srHeader) srHeader.textContent = `SR (${lang.sr})`;
+        
+        // 4. Update Common Numbers table round cells
+        document.querySelectorAll('.common-venue-card .round-cell').forEach(cell => {
+            const text = cell.textContent;
+            if (text.includes('FR')) {
+                cell.textContent = `FR (${lang.fr})`;
+            } else if (text.includes('SR')) {
+                cell.textContent = `SR (${lang.sr})`;
+            }
+        });
+        
+        // 5. Update Fast Server Link timings
+        document.querySelectorAll('.fast-server-link, a[href*="omg10"]').forEach(el => {
+            // Skip main OMG10 link
+        });
+    }
+    
+    // Add click handler to each slider link to switch language
+    sliderLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Toggle language: en -> as -> bn -> en
+            const langOrder = ['en', 'as', 'bn'];
+            let currentIndex = langOrder.indexOf(currentLang);
+            let nextIndex = (currentIndex + 1) % langOrder.length;
+            currentLang = langOrder[nextIndex];
+            updateTimes(currentLang);
+            
+            // Show toast notification
+            const langName = languages[currentLang].label;
+            showToast(`✅ ভাষা পরিবর্তন করা হয়েছে: ${langName} / Language switched to: ${langName}`);
+            
+            // Open the link after language switch (optional)
+            setTimeout(() => {
+                window.location.href = this.href;
+            }, 1000);
+        });
+    });
+    
+    // Initial setup - store data attributes
+    sliderLinks.forEach(link => {
+        const text = link.textContent;
+        // Extract FR and SR values
+        const frMatch = text.match(/FR: ([\d:]+ (?:AM|PM))/);
+        const srMatch = text.match(/SR: ([\d:]+ (?:AM|PM))/);
+        if (frMatch) link.dataset.fr = frMatch[1];
+        if (srMatch) link.dataset.sr = srMatch[1];
+    });
+    
+    // Apply default language (English)
+    updateTimes('en');
+});
+</script>
 </body>
 </html>
