@@ -24,7 +24,7 @@
     <meta name="keywords" content="Shillong Teer Result Today, Shillong Teer Live Result, Khanapara Teer, Juwai Teer, Morning Teer, Night Teer, Teer FR SR Result, Teer House Number">
     <meta name="author" content="Shillong Teer Live Result">
     <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
-    <meta name="language" content="Bengali, English, Assamese">
+    <meta name="language" content="Bengali, English, Assamese, Hindi">
     <meta name="geo.region" content="IN-ML">
     <meta name="geo.placename" content="Shillong">
     <meta name="revisit-after" content="1 day">
@@ -82,9 +82,7 @@
             justify-content: center;
             align-items: center;
         }
-        .vip-modal-overlay.active {
-            display: flex;
-        }
+        .vip-modal-overlay.active { display: flex; }
         .vip-modal-box {
             background: #fff;
             padding: 30px;
@@ -109,9 +107,7 @@
             color: #999;
             transition: color 0.2s;
         }
-        .vip-modal-close:hover {
-            color: #cc0000;
-        }
+        .vip-modal-close:hover { color: #cc0000; }
         .vip-number-display {
             font-size: 2.2rem;
             font-weight: 900;
@@ -151,56 +147,89 @@
             cursor: not-allowed;
             transform: none;
         }
-        /* Slider */
+
+        /* ============================================================ */
+        /* 🔥 SLIDER - Full Text Visible (No Cut-off) */
+        /* ============================================================ */
         .slider-container {
             width: 100%;
             overflow: hidden;
-            background: #f5f5f5;
-            padding: 8px 0;
+            background: #ffffff;
+            padding: 12px 0;
             border-radius: 8px;
             margin: 10px 0;
             position: relative;
+            border: 2px solid #1a4d2e;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
         .slider-track {
             display: flex;
-            gap: 30px;
-            animation: scrollSlider 20s linear infinite;
+            gap: 60px;
+            animation: scrollSlider 45s linear infinite;
             white-space: nowrap;
             width: max-content;
+            align-items: center;
+            will-change: transform;
         }
         .slider-track a {
             white-space: nowrap;
             text-decoration: none;
             color: #0a3d6b;
-            font-weight: bold;
-            padding: 6px 15px;
-            background: #fff;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 10px 25px;
+            background: #ffffff;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+            font-size: 1rem;
             flex-shrink: 0;
             transition: all 0.3s;
+            display: inline-block;
+            line-height: 1.4;
+            letter-spacing: 0.3px;
+            min-width: auto;
+            width: auto;
         }
         .slider-track a:hover {
-            background: #0a3d6b;
-            color: #fff;
-            border-color: #0a3d6b;
-        }
-        @keyframes scrollSlider {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            background: #1a4d2e;
+            color: #ffffff;
+            border-color: #1a4d2e;
         }
 
-        /* WhatsApp Box 1200x630 - Slim Button */
+        /* 4 Language Colors */
+        .slider-track .lang-en { color: #0a3d6b; }
+        .slider-track .lang-hi { color: #e65100; }
+        .slider-track .lang-as { color: #cc0000; }
+        .slider-track .lang-bn { color: #00695c; }
+
+        /* ✅ Proper 4-language sliding - Each language fully visible */
+        /* 4 languages × 5s = 20s per set, 2 sets = 40s, total 45s with buffer */
+        @keyframes scrollSlider {
+            0% { transform: translateX(0); }
+            11% { transform: translateX(0); }
+            15% { transform: translateX(-25%); }
+            26% { transform: translateX(-25%); }
+            30% { transform: translateX(-50%); }
+            41% { transform: translateX(-50%); }
+            45% { transform: translateX(-75%); }
+            56% { transform: translateX(-75%); }
+            60% { transform: translateX(-100%); }
+            71% { transform: translateX(-100%); }
+            75% { transform: translateX(-125%); }
+            86% { transform: translateX(-125%); }
+            90% { transform: translateX(-150%); }
+            100% { transform: translateX(-150%); }
+        }
+
+        /* WhatsApp Box - Slim + Button Long */
         .whatsapp-box {
             max-width: 1200px;
             width: 100%;
-            min-height: 630px;
+            min-height: 380px;
             margin: 0 auto 20px auto;
             background: #25d36610;
             border: 2px solid #25d366;
             border-radius: 16px;
-            padding: 30px 20px;
+            padding: 20px 15px;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -208,20 +237,21 @@
             align-items: center;
             box-sizing: border-box;
         }
-        .whatsapp-box .whatsapp-icon { font-size: 4rem; }
-        .whatsapp-box h3 { font-size: 2rem; margin: 15px 0; color: #075e54; }
-        .whatsapp-box p { font-size: 1.2rem; margin: 10px 0 20px; }
+        .whatsapp-box .whatsapp-icon { font-size: 2.8rem; }
+        .whatsapp-box h3 { font-size: 1.4rem; margin: 8px 0; color: #075e54; }
+        .whatsapp-box p { font-size: 0.9rem; margin: 4px 0 12px 0; }
         .whatsapp-box .whatsapp-join-btn {
             display: inline-block;
             background: #25d366;
             color: #fff;
-            padding: 10px 30px;
+            padding: 12px 32px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
             font-size: 1rem;
             width: fit-content;
             margin: 0 auto;
+            min-width: 200px;
             transition: transform 0.2s, box-shadow 0.2s;
         }
         .whatsapp-box .whatsapp-join-btn:hover {
@@ -263,14 +293,18 @@
         @media (max-width: 600px) {
             .btn-row-three { gap: 6px; flex-wrap: nowrap; }
             .nav-btn-big { padding: 8px 12px; font-size: 0.7rem; letter-spacing: 0px; white-space: nowrap; }
-            .whatsapp-box { min-height: auto; padding: 20px 15px; }
-            .whatsapp-box h3 { font-size: 1.3rem; }
-            .whatsapp-box p { font-size: 1rem; }
-            .whatsapp-box .whatsapp-join-btn { font-size: 0.9rem; padding: 8px 20px; }
+            .whatsapp-box { min-height: auto; padding: 15px 10px; }
+            .whatsapp-box h3 { font-size: 1.1rem; }
+            .whatsapp-box p { font-size: 0.8rem; }
+            .whatsapp-box .whatsapp-join-btn { font-size: 0.85rem; padding: 10px 20px; min-width: 150px; }
+            .slider-container { padding: 8px 0; }
+            .slider-track { gap: 20px; }
+            .slider-track a { font-size: 0.7rem; padding: 6px 12px; }
         }
         @media (max-width: 380px) {
             .nav-btn-big { padding: 6px 8px; font-size: 0.6rem; }
             .btn-row-three { gap: 4px; }
+            .slider-track a { font-size: 0.6rem; padding: 5px 10px; gap: 15px; }
         }
     </style>
 </head>
@@ -311,7 +345,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 🔥 WHATSAPP BOX (1200×630 Size - Slim Button) -->
+    <!-- 🔥 WHATSAPP BOX (Slim + Button Long) -->
     <!-- ============================================================ -->
     <div class="whatsapp-box">
         <div class="whatsapp-icon">💬</div>
@@ -325,21 +359,62 @@
     <h2 class="seo-h2-orange">🎯 Shillong Teer Result Today Live | আজকের শিলং তীর লাইভ রেজাল্ট</h2>
     
     <!-- ============================================================ -->
-    <!-- 🔥 SLIDER TRACK - Smooth Fast Sliding -->
+    <!-- 🔥 SLIDER TRACK - Full Text Visible (Proper 4-Language Sliding) -->
     <!-- ============================================================ -->
     <div class="slider-container">
         <div class="slider-track">
-            <a href="shillong-teer-result.html">🏹 Shillongteerliveresult.in - Fastest Result Update | FR: 4:15 PM | SR: 5:10 PM</a>
-            <a href="khanapara-teer-result.html">🏹 Shillongteerliveresult.in - Fastest Result Update | FR: 4:10 PM | SR: 5:05 PM</a>
-            <a href="juwai-teer-result.html">🏹 Shillongteerliveresult.in - Fastest Result Update | FR: 2:30 PM | SR: 3:15 PM</a>
-            <a href="morning-teer-result.html">🌅 Shillongteerliveresult.in - Fastest Result Update | FR: 10:30 AM | SR: 11:30 AM</a>
-            <a href="night-teer-result.html">🌙 Shillongteerliveresult.in - Fastest Result Update | FR: 11:10 PM | SR: 12:10 AM</a>
+            <!-- English -->
+            <a href="shillong-teer-result.html" class="lang-en">🏹 shillongteerliveresult.in - Fastest Result Update</a>
+            <a href="khanapara-teer-result.html" class="lang-en">🏹 shillongteerliveresult.in - Fastest Result Update</a>
+            <a href="juwai-teer-result.html" class="lang-en">🏹 shillongteerliveresult.in - Fastest Result Update</a>
+            <a href="morning-teer-result.html" class="lang-en">🌅 shillongteerliveresult.in - Fastest Result Update</a>
+            <a href="night-teer-result.html" class="lang-en">🌙 shillongteerliveresult.in - Fastest Result Update</a>
+            
+            <!-- Hindi -->
+            <a href="shillong-teer-result.html" class="lang-hi">🏹 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
+            <a href="khanapara-teer-result.html" class="lang-hi">🏹 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
+            <a href="juwai-teer-result.html" class="lang-hi">🏹 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
+            <a href="morning-teer-result.html" class="lang-hi">🌅 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
+            <a href="night-teer-result.html" class="lang-hi">🌙 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
+            
+            <!-- Assamese -->
+            <a href="shillong-teer-result.html" class="lang-as">🏹 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
+            <a href="khanapara-teer-result.html" class="lang-as">🏹 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
+            <a href="juwai-teer-result.html" class="lang-as">🏹 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
+            <a href="morning-teer-result.html" class="lang-as">🌅 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
+            <a href="night-teer-result.html" class="lang-as">🌙 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
+            
+            <!-- Bengali -->
+            <a href="shillong-teer-result.html" class="lang-bn">🏹 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
+            <a href="khanapara-teer-result.html" class="lang-bn">🏹 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
+            <a href="juwai-teer-result.html" class="lang-bn">🏹 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
+            <a href="morning-teer-result.html" class="lang-bn">🌅 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
+            <a href="night-teer-result.html" class="lang-bn">🌙 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
+            
             <!-- Duplicate for seamless loop -->
-            <a href="shillong-teer-result.html">🏹 Shillongteerliveresult.in - Fastest Result Update | FR: 4:15 PM | SR: 5:10 PM</a>
-            <a href="khanapara-teer-result.html">🏹 Shillongteerliveresult.in - Fastest Result Update | FR: 4:10 PM | SR: 5:05 PM</a>
-            <a href="juwai-teer-result.html">🏹 Shillongteerliveresult.in - Fastest Result Update | FR: 2:30 PM | SR: 3:15 PM</a>
-            <a href="morning-teer-result.html">🌅 Shillongteerliveresult.in - Fastest Result Update | FR: 10:30 AM | SR: 11:30 AM</a>
-            <a href="night-teer-result.html">🌙 Shillongteerliveresult.in - Fastest Result Update | FR: 11:10 PM | SR: 12:10 AM</a>
+            <a href="shillong-teer-result.html" class="lang-en">🏹 shillongteerliveresult.in - Fastest Result Update</a>
+            <a href="khanapara-teer-result.html" class="lang-en">🏹 shillongteerliveresult.in - Fastest Result Update</a>
+            <a href="juwai-teer-result.html" class="lang-en">🏹 shillongteerliveresult.in - Fastest Result Update</a>
+            <a href="morning-teer-result.html" class="lang-en">🌅 shillongteerliveresult.in - Fastest Result Update</a>
+            <a href="night-teer-result.html" class="lang-en">🌙 shillongteerliveresult.in - Fastest Result Update</a>
+            
+            <a href="shillong-teer-result.html" class="lang-hi">🏹 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
+            <a href="khanapara-teer-result.html" class="lang-hi">🏹 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
+            <a href="juwai-teer-result.html" class="lang-hi">🏹 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
+            <a href="morning-teer-result.html" class="lang-hi">🌅 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
+            <a href="night-teer-result.html" class="lang-hi">🌙 shillongteerliveresult.in - सबसे तेज़ परिणाम अपडेट</a>
+            
+            <a href="shillong-teer-result.html" class="lang-as">🏹 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
+            <a href="khanapara-teer-result.html" class="lang-as">🏹 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
+            <a href="juwai-teer-result.html" class="lang-as">🏹 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
+            <a href="morning-teer-result.html" class="lang-as">🌅 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
+            <a href="night-teer-result.html" class="lang-as">🌙 shillongteerliveresult.in - আটাইতকৈ দ্ৰুত ফলাফল আপডেট</a>
+            
+            <a href="shillong-teer-result.html" class="lang-bn">🏹 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
+            <a href="khanapara-teer-result.html" class="lang-bn">🏹 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
+            <a href="juwai-teer-result.html" class="lang-bn">🏹 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
+            <a href="morning-teer-result.html" class="lang-bn">🌅 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
+            <a href="night-teer-result.html" class="lang-bn">🌙 shillongteerliveresult.in - দ্রুততম ফলাফল আপডেট</a>
         </div>
     </div>
 
@@ -461,7 +536,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 📜 ALL ARTICLES (Shillong, Khanapara, Juwai, Morning, Night) -->
+    <!-- 📜 ALL ARTICLES -->
     <!-- ============================================================ -->
     <div class="history-section-direct" style="text-align: left; line-height: 1.7; margin-top: 35px;">
         <h2 style="color:#0d0a0a; border-left:5px solid #cc0000; padding-left:15px; font-size:1.4rem; margin-bottom:1.5rem; font-weight:900; text-transform: uppercase;">📜 Shillong Teer History, Tradition & Culture</h2>
