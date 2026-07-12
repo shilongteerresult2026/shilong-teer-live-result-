@@ -30,15 +30,55 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 // 🔥 Venue Configuration for Previous Results
 // ============================================================
 const venueConfigs = {
-    shillong: { tableId: 'resultsTableShillong', colorFr: '#0d6b3d', colorSr: '#0a3d6b', selectId: 'monthSelectShillong' },
-    khanapara: { tableId: 'resultsTableKhanapara', colorFr: '#0a3d6b', colorSr: '#0a3d6b', selectId: 'monthSelectKhanapara' },
-    juwai: { tableId: 'resultsTableJuwai', colorFr: '#0a2a5a', colorSr: '#0a2a5a', selectId: 'monthSelectJuwai' },
-    morning: { tableId: 'resultsTableMorning', colorFr: '#cc9900', colorSr: '#cc9900', selectId: 'monthSelectMorning' },
-    night: { tableId: 'resultsTableNight', colorFr: '#3d2a2a', colorSr: '#3d2a2a', selectId: 'monthSelectNight' }
+    shillong: { 
+        tableId: 'resultsTableShillong', 
+        colorFr: '#0d47a1', 
+        colorSr: '#1565c0', 
+        selectId: 'monthSelectShillong',
+        venueName: 'Shillong',
+        frTime: '4:15 PM',
+        srTime: '5:10 PM'
+    },
+    khanapara: { 
+        tableId: 'resultsTableKhanapara', 
+        colorFr: '#00695c', 
+        colorSr: '#00897b', 
+        selectId: 'monthSelectKhanapara',
+        venueName: 'Khanapara',
+        frTime: '4:10 PM',
+        srTime: '5:05 PM'
+    },
+    juwai: { 
+        tableId: 'resultsTableJuwai', 
+        colorFr: '#4a148c', 
+        colorSr: '#6a1b9a', 
+        selectId: 'monthSelectJuwai',
+        venueName: 'Juwai',
+        frTime: '2:30 PM',
+        srTime: '3:15 PM'
+    },
+    morning: { 
+        tableId: 'resultsTableMorning', 
+        colorFr: '#e65100', 
+        colorSr: '#f57c00', 
+        selectId: 'monthSelectMorning',
+        venueName: 'Morning',
+        frTime: '10:30 AM',
+        srTime: '11:30 AM'
+    },
+    night: { 
+        tableId: 'resultsTableNight', 
+        colorFr: '#1a237e', 
+        colorSr: '#283593', 
+        selectId: 'monthSelectNight',
+        venueName: 'Night',
+        frTime: '11:10 PM',
+        srTime: '12:10 AM'
+    }
 };
 
 // ============================================================
-// 🔥 ডাইনামিক Previous Results Load ফাংশন
+// 🔥 ডাইনামিক Previous Results Load ফাংশন (ভেন্যু অনুযায়ী ফিল্টার)
 // ============================================================
 async function loadPreviousResults(venue, monthIndex) {
     const config = venueConfigs[venue];
@@ -56,7 +96,7 @@ async function loadPreviousResults(venue, monthIndex) {
         const { data, error } = await supabaseClient
             .from('teer_previous_results')
             .select('*')
-            .eq('venue', venue)
+            .eq('venue', config.venueName)  // 👈 ভেন্যু অনুযায়ী ফিল্টার
             .gte('result_date', firstDay)
             .lte('result_date', lastDay)
             .order('result_date', { ascending: false });
@@ -241,7 +281,7 @@ async function saveLiveResultToPrevious(venue, frResult, srResult, resultDate) {
 }
 
 // ============================================================
-// 🔥 লাইভ রেজাল্ট লোড
+// 🔥 লাইভ রেজাল্ট লোড (ভেন্যু অনুযায়ী ফিল্টার)
 // ============================================================
 async function loadTodayResults() {
     try {
@@ -258,19 +298,19 @@ async function loadTodayResults() {
             let { data, error } = await supabaseClient
                 .from('teer_live_results')
                 .select('*')
-                .eq('venue', venue)
+                .eq('venue', venueConfigs[venue].venueName)  // 👈 ভেন্যু অনুযায়ী ফিল্টার
                 .eq('result_date', today);
                 
             if (!error && data && data.length > 0) {
                 liveData[venue] = { fr: data[0].fr_result || '--', sr: data[0].sr_result || '--' };
                 if (data[0].fr_result !== '--' && data[0].sr_result !== '--') {
-                    await saveLiveResultToPrevious(venue, data[0].fr_result, data[0].sr_result, today);
+                    await saveLiveResultToPrevious(venueConfigs[venue].venueName, data[0].fr_result, data[0].sr_result, today);
                 }
             } else {
                 const { data: prevData, error: prevError } = await supabaseClient
                     .from('teer_live_results')
                     .select('*')
-                    .eq('venue', venue)
+                    .eq('venue', venueConfigs[venue].venueName)
                     .eq('result_date', yesterdayStr)
                     .limit(1);
                 liveData[venue] = (!prevError && prevData && prevData.length > 0) 
@@ -282,13 +322,13 @@ async function loadTodayResults() {
         const { data: nightData, error: nightError } = await supabaseClient
             .from('teer_live_results')
             .select('*')
-            .eq('venue', 'night')
+            .eq('venue', venueConfigs.night.venueName)
             .eq('result_date', nightDate);
             
         if (!nightError && nightData && nightData.length > 0) {
             liveData['night'] = { fr: nightData[0].fr_result || '--', sr: nightData[0].sr_result || '--' };
             if (nightData[0].fr_result !== '--' && nightData[0].sr_result !== '--') {
-                await saveLiveResultToPrevious('night', nightData[0].fr_result, nightData[0].sr_result, nightDate);
+                await saveLiveResultToPrevious('Night', nightData[0].fr_result, nightData[0].sr_result, nightDate);
             }
         } else {
             liveData['night'] = { fr: '--', sr: '--' };
@@ -363,7 +403,7 @@ function renderTodayResults(liveData, todayDate, nightDate) {
 }
 
 // ============================================================
-// 🔥 কমন নাম্বার
+// 🔥 কমন নাম্বার (ভেন্যু অনুযায়ী)
 // ============================================================
 async function loadCommonNumbers() {
     try {
@@ -388,10 +428,11 @@ function renderCommonNumbersFromDB(data) {
     let html = '';
     venues.forEach(venue => {
         const v = venue.id;
-        let time1 = '4:00 PM', time2 = '5:00 PM';
-        if (v === 'morning') { time1 = '10:30 AM'; time2 = '11:30 AM'; }
-        else if (v === 'juwai') { time1 = '2:30 PM'; time2 = '3:15 PM'; }
-        else if (v === 'night') { time1 = '11:10 PM'; time2 = '12:10 AM'; }
+        const config = venueConfigs[v];
+        if (!config) return;
+        
+        const time1 = config.frTime || '4:00 PM';
+        const time2 = config.srTime || '5:00 PM';
         
         html += `
             <div class="common-venue-card">
@@ -502,7 +543,9 @@ const dreamChartData = [
 ];
 
 function renderDreamChart() { 
-    document.getElementById('dreamChartBody').innerHTML = dreamChartData.map(item => `<tr><td style="padding:10px;"><strong>${item.dream}</strong></td><td style="padding:10px;">${item.direct}</td><td style="padding:10px;">${item.house}</td><td style="padding:10px;">${item.ending}</td></tr>`).join('');
+    const tbody = document.getElementById('dreamChartBody');
+    if (!tbody) return;
+    tbody.innerHTML = dreamChartData.map(item => `<tr><td style="padding:10px;"><strong>${item.dream}</strong></td><td style="padding:10px;">${item.direct}</td><td style="padding:10px;">${item.house}</td><td style="padding:10px;">${item.ending}</td></tr>`).join('');
 }
 
 function dreamToNum(t) { 
@@ -530,7 +573,7 @@ function subscribeToCommonNumbers() {
 }
 
 // ============================================================
-// 🔥 Real-time Subscription for Live Results
+// 🔥 Real-time Subscription for Live Results (ভেন্যু অনুযায়ী)
 // ============================================================
 function subscribeToLiveResults() {
     return supabaseClient.channel('live-results-changes')
@@ -542,6 +585,9 @@ function subscribeToLiveResults() {
         }).subscribe();
 }
 
+// ============================================================
+// 🔥 DOMContentLoaded - সব ফাংশন লোড
+// ============================================================
 document.addEventListener('DOMContentLoaded', function() {
     loadTodayResults();
     loadCommonNumbers();
@@ -552,6 +598,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadTrendingNumbers();
     loadLeaderboard();
     
+    // Dream Predictor
     const predictBtn = document.getElementById('predictDreamBtn');
     if(predictBtn) {
         predictBtn.addEventListener('click', function() {
@@ -560,11 +607,14 @@ document.addEventListener('DOMContentLoaded', function() {
             let num = dreamToNum(inp);
             let he = getHENumbers(num);
             document.getElementById('dreamDisplayText').innerHTML = `💭 Dream: <strong>${inp}</strong> → Number: <strong>${num}</strong>`;
-            document.getElementById('houseDigit1').innerText = he.house[0]; document.getElementById('houseDigit2').innerText = he.house[1];
-            document.getElementById('endingDigit1').innerText = he.ending[0]; document.getElementById('endingDigit2').innerText = he.ending[1];
+            document.getElementById('houseDigit1').innerText = he.house[0]; 
+            document.getElementById('houseDigit2').innerText = he.house[1];
+            document.getElementById('endingDigit1').innerText = he.ending[0]; 
+            document.getElementById('endingDigit2').innerText = he.ending[1];
         });
     }
     
+    // FAQ Toggle
     document.querySelectorAll('.faq-question').forEach(q => {
         q.addEventListener('click', function() {
             let a = this.nextElementSibling;
@@ -575,6 +625,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Modal Close
     document.getElementById('closeLiveModalBtn')?.addEventListener('click', closeModals);
     document.getElementById('closePrevModalBtn')?.addEventListener('click', closeModals);
     window.addEventListener('click', function(e) { if(e.target.classList.contains('modal')) closeModals(); });
@@ -753,3 +804,58 @@ document.addEventListener('DOMContentLoaded', function() {
 
     console.log('✅ VIP System (Timer) Loaded Successfully!');
 });
+
+// ============================================================
+// 🔥 PAGE SPECIFIC FUNCTIONS - ভেন্যু অনুযায়ী আলাদা ডেটা লোড
+// ============================================================
+
+// Shillong Page
+async function loadShillongPageData() {
+    await loadPreviousResults('shillong', 6);
+    // Shillong specific data loading
+}
+
+// Khanapara Page
+async function loadKhanaparaPageData() {
+    await loadPreviousResults('khanapara', 6);
+    // Khanapara specific data loading
+}
+
+// Juwai Page
+async function loadJuwaiPageData() {
+    await loadPreviousResults('juwai', 6);
+    // Juwai specific data loading
+}
+
+// Morning Page
+async function loadMorningPageData() {
+    await loadPreviousResults('morning', 6);
+    // Morning specific data loading
+}
+
+// Night Page
+async function loadNightPageData() {
+    await loadPreviousResults('night', 6);
+    // Night specific data loading
+}
+
+// Detect which page is loaded and load appropriate data
+document.addEventListener('DOMContentLoaded', function() {
+    const path = window.location.pathname;
+    
+    if (path.includes('shillong-teer-result.html') || path.includes('shillong-previous.html') || path.includes('shillong-common.html')) {
+        loadShillongPageData();
+    } else if (path.includes('khanapara-teer-result.html') || path.includes('khanapara-previous.html') || path.includes('khanapara-common.html')) {
+        loadKhanaparaPageData();
+    } else if (path.includes('juwai-teer-result.html') || path.includes('juwai-previous.html') || path.includes('juwai-common.html')) {
+        loadJuwaiPageData();
+    } else if (path.includes('morning-teer-result.html') || path.includes('morning-previous.html') || path.includes('morning-common.html')) {
+        loadMorningPageData();
+    } else if (path.includes('night-teer-result.html') || path.includes('night-previous.html') || path.includes('night-common.html')) {
+        loadNightPageData();
+    }
+});
+
+console.log('✅ App.js loaded successfully with all features!');
+console.log('📌 Features: Live Results, Previous Results, Common Numbers, Dream Predictor, VIP System, Comments, Countdown, Real-time Updates');
+console.log('🏹 Venues: Shillong, Khanapara, Juwai, Morning, Night');
