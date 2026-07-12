@@ -151,12 +151,133 @@
             cursor: not-allowed;
             transform: none;
         }
+        /* Slider */
+        .slider-container {
+            width: 100%;
+            overflow: hidden;
+            background: #f5f5f5;
+            padding: 8px 0;
+            border-radius: 8px;
+            margin: 10px 0;
+            position: relative;
+        }
+        .slider-track {
+            display: flex;
+            gap: 30px;
+            animation: scrollSlider 20s linear infinite;
+            white-space: nowrap;
+            width: max-content;
+        }
+        .slider-track a {
+            white-space: nowrap;
+            text-decoration: none;
+            color: #0a3d6b;
+            font-weight: bold;
+            padding: 6px 15px;
+            background: #fff;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+        .slider-track a:hover {
+            background: #0a3d6b;
+            color: #fff;
+            border-color: #0a3d6b;
+        }
+        @keyframes scrollSlider {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* WhatsApp Box 1200x630 - Slim Button */
+        .whatsapp-box {
+            max-width: 1200px;
+            width: 100%;
+            min-height: 630px;
+            margin: 0 auto 20px auto;
+            background: #25d36610;
+            border: 2px solid #25d366;
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        .whatsapp-box .whatsapp-icon { font-size: 4rem; }
+        .whatsapp-box h3 { font-size: 2rem; margin: 15px 0; color: #075e54; }
+        .whatsapp-box p { font-size: 1.2rem; margin: 10px 0 20px; }
+        .whatsapp-box .whatsapp-join-btn {
+            display: inline-block;
+            background: #25d366;
+            color: #fff;
+            padding: 10px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            width: fit-content;
+            margin: 0 auto;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .whatsapp-box .whatsapp-join-btn:hover {
+            transform: scale(1.04);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        /* Bigger Buttons - Morning, Juwai, Night */
+        .btn-row-three {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        .nav-btn-big {
+            padding: 14px 28px;
+            border-radius: 30px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            flex: 0 1 auto;
+            white-space: nowrap;
+        }
+        .nav-btn-big:hover {
+            transform: scale(1.04);
+            box-shadow: 0 5px 18px rgba(0,0,0,0.25);
+        }
+        .btn-morning-big { background: linear-gradient(135deg, #f57c00, #e65100); }
+        .btn-juwai-big { background: linear-gradient(135deg, #4a148c, #6a1b9a); }
+        .btn-night-big { background: linear-gradient(135deg, #1a237e, #0d1442); }
+
+        @media (max-width: 600px) {
+            .btn-row-three { gap: 6px; flex-wrap: nowrap; }
+            .nav-btn-big { padding: 8px 12px; font-size: 0.7rem; letter-spacing: 0px; white-space: nowrap; }
+            .whatsapp-box { min-height: auto; padding: 20px 15px; }
+            .whatsapp-box h3 { font-size: 1.3rem; }
+            .whatsapp-box p { font-size: 1rem; }
+            .whatsapp-box .whatsapp-join-btn { font-size: 0.9rem; padding: 8px 20px; }
+        }
+        @media (max-width: 380px) {
+            .nav-btn-big { padding: 6px 8px; font-size: 0.6rem; }
+            .btn-row-three { gap: 4px; }
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <!-- ===== ল্যাঙ্গুয়েজ বার ===== -->
-    <div class="language-bar">
+    <div class="language-bar" style="text-align:center;padding:5px;background:#f5f5f5;border-radius:5px;margin-bottom:10px;">
         🌐 ভাষা / Language: 
         <a href="#" onclick="showBangla()">🇧🇩 বাংলা</a> | 
         <a href="#" onclick="showEnglish()">🇬🇧 English</a>
@@ -173,11 +294,13 @@
         <div class="live-badge-main">🔴 Shillong Teer Result Today | আজকের লাইভ রেজাল্ট</div>
     </div>
     
-    <!-- ===== Buttons ===== -->
+    <!-- ============================================================ -->
+    <!-- 🔥 MORNING / JUWAI / NIGHT TEER BUTTONS (Bigger + English) -->
+    <!-- ============================================================ -->
     <div class="btn-row-three">
-        <a href="morning-teer-result.html" class="nav-btn-small btn-morning">🌅 মর্নিং তীর</a>
-        <a href="juwai-teer-result.html" class="nav-btn-small btn-juwai">🏹 জুওয়াই তীর</a>
-        <a href="night-teer-result.html" class="nav-btn-small btn-night">🌙 নাইট তীর</a>
+        <a href="morning-teer-result.html" class="nav-btn-big btn-morning-big">🌅 Morning Teer</a>
+        <a href="juwai-teer-result.html" class="nav-btn-big btn-juwai-big">🏹 Juwai Teer</a>
+        <a href="night-teer-result.html" class="nav-btn-big btn-night-big">🌙 Night Teer</a>
     </div>
     
     <!-- ===== OMG10 Link ===== -->
@@ -188,49 +311,57 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 🔥 WHATSAPP SECTION (এখন Social Share এর জায়গায়) -->
+    <!-- 🔥 WHATSAPP BOX (1200×630 Size - Slim Button) -->
     <!-- ============================================================ -->
-    <div class="whatsapp-section">
-        <div class="whatsapp-card">
-            <div class="whatsapp-header">
-                <span class="whatsapp-icon">💬</span>
-                <h3>Shillong Teer Live Result Official Team</h3>
-            </div>
-            <div class="whatsapp-body">
-                <p>📢 Daily Results, Tips & Expert Predictions</p>
-                <a href="https://whatsapp.com/channel/0029VaFbrQmLSmbjX5WOYp2d" target="_blank" class="whatsapp-join-btn">
-                    <i class="fab fa-whatsapp"></i> Join WhatsApp
-                </a>
-            </div>
-        </div>
+    <div class="whatsapp-box">
+        <div class="whatsapp-icon">💬</div>
+        <h3>Shillong Teer Live Result Official Team</h3>
+        <p>📢 Daily Results, Tips & Expert Predictions</p>
+        <a href="https://whatsapp.com/channel/0029VaFbrQmLSmbjX5WOYp2d" target="_blank" class="whatsapp-join-btn">
+            <i class="fab fa-whatsapp"></i> Join WhatsApp
+        </a>
     </div>
 
     <h2 class="seo-h2-orange">🎯 Shillong Teer Result Today Live | আজকের শিলং তীর লাইভ রেজাল্ট</h2>
     
     <!-- ============================================================ -->
-    <!-- 🔥 SLIDER TRACK - Shillongteerliveresult.in Fastest Result Update -->
+    <!-- 🔥 SLIDER TRACK - Smooth Fast Sliding -->
     <!-- ============================================================ -->
     <div class="slider-container">
         <div class="slider-track">
-            <a href="shillong-teer-result.html" class="slide-link" data-venue="shillong" data-fr="4:15 PM" data-sr="5:10 PM">
-                🏹 Shillongteerliveresult.in - Fastest Result Update | FR: 4:15 PM | SR: 5:10 PM
-            </a>
-            <a href="khanapara-teer-result.html" class="slide-link" data-venue="khanapara" data-fr="4:10 PM" data-sr="5:05 PM">
-                🏹 Shillongteerliveresult.in - Fastest Result Update | FR: 4:10 PM | SR: 5:05 PM
-            </a>
-            <a href="juwai-teer-result.html" class="slide-link" data-venue="juwai" data-fr="2:30 PM" data-sr="3:15 PM">
-                🏹 Shillongteerliveresult.in - Fastest Result Update | FR: 2:30 PM | SR: 3:15 PM
-            </a>
-            <a href="morning-teer-result.html" class="slide-link" data-venue="morning" data-fr="10:30 AM" data-sr="11:30 AM">
-                🌅 Shillongteerliveresult.in - Fastest Result Update | FR: 10:30 AM | SR: 11:30 AM
-            </a>
-            <a href="night-teer-result.html" class="slide-link" data-venue="night" data-fr="11:10 PM" data-sr="12:10 AM">
-                🌙 Shillongteerliveresult.in - Fastest Result Update | FR: 11:10 PM | SR: 12:10 AM
-            </a>
+            <a href="shillong-teer-result.html">🏹 Shillongteerliveresult.in - Fastest Result Update | FR: 4:15 PM | SR: 5:10 PM</a>
+            <a href="khanapara-teer-result.html">🏹 Shillongteerliveresult.in - Fastest Result Update | FR: 4:10 PM | SR: 5:05 PM</a>
+            <a href="juwai-teer-result.html">🏹 Shillongteerliveresult.in - Fastest Result Update | FR: 2:30 PM | SR: 3:15 PM</a>
+            <a href="morning-teer-result.html">🌅 Shillongteerliveresult.in - Fastest Result Update | FR: 10:30 AM | SR: 11:30 AM</a>
+            <a href="night-teer-result.html">🌙 Shillongteerliveresult.in - Fastest Result Update | FR: 11:10 PM | SR: 12:10 AM</a>
+            <!-- Duplicate for seamless loop -->
+            <a href="shillong-teer-result.html">🏹 Shillongteerliveresult.in - Fastest Result Update | FR: 4:15 PM | SR: 5:10 PM</a>
+            <a href="khanapara-teer-result.html">🏹 Shillongteerliveresult.in - Fastest Result Update | FR: 4:10 PM | SR: 5:05 PM</a>
+            <a href="juwai-teer-result.html">🏹 Shillongteerliveresult.in - Fastest Result Update | FR: 2:30 PM | SR: 3:15 PM</a>
+            <a href="morning-teer-result.html">🌅 Shillongteerliveresult.in - Fastest Result Update | FR: 10:30 AM | SR: 11:30 AM</a>
+            <a href="night-teer-result.html">🌙 Shillongteerliveresult.in - Fastest Result Update | FR: 11:10 PM | SR: 12:10 AM</a>
         </div>
     </div>
 
-    <!-- Refresh Button -->
+    <!-- ============================================================ -->
+    <!-- 🔥 VIP TRIGGER BUTTON (Results Grid-এর ঠিক উপরে) -->
+    <!-- ============================================================ -->
+    <div style="margin: 15px 0; padding: 15px; border: 2px solid #cc0000; background: linear-gradient(135deg, #fff9e6, #fff0d0); border-radius: 12px; text-align: center; box-shadow: 0 3px 15px rgba(204,0,0,0.1);">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <span style="font-size: 2rem;">🔒</span>
+            <h3 style="color: #cc0000; margin: 0; font-size: 1.1rem; font-weight: 900;">🎯 VIP ডাইরেক্ট নাম্বার (100% Locked)</h3>
+        </div>
+        <p style="margin: 5px 0 12px 0; font-size: 0.85rem; color: #666;">
+            <span style="background: #ffeb3b; padding: 2px 10px; border-radius: 4px; font-weight: bold;">🚀 [BN]</span> 
+            ফ্রিতে আনলক করে স্পেশাল হিট নাম্বারটি দেখে নিন
+        </p>
+        <button id="vipUnlockBtn" class="vip-unlock-btn">
+            🔓 আনলক করুন / Unlock Now
+        </button>
+        <div id="vipStatusText" style="margin-top: 10px; font-size: 0.85rem; color: #888; min-height: 25px;"></div>
+    </div>
+
+    <!-- ===== Refresh Button ===== -->
     <div style="text-align: center; margin: 12px 0;">
         <button onclick="window.location.reload();" style="background: linear-gradient(135deg, #00b300, #008000); color: white; padding: 10px 20px; font-size: 0.95rem; font-weight: bold; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 3px 8px rgba(0,128,0,0.2); width: 95%; max-width: 400px;">
             🔄 ক্লিক করে রেজাল্ট রিফ্রেশ করুন / ৰিফ্ৰেছ কৰক
@@ -248,7 +379,7 @@
     <div id="resultsGrid" class="results-grid"></div>
 
     <!-- ============================================================ -->
-    <!-- 🔥 সোশ্যাল শেয়ার বাটন (এখন Results Grid-এর নিচে) -->
+    <!-- 🔥 সোশ্যাল শেয়ার বাটন (Results Grid-এর নিচে) -->
     <!-- ============================================================ -->
     <div class="social-share-container">
         <div class="share-title">📢 <span>শেয়ার করুন</span></div>
@@ -330,34 +461,28 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 📜 ARTICLE: SHILLONG TEER HISTORY, TRADITION & CULTURE -->
+    <!-- 📜 ALL ARTICLES (Shillong, Khanapara, Juwai, Morning, Night) -->
     <!-- ============================================================ -->
     <div class="history-section-direct" style="text-align: left; line-height: 1.7; margin-top: 35px;">
         <h2 style="color:#0d0a0a; border-left:5px solid #cc0000; padding-left:15px; font-size:1.4rem; margin-bottom:1.5rem; font-weight:900; text-transform: uppercase;">📜 Shillong Teer History, Tradition & Culture</h2>
-        
         <div class="history-card" style="background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eaeaea;">
             <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 15px;">
-                
                 <li style="padding: 15px; background: #fffcfc; border-radius: 8px; border-left: 4px solid #cc0000; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #cc0000; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">🏹 Origin & Cultural Significance</h4>
                     <p style="margin: 0; color: #444; font-size: 0.95rem;">Shillong Teer is not merely a numbers game; it is a living cultural heritage of the Khasi community in Meghalaya. Originating during the British colonial era (1830s-1940s), archery was traditionally a means of self-defense and a royal sport among the indigenous Khasi tribes. The game transformed into a unique lottery system in the early 20th century. In 1982, the Meghalaya government legally recognized Teer under the Meghalaya Amusement and Betting Tax Act, making it one of the few legally sanctioned betting games in India.</p>
                 </li>
-
                 <li style="padding: 15px; background: #fffcfc; border-radius: 8px; border-left: 4px solid #cc0000; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #cc0000; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">🎯 Traditional Rituals</h4>
                     <p style="margin: 0; color: #444; font-size: 0.95rem;">Before each match, local elders and priests perform traditional ceremonies to bless the archers and the counting process. These rituals ensure fair play and spiritual protection. The game is deeply rooted in Khasi culture, with archery being a symbol of strength, precision, and community bonding.</p>
                 </li>
-
                 <li style="padding: 15px; background: #fffcfc; border-radius: 8px; border-left: 4px solid #cc0000; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #cc0000; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">🏛️ Modern Evolution</h4>
                     <p style="margin: 0; color: #444; font-size: 0.95rem;">Today, over 200 licensed Teer counters operate across Meghalaya, processing millions of rupees in bets daily. The game has survived through generations, adapting to modern times while preserving its traditional essence. It stands as a unique blend of ancient archery skills and modern lottery systems, attracting players from all walks of life.</p>
                 </li>
-
                 <li style="padding: 15px; background: #f9f5f0; border-radius: 8px; border-left: 4px solid #d84315; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #d84315; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">📌 Did You Know?</h4>
                     <p style="margin: 0; color: #555; font-size: 0.95rem; font-style: italic;">The oldest recorded Teer match dates back to 1906 when local Khasi kings organized archery competitions during harvest festivals. The game was played with traditional bamboo bows and wooden arrows.</p>
                 </li>
-
             </ul>
         </div>
     </div>
@@ -380,30 +505,24 @@
     <!-- ============================================================ -->
     <div class="history-section-direct" style="text-align: left; line-height: 1.7; margin-top: 35px;">
         <h2 style="color:#0d0a0a; border-left:5px solid #00695c; padding-left:15px; font-size:1.4rem; margin-bottom:1.5rem; font-weight:900; text-transform: uppercase;">📜 Khanapara Teer History, Tradition & Culture</h2>
-        
         <div class="history-card" style="background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eaeaea;">
             <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 15px;">
-                
                 <li style="padding: 15px; background: #f2fbf9; border-radius: 8px; border-left: 4px solid #00695c; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #00695c; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">🏹 Origin & Development</h4>
                     <p style="margin: 0; color: #444; font-size: 0.95rem;">Khanapara Teer originated as a regional variant of the traditional Shillong Teer game, played in the Khanapara area of Assam, near the Meghalaya border. It shares the same archery-based lottery system but has its own unique cultural identity and local flavor.</p>
                 </li>
-
                 <li style="padding: 15px; background: #f2fbf9; border-radius: 8px; border-left: 4px solid #00695c; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #00695c; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">🎯 Local Traditions</h4>
                     <p style="margin: 0; color: #444; font-size: 0.95rem;">The Khanapara Teer grounds have become a hub for local communities, where players gather daily to witness the matches. The game has become an integral part of the local economy and social life, with many families having generations of archers.</p>
                 </li>
-
                 <li style="padding: 15px; background: #f2fbf9; border-radius: 8px; border-left: 4px solid #00695c; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #00695c; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">🏛️ Modern Impact</h4>
                     <p style="margin: 0; color: #444; font-size: 0.95rem;">Khanapara Teer has grown significantly in popularity, attracting players from Assam and neighboring states. It operates under the same legal framework as Shillong Teer and follows similar rules and timings, with FR at 4:10 PM and SR at 5:05 PM.</p>
                 </li>
-
                 <li style="padding: 15px; background: #e0f2f1; border-radius: 8px; border-left: 4px solid #004d40; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #004d40; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">📌 Did You Know?</h4>
                     <p style="margin: 0; color: #555; font-size: 0.95rem; font-style: italic;">Khanapara Teer has become a major tourist attraction, with visitors coming from across Assam to witness the unique archery competitions and the vibrant atmosphere of the grounds.</p>
                 </li>
-
             </ul>
         </div>
     </div>
@@ -413,30 +532,24 @@
     <!-- ============================================================ -->
     <div class="history-section-direct" style="text-align: left; line-height: 1.7; margin-top: 35px;">
         <h2 style="color:#0d0a0a; border-left:5px solid #4a148c; padding-left:15px; font-size:1.4rem; margin-bottom:1.5rem; font-weight:900; text-transform: uppercase;">📜 Juwai Teer History, Tradition & Culture</h2>
-        
         <div class="history-card" style="background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eaeaea;">
             <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 15px;">
-                
                 <li style="padding: 15px; background: #f9f5fb; border-radius: 8px; border-left: 4px solid #4a148c; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #4a148c; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">🏹 Origin & Cultural Roots</h4>
                     <p style="margin: 0; color: #444; font-size: 0.95rem;">Juwai Teer is another regional variant of the traditional archery-based game, played in the Juwai area of Meghalaya. It has its own distinct identity, with local communities celebrating the game as a symbol of unity and cultural pride.</p>
                 </li>
-
                 <li style="padding: 15px; background: #f9f5fb; border-radius: 8px; border-left: 4px solid #4a148c; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #4a148c; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">🎯 Traditional Practices</h4>
                     <p style="margin: 0; color: #444; font-size: 0.95rem;">The Juwai Teer matches are known for their festive atmosphere, with traditional music and dance performances accompanying the competitions. The game has become a social gathering point for families and friends.</p>
                 </li>
-
                 <li style="padding: 15px; background: #f9f5fb; border-radius: 8px; border-left: 4px solid #4a148c; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #4a148c; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">🏛️ Current Status</h4>
                     <p style="margin: 0; color: #444; font-size: 0.95rem;">Juwai Teer operates with the same legal framework as other Teer games in Meghalaya. The timings are FR at 2:30 PM and SR at 3:15 PM, making it one of the afternoon matches.</p>
                 </li>
-
                 <li style="padding: 15px; background: #f3e5f5; border-radius: 8px; border-left: 4px solid #38006b; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #38006b; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">📌 Did You Know?</h4>
                     <p style="margin: 0; color: #555; font-size: 0.95rem; font-style: italic;">The Juwai Teer grounds are known for their picturesque location, surrounded by lush green hills and traditional Khasi villages.</p>
                 </li>
-
             </ul>
         </div>
     </div>
@@ -446,30 +559,24 @@
     <!-- ============================================================ -->
     <div class="history-section-direct" style="text-align: left; line-height: 1.7; margin-top: 35px;">
         <h2 style="color:#0d0a0a; border-left:5px solid #e65100; padding-left:15px; font-size:1.4rem; margin-bottom:1.5rem; font-weight:900; text-transform: uppercase;">📜 Morning Teer History, Tradition & Culture</h2>
-        
         <div class="history-card" style="background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eaeaea;">
             <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 15px;">
-                
                 <li style="padding: 15px; background: #fff8f2; border-radius: 8px; border-left: 4px solid #e65100; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #e65100; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">🌅 Origin & Purpose</h4>
                     <p style="margin: 0; color: #444; font-size: 0.95rem;">Morning Teer was introduced to accommodate the growing demand for Teer matches in the morning hours. It allows players to participate in the game before their daily work begins, making it accessible to a wider audience.</p>
                 </li>
-
                 <li style="padding: 15px; background: #fff8f2; border-radius: 8px; border-left: 4px solid #e65100; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #e65100; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">🎯 Cultural Significance</h4>
                     <p style="margin: 0; color: #444; font-size: 0.95rem;">Morning Teer has become a daily ritual for many Khasi families, with people starting their day by checking the results and discussing strategies with fellow players.</p>
                 </li>
-
                 <li style="padding: 15px; background: #fff8f2; border-radius: 8px; border-left: 4px solid #e65100; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #e65100; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">🏛️ Operational Details</h4>
                     <p style="margin: 0; color: #444; font-size: 0.95rem;">Morning Teer operates from Monday to Friday, with FR at 10:30 AM and SR at 11:30 AM. It follows the same rules and regulations as other Teer games in Meghalaya.</p>
                 </li>
-
                 <li style="padding: 15px; background: #fff3e0; border-radius: 8px; border-left: 4px solid #bf360c; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #bf360c; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">📌 Did You Know?</h4>
                     <p style="margin: 0; color: #555; font-size: 0.95rem; font-style: italic;">Morning Teer is especially popular among elderly players who prefer to participate in the game during the cooler morning hours.</p>
                 </li>
-
             </ul>
         </div>
     </div>
@@ -479,30 +586,24 @@
     <!-- ============================================================ -->
     <div class="history-section-direct" style="text-align: left; line-height: 1.7; margin-top: 35px;">
         <h2 style="color:#0d0a0a; border-left:5px solid #1a237e; padding-left:15px; font-size:1.4rem; margin-bottom:1.5rem; font-weight:900; text-transform: uppercase;">📜 Night Teer History, Tradition & Culture</h2>
-        
         <div class="history-card" style="background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eaeaea;">
             <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 15px;">
-                
                 <li style="padding: 15px; background: #f3f4fa; border-radius: 8px; border-left: 4px solid #1a237e; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #1a237e; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">🌙 Origin & Evolution</h4>
                     <p style="margin: 0; color: #444; font-size: 0.95rem;">Night Teer was developed to cater to players who work during the day and prefer to participate in the evening. It has quickly gained popularity, becoming a favorite among the younger generation.</p>
                 </li>
-
                 <li style="padding: 15px; background: #f3f4fa; border-radius: 8px; border-left: 4px solid #1a237e; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #1a237e; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">🎯 Cultural Impact</h4>
                     <p style="margin: 0; color: #444; font-size: 0.95rem;">Night Teer has created a vibrant evening community, with players gathering at local counters to discuss strategies and share predictions under the night sky.</p>
                 </li>
-
                 <li style="padding: 15px; background: #f3f4fa; border-radius: 8px; border-left: 4px solid #1a237e; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #1a237e; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">🏛️ Operational Details</h4>
                     <p style="margin: 0; color: #444; font-size: 0.95rem;">Night Teer operates from Monday to Friday, with FR at 11:10 PM and SR at 12:10 AM. It follows the same rules and regulations as other Teer games in Meghalaya.</p>
                 </li>
-
                 <li style="padding: 15px; background: #e8eaf6; border-radius: 8px; border-left: 4px solid #000051; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h4 style="margin: 0 0 8px 0; color: #000051; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">📌 Did You Know?</h4>
                     <p style="margin: 0; color: #555; font-size: 0.95rem; font-style: italic;">Night Teer has become a popular topic of discussion on social media platforms, with players sharing their predictions and experiences late into the night.</p>
                 </li>
-
             </ul>
         </div>
     </div>
@@ -678,116 +779,5 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="app.js"></script>
 
-<!-- ============================================================ -->
-<!-- 🔥 SLIDER TIME LANGUAGE SWITCHER SCRIPT -->
-<!-- ============================================================ -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const sliderLinks = document.querySelectorAll('.slider-track .slide-link');
-    
-    // Language data
-    const languages = {
-        bn: { label: 'বাংলা', fr: '৪:১৫ PM', sr: '৫:১০ PM' },
-        en: { label: 'English', fr: '4:15 PM', sr: '5:10 PM' },
-        as: { label: 'অসমীয়া', fr: '৪:১৫ PM', sr: '৫:১০ PM' }
-    };
-    
-    let currentLang = 'en'; // Default English
-    
-    // Store original text for each link
-    const originalTexts = {};
-    sliderLinks.forEach(link => {
-        originalTexts[link.href] = link.textContent;
-    });
-    
-    // Function to update all times
-    function updateTimes(langKey) {
-        const lang = languages[langKey];
-        if (!lang) return;
-        
-        // 1. Update slider links
-        sliderLinks.forEach(link => {
-            const venue = link.dataset.venue;
-            const fr = link.dataset.fr || '4:15 PM';
-            const sr = link.dataset.sr || '5:10 PM';
-            const baseText = link.textContent.replace(/FR: [\d:]+ (AM|PM)/, '').replace(/SR: [\d:]+ (AM|PM)/, '').trim();
-            link.textContent = `${baseText} | FR: ${lang.fr} | SR: ${lang.sr}`;
-        });
-        
-        // 2. Update Results Grid times
-        document.querySelectorAll('.fr-box .result-number, .sr-box .result-number').forEach(el => {
-            const parent = el.closest('.result-card');
-            if (!parent) return;
-            const venueName = parent.querySelector('.venue-name')?.textContent || '';
-            let venue = 'shillong';
-            if (venueName.includes('KHANAPARA')) venue = 'khanapara';
-            else if (venueName.includes('JUWAI')) venue = 'juwai';
-            else if (venueName.includes('MORNING')) venue = 'morning';
-            else if (venueName.includes('NIGHT')) venue = 'night';
-            
-            // Only update actual numbers, not WAITING text
-            if (!el.closest('.waiting-number-display') && !el.closest('.waiting-number-display')?.parentElement) {
-                // For actual results, we keep the numbers as is, only the headers change
-            }
-        });
-        
-        // 3. Update Previous Results table headers
-        const frHeader = document.getElementById('frHeader');
-        const srHeader = document.getElementById('srHeader');
-        if (frHeader) frHeader.textContent = `FR (${lang.fr})`;
-        if (srHeader) srHeader.textContent = `SR (${lang.sr})`;
-        
-        // 4. Update Common Numbers table round cells
-        document.querySelectorAll('.common-venue-card .round-cell').forEach(cell => {
-            const text = cell.textContent;
-            if (text.includes('FR')) {
-                cell.textContent = `FR (${lang.fr})`;
-            } else if (text.includes('SR')) {
-                cell.textContent = `SR (${lang.sr})`;
-            }
-        });
-        
-        // 5. Update Fast Server Link timings
-        document.querySelectorAll('.fast-server-link, a[href*="omg10"]').forEach(el => {
-            // Skip main OMG10 link
-        });
-    }
-    
-    // Add click handler to each slider link to switch language
-    sliderLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            // Toggle language: en -> as -> bn -> en
-            const langOrder = ['en', 'as', 'bn'];
-            let currentIndex = langOrder.indexOf(currentLang);
-            let nextIndex = (currentIndex + 1) % langOrder.length;
-            currentLang = langOrder[nextIndex];
-            updateTimes(currentLang);
-            
-            // Show toast notification
-            const langName = languages[currentLang].label;
-            showToast(`✅ ভাষা পরিবর্তন করা হয়েছে: ${langName} / Language switched to: ${langName}`);
-            
-            // Open the link after language switch (optional)
-            setTimeout(() => {
-                window.location.href = this.href;
-            }, 1000);
-        });
-    });
-    
-    // Initial setup - store data attributes
-    sliderLinks.forEach(link => {
-        const text = link.textContent;
-        // Extract FR and SR values
-        const frMatch = text.match(/FR: ([\d:]+ (?:AM|PM))/);
-        const srMatch = text.match(/SR: ([\d:]+ (?:AM|PM))/);
-        if (frMatch) link.dataset.fr = frMatch[1];
-        if (srMatch) link.dataset.sr = srMatch[1];
-    });
-    
-    // Apply default language (English)
-    updateTimes('en');
-});
-</script>
 </body>
 </html>
