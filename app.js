@@ -150,60 +150,6 @@ const venueConfigs = {
 };
 
 // ============================================================
-// 🔥 CACHE MANAGEMENT
-// ============================================================
-const resultCache = new Map();
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
-
-function getCachedResult(venueId, date) {
-    const cacheKey = `${venueId}_${date}`;
-    const cached = resultCache.get(cacheKey);
-    if (cached && (Date.now() - cached.timestamp < CACHE_DURATION)) {
-        return cached.data;
-    }
-    return null;
-}
-
-function setCachedResult(venueId, date, data) {
-    const cacheKey = `${venueId}_${date}`;
-    resultCache.set(cacheKey, {
-        data: data,
-        timestamp: Date.now()
-    });
-}
-
-// ============================================================
-// 🔥 TIME PARSING HELPERS
-// ============================================================
-function parseTimeToMinutes(timeStr) {
-    if (!timeStr) return 0;
-    
-    const match = timeStr.match(/(\d+):(\d+)\s*(AM|PM)/i);
-    if (!match) return 0;
-    
-    let [, hours, minutes, period] = match;
-    hours = parseInt(hours);
-    minutes = parseInt(minutes);
-    
-    if (period.toUpperCase() === 'PM' && hours !== 12) hours += 12;
-    if (period.toUpperCase() === 'AM' && hours === 12) hours = 0;
-    
-    return hours * 60 + minutes;
-}
-
-function getVenueTimings(venueId) {
-    const config = venueConfigs[venueId];
-    if (!config) return null;
-    
-    return {
-        fr: parseTimeToMinutes(config.frTime),
-        sr: parseTimeToMinutes(config.srTime),
-        frStr: config.frTime,
-        srStr: config.srTime
-    };
-}
-
-// ============================================================
 // 🔥 PAGE DETECT - কোন পেজ তা চিনবে
 // ============================================================
 function detectVenueFromPage() {
@@ -245,6 +191,37 @@ function getVenuesForCurrentPage() {
 }
 
 // ============================================================
+// 🔥 TIME PARSING HELPERS
+// ============================================================
+function parseTimeToMinutes(timeStr) {
+    if (!timeStr) return 0;
+    
+    const match = timeStr.match(/(\d+):(\d+)\s*(AM|PM)/i);
+    if (!match) return 0;
+    
+    let [, hours, minutes, period] = match;
+    hours = parseInt(hours);
+    minutes = parseInt(minutes);
+    
+    if (period.toUpperCase() === 'PM' && hours !== 12) hours += 12;
+    if (period.toUpperCase() === 'AM' && hours === 12) hours = 0;
+    
+    return hours * 60 + minutes;
+}
+
+function getVenueTimings(venueId) {
+    const config = venueConfigs[venueId];
+    if (!config) return null;
+    
+    return {
+        fr: parseTimeToMinutes(config.frTime),
+        sr: parseTimeToMinutes(config.srTime),
+        frStr: config.frTime,
+        srStr: config.srTime
+    };
+}
+
+// ============================================================
 // 🔥 IST TIME ZONE FIX
 // ============================================================
 function getTodayIST() {
@@ -271,7 +248,7 @@ function getYesterdayIST() {
 }
 
 // ============================================================
-// 🔥 WAITING চেক - সঠিক সময় অনুযায়ী (আপডেটেড)
+// 🔥 WAITING চেক - সঠিক সময় অনুযায়ী
 // ============================================================
 function isWaitingForVenue(venueId, roundType) {
     const now = new Date();
@@ -295,7 +272,7 @@ function isWaitingForVenue(venueId, roundType) {
 }
 
 // ============================================================
-// ⏳ কাউন্টডাউন (আপডেটেড)
+// ⏳ কাউন্টডাউন
 // ============================================================
 let countdownInterval = null;
 let countdownVenues = [];
@@ -312,10 +289,8 @@ function startAllCountdowns() {
         countdownVenues = Object.keys(venueConfigs);
     }
     
-    // Immediate update
     countdownVenues.forEach(updateVenueCountdown);
     
-    // Update every second for smooth countdown
     countdownInterval = setInterval(() => {
         countdownVenues.forEach(updateVenueCountdown);
     }, 1000);
@@ -349,7 +324,6 @@ function updateVenueCountdown(venueId) {
     } else if (currentMinutes < srTime) {
         nextTime = srTime;
     } else {
-        // Both rounds completed - show next day's FR
         nextTime = frTime + 1440;
     }
     
@@ -362,51 +336,12 @@ function updateVenueCountdown(venueId) {
     
     el.textContent = `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
     
-    // Add urgency class if less than 30 minutes
     if (diff < 30) {
         el.style.color = '#FF5722';
         el.style.fontWeight = '700';
     } else {
         el.style.color = '#ffffff';
         el.style.fontWeight = '800';
-    }
-}
-
-// ============================================================
-// 🔥 অটো-সেভ লাইভ রেজাল্ট টু প্রিভিয়াস রেজাল্ট
-// ============================================================
-async function saveLiveResultToPrevious(venue, frResult, srResult, resultDate) {
-    if (!frResult || !srResult || frResult === '--' || srResult === '--') return;
-
-    try {
-        const { data: existing, error: checkError } = await supabaseClient
-            .from('teer_previous_results')
-            .select('*')
-            .eq('venue', venue)
-            .eq('result_date', resultDate)
-            .limit(1);
-
-        if (checkError) return;
-
-        if (existing && existing.length > 0) {
-            await supabaseClient
-                .from('teer_previous_results')
-                .update({ fr_result: frResult, sr_result: srResult, updated_at: new Date().toISOString() })
-                .eq('id', existing[0].id);
-        } else {
-            await supabaseClient
-                .from('teer_previous_results')
-                .insert({ 
-                    venue, 
-                    result_date: resultDate, 
-                    fr_result: frResult, 
-                    sr_result: srResult, 
-                    created_at: new Date().toISOString(), 
-                    updated_at: new Date().toISOString() 
-                });
-        }
-    } catch (err) {
-        console.error(`❌ Error saving ${venue} previous result:`, err);
     }
 }
 
@@ -482,7 +417,45 @@ function setupAllSelectors() {
 }
 
 // ============================================================
-// 🔥 লাইভ রেজাল্ট লোড (সব ভেন্যু সহ - আপডেটেড)
+// 🔥 অটো-সেভ লাইভ রেজাল্ট টু প্রিভিয়াস রেজাল্ট
+// ============================================================
+async function saveLiveResultToPrevious(venue, frResult, srResult, resultDate) {
+    if (!frResult || !srResult || frResult === '--' || srResult === '--') return;
+
+    try {
+        const { data: existing, error: checkError } = await supabaseClient
+            .from('teer_previous_results')
+            .select('*')
+            .eq('venue', venue)
+            .eq('result_date', resultDate)
+            .limit(1);
+
+        if (checkError) return;
+
+        if (existing && existing.length > 0) {
+            await supabaseClient
+                .from('teer_previous_results')
+                .update({ fr_result: frResult, sr_result: srResult, updated_at: new Date().toISOString() })
+                .eq('id', existing[0].id);
+        } else {
+            await supabaseClient
+                .from('teer_previous_results')
+                .insert({ 
+                    venue, 
+                    result_date: resultDate, 
+                    fr_result: frResult, 
+                    sr_result: srResult, 
+                    created_at: new Date().toISOString(), 
+                    updated_at: new Date().toISOString() 
+                });
+        }
+    } catch (err) {
+        console.error(`❌ Error saving ${venue} previous result:`, err);
+    }
+}
+
+// ============================================================
+// 🔥 লাইভ রেজাল্ট লোড (সব ভেন্যু সহ)
 // ============================================================
 let isLoading = false;
 let globalLiveData = {};
@@ -513,13 +486,6 @@ async function loadTodayResults() {
                 dateToUse = nightDate;
             }
             
-            // Check cache first
-            const cached = getCachedResult(venue, dateToUse);
-            if (cached) {
-                liveData[venue] = cached;
-                continue;
-            }
-            
             let { data, error } = await supabaseClient
                 .from('teer_live_results')
                 .select('*')
@@ -527,25 +493,17 @@ async function loadTodayResults() {
                 .eq('result_date', dateToUse);
                 
             if (!error && data && data.length > 0) {
-                const result = { 
-                    fr: data[0].fr_result || '--', 
-                    sr: data[0].sr_result || '--' 
-                };
-                liveData[venue] = result;
-                setCachedResult(venue, dateToUse, result);
-                
+                liveData[venue] = { fr: data[0].fr_result || '--', sr: data[0].sr_result || '--' };
                 if (data[0].fr_result !== '--' && data[0].sr_result !== '--') {
                     await saveLiveResultToPrevious(config.venueName, data[0].fr_result, data[0].sr_result, dateToUse);
                 }
             } else {
-                // Try to get from previous results
                 const { data: prevData, error: prevError } = await supabaseClient
-                    .from('teer_previous_results')
+                    .from('teer_live_results')
                     .select('*')
                     .eq('venue', config.venueName)
-                    .eq('result_date', dateToUse)
+                    .eq('result_date', yesterdayStr)
                     .limit(1);
-                    
                 liveData[venue] = (!prevError && prevData && prevData.length > 0) 
                     ? { fr: prevData[0].fr_result || '--', sr: prevData[0].sr_result || '--' } 
                     : { fr: '--', sr: '--' };
@@ -562,7 +520,6 @@ async function loadTodayResults() {
             updateMetaTags(currentVenue, liveData[venueId].fr || '--', liveData[venueId].sr || '--', today);
         }
         
-        // Update selectors
         Object.keys(venueConfigs).forEach(venue => {
             const select = document.getElementById(venueConfigs[venue].selectId);
             if (select) loadPreviousResults(venue, parseInt(select.value));
@@ -613,6 +570,7 @@ function renderTodayResults(liveData, todayDate, nightDate) {
             { id: 'night', name: 'NIGHT TEER', time1: '11:10 PM', time2: '12:10 AM', date: nightDate || getNightDate() }
         ];
     } else {
+        // Home Page - সব ভেন্যু
         venues = [
             { id: 'shillong', name: 'SHILLONG TEER', time1: '4:15 PM', time2: '5:10 PM', date: todayDate },
             { id: 'khanapara', name: 'KHANAPARA TEER', time1: '4:10 PM', time2: '5:05 PM', date: todayDate },
@@ -700,7 +658,7 @@ function updateMetaTags(venue, frResult, srResult, date) {
 }
 
 // ============================================================
-// 🔥 কমন নাম্বার (ভেন্যু অনুযায়ী - আপডেটেড)
+// 🔥 কমন নাম্বার (ভেন্যু অনুযায়ী)
 // ============================================================
 let globalCommonData = null;
 
@@ -736,7 +694,7 @@ function renderCommonNumbersFromDB(data) {
     } else if (pageType === 'shillong') {
         venueIds = ['shillong'];
     } else if (pageType === 'juwai') {
-        venueIds = ['juwai'];
+        venueIds = ['juwai', 'juwaiMorning', 'juwaiNight'];
     } else if (pageType === 'morning') {
         venueIds = ['morning'];
     } else if (pageType === 'night') {
@@ -797,7 +755,7 @@ function renderCommonNumbers() {
 }
 
 // ============================================================
-// 🔥 TRENDING & LEADERBOARD
+// 🔥 ট্রেন্ডিং নাম্বার
 // ============================================================
 function loadTrendingNumbers() {
     const grid = document.getElementById('trendingGrid');
@@ -815,6 +773,9 @@ function loadTrendingNumbers() {
     ).join('');
 }
 
+// ============================================================
+// 🔥 লিডারবোর্ড
+// ============================================================
 function loadLeaderboard() {
     const tbody = document.getElementById('leaderboardBody');
     if (!tbody) return;
@@ -829,7 +790,7 @@ function loadLeaderboard() {
 }
 
 // ============================================================
-// 🔥 SOCIAL SHARE FUNCTIONS
+// 🔥 টোস্ট নোটিফিকেশন
 // ============================================================
 function showToast(message) {
     const toast = document.createElement('div');
@@ -843,6 +804,9 @@ function showToast(message) {
     }, 3000);
 }
 
+// ============================================================
+// 🔥 সোশ্যাল শেয়ার ফাংশন
+// ============================================================
 function shareOnFacebook() { 
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank', 'width=600,height=400'); 
 }
@@ -866,7 +830,7 @@ function copyLink() {
 }
 
 // ============================================================
-// 🔥 COMMENT SYSTEM
+// 🔥 কমেন্ট সিস্টেম
 // ============================================================
 function addComment() {
     const nameInput = document.getElementById('commentName');
@@ -891,6 +855,9 @@ function addComment() {
     showToast('✅ আপনার মন্তব্য পোস্ট হয়েছে!');
 }
 
+// ============================================================
+// 🔥 নিউজলেটার সাবস্ক্রাইব
+// ============================================================
 function subscribeNewsletter() {
     const email = document.getElementById('newsletterEmail').value.trim();
     const msg = document.getElementById('newsletterMsg');
@@ -905,7 +872,7 @@ function subscribeNewsletter() {
 }
 
 // ============================================================
-// 🔥 DREAM PREDICTOR
+// 🔥 ড্রিম প্রেডিক্টর
 // ============================================================
 const dreamChartData = [
     { dream: "Snake / সাপ", direct: "05, 33, 77", house: "7", ending: "1" }, 
@@ -948,7 +915,7 @@ function getHENumbers(n) {
 }
 
 // ============================================================
-// 🔥 REAL-TIME SUBSCRIPTIONS
+// 🔥 রিয়েল-টাইম সাবস্ক্রিপশন
 // ============================================================
 function subscribeToCommonNumbers() {
     return supabaseClient.channel('common-numbers-changes')
@@ -1136,7 +1103,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================================
-// 🔥 PAGE SPECIFIC FUNCTIONS
+// 🔥 পেজ স্পেসিফিক ফাংশন
 // ============================================================
 async function loadShillongPageData() {
     await loadPreviousResults('shillong', 6);
@@ -1159,10 +1126,27 @@ async function loadNightPageData() {
 }
 
 // ============================================================
+// 🔥 মডাল ক্লোজ
+// ============================================================
+function closeModals() {
+    const lm = document.getElementById('liveModalWin');
+    const pm = document.getElementById('prevModalWin');
+    if (lm) lm.style.display = 'none';
+    if (pm) pm.style.display = 'none';
+}
+
+function showBangla() { 
+    showToast('বাংলা ভার্সন সক্রিয়। পুরো সাইট বাংলা ও ইংরেজিতে দেখা যাচ্ছে।');
+}
+
+function showEnglish() { 
+    showToast('English version active. Site is fully bilingual.');
+}
+
+// ============================================================
 // 🔥 DOMContentLoaded - সব ফাংশন লোড
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
-    // Load initial data
     loadTodayResults();
     loadCommonNumbers();
     setupAllSelectors();
@@ -1170,11 +1154,9 @@ document.addEventListener('DOMContentLoaded', function() {
     loadTrendingNumbers();
     loadLeaderboard();
     
-    // Real-time subscriptions
     subscribeToCommonNumbers();
     subscribeToLiveResults();
     
-    // Page specific loading
     const path = window.location.pathname;
     if (path.includes('shillong-teer-result.html') || path.includes('shillong-previous.html') || path.includes('shillong-common.html')) {
         loadShillongPageData();
@@ -1226,21 +1208,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if(e.target.classList.contains('modal')) closeModals(); 
     });
 });
-
-function closeModals() {
-    const lm = document.getElementById('liveModalWin');
-    const pm = document.getElementById('prevModalWin');
-    if (lm) lm.style.display = 'none';
-    if (pm) pm.style.display = 'none';
-}
-
-function showBangla() { 
-    showToast('বাংলা ভার্সন সক্রিয়। পুরো সাইট বাংলা ও ইংরেজিতে দেখা যাচ্ছে।');
-}
-
-function showEnglish() { 
-    showToast('English version active. Site is fully bilingual.');
-}
 
 console.log('✅ App.js loaded successfully with all features!');
 console.log('📌 Features: Live Results, Previous Results, Common Numbers, Dream Predictor, VIP System, Comments, Countdown, Real-time Updates');
