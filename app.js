@@ -27,33 +27,81 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 })();
 
 // ============================================================
-// 🔥 Venue Configuration for Previous Results
+// 🔥 VENUE CONFIGURATIONS - সব ভেন্যু সহ (আপডেটেড)
 // ============================================================
 const venueConfigs = {
+    // ===== SHILLONG =====
     shillong: { 
         tableId: 'resultsTableShillong', 
         colorFr: '#0d47a1', 
         colorSr: '#1565c0', 
         selectId: 'monthSelectShillong',
         venueName: 'Shillong',
+        displayName: 'SHILLONG TEER',
         frTime: '4:15 PM',
         srTime: '5:10 PM'
     },
+    shillongMorning: { 
+        tableId: 'resultsTableShillongMorning', 
+        colorFr: '#e65100', 
+        colorSr: '#f57c00', 
+        selectId: 'monthSelectShillongMorning',
+        venueName: 'Shillong Morning',
+        displayName: 'SHILLONG MORNING TEER',
+        frTime: '10:30 AM',
+        srTime: '11:30 AM'
+    },
+    shillongNight: { 
+        tableId: 'resultsTableShillongNight', 
+        colorFr: '#1a237e', 
+        colorSr: '#283593', 
+        selectId: 'monthSelectShillongNight',
+        venueName: 'Shillong Night',
+        displayName: 'SHILLONG NIGHT TEER',
+        frTime: '11:10 PM',
+        srTime: '12:10 AM'
+    },
+    
+    // ===== KHANAPARA =====
     khanapara: { 
         tableId: 'resultsTableKhanapara', 
         colorFr: '#00695c', 
         colorSr: '#00897b', 
         selectId: 'monthSelectKhanapara',
         venueName: 'Khanapara',
+        displayName: 'KHANAPARA TEER',
         frTime: '4:10 PM',
         srTime: '5:05 PM'
     },
+    khanaparaMorning: { 
+        tableId: 'resultsTableKhanaparaMorning', 
+        colorFr: '#e65100', 
+        colorSr: '#f57c00', 
+        selectId: 'monthSelectKhanaparaMorning',
+        venueName: 'Khanapara Morning',
+        displayName: 'KHANAPARA MORNING TEER',
+        frTime: '10:30 AM',
+        srTime: '11:30 AM'
+    },
+    khanaparaNight: { 
+        tableId: 'resultsTableKhanaparaNight', 
+        colorFr: '#1a237e', 
+        colorSr: '#283593', 
+        selectId: 'monthSelectKhanaparaNight',
+        venueName: 'Khanapara Night',
+        displayName: 'KHANAPARA NIGHT TEER',
+        frTime: '11:10 PM',
+        srTime: '12:10 AM'
+    },
+    
+    // ===== OTHERS =====
     juwai: { 
         tableId: 'resultsTableJuwai', 
         colorFr: '#4a148c', 
         colorSr: '#6a1b9a', 
         selectId: 'monthSelectJuwai',
         venueName: 'Juwai',
+        displayName: 'JUWAI TEER',
         frTime: '2:30 PM',
         srTime: '3:15 PM'
     },
@@ -63,6 +111,7 @@ const venueConfigs = {
         colorSr: '#f57c00', 
         selectId: 'monthSelectMorning',
         venueName: 'Morning',
+        displayName: 'MORNING TEER',
         frTime: '10:30 AM',
         srTime: '11:30 AM'
     },
@@ -72,13 +121,38 @@ const venueConfigs = {
         colorSr: '#283593', 
         selectId: 'monthSelectNight',
         venueName: 'Night',
+        displayName: 'NIGHT TEER',
         frTime: '11:10 PM',
         srTime: '12:10 AM'
     }
 };
 
 // ============================================================
-// 🔥 ডাইনামিক Previous Results Load ফাংশন (ভেন্যু অনুযায়ী ফিল্টার)
+// 🔥 PAGE DETECT - কোন পেজ তা চিনবে
+// ============================================================
+function detectVenueFromPage() {
+    const path = window.location.pathname;
+    
+    if (path.includes('khanapara')) return 'Khanapara';
+    if (path.includes('shillong')) return 'Shillong';
+    if (path.includes('juwai')) return 'Juwai';
+    if (path.includes('morning')) return 'Morning';
+    if (path.includes('night')) return 'Night';
+    return 'Shillong';
+}
+
+function detectPageType() {
+    const path = window.location.pathname;
+    if (path.includes('khanapara')) return 'khanapara';
+    if (path.includes('shillong')) return 'shillong';
+    if (path.includes('juwai')) return 'juwai';
+    if (path.includes('morning')) return 'morning';
+    if (path.includes('night')) return 'night';
+    return 'home';
+}
+
+// ============================================================
+// 🔥 ডাইনামিক Previous Results Load ফাংশন
 // ============================================================
 async function loadPreviousResults(venue, monthIndex) {
     const config = venueConfigs[venue];
@@ -108,7 +182,6 @@ async function loadPreviousResults(venue, monthIndex) {
             data.forEach(row => {
                 const fr = row.fr_result || '--';
                 const sr = row.sr_result || '--';
-                // তারিখ ফরম্যাট DD.MM.YYYY
                 const dateObj = new Date(row.result_date);
                 const day = String(dateObj.getDate()).padStart(2, '0');
                 const monthName = String(dateObj.getMonth() + 1).padStart(2, '0');
@@ -136,14 +209,12 @@ async function loadPreviousResults(venue, monthIndex) {
 // 🔥 ডাইনামিক Selector Setup
 // ============================================================
 function setupAllSelectors() {
-    const currentMonth = 6; // July
-    
+    const currentMonth = 6;
     Object.keys(venueConfigs).forEach(venue => {
         const selectElement = document.getElementById(venueConfigs[venue].selectId);
         if (selectElement) {
             selectElement.value = currentMonth.toString();
             loadPreviousResults(venue, currentMonth);
-            
             selectElement.addEventListener('change', function() {
                 loadPreviousResults(venue, parseInt(this.value));
             });
@@ -185,7 +256,11 @@ function isWaitingForVenue(venueId, roundType) {
     
     const timings = {
         shillong: { fr: 16.25 * 60, sr: 17.166 * 60 },
+        shillongMorning: { fr: 10.5 * 60, sr: 11.5 * 60 },
+        shillongNight: { fr: 23.166 * 60, sr: 24.166 * 60 },
         khanapara: { fr: 16.166 * 60, sr: 17.083 * 60 },
+        khanaparaMorning: { fr: 10.5 * 60, sr: 11.5 * 60 },
+        khanaparaNight: { fr: 23.166 * 60, sr: 24.166 * 60 },
         juwai: { fr: 14.5 * 60, sr: 15.25 * 60 },
         morning: { fr: 10.5 * 60, sr: 11.5 * 60 },
         night: { fr: 23.166 * 60, sr: 24.166 * 60 }
@@ -197,7 +272,7 @@ function isWaitingForVenue(venueId, roundType) {
     const roundTime = roundType === 'fr' ? venueTime.fr : venueTime.sr;
     const waitingStart = roundTime - 10;
     
-    if (venueId === 'night') {
+    if (venueId === 'night' || venueId === 'shillongNight' || venueId === 'khanaparaNight') {
         if (roundType === 'fr') {
             return totalMinutes >= (23 * 60) && totalMinutes < (23 * 60 + 10);
         } else if (roundType === 'sr') {
@@ -215,7 +290,7 @@ let countdownInterval = null;
 
 function startAllCountdowns() {
     if (countdownInterval) clearInterval(countdownInterval);
-    const venues = ['shillong', 'khanapara', 'juwai', 'morning', 'night'];
+    const venues = ['shillong', 'shillongMorning', 'shillongNight', 'khanapara', 'khanaparaMorning', 'khanaparaNight', 'juwai', 'morning', 'night'];
     countdownInterval = setInterval(() => {
         venues.forEach(updateVenueCountdown);
     }, 1000);
@@ -232,7 +307,11 @@ function updateVenueCountdown(venueId) {
     
     const timings = {
         shillong: { fr: 16.25 * 60, sr: 17.166 * 60 },
+        shillongMorning: { fr: 10.5 * 60, sr: 11.5 * 60 },
+        shillongNight: { fr: 23.166 * 60, sr: 24.166 * 60 },
         khanapara: { fr: 16.166 * 60, sr: 17.083 * 60 },
+        khanaparaMorning: { fr: 10.5 * 60, sr: 11.5 * 60 },
+        khanaparaNight: { fr: 23.166 * 60, sr: 24.166 * 60 },
         juwai: { fr: 14.5 * 60, sr: 15.25 * 60 },
         morning: { fr: 10.5 * 60, sr: 11.5 * 60 },
         night: { fr: 23.166 * 60, sr: 24.166 * 60 }
@@ -288,7 +367,7 @@ async function saveLiveResultToPrevious(venue, frResult, srResult, resultDate) {
 }
 
 // ============================================================
-// 🔥 লাইভ রেজাল্ট লোড (ভেন্যু অনুযায়ী ফিল্টার)
+// 🔥 লাইভ রেজাল্ট লোড (সব ভেন্যু সহ)
 // ============================================================
 async function loadTodayResults() {
     try {
@@ -298,26 +377,34 @@ async function loadTodayResults() {
         yesterday.setDate(yesterday.getDate() - 1);
         const yesterdayStr = yesterday.toISOString().split('T')[0];
         
-        const venues = ['shillong', 'khanapara', 'juwai', 'morning'];
+        const venues = ['shillong', 'shillongMorning', 'shillongNight', 'khanapara', 'khanaparaMorning', 'khanaparaNight', 'juwai', 'morning', 'night'];
         const liveData = {};
         
         for (const venue of venues) {
+            const config = venueConfigs[venue];
+            if (!config) continue;
+            
+            let dateToUse = today;
+            if (venue === 'shillongNight' || venue === 'khanaparaNight' || venue === 'night') {
+                dateToUse = nightDate;
+            }
+            
             let { data, error } = await supabaseClient
                 .from('teer_live_results')
                 .select('*')
-                .eq('venue', venueConfigs[venue].venueName)
-                .eq('result_date', today);
+                .eq('venue', config.venueName)
+                .eq('result_date', dateToUse);
                 
             if (!error && data && data.length > 0) {
                 liveData[venue] = { fr: data[0].fr_result || '--', sr: data[0].sr_result || '--' };
                 if (data[0].fr_result !== '--' && data[0].sr_result !== '--') {
-                    await saveLiveResultToPrevious(venueConfigs[venue].venueName, data[0].fr_result, data[0].sr_result, today);
+                    await saveLiveResultToPrevious(config.venueName, data[0].fr_result, data[0].sr_result, dateToUse);
                 }
             } else {
                 const { data: prevData, error: prevError } = await supabaseClient
                     .from('teer_live_results')
                     .select('*')
-                    .eq('venue', venueConfigs[venue].venueName)
+                    .eq('venue', config.venueName)
                     .eq('result_date', yesterdayStr)
                     .limit(1);
                 liveData[venue] = (!prevError && prevData && prevData.length > 0) 
@@ -326,25 +413,10 @@ async function loadTodayResults() {
             }
         }
         
-        const { data: nightData, error: nightError } = await supabaseClient
-            .from('teer_live_results')
-            .select('*')
-            .eq('venue', venueConfigs.night.venueName)
-            .eq('result_date', nightDate);
-            
-        if (!nightError && nightData && nightData.length > 0) {
-            liveData['night'] = { fr: nightData[0].fr_result || '--', sr: nightData[0].sr_result || '--' };
-            if (nightData[0].fr_result !== '--' && nightData[0].sr_result !== '--') {
-                await saveLiveResultToPrevious('Night', nightData[0].fr_result, nightData[0].sr_result, nightDate);
-            }
-        } else {
-            liveData['night'] = { fr: '--', sr: '--' };
-        }
-        
         globalLiveData = liveData;
         renderTodayResults(liveData, today, nightDate);
         
-        // Meta Tags আপডেট করুন - Option 2
+        // Meta Tags আপডেট
         const currentVenue = detectVenueFromPage();
         const venueId = currentVenue.toLowerCase();
         if (liveData[venueId]) {
@@ -363,70 +435,50 @@ async function loadTodayResults() {
 }
 
 // ============================================================
-// 🔥 PAGE DETECT - কোন পেজ তা চিনবে
+// 🔥 RENDER TODAY RESULTS - Page অনুযায়ী
 // ============================================================
-function detectVenueFromPage() {
-    const path = window.location.pathname;
-    
-    if (path.includes('khanapara')) return 'Khanapara';
-    if (path.includes('shillong')) return 'Shillong';
-    if (path.includes('juwai')) return 'Juwai';
-    if (path.includes('morning')) return 'Morning';
-    if (path.includes('night')) return 'Night';
-    return 'Shillong'; // Default
-}
-
-// ============================================================
-// 🔥 DYNAMIC META TAGS - Option 2 (Title Static + Meta Dynamic)
-// ============================================================
-function updateMetaTags(venue, frResult, srResult, date) {
-    const formattedDate = date || getTodayIST();
-    
-    // ===== TITLE - আগের মতো (শুধু Venue পরিবর্তন) =====
-    const title = document.querySelector('title');
-    if (title) {
-        title.textContent = venue + ' Teer Result Today | Live Updates & Predictions';
-    }
-    
-    // ===== META DESCRIPTION - Dynamic =====
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-        metaDesc.content = venue + ' result today - live FR & SR updates. Get expert predictions, house digits & ending digits for ' + venue + ' Teer.';
-    }
-    
-    // ===== META KEYWORDS - Dynamic =====
-    const metaKeywords = document.querySelector('meta[name="keywords"]');
-    if (metaKeywords) {
-        metaKeywords.content = venue + ' Teer Result Today, ' + venue + ' Teer Live Result, ' + venue + ' Teer FR SR Result, ' + venue + ' Teer House Number';
-    }
-    
-    // ===== OG TITLE - Dynamic =====
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) {
-        ogTitle.content = venue + ' Teer Result Today | Live Updates';
-    }
-    
-    // ===== OG DESCRIPTION - Dynamic =====
-    const ogDesc = document.querySelector('meta[property="og:description"]');
-    if (ogDesc) {
-        ogDesc.content = 'Live ' + venue + ' Teer results with expert predictions and common numbers.';
-    }
-}
-
 function renderTodayResults(liveData, todayDate, nightDate) {
-    const venues = [
-        { id: 'shillong', name: 'SHILLONG TEER', time1: '4:15 PM', time2: '5:10 PM', date: todayDate, prevLink: 'shillong-previous.html', commonLink: 'shillong-common.html', commonClass: 'btn-common-small' },
-        { id: 'khanapara', name: 'KHANAPARA TEER', time1: '4:10 PM', time2: '5:05 PM', date: todayDate, prevLink: 'khanapara-previous.html', commonLink: 'khanapara-common.html', commonClass: 'btn-common-small-khanapara' },
-        { id: 'juwai', name: 'JUWAI TEER', time1: '2:30 PM', time2: '3:15 PM', date: todayDate, prevLink: 'juwai-previous.html', commonLink: 'juwai-common.html', commonClass: 'btn-common-small-juwai' },
-        { id: 'morning', name: 'MORNING TEER', time1: '10:30 AM', time2: '11:30 AM', date: todayDate, prevLink: 'morning-previous.html', commonLink: 'morning-common.html', commonClass: 'btn-common-small-morning' },
-        { id: 'night', name: 'NIGHT TEER', time1: '11:10 PM', time2: '12:10 AM', date: nightDate || getNightDate(), prevLink: 'night-previous.html', commonLink: 'night-common.html', commonClass: 'btn-common-small-night' }
-    ];
+    const pageType = detectPageType();
+    let venues = [];
+    
+    if (pageType === 'khanapara') {
+        venues = [
+            { id: 'khanapara', name: 'KHANAPARA TEER', time1: '4:10 PM', time2: '5:05 PM', date: todayDate },
+            { id: 'khanaparaMorning', name: 'KHANAPARA MORNING TEER', time1: '10:30 AM', time2: '11:30 AM', date: todayDate },
+            { id: 'khanaparaNight', name: 'KHANAPARA NIGHT TEER', time1: '11:10 PM', time2: '12:10 AM', date: nightDate || getNightDate() }
+        ];
+    } else if (pageType === 'shillong') {
+        venues = [
+            { id: 'shillong', name: 'SHILLONG TEER', time1: '4:15 PM', time2: '5:10 PM', date: todayDate },
+            { id: 'shillongMorning', name: 'SHILLONG MORNING TEER', time1: '10:30 AM', time2: '11:30 AM', date: todayDate },
+            { id: 'shillongNight', name: 'SHILLONG NIGHT TEER', time1: '11:10 PM', time2: '12:10 AM', date: nightDate || getNightDate() }
+        ];
+    } else if (pageType === 'juwai') {
+        venues = [
+            { id: 'juwai', name: 'JUWAI TEER', time1: '2:30 PM', time2: '3:15 PM', date: todayDate }
+        ];
+    } else if (pageType === 'morning') {
+        venues = [
+            { id: 'morning', name: 'MORNING TEER', time1: '10:30 AM', time2: '11:30 AM', date: todayDate }
+        ];
+    } else if (pageType === 'night') {
+        venues = [
+            { id: 'night', name: 'NIGHT TEER', time1: '11:10 PM', time2: '12:10 AM', date: nightDate || getNightDate() }
+        ];
+    } else {
+        venues = [
+            { id: 'shillong', name: 'SHILLONG TEER', time1: '4:15 PM', time2: '5:10 PM', date: todayDate },
+            { id: 'khanapara', name: 'KHANAPARA TEER', time1: '4:10 PM', time2: '5:05 PM', date: todayDate },
+            { id: 'juwai', name: 'JUWAI TEER', time1: '2:30 PM', time2: '3:15 PM', date: todayDate },
+            { id: 'morning', name: 'MORNING TEER', time1: '10:30 AM', time2: '11:30 AM', date: todayDate },
+            { id: 'night', name: 'NIGHT TEER', time1: '11:10 PM', time2: '12:10 AM', date: nightDate || getNightDate() }
+        ];
+    }
     
     const grid = document.getElementById('resultsGrid');
     if (!grid) return;
     
     let html = '';
-    
     venues.forEach(v => {
         const data = liveData[v.id] || { fr: '--', sr: '--' };
         const hasData = (data.fr !== '--' || data.sr !== '--');
@@ -437,23 +489,28 @@ function renderTodayResults(liveData, todayDate, nightDate) {
         const badgeClass = hasData ? 'live-result-badge' : 'flash-waiting';
         const badgeText = hasData ? '🔴 LIVE' : '⏳ WAITING';
         
+        const config = venueConfigs[v.id];
+        const color = config ? config.colorFr : '#0d47a1';
+        
         html += `
-            <div class="result-card">
+            <div class="result-card" style="border-left-color: ${color};">
                 <div style="background: #0a3d6b; border-radius: 8px; padding: 0.2rem 0.5rem; margin-bottom: 0.4rem; text-align: center; border: 1px solid #ffcc00;">
                     <div style="color: #ffcc00; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.5px;">
                         ⏳ NEXT ROUND IN: 
                         <span id="countdown_${v.id}" style="font-weight: 800; color: #ffffff; background: #000000; padding: 0.05rem 0.5rem; border-radius: 4px; font-size: 0.7rem;">--:--:--</span>
                     </div>
                 </div>
-                <div class="venue-header"><span class="venue-name">🎯 ${v.name}</span></div>
+                <div class="venue-header" style="background: linear-gradient(135deg, ${color}, ${color}dd);">
+                    <span class="venue-name">🎯 ${v.name}</span>
+                </div>
                 <div class="info-row"><span class="date-box">📅 ${v.date}</span><span class="${badgeClass}">${badgeText}</span></div>
                 <div class="timing-dual">
                     <div class="fr-box"><div>FIRST ROUND (${v.time1})</div>${frDisplay}</div>
                     <div class="sr-box"><div>SECOND ROUND (${v.time2})</div>${srDisplay}</div>
                 </div>
                 <div class="card-footer-buttons">
-                    <a href="${v.prevLink}" class="btn-previous-sky">Previous Result</a>
-                    <a href="${v.commonLink}" class="${v.commonClass}">Common Number</a>
+                    <a href="${v.id}-previous.html" class="btn-previous-sky">Previous Result</a>
+                    <a href="${v.id}-common.html" class="btn-common-small">Common Number</a>
                 </div>
             </div>
         `;
@@ -461,6 +518,38 @@ function renderTodayResults(liveData, todayDate, nightDate) {
     
     grid.innerHTML = html;
     setTimeout(startAllCountdowns, 500);
+}
+
+// ============================================================
+// 🔥 DYNAMIC META TAGS - Option 2 (Title Static + Meta Dynamic)
+// ============================================================
+function updateMetaTags(venue, frResult, srResult, date) {
+    const formattedDate = date || getTodayIST();
+    
+    const title = document.querySelector('title');
+    if (title) {
+        title.textContent = venue + ' Teer Result Today | Live Updates & Predictions';
+    }
+    
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+        metaDesc.content = venue + ' result today - live FR & SR updates. Get expert predictions, house digits & ending digits for ' + venue + ' Teer.';
+    }
+    
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords) {
+        metaKeywords.content = venue + ' Teer Result Today, ' + venue + ' Teer Live Result, ' + venue + ' Teer FR SR Result, ' + venue + ' Teer House Number';
+    }
+    
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) {
+        ogTitle.content = venue + ' Teer Result Today | Live Updates';
+    }
+    
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) {
+        ogDesc.content = 'Live ' + venue + ' Teer results with expert predictions and common numbers.';
+    }
 }
 
 // ============================================================
@@ -481,14 +570,25 @@ function renderCommonNumbersFromDB(data) {
     const container = document.getElementById('commonTablesContainer');
     if (!container) return;
     
-    const venues = [
-        { id: 'shillong', name: 'SHILLONG TEER' }, { id: 'khanapara', name: 'KHANAPARA TEER' },
-        { id: 'juwai', name: 'JUWAI TEER' }, { id: 'morning', name: 'MORNING TEER' }, { id: 'night', name: 'NIGHT TEER' }
-    ];
+    const pageType = detectPageType();
+    let venueIds = [];
+    
+    if (pageType === 'khanapara') {
+        venueIds = ['khanapara'];
+    } else if (pageType === 'shillong') {
+        venueIds = ['shillong'];
+    } else if (pageType === 'juwai') {
+        venueIds = ['juwai'];
+    } else if (pageType === 'morning') {
+        venueIds = ['morning'];
+    } else if (pageType === 'night') {
+        venueIds = ['night'];
+    } else {
+        venueIds = ['shillong', 'khanapara', 'juwai', 'morning', 'night'];
+    }
     
     let html = '';
-    venues.forEach(venue => {
-        const v = venue.id;
+    venueIds.forEach(v => {
         const config = venueConfigs[v];
         if (!config) return;
         
@@ -497,7 +597,7 @@ function renderCommonNumbersFromDB(data) {
         
         html += `
             <div class="common-venue-card">
-                <div class="common-venue-title">🎯 ${venue.name} - COMMON NUMBERS</div>
+                <div class="common-venue-title">🎯 ${config.displayName || config.venueName} - COMMON NUMBERS</div>
                 <table class="common-table">
                     <thead><tr><th>Round</th><th>Direct Numbers</th><th>House Digit</th><th>Ending Digit</th></tr></thead>
                     <tbody>
@@ -640,7 +740,7 @@ function subscribeToCommonNumbers() {
 }
 
 // ============================================================
-// 🔥 Real-time Subscription for Live Results (ভেন্যু অনুযায়ী)
+// 🔥 Real-time Subscription for Live Results
 // ============================================================
 function subscribeToLiveResults() {
     return supabaseClient.channel('live-results-changes')
@@ -708,9 +808,8 @@ function closeModals() {
 function showBangla() { alert("বাংলা ভার্সন সক্রিয়। পুরো সাইট বাংলা ও ইংরেজিতে দেখা যাচ্ছে।"); }
 function showEnglish() { alert("English version active. Site is fully bilingual."); }
 
-
 // ============================================================
-// 🔥 VIP SYSTEM (Timer + Ad + Unlock) - Using teer_common_numbers
+// 🔥 VIP SYSTEM (Timer + Ad + Unlock)
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
     const vipBtn = document.getElementById('vipUnlockBtn');
@@ -873,35 +972,28 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================================
-// 🔥 PAGE SPECIFIC FUNCTIONS - ভেন্যু অনুযায়ী আলাদা ডেটা লোড
+// 🔥 PAGE SPECIFIC FUNCTIONS
 // ============================================================
-
-// Shillong Page
 async function loadShillongPageData() {
     await loadPreviousResults('shillong', 6);
 }
 
-// Khanapara Page
 async function loadKhanaparaPageData() {
     await loadPreviousResults('khanapara', 6);
 }
 
-// Juwai Page
 async function loadJuwaiPageData() {
     await loadPreviousResults('juwai', 6);
 }
 
-// Morning Page
 async function loadMorningPageData() {
     await loadPreviousResults('morning', 6);
 }
 
-// Night Page
 async function loadNightPageData() {
     await loadPreviousResults('night', 6);
 }
 
-// Detect which page is loaded and load appropriate data
 document.addEventListener('DOMContentLoaded', function() {
     const path = window.location.pathname;
     
@@ -920,4 +1012,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 console.log('✅ App.js loaded successfully with all features!');
 console.log('📌 Features: Live Results, Previous Results, Common Numbers, Dream Predictor, VIP System, Comments, Countdown, Real-time Updates');
-console.log('🏹 Venues: Shillong, Khanapara, Juwai, Morning, Night');
+console.log('🏹 Venues: Shillong, Shillong Morning, Shillong Night, Khanapara, Khanapara Morning, Khanapara Night, Juwai, Morning, Night');
