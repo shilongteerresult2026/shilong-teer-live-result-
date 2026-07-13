@@ -455,13 +455,14 @@ async function saveLiveResultToPrevious(venue, frResult, srResult, resultDate) {
 }
 
 // ============================================================
-// 🔥 লাইভ রেজাল্ট লোড (সব ভেন্যু সহ)
+// 🔥 লাইভ রেজাল্ট লোড (সব ভেন্যু সহ - আপডেটেড)
 // ============================================================
 let isLoading = false;
 let globalLiveData = {};
+let lastFetchTime = {};
 
-async function loadTodayResults() {
-    if (isLoading) {
+async function loadTodayResults(forceRefresh = false) {
+    if (isLoading && !forceRefresh) {
         console.log('Already loading results...');
         return globalLiveData;
     }
@@ -473,7 +474,10 @@ async function loadTodayResults() {
         const nightDate = getNightDate();
         const yesterday = getYesterdayIST();
         
+        // Get venues for current page
         const venues = getVenuesForCurrentPage();
+        console.log('🔄 Loading results for venues:', venues);
+        
         const liveData = {};
         
         for (const venue of venues) {
@@ -486,6 +490,9 @@ async function loadTodayResults() {
                 dateToUse = nightDate;
             }
             
+            console.log(`📊 Fetching ${venue} for date: ${dateToUse}`);
+            
+            // Try to get from live results first
             let { data, error } = await supabaseClient
                 .from('teer_live_results')
                 .select('*')
@@ -493,33 +500,56 @@ async function loadTodayResults() {
                 .eq('result_date', dateToUse);
                 
             if (!error && data && data.length > 0) {
-                liveData[venue] = { fr: data[0].fr_result || '--', sr: data[0].sr_result || '--' };
+                console.log(`✅ Found live data for ${venue}:`, data[0]);
+                liveData[venue] = { 
+                    fr: data[0].fr_result || '--', 
+                    sr: data[0].sr_result || '--' 
+                };
+                
+                // Auto-save to previous results
                 if (data[0].fr_result !== '--' && data[0].sr_result !== '--') {
                     await saveLiveResultToPrevious(config.venueName, data[0].fr_result, data[0].sr_result, dateToUse);
                 }
             } else {
+                // Try to get from previous results
+                console.log(`⚠️ No live data for ${venue}, checking previous results...`);
                 const { data: prevData, error: prevError } = await supabaseClient
-                    .from('teer_live_results')
+                    .from('teer_previous_results')
                     .select('*')
                     .eq('venue', config.venueName)
-                    .eq('result_date', yesterdayStr)
+                    .eq('result_date', dateToUse)
                     .limit(1);
-                liveData[venue] = (!prevError && prevData && prevData.length > 0) 
-                    ? { fr: prevData[0].fr_result || '--', sr: prevData[0].sr_result || '--' } 
-                    : { fr: '--', sr: '--' };
+                    
+                if (!prevError && prevData && prevData.length > 0) {
+                    console.log(`✅ Found previous data for ${venue}:`, prevData[0]);
+                    liveData[venue] = { 
+                        fr: prevData[0].fr_result || '--', 
+                        sr: prevData[0].sr_result || '--' 
+                    };
+                } else {
+                    console.log(`❌ No data found for ${venue}`);
+                    liveData[venue] = { fr: '--', sr: '--' };
+                }
             }
         }
         
         globalLiveData = liveData;
+        lastFetchTime = {
+            ...lastFetchTime,
+            [getTodayIST()]: Date.now()
+        };
+        
+        // Render results
         renderTodayResults(liveData, today, nightDate);
         
-        // Meta Tags আপডেট
+        // Update meta tags
         const currentVenue = detectVenueFromPage();
         const venueId = currentVenue.toLowerCase();
         if (liveData[venueId]) {
             updateMetaTags(currentVenue, liveData[venueId].fr || '--', liveData[venueId].sr || '--', today);
         }
         
+        // Update selectors
         Object.keys(venueConfigs).forEach(venue => {
             const select = document.getElementById(venueConfigs[venue].selectId);
             if (select) loadPreviousResults(venue, parseInt(select.value));
@@ -542,6 +572,8 @@ async function loadTodayResults() {
 function renderTodayResults(liveData, todayDate, nightDate) {
     const pageType = detectPageType();
     let venues = [];
+    
+    console.log('📄 Rendering for page type:', pageType);
     
     if (pageType === 'khanapara') {
         venues = [
@@ -581,12 +613,19 @@ function renderTodayResults(liveData, todayDate, nightDate) {
     }
     
     const grid = document.getElementById('resultsGrid');
-    if (!grid) return;
+    if (!grid) {
+        console.warn('⚠️ resultsGrid not found on this page');
+        return;
+    }
+    
+    console.log('📊 Rendering venues:', venues.map(v => v.id));
     
     let html = '';
     venues.forEach(v => {
         const data = liveData[v.id] || { fr: '--', sr: '--' };
         const hasData = (data.fr !== '--' || data.sr !== '--');
+        
+        console.log(`📊 ${v.id}: FR=${data.fr}, SR=${data.sr}`);
         
         const frDisplay = isWaitingForVenue(v.id, 'fr') ? `<div class="waiting-number-display">⏳ WAITING</div>` : `<div class="result-number">${data.fr}</div>`;
         const srDisplay = isWaitingForVenue(v.id, 'sr') ? `<div class="waiting-number-display">⏳ WAITING</div>` : `<div class="result-number">${data.sr}</div>`;
@@ -915,28 +954,101 @@ function getHENumbers(n) {
 }
 
 // ============================================================
-// 🔥 রিয়েল-টাইম সাবস্ক্রিপশন
+// 🔥 রিয়েল-টাইম সাবস্ক্রিপশন (আপডেটেড)
 // ============================================================
 function subscribeToCommonNumbers() {
+    console.log('🔄 Subscribing to common numbers...');
+    
     return supabaseClient.channel('common-numbers-changes')
-        .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'teer_common_numbers' }, (payload) => {
-            if (payload.new && payload.new.result_date === getTodayIST()) {
-                globalCommonData = payload.new;
-                renderCommonNumbersFromDB(payload.new);
-            } else {
-                loadCommonNumbers();
+        .on('postgres_changes', 
+            { 
+                event: '*', 
+                schema: 'public', 
+                table: 'teer_common_numbers' 
+            }, 
+            (payload) => {
+                console.log('🔔 Common numbers update received:', payload);
+                
+                const today = getTodayIST();
+                if (payload.new && payload.new.result_date === today) {
+                    globalCommonData = payload.new;
+                    renderCommonNumbersFromDB(payload.new);
+                    showToast('🔄 Common numbers updated!');
+                } else {
+                    loadCommonNumbers();
+                }
             }
-        }).subscribe();
+        )
+        .subscribe((status) => {
+            console.log('📡 Common numbers subscription status:', status);
+        });
 }
 
 function subscribeToLiveResults() {
+    console.log('🔄 Subscribing to live results...');
+    
     return supabaseClient.channel('live-results-changes')
-        .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'teer_live_results' }, async (payload) => {
-            if (payload.new.fr_result !== '--' && payload.new.sr_result !== '--') {
-                await saveLiveResultToPrevious(payload.new.venue, payload.new.fr_result, payload.new.sr_result, payload.new.result_date);
+        .on('postgres_changes', 
+            { 
+                event: '*', 
+                schema: 'public', 
+                table: 'teer_live_results' 
+            }, 
+            async (payload) => {
+                console.log('🔔 Live results update received:', payload);
+                
+                // Check if this venue is on current page
+                const currentVenues = getVenuesForCurrentPage();
+                const venueId = Object.keys(venueConfigs).find(key => 
+                    venueConfigs[key].venueName === payload.new?.venue
+                );
+                
+                if (venueId && currentVenues.includes(venueId)) {
+                    console.log(`✅ Updating UI for ${venueId}`);
+                    
+                    // Save to previous if both results available
+                    if (payload.new?.fr_result !== '--' && payload.new?.sr_result !== '--') {
+                        await saveLiveResultToPrevious(
+                            payload.new.venue, 
+                            payload.new.fr_result, 
+                            payload.new.sr_result, 
+                            payload.new.result_date
+                        );
+                    }
+                    
+                    // Reload results for current page
+                    await loadTodayResults(true);
+                    
+                    // Show toast notification
+                    showToast(`🔄 ${payload.new?.venue} result updated!`);
+                } else {
+                    console.log(`⏭️ Update for ${payload.new?.venue} not on current page, skipping UI update`);
+                }
             }
-            loadTodayResults();
-        }).subscribe();
+        )
+        .subscribe((status) => {
+            console.log('📡 Live results subscription status:', status);
+        });
+}
+
+// ============================================================
+// 🔥 ফোর্স রিফ্রেশ ফাংশন
+// ============================================================
+function forceRefreshResults() {
+    console.log('🔄 Force refreshing results...');
+    showToast('🔄 Refreshing results...');
+    
+    // Clear cache
+    lastFetchTime = {};
+    globalLiveData = {};
+    
+    // Reload
+    loadTodayResults(true).then(() => {
+        showToast('✅ Results refreshed successfully!');
+    }).catch((err) => {
+        console.error('❌ Refresh failed:', err);
+        showToast('❌ Failed to refresh results');
+    });
 }
 
 // ============================================================
@@ -1144,9 +1256,13 @@ function showEnglish() {
 }
 
 // ============================================================
-// 🔥 DOMContentLoaded - সব ফাংশন লোড
+// 🔥 DOMContentLoaded - সব ফাংশন লোড (আপডেটেড)
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('📄 Page loaded:', window.location.pathname);
+    console.log('📄 Page type:', detectPageType());
+    
+    // Load initial data
     loadTodayResults();
     loadCommonNumbers();
     setupAllSelectors();
@@ -1154,9 +1270,11 @@ document.addEventListener('DOMContentLoaded', function() {
     loadTrendingNumbers();
     loadLeaderboard();
     
+    // Real-time subscriptions
     subscribeToCommonNumbers();
     subscribeToLiveResults();
     
+    // Page specific loading
     const path = window.location.pathname;
     if (path.includes('shillong-teer-result.html') || path.includes('shillong-previous.html') || path.includes('shillong-common.html')) {
         loadShillongPageData();
@@ -1168,6 +1286,12 @@ document.addEventListener('DOMContentLoaded', function() {
         loadMorningPageData();
     } else if (path.includes('night-teer-result.html') || path.includes('night-previous.html') || path.includes('night-common.html')) {
         loadNightPageData();
+    }
+    
+    // Add force refresh button if exists
+    const refreshBtn = document.getElementById('refreshResultsBtn');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', forceRefreshResults);
     }
     
     // Dream Predictor
@@ -1207,6 +1331,24 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('click', function(e) { 
         if(e.target.classList.contains('modal')) closeModals(); 
     });
+    
+    // Auto-refresh every 2 minutes
+    setInterval(() => {
+        if (!document.hidden) {
+            console.log('🔄 Auto-refreshing results...');
+            loadTodayResults(true);
+        }
+    }, 120000); // 2 minutes
+});
+
+// ============================================================
+// 🔥 ব্রাউজার ট্যাব ভিসিবিলিটি চেঞ্জ হ্যান্ডলার
+// ============================================================
+document.addEventListener('visibilitychange', function() {
+    if (!document.hidden) {
+        console.log('👁️ Page became visible, refreshing results...');
+        loadTodayResults(true);
+    }
 });
 
 console.log('✅ App.js loaded successfully with all features!');
@@ -1214,3 +1356,4 @@ console.log('📌 Features: Live Results, Previous Results, Common Numbers, Drea
 console.log('🏹 Venues: Shillong, Shillong Morning, Shillong Night, Khanapara, Khanapara Morning, Khanapara Night, Juwai, Juwai Morning, Juwai Night, Morning, Night');
 console.log('🔄 Real-time subscriptions active for live results and common numbers');
 console.log('⏰ Countdown updates every second for all venues');
+console.log('♻️ Auto-refresh every 2 minutes');
