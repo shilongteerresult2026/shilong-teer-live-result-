@@ -94,7 +94,7 @@ const venueConfigs = {
         srTime: '12:10 AM'
     },
     
-    // ===== OTHERS =====
+    // ===== JUWAI =====
     juwai: { 
         tableId: 'resultsTableJuwai', 
         colorFr: '#4a148c', 
@@ -105,6 +105,28 @@ const venueConfigs = {
         frTime: '2:30 PM',
         srTime: '3:15 PM'
     },
+    juwaiMorning: { 
+        tableId: 'resultsTableJuwaiMorning', 
+        colorFr: '#e65100', 
+        colorSr: '#f57c00', 
+        selectId: 'monthSelectJuwaiMorning',
+        venueName: 'Juwai Morning',
+        displayName: 'JUWAI MORNING TEER',
+        frTime: '10:30 AM',
+        srTime: '11:30 AM'
+    },
+    juwaiNight: { 
+        tableId: 'resultsTableJuwaiNight', 
+        colorFr: '#1a237e', 
+        colorSr: '#283593', 
+        selectId: 'monthSelectJuwaiNight',
+        venueName: 'Juwai Night',
+        displayName: 'JUWAI NIGHT TEER',
+        frTime: '9:30 PM',
+        srTime: '10:30 PM'
+    },
+    
+    // ===== OTHERS =====
     morning: { 
         tableId: 'resultsTableMorning', 
         colorFr: '#e65100', 
@@ -128,6 +150,60 @@ const venueConfigs = {
 };
 
 // ============================================================
+// 🔥 CACHE MANAGEMENT
+// ============================================================
+const resultCache = new Map();
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
+function getCachedResult(venueId, date) {
+    const cacheKey = `${venueId}_${date}`;
+    const cached = resultCache.get(cacheKey);
+    if (cached && (Date.now() - cached.timestamp < CACHE_DURATION)) {
+        return cached.data;
+    }
+    return null;
+}
+
+function setCachedResult(venueId, date, data) {
+    const cacheKey = `${venueId}_${date}`;
+    resultCache.set(cacheKey, {
+        data: data,
+        timestamp: Date.now()
+    });
+}
+
+// ============================================================
+// 🔥 TIME PARSING HELPERS
+// ============================================================
+function parseTimeToMinutes(timeStr) {
+    if (!timeStr) return 0;
+    
+    const match = timeStr.match(/(\d+):(\d+)\s*(AM|PM)/i);
+    if (!match) return 0;
+    
+    let [, hours, minutes, period] = match;
+    hours = parseInt(hours);
+    minutes = parseInt(minutes);
+    
+    if (period.toUpperCase() === 'PM' && hours !== 12) hours += 12;
+    if (period.toUpperCase() === 'AM' && hours === 12) hours = 0;
+    
+    return hours * 60 + minutes;
+}
+
+function getVenueTimings(venueId) {
+    const config = venueConfigs[venueId];
+    if (!config) return null;
+    
+    return {
+        fr: parseTimeToMinutes(config.frTime),
+        sr: parseTimeToMinutes(config.srTime),
+        frStr: config.frTime,
+        srStr: config.srTime
+    };
+}
+
+// ============================================================
 // 🔥 PAGE DETECT - কোন পেজ তা চিনবে
 // ============================================================
 function detectVenueFromPage() {
@@ -149,6 +225,189 @@ function detectPageType() {
     if (path.includes('morning')) return 'morning';
     if (path.includes('night')) return 'night';
     return 'home';
+}
+
+function getVenuesForCurrentPage() {
+    const pageType = detectPageType();
+    
+    const venueMap = {
+        khanapara: ['khanapara', 'khanaparaMorning', 'khanaparaNight'],
+        shillong: ['shillong', 'shillongMorning', 'shillongNight'],
+        juwai: ['juwai', 'juwaiMorning', 'juwaiNight'],
+        morning: ['morning'],
+        night: ['night'],
+        home: ['shillong', 'khanapara', 'juwai', 'morning', 'night'],
+        default: ['shillong', 'khanapara', 'juwai', 'morning', 'night']
+    };
+    
+    const ids = venueMap[pageType] || venueMap.default;
+    return ids.filter(id => venueConfigs[id]);
+}
+
+// ============================================================
+// 🔥 IST TIME ZONE FIX
+// ============================================================
+function getTodayIST() {
+    try {
+        return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(new Date());
+    } catch (e) {
+        const now = new Date();
+        const istOffset = 5.5 * 60 * 60 * 1000;
+        return new Date(now.getTime() + istOffset).toISOString().split('T')[0];
+    }
+}
+
+function getNightDate() {
+    const today = getTodayIST();
+    const dateObj = new Date(today);
+    dateObj.setDate(dateObj.getDate() - 1);
+    return dateObj.toISOString().split('T')[0];
+}
+
+function getYesterdayIST() {
+    const date = new Date(getTodayIST());
+    date.setDate(date.getDate() - 1);
+    return date.toISOString().split('T')[0];
+}
+
+// ============================================================
+// 🔥 WAITING চেক - সঠিক সময় অনুযায়ী (আপডেটেড)
+// ============================================================
+function isWaitingForVenue(venueId, roundType) {
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    
+    const timings = getVenueTimings(venueId);
+    if (!timings) return false;
+    
+    const roundTime = roundType === 'fr' ? timings.fr : timings.sr;
+    const isNight = venueId.includes('Night') || venueId === 'night';
+    
+    let targetTime = roundTime;
+    if (isNight && roundTime < currentMinutes && roundTime < 180) {
+        targetTime = roundTime + 1440;
+    }
+    
+    const waitingStart = targetTime - 10;
+    const waitingEnd = targetTime + 5;
+    
+    return currentMinutes >= waitingStart && currentMinutes < waitingEnd;
+}
+
+// ============================================================
+// ⏳ কাউন্টডাউন (আপডেটেড)
+// ============================================================
+let countdownInterval = null;
+let countdownVenues = [];
+
+function startAllCountdowns() {
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+    }
+    
+    countdownVenues = getVenuesForCurrentPage();
+    
+    if (countdownVenues.length === 0) {
+        countdownVenues = Object.keys(venueConfigs);
+    }
+    
+    // Immediate update
+    countdownVenues.forEach(updateVenueCountdown);
+    
+    // Update every second for smooth countdown
+    countdownInterval = setInterval(() => {
+        countdownVenues.forEach(updateVenueCountdown);
+    }, 1000);
+}
+
+function updateVenueCountdown(venueId) {
+    const el = document.getElementById(`countdown_${venueId}`);
+    if (!el) return;
+    
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    
+    const timings = getVenueTimings(venueId);
+    if (!timings) {
+        el.textContent = '--:--:--';
+        return;
+    }
+    
+    const isNight = venueId.includes('Night') || venueId === 'night';
+    let frTime = timings.fr;
+    let srTime = timings.sr;
+    
+    if (isNight) {
+        if (frTime < currentMinutes && frTime < 180) frTime += 1440;
+        if (srTime < currentMinutes && srTime < 180) srTime += 1440;
+    }
+    
+    let nextTime = null;
+    if (currentMinutes < frTime) {
+        nextTime = frTime;
+    } else if (currentMinutes < srTime) {
+        nextTime = srTime;
+    } else {
+        // Both rounds completed - show next day's FR
+        nextTime = frTime + 1440;
+    }
+    
+    let diff = nextTime - currentMinutes;
+    if (diff < 0) diff += 1440;
+    
+    const hrs = Math.floor(diff / 60);
+    const mins = Math.floor(diff % 60);
+    const secs = Math.floor((diff % 1) * 60) || 0;
+    
+    el.textContent = `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    
+    // Add urgency class if less than 30 minutes
+    if (diff < 30) {
+        el.style.color = '#FF5722';
+        el.style.fontWeight = '700';
+    } else {
+        el.style.color = '#ffffff';
+        el.style.fontWeight = '800';
+    }
+}
+
+// ============================================================
+// 🔥 অটো-সেভ লাইভ রেজাল্ট টু প্রিভিয়াস রেজাল্ট
+// ============================================================
+async function saveLiveResultToPrevious(venue, frResult, srResult, resultDate) {
+    if (!frResult || !srResult || frResult === '--' || srResult === '--') return;
+
+    try {
+        const { data: existing, error: checkError } = await supabaseClient
+            .from('teer_previous_results')
+            .select('*')
+            .eq('venue', venue)
+            .eq('result_date', resultDate)
+            .limit(1);
+
+        if (checkError) return;
+
+        if (existing && existing.length > 0) {
+            await supabaseClient
+                .from('teer_previous_results')
+                .update({ fr_result: frResult, sr_result: srResult, updated_at: new Date().toISOString() })
+                .eq('id', existing[0].id);
+        } else {
+            await supabaseClient
+                .from('teer_previous_results')
+                .insert({ 
+                    venue, 
+                    result_date: resultDate, 
+                    fr_result: frResult, 
+                    sr_result: srResult, 
+                    created_at: new Date().toISOString(), 
+                    updated_at: new Date().toISOString() 
+                });
+        }
+    } catch (err) {
+        console.error(`❌ Error saving ${venue} previous result:`, err);
+    }
 }
 
 // ============================================================
@@ -223,161 +482,25 @@ function setupAllSelectors() {
 }
 
 // ============================================================
-// 🔥 IST TIME ZONE FIX
+// 🔥 লাইভ রেজাল্ট লোড (সব ভেন্যু সহ - আপডেটেড)
 // ============================================================
-function getTodayIST() {
-    try {
-        return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(new Date());
-    } catch (e) {
-        const now = new Date();
-        const istOffset = 5.5 * 60 * 60 * 1000;
-        return new Date(now.getTime() + istOffset).toISOString().split('T')[0];
-    }
-}
+let isLoading = false;
+let globalLiveData = {};
 
-// ============================================================
-// 🔥 NIGHT TEER - গতকালের তারিখ দেখাবে
-// ============================================================
-function getNightDate() {
-    const today = getTodayIST();
-    const dateObj = new Date(today);
-    dateObj.setDate(dateObj.getDate() - 1);
-    return dateObj.toISOString().split('T')[0];
-}
-
-// ============================================================
-// 🔥 WAITING চেক - সঠিক সময় অনুযায়ী
-// ============================================================
-function isWaitingForVenue(venueId, roundType) {
-    const now = new Date();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const totalMinutes = hours * 60 + minutes;
-    
-    const timings = {
-        shillong: { fr: 16.25 * 60, sr: 17.166 * 60 },
-        shillongMorning: { fr: 10.5 * 60, sr: 11.5 * 60 },
-        shillongNight: { fr: 23.166 * 60, sr: 24.166 * 60 },
-        khanapara: { fr: 16.166 * 60, sr: 17.083 * 60 },
-        khanaparaMorning: { fr: 10.5 * 60, sr: 11.5 * 60 },
-        khanaparaNight: { fr: 23.166 * 60, sr: 24.166 * 60 },
-        juwai: { fr: 14.5 * 60, sr: 15.25 * 60 },
-        morning: { fr: 10.5 * 60, sr: 11.5 * 60 },
-        night: { fr: 23.166 * 60, sr: 24.166 * 60 }
-    };
-    
-    const venueTime = timings[venueId];
-    if (!venueTime) return false;
-    
-    const roundTime = roundType === 'fr' ? venueTime.fr : venueTime.sr;
-    const waitingStart = roundTime - 10;
-    
-    if (venueId === 'night' || venueId === 'shillongNight' || venueId === 'khanaparaNight') {
-        if (roundType === 'fr') {
-            return totalMinutes >= (23 * 60) && totalMinutes < (23 * 60 + 10);
-        } else if (roundType === 'sr') {
-            return totalMinutes >= 0 && totalMinutes < 10;
-        }
-    }
-    
-    return totalMinutes >= waitingStart && totalMinutes < roundTime;
-}
-
-// ============================================================
-// ⏳ কাউন্টডাউন
-// ============================================================
-let countdownInterval = null;
-
-function startAllCountdowns() {
-    if (countdownInterval) clearInterval(countdownInterval);
-    const venues = ['shillong', 'shillongMorning', 'shillongNight', 'khanapara', 'khanaparaMorning', 'khanaparaNight', 'juwai', 'morning', 'night'];
-    countdownInterval = setInterval(() => {
-        venues.forEach(updateVenueCountdown);
-    }, 1000);
-}
-
-function updateVenueCountdown(venueId) {
-    const el = document.getElementById(`countdown_${venueId}`);
-    if (!el) return;
-    
-    const now = new Date();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const totalMinutes = hours * 60 + minutes;
-    
-    const timings = {
-        shillong: { fr: 16.25 * 60, sr: 17.166 * 60 },
-        shillongMorning: { fr: 10.5 * 60, sr: 11.5 * 60 },
-        shillongNight: { fr: 23.166 * 60, sr: 24.166 * 60 },
-        khanapara: { fr: 16.166 * 60, sr: 17.083 * 60 },
-        khanaparaMorning: { fr: 10.5 * 60, sr: 11.5 * 60 },
-        khanaparaNight: { fr: 23.166 * 60, sr: 24.166 * 60 },
-        juwai: { fr: 14.5 * 60, sr: 15.25 * 60 },
-        morning: { fr: 10.5 * 60, sr: 11.5 * 60 },
-        night: { fr: 23.166 * 60, sr: 24.166 * 60 }
-    };
-    
-    const venueTimes = timings[venueId];
-    if (!venueTimes) return;
-    
-    let nextTime = null;
-    if (totalMinutes < venueTimes.fr) nextTime = venueTimes.fr;
-    else if (totalMinutes < venueTimes.sr) nextTime = venueTimes.sr;
-    else nextTime = venueTimes.fr + (24 * 60);
-    
-    let diff = nextTime - totalMinutes;
-    if (diff < 0) diff += 24 * 60;
-    
-    const hrs = Math.floor(diff / 60);
-    const mins = Math.floor(diff % 60);
-    const secs = Math.floor((diff % 1) * 60);
-    
-    el.textContent = `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-}
-
-// ============================================================
-// 🔥 অটো-সেভ লাইভ রেজাল্ট টু প্রিভিয়াস রেজাল্ট
-// ============================================================
-async function saveLiveResultToPrevious(venue, frResult, srResult, resultDate) {
-    if (!frResult || !srResult || frResult === '--' || srResult === '--') return;
-
-    try {
-        const { data: existing, error: checkError } = await supabaseClient
-            .from('teer_previous_results')
-            .select('*')
-            .eq('venue', venue)
-            .eq('result_date', resultDate)
-            .limit(1);
-
-        if (checkError) return;
-
-        if (existing && existing.length > 0) {
-            await supabaseClient
-                .from('teer_previous_results')
-                .update({ fr_result: frResult, sr_result: srResult, updated_at: new Date().toISOString() })
-                .eq('id', existing[0].id);
-        } else {
-            await supabaseClient
-                .from('teer_previous_results')
-                .insert({ venue, result_date: resultDate, fr_result: frResult, sr_result: srResult, created_at: new Date().toISOString(), updated_at: new Date().toISOString() });
-        }
-    } catch (err) {
-        console.error(`❌ Error saving ${venue} previous result:`, err);
-    }
-}
-
-// ============================================================
-// 🔥 লাইভ রেজাল্ট লোড (সব ভেন্যু সহ)
-// ============================================================
 async function loadTodayResults() {
+    if (isLoading) {
+        console.log('Already loading results...');
+        return globalLiveData;
+    }
+    
     try {
+        isLoading = true;
+        
         const today = getTodayIST();
         const nightDate = getNightDate();
-        const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1);
-        const yesterdayStr = yesterday.toISOString().split('T')[0];
+        const yesterday = getYesterdayIST();
         
-        const venues = ['shillong', 'shillongMorning', 'shillongNight', 'khanapara', 'khanaparaMorning', 'khanaparaNight', 'juwai', 'morning', 'night'];
+        const venues = getVenuesForCurrentPage();
         const liveData = {};
         
         for (const venue of venues) {
@@ -385,8 +508,16 @@ async function loadTodayResults() {
             if (!config) continue;
             
             let dateToUse = today;
-            if (venue === 'shillongNight' || venue === 'khanaparaNight' || venue === 'night') {
+            if (venue === 'shillongNight' || venue === 'khanaparaNight' || 
+                venue === 'juwaiNight' || venue === 'night') {
                 dateToUse = nightDate;
+            }
+            
+            // Check cache first
+            const cached = getCachedResult(venue, dateToUse);
+            if (cached) {
+                liveData[venue] = cached;
+                continue;
             }
             
             let { data, error } = await supabaseClient
@@ -396,17 +527,25 @@ async function loadTodayResults() {
                 .eq('result_date', dateToUse);
                 
             if (!error && data && data.length > 0) {
-                liveData[venue] = { fr: data[0].fr_result || '--', sr: data[0].sr_result || '--' };
+                const result = { 
+                    fr: data[0].fr_result || '--', 
+                    sr: data[0].sr_result || '--' 
+                };
+                liveData[venue] = result;
+                setCachedResult(venue, dateToUse, result);
+                
                 if (data[0].fr_result !== '--' && data[0].sr_result !== '--') {
                     await saveLiveResultToPrevious(config.venueName, data[0].fr_result, data[0].sr_result, dateToUse);
                 }
             } else {
+                // Try to get from previous results
                 const { data: prevData, error: prevError } = await supabaseClient
-                    .from('teer_live_results')
+                    .from('teer_previous_results')
                     .select('*')
                     .eq('venue', config.venueName)
-                    .eq('result_date', yesterdayStr)
+                    .eq('result_date', dateToUse)
                     .limit(1);
+                    
                 liveData[venue] = (!prevError && prevData && prevData.length > 0) 
                     ? { fr: prevData[0].fr_result || '--', sr: prevData[0].sr_result || '--' } 
                     : { fr: '--', sr: '--' };
@@ -423,19 +562,25 @@ async function loadTodayResults() {
             updateMetaTags(currentVenue, liveData[venueId].fr || '--', liveData[venueId].sr || '--', today);
         }
         
+        // Update selectors
         Object.keys(venueConfigs).forEach(venue => {
             const select = document.getElementById(venueConfigs[venue].selectId);
             if (select) loadPreviousResults(venue, parseInt(select.value));
         });
         
+        return liveData;
+        
     } catch(err) {
         console.error('❌ Error loading live results:', err);
         renderTodayResults({}, getTodayIST(), getNightDate());
+        return null;
+    } finally {
+        isLoading = false;
     }
 }
 
 // ============================================================
-// 🔥 RENDER TODAY RESULTS - Page অনুযায়ী
+// 🔥 RENDER TODAY RESULTS - Page অনুযায়ী (আপডেটেড)
 // ============================================================
 function renderTodayResults(liveData, todayDate, nightDate) {
     const pageType = detectPageType();
@@ -455,7 +600,9 @@ function renderTodayResults(liveData, todayDate, nightDate) {
         ];
     } else if (pageType === 'juwai') {
         venues = [
-            { id: 'juwai', name: 'JUWAI TEER', time1: '2:30 PM', time2: '3:15 PM', date: todayDate }
+            { id: 'juwai', name: 'JUWAI TEER', time1: '2:30 PM', time2: '3:15 PM', date: todayDate },
+            { id: 'juwaiMorning', name: 'JUWAI MORNING TEER', time1: '10:30 AM', time2: '11:30 AM', date: todayDate },
+            { id: 'juwaiNight', name: 'JUWAI NIGHT TEER', time1: '9:30 PM', time2: '10:30 PM', date: nightDate || getNightDate() }
         ];
     } else if (pageType === 'morning') {
         venues = [
@@ -521,7 +668,7 @@ function renderTodayResults(liveData, todayDate, nightDate) {
 }
 
 // ============================================================
-// 🔥 DYNAMIC META TAGS - Option 2 (Title Static + Meta Dynamic)
+// 🔥 DYNAMIC META TAGS
 // ============================================================
 function updateMetaTags(venue, frResult, srResult, date) {
     const formattedDate = date || getTodayIST();
@@ -553,14 +700,25 @@ function updateMetaTags(venue, frResult, srResult, date) {
 }
 
 // ============================================================
-// 🔥 কমন নাম্বার (ভেন্যু অনুযায়ী)
+// 🔥 কমন নাম্বার (ভেন্যু অনুযায়ী - আপডেটেড)
 // ============================================================
+let globalCommonData = null;
+
 async function loadCommonNumbers() {
     try {
         const today = getTodayIST();
-        const { data, error } = await supabaseClient.from('teer_common_numbers').select('*').eq('result_date', today).limit(1);
-        if (!error && data && data.length > 0) renderCommonNumbersFromDB(data[0]);
-        else renderCommonNumbers();
+        const { data, error } = await supabaseClient
+            .from('teer_common_numbers')
+            .select('*')
+            .eq('result_date', today)
+            .limit(1);
+            
+        if (!error && data && data.length > 0) {
+            globalCommonData = data[0];
+            renderCommonNumbersFromDB(data[0]);
+        } else {
+            renderCommonNumbers();
+        }
     } catch(err) {
         renderCommonNumbers();
     }
@@ -627,6 +785,10 @@ function renderCommonNumbers() {
         khanapara_sr_direct: '64, 91', khanapara_sr_house: '6, 9', khanapara_sr_ending: '4, 1',
         juwai_fr_direct: '52, 77', juwai_fr_house: '5, 7', juwai_fr_ending: '2, 1',
         juwai_sr_direct: '88, 43', juwai_sr_house: '8, 4', juwai_sr_ending: '8, 3',
+        juwaiMorning_fr_direct: '52, 77', juwaiMorning_fr_house: '5, 7', juwaiMorning_fr_ending: '2, 1',
+        juwaiMorning_sr_direct: '88, 43', juwaiMorning_sr_house: '8, 4', juwaiMorning_sr_ending: '8, 3',
+        juwaiNight_fr_direct: '52, 77', juwaiNight_fr_house: '5, 7', juwaiNight_fr_ending: '2, 1',
+        juwaiNight_sr_direct: '88, 43', juwaiNight_sr_house: '8, 4', juwaiNight_sr_ending: '8, 3',
         morning_fr_direct: '52, 77', morning_fr_house: '5, 7', morning_fr_ending: '2, 1',
         morning_sr_direct: '88, 43', morning_sr_house: '8, 4', morning_sr_ending: '8, 3',
         night_fr_direct: '52, 77', night_fr_house: '5, 7', night_fr_ending: '2, 1',
@@ -634,20 +796,41 @@ function renderCommonNumbers() {
     });
 }
 
+// ============================================================
+// 🔥 TRENDING & LEADERBOARD
+// ============================================================
 function loadTrendingNumbers() {
     const grid = document.getElementById('trendingGrid');
     if (!grid) return;
-    const numbers = [ { num: '68', count: 5, hot: true }, { num: '47', count: 4, hot: true }, { num: '86', count: 4, hot: true }, { num: '70', count: 3, hot: false }, { num: '31', count: 3, hot: false }, { num: '20', count: 3, hot: false } ];
-    grid.innerHTML = numbers.map(n => `<div class="trending-item"><div class="t-number">${n.num}</div><div class="t-count">${n.count} বার</div>${n.hot ? '<div class="t-hot">🔥 হট</div>' : ''}</div>`).join('');
+    const numbers = [ 
+        { num: '68', count: 5, hot: true }, 
+        { num: '47', count: 4, hot: true }, 
+        { num: '86', count: 4, hot: true }, 
+        { num: '70', count: 3, hot: false }, 
+        { num: '31', count: 3, hot: false }, 
+        { num: '20', count: 3, hot: false } 
+    ];
+    grid.innerHTML = numbers.map(n => 
+        `<div class="trending-item"><div class="t-number">${n.num}</div><div class="t-count">${n.count} বার</div>${n.hot ? '<div class="t-hot">🔥 হট</div>' : ''}</div>`
+    ).join('');
 }
 
 function loadLeaderboard() {
     const tbody = document.getElementById('leaderboardBody');
     if (!tbody) return;
-    const users = [ { name: 'Rahul Das', correct: 47, total: 50, rate: 94 }, { name: 'Suman Mistry', correct: 43, total: 48, rate: 89 }, { name: 'Riya Sen', correct: 41, total: 47, rate: 87 } ];
-    tbody.innerHTML = users.map((u, i) => `<tr><td class="rank-${i+1}">${i+1}</td><td>${u.name}</td><td>${u.correct}</td><td>${u.total}</td><td>${u.rate}%</td></tr>`).join('');
+    const users = [ 
+        { name: 'Rahul Das', correct: 47, total: 50, rate: 94 }, 
+        { name: 'Suman Mistry', correct: 43, total: 48, rate: 89 }, 
+        { name: 'Riya Sen', correct: 41, total: 47, rate: 87 } 
+    ];
+    tbody.innerHTML = users.map((u, i) => 
+        `<tr><td class="rank-${i+1}">${i+1}</td><td>${u.name}</td><td>${u.correct}</td><td>${u.total}</td><td>${u.rate}%</td></tr>`
+    ).join('');
 }
 
+// ============================================================
+// 🔥 SOCIAL SHARE FUNCTIONS
+// ============================================================
 function showToast(message) {
     const toast = document.createElement('div');
     toast.className = 'toast-notification';
@@ -660,12 +843,31 @@ function showToast(message) {
     }, 3000);
 }
 
-function shareOnFacebook() { window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank', 'width=600,height=400'); }
-function shareOnWhatsApp() { window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(document.title)}%20-%20${encodeURIComponent(window.location.href)}`, '_blank'); }
-function shareOnTwitter() { window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(document.title)}&url=${encodeURIComponent(window.location.href)}`, '_blank', 'width=600,height=400'); }
-function shareOnTelegram() { window.open(`https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(document.title)}`, '_blank'); }
-function copyLink() { navigator.clipboard.writeText(window.location.href).then(() => showToast('✅ লিংক কপি হয়েছে!')).catch(() => showToast('❌ কপি করতে ব্যর্থ!')); }
+function shareOnFacebook() { 
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank', 'width=600,height=400'); 
+}
 
+function shareOnWhatsApp() { 
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(document.title)}%20-%20${encodeURIComponent(window.location.href)}`, '_blank'); 
+}
+
+function shareOnTwitter() { 
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(document.title)}&url=${encodeURIComponent(window.location.href)}`, '_blank', 'width=600,height=400'); 
+}
+
+function shareOnTelegram() { 
+    window.open(`https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(document.title)}`, '_blank'); 
+}
+
+function copyLink() { 
+    navigator.clipboard.writeText(window.location.href)
+        .then(() => showToast('✅ লিংক কপি হয়েছে!'))
+        .catch(() => showToast('❌ কপি করতে ব্যর্থ!')); 
+}
+
+// ============================================================
+// 🔥 COMMENT SYSTEM
+// ============================================================
 function addComment() {
     const nameInput = document.getElementById('commentName');
     const textInput = document.getElementById('commentInput');
@@ -676,7 +878,14 @@ function addComment() {
     const list = document.getElementById('commentList');
     const item = document.createElement('div');
     item.className = 'comment-item';
-    item.innerHTML = `<div class="c-avatar">${name.charAt(0).toUpperCase()}</div><div class="c-body"><div class="c-name">${name}</div><div class="c-text">${text}</div><div class="c-time">${new Date().toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' })}</div></div>`;
+    item.innerHTML = `
+        <div class="c-avatar">${name.charAt(0).toUpperCase()}</div>
+        <div class="c-body">
+            <div class="c-name">${name}</div>
+            <div class="c-text">${text}</div>
+            <div class="c-time">${new Date().toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' })}</div>
+        </div>
+    `;
     list.insertBefore(item, list.firstChild);
     textInput.value = '';
     showToast('✅ আপনার মন্তব্য পোস্ট হয়েছে!');
@@ -685,12 +894,19 @@ function addComment() {
 function subscribeNewsletter() {
     const email = document.getElementById('newsletterEmail').value.trim();
     const msg = document.getElementById('newsletterMsg');
-    if (!email || !email.includes('@')) { msg.innerHTML = '❌ দয়া করে সঠিক ইমেইল দিন!'; msg.style.color = '#cc0000'; return; }
+    if (!email || !email.includes('@')) { 
+        msg.innerHTML = '❌ দয়া করে সঠিক ইমেইল দিন!'; 
+        msg.style.color = '#cc0000'; 
+        return; 
+    }
     msg.innerHTML = '✅ সাবস্ক্রাইব সম্পূর্ণ! আমরা শীঘ্রই আপডেট পাঠাব।';
     msg.style.color = '#cc0000';
     document.getElementById('newsletterEmail').value = '';
 }
 
+// ============================================================
+// 🔥 DREAM PREDICTOR
+// ============================================================
 const dreamChartData = [
     { dream: "Snake / সাপ", direct: "05, 33, 77", house: "7", ending: "1" }, 
     { dream: "Tiger / বাঘ", direct: "28, 44, 66", house: "3", ending: "9" },
@@ -705,15 +921,21 @@ const dreamChartData = [
 function renderDreamChart() { 
     const tbody = document.getElementById('dreamChartBody');
     if (!tbody) return;
-    tbody.innerHTML = dreamChartData.map(item => `<tr><td style="padding:10px;"><strong>${item.dream}</strong></td><td style="padding:10px;">${item.direct}</td><td style="padding:10px;">${item.house}</td><td style="padding:10px;">${item.ending}</td></tr>`).join('');
+    tbody.innerHTML = dreamChartData.map(item => 
+        `<tr><td style="padding:10px;"><strong>${item.dream}</strong></td><td style="padding:10px;">${item.direct}</td><td style="padding:10px;">${item.house}</td><td style="padding:10px;">${item.ending}</td></tr>`
+    ).join('');
 }
 
 function dreamToNum(t) { 
     if(!t) return 24; 
-    let m = { "snake":5, "tiger":28, "lion":32, "elephant":47, "horse":19, "dog":24, "cat":18, "water":2, "সাপ":5, "বাঘ":28, "সিংহ":32, "হাতি":47, "ঘোড়া":19, "কুকুর":24, "বিড়াল":18, "পানি":2 }; 
+    const m = { 
+        "snake":5, "tiger":28, "lion":32, "elephant":47, "horse":19, "dog":24, "cat":18, "water":2,
+        "সাপ":5, "বাঘ":28, "সিংহ":32, "হাতি":47, "ঘোড়া":19, "কুকুর":24, "বিড়াল":18, "পানি":2 
+    }; 
     let l = t.toLowerCase(); 
     for(let [k,v] of Object.entries(m)) if(l.includes(k)) return v; 
-    let h=0; for(let i=0;i<l.length;i++) h=((h<<5)-h)+l.charCodeAt(i); 
+    let h=0; 
+    for(let i=0;i<l.length;i++) h=((h<<5)-h)+l.charCodeAt(i); 
     return Math.abs(h)%100||24; 
 }
 
@@ -725,23 +947,21 @@ function getHENumbers(n) {
     }; 
 }
 
-let globalLiveData = {};
-let globalCommonData = null;
-
 // ============================================================
-// 🔥 Real-time Subscription for Common Numbers
+// 🔥 REAL-TIME SUBSCRIPTIONS
 // ============================================================
 function subscribeToCommonNumbers() {
     return supabaseClient.channel('common-numbers-changes')
         .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'teer_common_numbers' }, (payload) => {
-            if (payload.new && payload.new.result_date === getTodayIST()) renderCommonNumbersFromDB(payload.new);
-            else loadCommonNumbers();
+            if (payload.new && payload.new.result_date === getTodayIST()) {
+                globalCommonData = payload.new;
+                renderCommonNumbersFromDB(payload.new);
+            } else {
+                loadCommonNumbers();
+            }
         }).subscribe();
 }
 
-// ============================================================
-// 🔥 Real-time Subscription for Live Results
-// ============================================================
 function subscribeToLiveResults() {
     return supabaseClient.channel('live-results-changes')
         .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'teer_live_results' }, async (payload) => {
@@ -751,62 +971,6 @@ function subscribeToLiveResults() {
             loadTodayResults();
         }).subscribe();
 }
-
-// ============================================================
-// 🔥 DOMContentLoaded - সব ফাংশন লোড
-// ============================================================
-document.addEventListener('DOMContentLoaded', function() {
-    loadTodayResults();
-    loadCommonNumbers();
-    subscribeToCommonNumbers();
-    subscribeToLiveResults();
-    setupAllSelectors();
-    renderDreamChart();
-    loadTrendingNumbers();
-    loadLeaderboard();
-    
-    // Dream Predictor
-    const predictBtn = document.getElementById('predictDreamBtn');
-    if(predictBtn) {
-        predictBtn.addEventListener('click', function() {
-            let inp = document.getElementById('dreamInput').value.trim();
-            if(!inp) { alert("Enter dream word"); return; }
-            let num = dreamToNum(inp);
-            let he = getHENumbers(num);
-            document.getElementById('dreamDisplayText').innerHTML = `💭 Dream: <strong>${inp}</strong> → Number: <strong>${num}</strong>`;
-            document.getElementById('houseDigit1').innerText = he.house[0]; 
-            document.getElementById('houseDigit2').innerText = he.house[1];
-            document.getElementById('endingDigit1').innerText = he.ending[0]; 
-            document.getElementById('endingDigit2').innerText = he.ending[1];
-        });
-    }
-    
-    // FAQ Toggle
-    document.querySelectorAll('.faq-question').forEach(q => {
-        q.addEventListener('click', function() {
-            let a = this.nextElementSibling;
-            if (a) {
-                a.classList.toggle('show');
-                this.querySelector('.faq-icon').innerHTML = a.classList.contains('show') ? '−' : '+';
-            }
-        });
-    });
-    
-    // Modal Close
-    document.getElementById('closeLiveModalBtn')?.addEventListener('click', closeModals);
-    document.getElementById('closePrevModalBtn')?.addEventListener('click', closeModals);
-    window.addEventListener('click', function(e) { if(e.target.classList.contains('modal')) closeModals(); });
-});
-
-function closeModals() {
-    const lm = document.getElementById('liveModalWin');
-    const pm = document.getElementById('prevModalWin');
-    if (lm) lm.style.display = 'none';
-    if (pm) pm.style.display = 'none';
-}
-
-function showBangla() { alert("বাংলা ভার্সন সক্রিয়। পুরো সাইট বাংলা ও ইংরেজিতে দেখা যাচ্ছে।"); }
-function showEnglish() { alert("English version active. Site is fully bilingual."); }
 
 // ============================================================
 // 🔥 VIP SYSTEM (Timer + Ad + Unlock)
@@ -994,9 +1158,24 @@ async function loadNightPageData() {
     await loadPreviousResults('night', 6);
 }
 
+// ============================================================
+// 🔥 DOMContentLoaded - সব ফাংশন লোড
+// ============================================================
 document.addEventListener('DOMContentLoaded', function() {
-    const path = window.location.pathname;
+    // Load initial data
+    loadTodayResults();
+    loadCommonNumbers();
+    setupAllSelectors();
+    renderDreamChart();
+    loadTrendingNumbers();
+    loadLeaderboard();
     
+    // Real-time subscriptions
+    subscribeToCommonNumbers();
+    subscribeToLiveResults();
+    
+    // Page specific loading
+    const path = window.location.pathname;
     if (path.includes('shillong-teer-result.html') || path.includes('shillong-previous.html') || path.includes('shillong-common.html')) {
         loadShillongPageData();
     } else if (path.includes('khanapara-teer-result.html') || path.includes('khanapara-previous.html') || path.includes('khanapara-common.html')) {
@@ -1008,8 +1187,63 @@ document.addEventListener('DOMContentLoaded', function() {
     } else if (path.includes('night-teer-result.html') || path.includes('night-previous.html') || path.includes('night-common.html')) {
         loadNightPageData();
     }
+    
+    // Dream Predictor
+    const predictBtn = document.getElementById('predictDreamBtn');
+    if(predictBtn) {
+        predictBtn.addEventListener('click', function() {
+            let inp = document.getElementById('dreamInput').value.trim();
+            if(!inp) { 
+                showToast('❌ দয়া করে একটি স্বপ্নের শব্দ লিখুন!');
+                return; 
+            }
+            let num = dreamToNum(inp);
+            let he = getHENumbers(num);
+            document.getElementById('dreamDisplayText').innerHTML = `💭 Dream: <strong>${inp}</strong> → Number: <strong>${num}</strong>`;
+            document.getElementById('houseDigit1').innerText = he.house[0]; 
+            document.getElementById('houseDigit2').innerText = he.house[1];
+            document.getElementById('endingDigit1').innerText = he.ending[0]; 
+            document.getElementById('endingDigit2').innerText = he.ending[1];
+            showToast('✅ স্বপ্নের নাম্বার তৈরি হয়েছে!');
+        });
+    }
+    
+    // FAQ Toggle
+    document.querySelectorAll('.faq-question').forEach(q => {
+        q.addEventListener('click', function() {
+            let a = this.nextElementSibling;
+            if (a) {
+                a.classList.toggle('show');
+                this.querySelector('.faq-icon').innerHTML = a.classList.contains('show') ? '−' : '+';
+            }
+        });
+    });
+    
+    // Modal Close
+    document.getElementById('closeLiveModalBtn')?.addEventListener('click', closeModals);
+    document.getElementById('closePrevModalBtn')?.addEventListener('click', closeModals);
+    window.addEventListener('click', function(e) { 
+        if(e.target.classList.contains('modal')) closeModals(); 
+    });
 });
+
+function closeModals() {
+    const lm = document.getElementById('liveModalWin');
+    const pm = document.getElementById('prevModalWin');
+    if (lm) lm.style.display = 'none';
+    if (pm) pm.style.display = 'none';
+}
+
+function showBangla() { 
+    showToast('বাংলা ভার্সন সক্রিয়। পুরো সাইট বাংলা ও ইংরেজিতে দেখা যাচ্ছে।');
+}
+
+function showEnglish() { 
+    showToast('English version active. Site is fully bilingual.');
+}
 
 console.log('✅ App.js loaded successfully with all features!');
 console.log('📌 Features: Live Results, Previous Results, Common Numbers, Dream Predictor, VIP System, Comments, Countdown, Real-time Updates');
-console.log('🏹 Venues: Shillong, Shillong Morning, Shillong Night, Khanapara, Khanapara Morning, Khanapara Night, Juwai, Morning, Night');
+console.log('🏹 Venues: Shillong, Shillong Morning, Shillong Night, Khanapara, Khanapara Morning, Khanapara Night, Juwai, Juwai Morning, Juwai Night, Morning, Night');
+console.log('🔄 Real-time subscriptions active for live results and common numbers');
+console.log('⏰ Countdown updates every second for all venues');
