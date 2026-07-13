@@ -433,23 +433,23 @@
         .vip-unlock-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
         /* ============================================================ */
-        /* 🔥 RESULTS GRID - Venue Name White Text */
+        /* 🔥 RESULTS GRID - Smaller Cards, Side by Side Digits */
         /* ============================================================ */
         .results-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 15px;
-            margin: 12px 0;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px;
+            margin: 10px 0;
             justify-content: center;
             align-items: stretch;
         }
 
         .result-card {
             background: #fff;
-            border-radius: 12px;
-            padding: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            border-left: 4px solid #0d47a1;
+            border-radius: 10px;
+            padding: 10px 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border-left: 3px solid #0d47a1;
             transition: all 0.3s;
             display: flex;
             flex-direction: column;
@@ -457,40 +457,40 @@
         }
 
         .result-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
-        /* ===== VENUE HEADER - Blue Background with White Text ===== */
+        /* ===== VENUE HEADER - Smaller ===== */
         .result-card .venue-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             background: linear-gradient(135deg, #0d47a1, #1565c0);
-            padding: 8px 14px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(13,71,161,0.15);
+            padding: 5px 10px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(13,71,161,0.12);
         }
 
         .result-card .venue-name {
-            font-size: 1.05rem;
-            font-weight: 900;
+            font-size: 0.8rem;
+            font-weight: 800;
             color: #ffffff !important;
-            text-shadow: 0 1px 10px rgba(255,255,255,0.15);
-            letter-spacing: 0.5px;
+            text-shadow: 0 1px 6px rgba(255,255,255,0.12);
+            letter-spacing: 0.3px;
         }
 
         .result-card .live-badge {
             background: linear-gradient(135deg, #cc0000, #ff1a1a);
             color: #fff;
-            padding: 3px 14px;
+            padding: 2px 10px;
             border-radius: 20px;
-            font-size: 0.6rem;
+            font-size: 0.5rem;
             font-weight: 700;
             animation: pulse 1.5s infinite;
             text-shadow: 0 1px 4px rgba(0,0,0,0.2);
-            box-shadow: 0 0 15px rgba(204,0,0,0.2);
+            box-shadow: 0 0 12px rgba(204,0,0,0.15);
         }
 
         @keyframes pulse {
@@ -499,50 +499,52 @@
         }
 
         .result-card .date-box {
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             color: #888;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
+            text-align: center;
         }
 
+        /* ===== TIMING DUAL - Side by Side ===== */
         .result-card .timing-dual {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 8px 0;
+            gap: 8px;
+            margin: 6px 0;
         }
 
         .result-card .fr-box,
         .result-card .sr-box {
             background: #f8f9fa;
-            border-radius: 8px;
-            padding: 8px 10px;
+            border-radius: 6px;
+            padding: 6px 8px;
             text-align: center;
             border: 1px solid #eee;
         }
 
         .result-card .fr-box .round-label,
         .result-card .sr-box .round-label {
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             color: #888;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
 
         .result-card .fr-box .result-number,
         .result-card .sr-box .result-number {
-            font-size: 1.6rem;
+            font-size: 1.3rem;
             font-weight: 900;
             color: #cc0000;
-            margin-top: 2px;
+            margin-top: 1px;
         }
 
         .result-card .fr-box .waiting-number-display,
         .result-card .sr-box .waiting-number-display {
-            font-size: 0.9rem;
+            font-size: 0.75rem;
             font-weight: 700;
             color: #ff9800;
-            margin-top: 2px;
+            margin-top: 1px;
             animation: blink 1s infinite;
         }
 
@@ -551,44 +553,46 @@
             50% { opacity: 0.3; }
         }
 
+        /* ===== COUNTDOWN BOX ===== */
         .result-card .countdown-box {
             background: #0a3d6b;
-            border-radius: 6px;
-            padding: 3px 8px;
-            margin-bottom: 6px;
+            border-radius: 4px;
+            padding: 2px 6px;
+            margin-bottom: 4px;
             text-align: center;
             border: 1px solid #ffcc00;
         }
 
         .result-card .countdown-box .countdown-label {
             color: #ffcc00;
-            font-size: 0.5rem;
+            font-size: 0.45rem;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
 
         .result-card .countdown-box .countdown-time {
             font-weight: 800;
             color: #fff;
             background: #000;
-            padding: 1px 8px;
-            border-radius: 4px;
-            font-size: 0.65rem;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.6rem;
         }
 
+        /* ===== CARD FOOTER ===== */
         .result-card .card-footer {
             display: flex;
-            gap: 6px;
+            gap: 4px;
             justify-content: center;
-            margin-top: 8px;
+            margin-top: 6px;
             flex-wrap: wrap;
         }
 
         .result-card .card-footer a {
-            padding: 5px 14px;
-            border-radius: 25px;
+            padding: 3px 10px;
+            border-radius: 20px;
             font-weight: 700;
-            font-size: 0.65rem;
+            font-size: 0.55rem;
             text-decoration: none;
             transition: all 0.3s;
         }
