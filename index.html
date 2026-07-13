@@ -63,573 +63,1023 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
     <style>
         /* ============================================================ */
-        /* 🔥 PREMIUM SYSTEM THEME & CORE DESIGN */
+        /* 🔥 BASE & RESET */
         /* ============================================================ */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            font-family: 'Inter', 'Hind Siliguri', sans-serif; 
-            background: #f8fafc; 
-            color: #1e293b;
-            line-height: 1.5;
-            padding-bottom: 30px;
-        }
-        .container { max-width: 1140px; margin: 0 auto; padding: 0 16px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f4f9; margin: 0; padding: 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
 
         /* ============================================================ */
-        /* 🔥 HEADER - Sleek Luxury UI */
+        /* 🔥 HEADER - Slim, White Box with Blue Text */
         /* ============================================================ */
         .header-section {
-            background: linear-gradient(135deg, #0f172a, #1e3a8a);
-            padding: 24px 16px;
-            border-radius: 0 0 24px 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px -10px rgba(30, 58, 138, 0.3);
+            background: linear-gradient(135deg, #0a2a5a, #0d47a1, #1565c0);
+            padding: 6px 0 10px 0;
+            border-radius: 0 0 18px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 25px rgba(13,71,161,0.25);
             position: relative;
             overflow: hidden;
-            border-bottom: 3px solid #f59e0b;
-        }
-        .header-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.04) 0%, transparent 70%);
-            pointer-events: none;
         }
 
-        .site-brand { text-align: center; position: relative; z-index: 1; }
-        .site-logo { 
-            max-width: 70px; 
-            height: auto; 
-            border-radius: 50%; 
-            border: 3px solid #fff; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3); 
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
+        .header-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00e676, #ffcc00, #00e676, transparent);
+            animation: glowLine 3s ease-in-out infinite;
         }
-        .site-logo:hover { transform: scale(1.08) rotate(5deg); border-color: #f59e0b; }
-        
-        .name-box h1 { 
-            font-size: 1.6rem; 
-            font-weight: 800;
-            color: #fff; 
-            margin: 10px 0 4px 0; 
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2); 
-            letter-spacing: -0.5px; 
+
+        @keyframes glowLine {
+            0%, 100% { transform: translateX(-100%); opacity: 0.3; }
+            50% { transform: translateX(100%); opacity: 1; }
         }
-        .name-box .bn-title { 
-            font-size: 1rem; 
-            color: #cbd5e1; 
-            font-weight: 500; 
+
+        .site-brand {
+            text-align: center;
+            padding: 12px 20px;
+            position: relative;
+            z-index: 1;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.06);
+            margin: 0 10px;
+            border: 1px solid rgba(13,71,161,0.08);
         }
-        .domain { 
-            font-size: 0.8rem; 
-            color: rgba(255,255,255,0.4); 
-            margin-top: 4px; 
+
+        .site-logo {
+            max-width: 55px;
+            height: auto;
+            border-radius: 50%;
+            border: 3px solid #0d47a1;
+            box-shadow: 0 2px 15px rgba(13,71,161,0.15);
+            transition: all 0.4s ease;
+        }
+        .site-logo:hover {
+            transform: scale(1.05) rotate(-3deg);
+            border-color: #00e676;
+            box-shadow: 0 0 30px rgba(0,230,118,0.2);
+        }
+
+        .name-box h1 {
+            font-size: 1.5rem;
+            color: #0d47a1;
+            margin: 4px 0 2px 0;
+            text-shadow: 0 1px 3px rgba(13,71,161,0.08);
+            letter-spacing: 0.5px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #0d47a1, #1565c0, #0d47a1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+            padding: 0 5px;
+        }
+
+        .name-box .bn-title {
+            font-size: 0.95rem;
+            color: #1565c0;
             font-weight: 600;
-            letter-spacing: 1px; 
+            letter-spacing: 0.5px;
+            text-shadow: 0 1px 3px rgba(21,101,192,0.06);
         }
+
+        .domain {
+            font-size: 0.8rem;
+            color: #64b5f6;
+            margin-top: 2px;
+            letter-spacing: 0.5px;
+            font-weight: 400;
+        }
+
         .live-badge-main {
-            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            background: linear-gradient(135deg, #cc0000, #ff1a1a);
             color: #fff;
-            padding: 5px 20px;
+            padding: 4px 22px;
             border-radius: 30px;
             display: inline-block;
             font-weight: 700;
             font-size: 0.75rem;
-            margin-top: 10px;
-            animation: pulse 2s infinite;
-            box-shadow: 0 4px 15px rgba(239,68,68,0.4);
+            margin-top: 6px;
+            box-shadow: 0 0 25px rgba(204,0,0,0.25);
             letter-spacing: 0.5px;
             text-transform: uppercase;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: badgePulse 2s ease-in-out infinite;
         }
-        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.9; transform: scale(1.03); } }
+
+        @keyframes badgePulse {
+            0%, 100% { box-shadow: 0 0 25px rgba(204,0,0,0.25); }
+            50% { box-shadow: 0 0 45px rgba(204,0,0,0.45); }
+        }
 
         /* ============================================================ */
         /* 🔥 LANGUAGE BAR */
         /* ============================================================ */
         .language-bar {
             text-align: center;
-            padding: 6px 16px;
-            background: #ffffff;
-            border-radius: 30px;
-            margin: 12px auto;
-            color: #64748b;
-            font-size: 0.85rem;
-            font-weight: 500;
-            display: table;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
+            padding: 3px 12px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            margin: 0 15px 4px 15px;
+            color: #fff;
+            font-size: 0.75rem;
+            display: inline-block;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.06);
         }
-        .language-bar a { color: #2563eb; text-decoration: none; font-weight: 700; padding: 0 6px; transition: all 0.2s; }
-        .language-bar a:hover { color: #1d4ed8; text-decoration: underline; }
+        .language-bar a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0 4px;
+            transition: all 0.3s;
+        }
+        .language-bar a:hover {
+            text-decoration: underline;
+            color: #fff;
+        }
 
         /* ============================================================ */
-        /* 🔥 NAVIGATION BUTTONS - Dashboard Minimalist Style */
+        /* 🔥 NAVIGATION BUTTONS */
         /* ============================================================ */
-        .btn-row-three { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 16px 0; }
+        .btn-row-three { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 10px 0; }
         .nav-btn-big {
-            padding: 10px 20px;
-            border-radius: 12px;
+            padding: 8px 18px;
+            border-radius: 30px;
             color: #fff;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 0.85rem;
-            letter-spacing: 0.3px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             display: inline-block;
-            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
         }
-        .nav-btn-big:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.15); filter: brightness(1.1); }
-        .btn-morning-big { background: linear-gradient(135deg, #f97316, #ea580c); }
-        .btn-juwai-big { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
-        .btn-night-big { background: linear-gradient(135deg, #334155, #1e293b); }
-        .btn-shillong-big { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
-        .btn-khanapara-big { background: linear-gradient(135deg, #059669, #047857); }
+        .nav-btn-big:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(0,0,0,0.25); }
+        .btn-morning-big { background: linear-gradient(135deg, #f57c00, #e65100); }
+        .btn-juwai-big { background: linear-gradient(135deg, #4a148c, #6a1b9a); }
+        .btn-night-big { background: linear-gradient(135deg, #1a237e, #0d1442); }
+        .btn-shillong-big { background: linear-gradient(135deg, #0d47a1, #1565c0); }
+        .btn-khanapara-big { background: linear-gradient(135deg, #00695c, #00897b); }
 
         /* ============================================================ */
-        /* 🔥 PROMO LINKS & SPECIAL BUTTONS */
+        /* 🔥 OMG10 LINK */
         /* ============================================================ */
         .omg10-link {
             display: inline-block;
-            background: linear-gradient(135deg, #b91c1c, #dc2626);
+            background: linear-gradient(135deg, #8b0000, #cc0000);
             color: #fff;
-            padding: 12px 24px;
-            border-radius: 14px;
-            font-weight: 800;
-            font-size: 0.95rem;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.85rem;
             text-decoration: none;
-            box-shadow: 0 6px 20px rgba(220,38,38,0.3);
-            border: 2px solid #fbbf24;
+            box-shadow: 0 3px 15px rgba(204,0,0,0.3);
+            border: 2px solid #ffcc00;
             transition: all 0.3s;
         }
-        .omg10-link:hover { transform: scale(1.02); box-shadow: 0 8px 25px rgba(220,38,38,0.45); }
+        .omg10-link:hover { transform: scale(1.03); box-shadow: 0 5px 25px rgba(204,0,0,0.5); }
 
         /* ============================================================ */
         /* 🔥 WHATSAPP BOX */
         /* ============================================================ */
         .whatsapp-box {
             width: 100%;
-            margin: 16px auto;
-            background: #ffffff;
-            border: 2px solid #22c55e;
-            border-radius: 20px;
-            padding: 24px;
+            min-height: 250px;
+            margin: 0 auto 12px auto;
+            background: linear-gradient(135deg, #25d36610, #25d36620);
+            border: 3px solid #25d366;
+            border-radius: 16px;
+            padding: 15px 20px;
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 10px 15px -3px rgba(34,197,94,0.08);
         }
-        .whatsapp-box .whatsapp-icon { font-size: 3rem; margin-bottom: 8px; }
-        .whatsapp-box h3 { font-size: 1.3rem; margin-bottom: 4px; color: #166534; font-weight: 800; }
-        .whatsapp-box p { font-size: 0.9rem; margin-bottom: 16px; color: #475569; font-weight: 500; }
+        .whatsapp-box .whatsapp-icon { font-size: 2.5rem; }
+        .whatsapp-box h3 { font-size: 1.2rem; margin: 6px 0; color: #075e54; }
+        .whatsapp-box p { font-size: 0.85rem; margin: 4px 0 10px 0; color: #555; }
         .whatsapp-box .whatsapp-join-btn {
             display: inline-block;
-            background: #22c55e;
+            background: #25d366;
             color: #fff;
-            padding: 12px 36px;
+            padding: 10px 28px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(34,197,94,0.3);
+            box-shadow: 0 4px 15px rgba(37,211,102,0.3);
         }
-        .whatsapp-box .whatsapp-join-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(34,197,94,0.5); }
+        .whatsapp-box .whatsapp-join-btn:hover { transform: scale(1.05); box-shadow: 0 6px 25px rgba(37,211,102,0.5); }
 
         /* ============================================================ */
-        /* 🔥 HEADINGS STRUCURE */
+        /* 🔥 SEO HEADINGS - Slim, White Text on Blue Background */
         /* ============================================================ */
         .seo-h2 {
-            color: #1e3a8a;
-            font-size: 1.4rem;
-            margin: 24px 0 14px 0;
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin: 10px 0 6px 0;
             text-align: center;
             position: relative;
-            padding-bottom: 10px;
+            padding: 6px 15px;
             font-weight: 800;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            border-radius: 10px;
+            display: inline-block;
+            width: auto;
+            box-shadow: 0 2px 15px rgba(13,71,161,0.15);
+            text-shadow: 0 1px 10px rgba(255,255,255,0.1);
         }
         .seo-h2::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -2px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: #2563eb;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(to right, #00e676, #ffcc00);
             border-radius: 2px;
+            animation: headingGlow 2s ease-in-out infinite;
         }
+        @keyframes headingGlow {
+            0%, 100% { width: 50px; opacity: 0.6; }
+            50% { width: 70px; opacity: 1; }
+        }
+
         .seo-h2-dark {
-            color: #0f172a;
-            font-size: 1.3rem;
-            margin: 28px 0 14px 0;
-            padding-left: 14px;
-            border-left: 5px solid #2563eb;
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin: 12px 0 6px 0;
+            padding: 6px 15px;
+            background: linear-gradient(135deg, #0a2a5a, #0d47a1);
+            border-radius: 10px;
             font-weight: 800;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            width: auto;
+            box-shadow: 0 2px 15px rgba(10,42,90,0.15);
+            text-shadow: 0 1px 10px rgba(255,255,255,0.08);
         }
+
         .seo-h2-orange {
-            color: #dc2626;
-            font-size: 1.5rem;
+            color: #ffffff;
+            font-size: 1.15rem;
             text-align: center;
-            margin: 20px 0;
-            font-weight: 900;
-            letter-spacing: -0.3px;
+            margin: 10px 0;
+            padding: 6px 20px;
+            background: linear-gradient(135deg, #cc0000, #ff1a1a);
+            border-radius: 10px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            width: auto;
+            box-shadow: 0 2px 15px rgba(204,0,0,0.15);
+            text-shadow: 0 1px 10px rgba(255,255,255,0.08);
         }
 
         /* ============================================================ */
-        /* 🔥 MARQUEE SLIDER */
+        /* 🔥 SLIDER */
         /* ============================================================ */
         .slider-container {
             width: 100%;
             overflow: hidden;
             background: #fff;
-            padding: 12px 0;
-            border-radius: 14px;
-            margin: 16px 0;
-            border: 2px solid #10b981;
-            box-shadow: 0 4px 15px rgba(16,185,129,0.1);
+            padding: 8px 0;
+            border-radius: 10px;
+            margin: 10px 0;
+            border: 3px solid #00e676;
+            box-shadow: 0 0 20px rgba(0,230,118,0.2), 0 4px 12px rgba(0,0,0,0.05);
             text-align: center;
             position: relative;
-            animation: borderPulse 3s ease-in-out infinite;
+            animation: borderPulse 2.5s ease-in-out infinite;
         }
         @keyframes borderPulse {
-            0%, 100% { border-color: #10b981; box-shadow: 0 0 15px rgba(16,185,129,0.15); }
-            50% { border-color: #34d399; box-shadow: 0 0 25px rgba(52,211,153,0.3); }
+            0% { border-color: #00e676; box-shadow: 0 0 20px rgba(0,230,118,0.2); }
+            50% { border-color: #69f0ae; box-shadow: 0 0 35px rgba(0,230,118,0.4); }
+            100% { border-color: #00e676; box-shadow: 0 0 20px rgba(0,230,118,0.2); }
         }
-        .slider-wrapper { display: flex; justify-content: center; align-items: center; position: relative; height: 48px; width: 100%; padding: 0 8px; }
+        .slider-wrapper { display: flex; justify-content: center; align-items: center; position: relative; height: 48px; overflow: hidden; width: 100%; padding: 0 8px; }
         .slider-text {
             position: absolute;
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             font-weight: 800;
+            letter-spacing: 0.6px;
             white-space: nowrap;
             opacity: 0;
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.6s ease;
-            top: 50%;
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.5s ease;
+            padding: 0 12px;
             left: 0;
+            top: 50%;
+            transform: translateY(-50%) translateX(100%);
             width: 100%;
             text-align: center;
-            transform: translateY(-50%) translateX(50px);
+            box-sizing: border-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+            line-height: 1.3;
         }
-        .slider-text .domain-part { color: #1e3a8a; }
-        .slider-text .sep-part { color: #10b981; margin: 0 6px; font-weight: 400; }
-        .slider-text .subline-part { color: #2563eb; }
+        .slider-text .domain-part { color: #0d47a1; }
+        .slider-text .sep-part { color: #00e676; margin: 0 4px; font-weight: 300; }
+        .slider-text .subline-part { color: #1565c0; }
         .slider-text.active { opacity: 1; transform: translateY(-50%) translateX(0); }
-        .slider-text.slide-out { opacity: 0; transform: translateY(-50%) translateX(-50px); }
+        .slider-text.slide-out { opacity: 0; transform: translateY(-50%) translateX(-100%); }
+
+        @media (max-width: 768px) { .slider-wrapper { height: 40px; } .slider-text { font-size: 1rem; padding: 0 8px; } }
+        @media (max-width: 480px) { .slider-wrapper { height: 36px; } .slider-text { font-size: 0.85rem; padding: 0 6px; letter-spacing: 0.3px; } }
 
         /* ============================================================ */
-        /* 🔥 VIP PREMIUM BOX */
+        /* 🔥 VIP BOX */
         /* ============================================================ */
         .vip-box {
-            margin: 16px 0;
-            padding: 20px;
-            border: 2px solid #f59e0b;
-            background: linear-gradient(135deg, #fef3c7, #fffbeb);
-            border-radius: 16px;
+            margin: 10px 0;
+            padding: 12px 15px;
+            border: 2px solid #cc0000;
+            background: linear-gradient(135deg, #fff9e6, #fff0d0);
+            border-radius: 10px;
             text-align: center;
-            box-shadow: 0 10px 15px -3px rgba(245,158,11,0.1);
+            box-shadow: 0 3px 15px rgba(204,0,0,0.1);
         }
-        .vip-box .vip-icon { font-size: 2rem; margin-bottom: 4px; }
-        .vip-box h3 { color: #b45309; margin: 0; font-size: 1.15rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.3px; }
-        .vip-box p { margin: 6px 0 12px 0; font-size: 0.85rem; color: #78350f; font-weight: 500; }
+        .vip-box .vip-icon { font-size: 1.8rem; }
+        .vip-box h3 { color: #cc0000; margin: 0; font-size: 1rem; font-weight: 900; }
+        .vip-box p { margin: 3px 0 8px 0; font-size: 0.75rem; color: #666; }
         .vip-unlock-btn {
-            background: linear-gradient(135deg, #d97706, #b45309);
+            background: linear-gradient(135deg, #cc0000, #ff0000);
             color: #fff;
-            padding: 8px 24px;
-            border-radius: 30px;
+            padding: 5px 18px;
+            border-radius: 25px;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             border: none;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 4px 10px rgba(180,83,9,0.3);
         }
-        .vip-unlock-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 15px rgba(180,83,9,0.45); }
-        .vip-unlock-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .vip-unlock-btn:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(204,0,0,0.4); }
+        .vip-unlock-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
         /* ============================================================ */
-        /* 🔥 RESULTS GRID & LIVE CARDS */
+        /* 🔥 RESULTS GRID - Same as Before */
         /* ============================================================ */
         .results-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 12px 0;
+            justify-content: center;
+            align-items: stretch;
         }
         .result-card {
             background: #fff;
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.05);
-            border-top: 4px solid #2563eb;
-            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 4px solid #0d47a1;
+            transition: all 0.3s;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
-        .result-card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
-        .result-card .venue-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px; }
-        .result-card .venue-name { font-size: 1.15rem; font-weight: 800; color: #0f172a; }
-        .result-card .live-badge { background: #ef4444; color: #fff; padding: 3px 12px; border-radius: 20px; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; animation: pulse 1.5s infinite; }
-        .result-card .date-box { font-size: 0.8rem; color: #64748b; font-weight: 500; }
-        
-        .result-card .timing-dual { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+        .result-card:hover { transform: translateY(-3px); box-shadow: 0 6px 25px rgba(0,0,0,0.12); }
+        .result-card .venue-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+        .result-card .venue-name { font-size: 1rem; font-weight: 900; color: #0d47a1; }
+        .result-card .live-badge { background: #cc0000; color: #fff; padding: 2px 10px; border-radius: 20px; font-size: 0.55rem; font-weight: 700; animation: pulse 1.5s infinite; }
+        .result-card .date-box { font-size: 0.75rem; color: #888; }
+        .result-card .timing-dual { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 8px 0; }
         .result-card .fr-box, .result-card .sr-box {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 8px 10px;
             text-align: center;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #eee;
         }
         .result-card .fr-box .round-label, .result-card .sr-box .round-label {
-            font-size: 0.65rem;
-            color: #64748b;
-            font-weight: 700;
+            font-size: 0.55rem;
+            color: #888;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         .result-card .fr-box .result-number, .result-card .sr-box .result-number {
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-weight: 900;
-            color: #dc2626;
-            margin-top: 4px;
+            color: #cc0000;
+            margin-top: 2px;
         }
         .result-card .fr-box .waiting-number-display, .result-card .sr-box .waiting-number-display {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 700;
-            color: #d97706;
-            margin-top: 4px;
-            animation: blink 1.2s infinite;
+            color: #ff9800;
+            margin-top: 2px;
+            animation: blink 1s infinite;
         }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-        
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
         .result-card .countdown-box {
-            background: #0f172a;
-            border-radius: 8px;
-            padding: 6px 12px;
-            margin-bottom: 12px;
+            background: #0a3d6b;
+            border-radius: 6px;
+            padding: 3px 8px;
+            margin-bottom: 6px;
             text-align: center;
-            border: 1px solid #fbbf24;
+            border: 1px solid #ffcc00;
         }
-        .result-card .countdown-box .countdown-label { color: #fbbf24; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-right: 4px; display: inline-block;}
-        .result-card .countdown-box .countdown-time { font-weight: 800; color: #fff; background: #1e293b; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; display: inline-block; }
-        
-        .result-card .card-footer { display: flex; gap: 8px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
-        .result-card .card-footer a { padding: 6px 16px; border-radius: 30px; font-weight: 700; font-size: 0.75rem; text-decoration: none; transition: all 0.2s; }
+        .result-card .countdown-box .countdown-label {
+            color: #ffcc00;
+            font-size: 0.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .result-card .countdown-box .countdown-time {
+            font-weight: 800;
+            color: #fff;
+            background: #000;
+            padding: 1px 8px;
+            border-radius: 4px;
+            font-size: 0.65rem;
+        }
+        .result-card .card-footer {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        .result-card .card-footer a {
+            padding: 5px 14px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.65rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
         .result-card .card-footer a:hover { transform: scale(1.03); }
-        .btn-previous { background: #e2e8f0; color: #334155; }
-        .btn-common { background: #d1fae5; color: #065f46; }
+        .btn-previous { background: #0d47a1; color: #fff; }
+        .btn-common { background: #00e676; color: #0d0a0a; }
 
         /* ============================================================ */
-        /* 🔥 TABLES - Common Numbers & Analytics */
+        /* 🔥 COMMON NUMBERS */
         /* ============================================================ */
-        .common-venues-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; margin: 20px 0; }
-        .common-venue-card { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; }
-        .common-venue-card .common-venue-title { font-size: 1.1rem; font-weight: 800; color: #1e3a8a; margin-bottom: 12px; text-align: center; }
-        .common-table { width: 100%; border-collapse: separate; border-spacing: 0 6px; font-size: 0.85rem; }
-        .common-table th { background: #1e40af; color: #fff; padding: 10px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-        .common-table th:first-child { border-radius: 8px 0 0 8px; }
-        .common-table th:last-child { border-radius: 0 8px 8px 0; }
-        .common-table td { padding: 10px; text-align: center; background: #f8fafc; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; }
-        .common-table td:first-child { border-left: 1px solid #f1f5f9; border-radius: 8px 0 0 8px; }
-        .common-table td:last-child { border-right: 1px solid #f1f5f9; border-radius: 0 8px 8px 0; }
-        .common-table tr:hover td { background: #ede9fe; }
-        .common-table .round-cell { font-weight: 700; color: #1e3a8a; }
-        .common-table .direct-num { background: #dbeafe; padding: 4px 10px; border-radius: 6px; font-weight: 800; color: #1e40af; }
-        .common-table .house-num { background: #d1fae5; padding: 4px 10px; border-radius: 6px; font-weight: 800; color: #065f46; }
-        .common-table .ending-num { background: #ffedd5; padding: 4px 10px; border-radius: 6px; font-weight: 800; color: #c2410c; }
+        .common-venues-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 15px;
+            margin: 12px 0;
+        }
+        .common-venue-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-top: 3px solid #0d47a1;
+        }
+        .common-venue-card .common-venue-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #0d47a1;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .common-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+        .common-table th {
+            background: #0d47a1;
+            color: #fff;
+            padding: 6px 8px;
+            font-size: 0.65rem;
+            text-align: center;
+        }
+        .common-table td { padding: 6px 8px; text-align: center; border-bottom: 1px solid #f0f0f0; }
+        .common-table tr:hover td { background: #f0f4f9; }
+        .common-table .round-cell { font-weight: 700; color: #0d47a1; }
+        .common-table .direct-num { background: #e3f2fd; padding: 2px 8px; border-radius: 4px; font-weight: 700; color: #0d47a1; }
+        .common-table .house-num { background: #e8f5e9; padding: 2px 8px; border-radius: 4px; font-weight: 700; color: #2e7d32; }
+        .common-table .ending-num { background: #fff3e0; padding: 2px 8px; border-radius: 4px; font-weight: 700; color: #e65100; }
 
         /* ============================================================ */
-        /* 🔥 MONTH WISE FILTER SECTION */
+        /* 🔥 PREVIOUS RESULTS - Year & Month Filter */
         /* ============================================================ */
-        .monthwise-section { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); margin: 20px 0; border: 1px solid #e2e8f0; }
-        .selector-container { display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; margin-bottom: 16px; background: #f8fafc; padding: 12px; border-radius: 12px; }
-        .selector-container select { padding: 6px 14px; border-radius: 8px; border: 2px solid #cbd5e1; font-weight: 600; font-size: 0.85rem; background: #fff; cursor: pointer; transition: all 0.2s; }
-        .selector-container select:focus { border-color: #2563eb; outline: none; }
-        .selector-container label { font-weight: 700; color: #334155; font-size: 0.85rem; }
-        
-        .result-display-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-        .result-display-table th { background: #0f172a; color: #fff; padding: 12px; text-align: center; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
-        .result-display-table th:first-child { border-radius: 8px 0 0 8px; }
-        .result-display-table th:last-child { border-radius: 0 8px 8px 0; }
-        .result-display-table td { padding: 10px; text-align: center; border-bottom: 1px solid #f1f5f9; font-weight: 500; }
-        .result-display-table tr:hover td { background: #f1f5f9; }
+        .monthwise-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        .selector-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .selector-container select {
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 2px solid #0d47a1;
+            font-weight: 600;
+            font-size: 0.85rem;
+            background: #fff;
+            cursor: pointer;
+            min-width: 80px;
+            height: 34px;
+            transition: all 0.3s;
+        }
+        .selector-container select:hover {
+            border-color: #1565c0;
+            box-shadow: 0 0 10px rgba(13,71,161,0.15);
+        }
+        .selector-container label {
+            font-weight: 600;
+            color: #0d47a1;
+            font-size: 0.85rem;
+        }
+        .result-display-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        .result-display-table th {
+            background: #0d47a1;
+            color: #fff;
+            padding: 10px 12px;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .result-display-table td {
+            padding: 8px 12px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            font-size: 0.85rem;
+        }
+        .result-display-table tr:hover td { background: #f0f4f9; }
 
         /* ============================================================ */
-        /* 🔥 DREAM CHART TABLE */
+        /* 🔥 DREAM CHART */
         /* ============================================================ */
-        .dream-chart-section { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); margin: 16px 0; border: 1px solid #e2e8f0; }
-        .dream-chart-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-        .dream-chart-table th { background: #1e3a8a; color: #fff; padding: 12px; text-align: center; font-size: 0.8rem; font-weight: 700; }
-        .dream-chart-table td { padding: 10px; text-align: center; border-bottom: 1px solid #f1f5f9; font-weight: 500; }
-        .dream-chart-table tr:hover td { background: #faf5ff; }
+        .dream-chart-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 12px 0;
+            overflow-x: auto;
+        }
+        .dream-chart-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .dream-chart-table th { background: #0d47a1; color: #fff; padding: 8px 10px; text-align: center; }
+        .dream-chart-table td { padding: 6px 10px; text-align: center; border-bottom: 1px solid #f0f0f0; }
+        .dream-chart-table tr:hover td { background: #f0f4f9; }
 
         /* ============================================================ */
-        /* 🔥 DREAM PREDICTOR BOX */
+        /* 🔥 DREAM PREDICTOR */
         /* ============================================================ */
-        .dream-card { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); margin: 16px 0; text-align: center; border: 1px solid #e2e8f0; }
-        .dream-title { font-size: 1.3rem; font-weight: 900; color: #1e3a8a; margin-bottom: 12px; letter-spacing: 0.5px; }
-        .dream-flex { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
-        .dream-input { padding: 10px 16px; border: 2px solid #cbd5e1; border-radius: 10px; font-size: 0.95rem; font-weight: 500; width: 240px; max-width: 100%; transition: all 0.2s; }
-        .dream-input:focus { border-color: #2563eb; outline: none; box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
-        .dream-predict-btn { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: #fff; border: none; padding: 10px 24px; font-weight: 700; border-radius: 10px; cursor: pointer; transition: all 0.2s; font-size: 0.9rem; }
-        .dream-predict-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
-        
+        .dream-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 12px 0;
+            text-align: center;
+        }
+        .dream-title { font-size: 1.2rem; font-weight: 900; color: #0d47a1; margin-bottom: 10px; }
+        .dream-flex { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px; }
+        .dream-input {
+            padding: 8px 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            width: 200px;
+            max-width: 100%;
+            transition: all 0.3s;
+        }
+        .dream-input:focus { border-color: #0d47a1; outline: none; box-shadow: 0 0 12px rgba(13,71,161,0.12); }
+        .dream-predict-btn {
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            color: #fff;
+            border: none;
+            padding: 8px 18px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .dream-predict-btn:hover { transform: scale(1.05); box-shadow: 0 4px 15px rgba(13,71,161,0.3); }
         .dream-table { width: 100%; max-width: 450px; margin: 0 auto; border-collapse: collapse; }
-        .dream-table th { background: #334155; color: #fff; padding: 10px; font-size: 0.75rem; font-weight: 700; }
-        .dream-table td { padding: 14px; border: 1px solid #e2e8f0; background: #f8fafc; }
+        .dream-table th { background: #0d47a1; color: #fff; padding: 8px 10px; }
+        .dream-table td { padding: 10px; border: 1px solid #ddd; }
         .number-group { display: flex; gap: 12px; justify-content: center; }
-        .dream-num-box { display: inline-block; padding: 6px 16px; background: #fff; border-radius: 8px; font-weight: 900; font-size: 1.1rem; color: #2563eb; min-width: 45px; border: 2px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .dream-num-box {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            font-weight: 900;
+            font-size: 1rem;
+            color: #0d47a1;
+            min-width: 35px;
+            border: 2px solid #eee;
+        }
 
         /* ============================================================ */
-        /* 🔥 COMPREHENSIVE HISTORY TIMELINE/CARDS */
+        /* 🔥 HISTORY SECTION - All Teer Details (English) */
         /* ============================================================ */
-        .history-section-direct { margin: 20px 0; }
-        .history-card { background: #fff; padding: 20px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; }
-        .history-card ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
-        .history-card li { padding: 14px 18px; background: #f8fafc; border-radius: 12px; border-left: 5px solid #2563eb; transition: all 0.2s; }
-        .history-card li:hover { transform: translateX(4px); background: #f1f5f9; }
-        .history-card li h4 { margin: 0 0 6px 0; color: #1e3a8a; font-size: 1rem; font-weight: 800; }
-        .history-card li p { margin: 0; color: #475569; font-size: 0.88rem; line-height: 1.6; font-weight: 400; }
-        
-        .history-card li.did-you-know { background: #eff6ff; border-left-color: #1e3a8a; }
-        .history-card li.did-you-know h4 { color: #1e40af; }
-        .history-card li.khanapara { border-left-color: #059669; background: #f0fdf4; }
-        .history-card li.khanapara h4 { color: #065f46; }
-        .history-card li.juwai { border-left-color: #7c3aed; background: #f5f3ff; }
-        .history-card li.juwai h4 { color: #5b21b6; }
-        .history-card li.morning { border-left-color: #ea580c; background: #fff7ed; }
-        .history-card li.morning h4 { color: #9a3412; }
-        .history-card li.night { border-left-color: #334155; background: #f8fafc; }
-        .history-card li.night h4 { color: #1e293b; }
+        .history-section-direct { margin: 15px 0; }
+        .history-card {
+            background: #fff;
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid #eaeaea;
+        }
+        .history-card ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+        .history-card li {
+            padding: 12px 15px;
+            background: #f0f4f9;
+            border-radius: 8px;
+            border-left: 4px solid #0d47a1;
+            transition: all 0.3s;
+        }
+        .history-card li:hover { transform: translateX(5px); }
+        .history-card li h4 {
+            margin: 0 0 4px 0;
+            color: #ffffff;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            padding: 4px 12px;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            border-radius: 8px;
+            display: inline-block;
+            width: auto;
+        }
+        .history-card li p { margin: 0; color: #444; font-size: 0.85rem; line-height: 1.6; }
+        .history-card li.did-you-know { background: #e3f2fd; border-left-color: #0a2a5a; }
+        .history-card li.did-you-know h4 { background: linear-gradient(135deg, #0a2a5a, #0d47a1); }
+        .history-card li.khanapara { border-left-color: #00695c; background: #f0f7f4; }
+        .history-card li.khanapara h4 { background: linear-gradient(135deg, #00695c, #00897b); }
+        .history-card li.juwai { border-left-color: #4a148c; background: #f5f0f9; }
+        .history-card li.juwai h4 { background: linear-gradient(135deg, #4a148c, #6a1b9a); }
+        .history-card li.morning { border-left-color: #e65100; background: #fff8f2; }
+        .history-card li.morning h4 { background: linear-gradient(135deg, #e65100, #f57c00); }
+        .history-card li.night { border-left-color: #1a237e; background: #f0f2f8; }
+        .history-card li.night h4 { background: linear-gradient(135deg, #1a237e, #283593); }
 
         /* ============================================================ */
-        /* 🔥 STRATEGY LOGIC ARTICLES */
+        /* 🔥 STRATEGY */
         /* ============================================================ */
-        .strategy-article-section { background: #fff; padding: 20px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); margin: 16px 0; border: 1px solid #e2e8f0; }
-        .strategy-article-section p { font-size: 0.9rem; color: #475569; font-weight: 500; }
-        .strategy-article-section .strategy-item { padding: 14px; background: #faf5ff; border-radius: 10px; border-left: 4px solid #a855f7; margin-top: 10px; }
-        .strategy-article-section .strategy-item strong { color: #6b21a8; display: block; margin-bottom: 4px; font-size: 0.95rem; font-weight: 700; }
+        .strategy-article-section {
+            background: #fff;
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 12px 0;
+        }
+        .strategy-article-section .strategy-item {
+            padding: 10px 14px;
+            background: #fafafa;
+            border-radius: 8px;
+            border-left: 4px solid #7b1fa2;
+            margin-bottom: 8px;
+        }
+        .strategy-article-section .strategy-item strong {
+            color: #7b1fa2;
+            display: block;
+            margin-bottom: 3px;
+            font-size: 0.9rem;
+        }
 
         /* ============================================================ */
-        /* 🔥 TRENDING NUMBERS GRID */
+        /* 🔥 TRENDING */
         /* ============================================================ */
-        .trending-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); gap: 10px; margin: 12px 0; }
-        .trending-grid .trend-num { background: #1e3a8a; color: #fff; padding: 12px 6px; border-radius: 10px; text-align: center; font-weight: 800; font-size: 1.1rem; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .trending-grid .trend-num:hover { transform: translateY(-3px); background: #2563eb; box-shadow: 0 8px 12px rgba(37,99,235,0.2); }
+        .trending-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(55px, 1fr));
+            gap: 8px;
+            margin: 10px 0;
+        }
+        .trending-grid .trend-num {
+            background: #0d47a1;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 900;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .trending-grid .trend-num:hover { transform: scale(1.08); box-shadow: 0 4px 12px rgba(13,71,161,0.25); }
 
         /* ============================================================ */
-        /* 🔥 SOCIAL SHARING COMPONENT */
+        /* 🔥 SOCIAL SHARE */
         /* ============================================================ */
-        .social-share-container { margin: 24px 0; text-align: center; }
-        .share-title { font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: #334155; text-transform: uppercase; letter-spacing: 0.5px; }
-        .share-buttons { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-        .share-btn { padding: 8px 18px; border: none; border-radius: 30px; font-weight: 700; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; color: #fff; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .share-btn:hover { transform: translateY(-1px); filter: brightness(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .social-share-container { margin: 18px 0; text-align: center; }
+        .share-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+            padding: 4px 16px;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            border-radius: 20px;
+            display: inline-block;
+            text-shadow: 0 1px 6px rgba(255,255,255,0.08);
+        }
+        .share-buttons { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+        .share-btn {
+            padding: 6px 14px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .share-btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
         .share-btn.facebook { background: #1877f2; }
         .share-btn.whatsapp { background: #25d366; }
-        .share-btn.twitter { background: #0f1419; }
+        .share-btn.twitter { background: #000; }
         .share-btn.telegram { background: #0088cc; }
-        .share-btn.copy { background: #64748b; }
+        .share-btn.copy { background: #6c757d; }
 
         /* ============================================================ */
-        /* 🔥 PROFESSIONAL FAQ ACCORDION */
+        /* 🔥 FAQ - 10 Points (English) */
         /* ============================================================ */
-        .faq-section { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); margin: 20px 0; border: 1px solid #e2e8f0; }
-        .faq-title { font-size: 1.3rem; font-weight: 900; color: #0f172a; margin-bottom: 16px; text-align: center; padding-bottom: 10px; border-bottom: 2px solid #e2e8f0; }
-        .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-        @media (max-width: 850px) { .faq-grid { grid-template-columns: 1fr; } }
-        .faq-item { border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px 16px; transition: all 0.2s; background: #f8fafc; }
-        .faq-item:hover { border-color: #cbd5e1; background: #fff; }
-        .faq-question { font-weight: 700; color: #1e3a8a; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; gap: 12px; }
-        .faq-icon { font-size: 1.2rem; color: #64748b; transition: transform 0.2s; flex-shrink: 0; font-weight: 400; }
-        .faq-item.active { border-color: #2563eb; background: #fff; box-shadow: 0 4px 12px rgba(37,99,235,0.04); }
-        .faq-item.active .faq-icon { transform: rotate(45deg); color: #2563eb; }
-        .faq-answer { display: none; padding-top: 8px; color: #475569; line-height: 1.6; font-size: 0.85rem; border-top: 1px solid #f1f5f9; margin-top: 8px; font-weight: 500; }
+        .faq-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 12px 0;
+        }
+        .faq-title {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-align: center;
+            padding: 6px 20px;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            border-radius: 10px;
+            text-shadow: 0 1px 10px rgba(255,255,255,0.08);
+            box-shadow: 0 2px 15px rgba(13,71,161,0.12);
+        }
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        @media (max-width: 768px) {
+            .faq-grid { grid-template-columns: 1fr; }
+        }
+        .faq-item {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 10px 14px;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+        .faq-item:hover {
+            border-color: #0d47a1;
+            box-shadow: 0 2px 10px rgba(13,71,161,0.08);
+        }
+        .faq-question {
+            font-weight: 700;
+            color: #0d47a1;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            gap: 10px;
+        }
+        .faq-icon {
+            font-size: 1.1rem;
+            color: #0d47a1;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+        .faq-answer {
+            display: none;
+            padding-top: 6px;
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.8rem;
+        }
         .faq-item.active .faq-answer { display: block; }
 
         /* ============================================================ */
-        /* 🔥 COMMENT BOARD */
+        /* 🔥 COMMENTS */
         /* ============================================================ */
-        .comment-box { background: #fff; padding: 20px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); margin: 16px 0; border: 1px solid #e2e8f0; }
-        .comment-box textarea { width: 100%; padding: 12px; border: 2px solid #cbd5e1; border-radius: 10px; font-size: 0.95rem; font-family: inherit; min-height: 70px; box-sizing: border-box; transition: all 0.2s; }
-        .comment-box textarea:focus { border-color: #2563eb; outline: none; }
-        .comment-input-row { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
-        .comment-input-row input { flex: 1; padding: 10px 14px; border: 2px solid #cbd5e1; border-radius: 10px; font-size: 0.95rem; min-width: 150px; transition: all 0.2s; }
-        .comment-input-row input:focus { border-color: #2563eb; outline: none; }
-        .comment-input-row button { background: #1e3a8a; color: #fff; border: none; padding: 10px 24px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; font-size: 0.9rem; }
-        .comment-input-row button:hover { background: #2563eb; }
-        .comment-list { margin-top: 14px; }
-        .comment-item { display: flex; gap: 12px; padding: 12px; background: #f8fafc; border-radius: 10px; margin-bottom: 8px; align-items: flex-start; border: 1px solid #f1f5f9; }
-        .comment-item .c-avatar { width: 36px; height: 36px; background: #2563eb; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-size: 0.9rem; }
+        .comment-box {
+            background: #fff;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 12px 0;
+        }
+        .comment-box textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            min-height: 60px;
+            box-sizing: border-box;
+            transition: all 0.3s;
+        }
+        .comment-box textarea:focus { border-color: #0d47a1; outline: none; }
+        .comment-input-row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+        .comment-input-row input {
+            flex: 1;
+            padding: 6px 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            min-width: 120px;
+            transition: all 0.3s;
+        }
+        .comment-input-row input:focus { border-color: #0d47a1; outline: none; }
+        .comment-input-row button {
+            background: #0d47a1;
+            color: #fff;
+            border: none;
+            padding: 6px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .comment-input-row button:hover { background: #1565c0; transform: scale(1.03); }
+        .comment-list { margin-top: 10px; }
+        .comment-item {
+            display: flex;
+            gap: 10px;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            align-items: flex-start;
+        }
+        .comment-item .c-avatar {
+            width: 32px;
+            height: 32px;
+            background: #0d47a1;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+            font-size: 0.8rem;
+        }
         .comment-item .c-body { flex: 1; }
-        .comment-item .c-name { font-weight: 700; color: #0f172a; font-size: 0.9rem; }
-        .comment-item .c-text { color: #475569; margin-top: 3px; font-size: 0.88rem; font-weight: 500; }
-        .comment-item .c-time { font-size: 0.7rem; color: #94a3b8; margin-top: 4px; font-weight: 600; }
+        .comment-item .c-name { font-weight: 700; color: #333; font-size: 0.85rem; }
+        .comment-item .c-text { color: #555; margin-top: 2px; font-size: 0.85rem; }
+        .comment-item .c-time { font-size: 0.65rem; color: #999; margin-top: 2px; }
 
         /* ============================================================ */
-        /* 🔥 FOOTER & DISCLAIMER */
+        /* 🔥 FOOTER */
         /* ============================================================ */
-        .footer-links { text-align: center; padding: 16px 0; font-size: 0.8rem; color: #64748b; border-top: 1px solid #e2e8f0; margin-top: 24px; font-weight: 600; }
-        .footer-links a { color: #2563eb; text-decoration: none; margin: 0 6px; }
+        .footer-links {
+            text-align: center;
+            padding: 12px 0;
+            font-size: 0.75rem;
+            color: #666;
+            border-top: 1px solid #eee;
+            margin-top: 15px;
+        }
+        .footer-links a { color: #0d47a1; text-decoration: none; margin: 0 3px; }
         .footer-links a:hover { text-decoration: underline; }
-        .disclaimer-footer { background: #f1f5f9; padding: 20px; border-radius: 14px; margin: 16px 0; font-size: 0.78rem; color: #475569; line-height: 1.7; border: 1px solid #e2e8f0; }
+        .disclaimer-footer {
+            background: #f8f9fa;
+            padding: 15px 18px;
+            border-radius: 12px;
+            margin: 12px 0;
+            font-size: 0.75rem;
+            color: #555;
+            line-height: 1.7;
+        }
 
         /* ============================================================ */
-        /* 🔥 MODALS SYSTEM (VIP POPUP) */
+        /* 🔥 VIP MODAL */
         /* ============================================================ */
-        .vip-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.6); backdrop-filter: blur(4px); z-index: 9999; justify-content: center; align-items: center; padding: 16px; }
+        .vip-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
         .vip-modal-overlay.active { display: flex; }
-        .vip-modal-box { background: #fff; padding: 30px 24px; border-radius: 20px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); animation: vipFadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; border: 1px solid #e2e8f0; }
-        @keyframes vipFadeIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .vip-modal-close { position: absolute; top: 12px; right: 18px; font-size: 28px; cursor: pointer; color: #94a3b8; transition: color 0.2s; font-weight: 300; }
-        .vip-modal-close:hover { color: #ef4444; }
-        .vip-number-display { font-size: 2.2rem; font-weight: 900; color: #dc2626; background: linear-gradient(135deg, #fef3c7, #fffbeb); padding: 16px; border-radius: 12px; border: 2px dashed #f59e0b; margin: 14px 0; letter-spacing: 3px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
-        .vip-number-display .label { font-size: 0.65rem; color: #b45309; display: block; margin-bottom: 4px; font-weight: 700; letter-spacing: 1px; }
+        .vip-modal-box {
+            background: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 92%;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: vipFadeIn 0.4s ease;
+            position: relative;
+        }
+        @keyframes vipFadeIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .vip-modal-close { position: absolute; top: 8px; right: 15px; font-size: 26px; cursor: pointer; color: #999; transition: color 0.2s; }
+        .vip-modal-close:hover { color: #cc0000; }
+        .vip-number-display {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #cc0000;
+            background: linear-gradient(135deg, #fff9e6, #fff0d0);
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px dashed #cc0000;
+            margin: 10px 0;
+            letter-spacing: 2px;
+        }
+        .vip-number-display .label { font-size: 0.6rem; color: #888; display: block; margin-bottom: 3px; font-weight: normal; letter-spacing: 0.5px; }
 
         /* ============================================================ */
-        /* 🔥 RESPONSIVE BREAKPOINTS ENGINE */
+        /* 🔥 RESPONSIVE */
         /* ============================================================ */
         @media (max-width: 768px) {
-            .name-box h1 { font-size: 1.35rem; }
-            .name-box .bn-title { font-size: 0.88rem; }
-            .slider-text { font-size: 1.05rem; }
+            .name-box h1 { font-size: 1.2rem; }
+            .name-box .bn-title { font-size: 0.8rem; }
+            .site-brand { padding: 8px 15px; }
+            .site-logo { max-width: 45px; }
+            .seo-h2, .seo-h2-dark, .seo-h2-orange, .faq-title {
+                font-size: 0.95rem;
+                padding: 4px 12px;
+            }
+            .slider-text { font-size: 1rem; }
             .slider-wrapper { height: 40px; }
-            .results-grid { grid-template-columns: 1fr; gap: 14px; }
-            .common-venues-container { grid-template-columns: 1fr; gap: 14px; }
-            .btn-row-three { gap: 6px; }
-            .nav-btn-big { padding: 8px 14px; font-size: 0.75rem; border-radius: 10px; }
-            .whatsapp-box { padding: 16px; }
-            .whatsapp-box h3 { font-size: 1.15rem; }
-            .whatsapp-box .whatsapp-join-btn { font-size: 0.9rem; padding: 10px 24px; }
-            .seo-h2 { font-size: 1.15rem; }
-            .seo-h2-dark { font-size: 1.15rem; }
-            .seo-h2-orange { font-size: 1.25rem; }
+            .results-grid { grid-template-columns: 1fr; }
+            .common-venues-container { grid-template-columns: 1fr; }
+            .btn-row-three { gap: 5px; }
+            .nav-btn-big { padding: 6px 12px; font-size: 0.65rem; }
+            .whatsapp-box { min-height: auto; padding: 12px; }
+            .whatsapp-box h3 { font-size: 1rem; }
+            .whatsapp-box .whatsapp-join-btn { font-size: 0.8rem; padding: 8px 16px; }
+            .selector-container { gap: 10px; }
+            .selector-container select { padding: 5px 10px; font-size: 0.75rem; min-width: 70px; height: 30px; }
+            .faq-grid { grid-template-columns: 1fr; }
+            .history-card li h4 { font-size: 0.8rem; padding: 3px 10px; }
         }
         @media (max-width: 480px) {
-            .slider-text { font-size: 0.9rem; }
+            .name-box h1 { font-size: 1rem; }
+            .name-box .bn-title { font-size: 0.7rem; }
+            .site-brand { padding: 6px 10px; }
+            .site-logo { max-width: 38px; }
+            .seo-h2, .seo-h2-dark, .seo-h2-orange, .faq-title {
+                font-size: 0.85rem;
+                padding: 3px 10px;
+            }
+            .slider-text { font-size: 0.85rem; }
             .slider-wrapper { height: 36px; }
-            .result-card .timing-dual { grid-template-columns: 1fr; gap: 8px; }
-            .result-card .fr-box .result-number, .result-card .sr-box .result-number { font-size: 1.7rem; }
-            .common-table th, .common-table td { padding: 8px 6px; font-size: 0.75rem; }
-            .selector-container { gap: 8px; padding: 8px; }
-            .selector-container select { padding: 5px 10px; font-size: 0.8rem; }
+            .result-card .timing-dual { grid-template-columns: 1fr; }
+            .result-card .fr-box .result-number, .result-card .sr-box .result-number { font-size: 1.4rem; }
+            .common-table th, .common-table td { padding: 4px 6px; font-size: 0.7rem; }
+            .selector-container { gap: 6px; flex-direction: row !important; flex-wrap: wrap; }
+            .selector-container select { padding: 4px 8px; font-size: 0.7rem; min-width: 60px; height: 28px; }
+            .selector-container label { font-size: 0.7rem; }
+            .history-card li h4 { font-size: 0.7rem; padding: 2px 8px; }
         }
     </style>
 </head>
 <body>
 <div class="container">
     <!-- ===== LANGUAGE BAR ===== -->
-    <div class="language-bar">
+    <div class="language-bar" style="text-align:center; display:block;">
         🌐 ভাষা / Language: 
         <a href="#" onclick="showBangla()">🇧🇩 বাংলা</a> | 
         <a href="#" onclick="showEnglish()">🇬🇧 English</a>
@@ -658,7 +1108,7 @@
     </div>
     
     <!-- ===== OMG10 LINK ===== -->
-    <div style="margin: 16px 0; text-align: center;">
+    <div style="margin: 10px 0; text-align: center;">
         <a href="https://omg10.com/4/11160871" target="_blank" class="omg10-link">
             🎯 আজকের VIP কমন নাম্বার ও উইনিং টিপস 🎯
         </a>
@@ -672,7 +1122,7 @@
         <a href="https://whatsapp.com/channel/0029VaFbrQmLSmbjX5WOYp2d" target="_blank" class="whatsapp-join-btn">Join WhatsApp</a>
     </div>
 
-    <h2 class="seo-h2-orange">🎯 Shillong Teer Result Today Live | আজকের শিলং তীর লাইভ রেজাল্ট</h2>
+    <h2 class="seo-h2-orange" style="display:block; width:100%; text-align:center;">🎯 Shillong Teer Result Today Live | আজকের শিলং তীর লাইভ রেজাল্ট</h2>
     
     <!-- ===== SLIDER ===== -->
     <div class="slider-container">
@@ -685,21 +1135,21 @@
     <div class="vip-box">
         <div class="vip-icon">🔒</div>
         <h3>🎯 VIP ডাইরেক্ট নাম্বার (100% Locked)</h3>
-        <p><span style="background:#fef08a; padding:2px 8px; border-radius:4px; font-weight:bold; color: #854d0e;">🚀 [BN]</span> ফ্রিতে আনলক করে স্পেশাল হিট নাম্বারটি দেখে নিন</p>
+        <p><span style="background:#ffeb3b; padding:2px 8px; border-radius:4px; font-weight:bold;">🚀 [BN]</span> ফ্রিতে আনলক করে স্পেশাল হিট নাম্বারটি দেখে নিন</p>
         <button id="vipUnlockBtn" class="vip-unlock-btn">🔓 আনলক করুন / Unlock Now</button>
         <div id="vipStatusText" style="margin-top:6px; font-size:0.75rem; color:#888; min-height:18px;"></div>
     </div>
 
     <!-- ===== Refresh Button ===== -->
-    <div style="text-align:center; margin:12px 0;">
-        <button onclick="window.location.reload();" style="background:linear-gradient(135deg,#10b981,#059669); color:#fff; padding:10px 24px; font-size:0.85rem; font-weight:700; border:none; border-radius:30px; cursor:pointer; box-shadow:0 4px 12px rgba(5,150,105,0.2); width:95%; max-width:350px; transition: all 0.2s;">
+    <div style="text-align:center; margin:8px 0;">
+        <button onclick="window.location.reload();" style="background:linear-gradient(135deg,#00b300,#008000); color:#fff; padding:6px 16px; font-size:0.8rem; font-weight:700; border:none; border-radius:30px; cursor:pointer; box-shadow:0 3px 8px rgba(0,128,0,0.15); width:95%; max-width:350px;">
             🔄 ক্লিক করে রেজাল্ট রিফ্রেশ করুন
         </button>
     </div>
 
     <!-- ===== Fast Server Link ===== -->
-    <div style="margin:-4px 0 12px 0; text-align:center;">
-        <a href="https://omg10.com/4/11160871" target="_blank" style="display:inline-block; width:95%; max-width:350px; background:#fef2f2; border:1px dashed #fca5a5; color:#b91c1c; padding:6px 12px; border-radius:8px; font-size:0.75rem; font-weight:700; text-decoration:none; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+    <div style="margin:-4px 0 8px 0; text-align:center;">
+        <a href="https://omg10.com/4/11160871" target="_blank" style="display:inline-block; width:95%; max-width:350px; background:#fff0f0; border:1px dashed #ffcccc; color:#d00000; padding:3px 8px; border-radius:6px; font-size:0.65rem; font-weight:700; text-decoration:none;">
             ⚡ [BN] সার্ভার-১ থেকে লাইভ দেখুন | [AS] চাৰ্ভাৰ-১ ৰ পৰা লাইভ চাওক
         </a>
     </div>
@@ -720,8 +1170,8 @@
     </div>
 
     <!-- ===== ADSTERA BANNER ===== -->
-    <div style="margin:1.5rem 0; text-align:center; background:#f8fafc; padding:1rem; border-radius:16px; border: 1px dashed #cbd5e1;">
-        <p style="font-size:0.75rem; font-weight:700; color:#64748b; margin-bottom:8px; letter-spacing:0.5px; text-transform: uppercase;">💡 Trending News & Teer Tips 💡</p>
+    <div style="margin:1.5rem 0; text-align:center; background:#f9f5f0; padding:0.8rem; border-radius:12px;">
+        <p style="font-size:0.75rem; font-weight:700; color:#555; margin-bottom:6px; letter-spacing:0.5px;">💡 Trending News & Teer Tips 💡</p>
         <script async="async" data-cfasync="false" src="https://pl30289530.effectivecpmnetwork.com/c790b6b5b066c06ce4ca5298332d2265/invoke.js"></script>
         <div id="container-c790b6b5b066c06ce4ca5298332d2265"></div>
     </div>
@@ -730,7 +1180,7 @@
     <div class="common-venues-container" id="commonTablesContainer"></div>
     
     <!-- ===== PREVIOUS RESULTS ===== -->
-    <h2 class="seo-h2-dark">📅 Shillong Teer Previous Results</h2>
+    <h2 class="seo-h2-dark" style="display:block; width:100%; text-align:center;">📅 Shillong Teer Previous Results</h2>
     <div class="monthwise-section">
         <div class="selector-container">
             <div style="display: flex; align-items: center; gap: 6px;">
@@ -774,13 +1224,13 @@
                 </tr>
             </thead>
             <tbody id="resultsTableShillong">
-                <tr><td colspan="3" style="text-align:center; padding:15px; color:#94a3b8; font-weight: 500;">Loading...</td></tr>
+                <tr><td colspan="3" style="text-align:center; padding:15px; color:#8a7a6a;">Loading...</td></tr>
             </tbody>
         </table>
     </div>
 
     <!-- ===== DREAM CHART ===== -->
-    <h2 class="seo-h2-dark">📖 Shillong Teer Dream Chart | শিলং তীর স্বপ্নের চার্ট</h2>
+    <h2 class="seo-h2-dark" style="display:block; width:100%; text-align:center;">📖 Shillong Teer Dream Chart | শিলং তীর স্বপ্নের চার্ট</h2>
     <div class="dream-chart-section">
         <table class="dream-chart-table">
             <thead><tr><th>Dream</th><th>Direct Numbers</th><th>House Digit</th><th>Ending Digit</th></tr></thead>
@@ -795,7 +1245,7 @@
             <input type="text" id="dreamInput" class="dream-input" placeholder="e.g., snake, tiger">
             <button id="predictDreamBtn" class="dream-predict-btn">🔮 PREDICT</button>
         </div>
-        <div id="dreamDisplayText" style="text-align:center; margin-bottom:10px; font-weight:700; color:#2563eb; font-size:0.85rem;">💭 Enter a dream word and click Predict</div>
+        <div id="dreamDisplayText" style="text-align:center; margin-bottom:6px; font-weight:700; color:#0d47a1; font-size:0.8rem;">💭 Enter a dream word and click Predict</div>
         <table class="dream-table">
             <thead><tr><th>🏠 HOUSE NUMBERS</th><th>🎯 ENDING NUMBERS</th></tr></thead>
             <tbody>
@@ -813,7 +1263,7 @@
     
     <!-- ===== SHILLONG TEER ===== -->
     <div class="history-section-direct">
-        <h2 class="seo-h2-dark" style="border-left-color:#2563eb;">🏹 Shillong Teer - Complete History, Tradition & Culture</h2>
+        <h2 class="seo-h2-dark" style="border-left-color:#0d47a1; display:block; width:100%; text-align:center;">🏹 Shillong Teer - Complete History, Tradition & Culture</h2>
         <div class="history-card">
             <ul>
                 <li>
@@ -842,7 +1292,7 @@
 
     <!-- ===== KHANAPARA TEER ===== -->
     <div class="history-section-direct">
-        <h2 class="seo-h2-dark" style="border-left-color:#059669;">🏹 Khanapara Teer - Complete History, Tradition & Culture</h2>
+        <h2 class="seo-h2-dark" style="border-left-color:#00695c; display:block; width:100%; text-align:center;">🏹 Khanapara Teer - Complete History, Tradition & Culture</h2>
         <div class="history-card">
             <ul>
                 <li class="khanapara">
@@ -857,8 +1307,8 @@
                     <h4>🏛️ Modern Impact of Khanapara Teer</h4>
                     <p>Khanapara Teer has grown significantly in popularity, attracting players from Assam and neighboring states. It operates under the same legal framework as Shillong Teer and follows similar rules and timings, with FR at 4:10 PM and SR at 5:05 PM.</p>
                 </li>
-                <li class="khanapara did-you-know" style="background:#e6f4ea; border-left-color:#047857;">
-                    <h4 style="color:#047857;">📌 Amazing Facts About Khanapara Teer</h4>
+                <li class="khanapara did-you-know" style="background:#e0f2f1; border-left-color:#004d40;">
+                    <h4 style="background:linear-gradient(135deg, #004d40, #00695c);">📌 Amazing Facts About Khanapara Teer</h4>
                     <p style="font-style:italic;">Khanapara Teer has become a major tourist attraction, with visitors coming from across Assam to witness the unique archery competitions and the vibrant atmosphere of the grounds.</p>
                 </li>
                 <li class="khanapara">
@@ -871,7 +1321,7 @@
 
     <!-- ===== JUWAI TEER ===== -->
     <div class="history-section-direct">
-        <h2 class="seo-h2-dark" style="border-left-color:#7c3aed;">🏹 Juwai Teer - Complete History, Tradition & Culture</h2>
+        <h2 class="seo-h2-dark" style="border-left-color:#4a148c; display:block; width:100%; text-align:center;">🏹 Juwai Teer - Complete History, Tradition & Culture</h2>
         <div class="history-card">
             <ul>
                 <li class="juwai">
@@ -886,8 +1336,8 @@
                     <h4>🏛️ Current Status of Juwai Teer</h4>
                     <p>Juwai Teer operates with the same legal framework as other Teer games in Meghalaya. The timings are FR at 2:30 PM and SR at 3:15 PM, making it one of the afternoon matches.</p>
                 </li>
-                <li class="juwai did-you-know" style="background:#f5f3ff; border-left-color:#5b21b6;">
-                    <h4 style="color:#5b21b6;">📌 Amazing Facts About Juwai Teer</h4>
+                <li class="juwai did-you-know" style="background:#f3e5f5; border-left-color:#38006b;">
+                    <h4 style="background:linear-gradient(135deg, #38006b, #4a148c);">📌 Amazing Facts About Juwai Teer</h4>
                     <p style="font-style:italic;">The Juwai Teer grounds are known for their picturesque location, surrounded by lush green hills and traditional Khasi villages.</p>
                 </li>
                 <li class="juwai">
@@ -900,7 +1350,7 @@
 
     <!-- ===== MORNING TEER ===== -->
     <div class="history-section-direct">
-        <h2 class="seo-h2-dark" style="border-left-color:#ea580c;">🌅 Morning Teer - Complete History, Tradition & Culture</h2>
+        <h2 class="seo-h2-dark" style="border-left-color:#e65100; display:block; width:100%; text-align:center;">🌅 Morning Teer - Complete History, Tradition & Culture</h2>
         <div class="history-card">
             <ul>
                 <li class="morning">
@@ -915,8 +1365,8 @@
                     <h4>🏛️ Operational Details of Morning Teer</h4>
                     <p>Morning Teer operates from Monday to Friday, with FR at 10:30 AM and SR at 11:30 AM. It follows the same rules and regulations as other Teer games in Meghalaya.</p>
                 </li>
-                <li class="morning did-you-know" style="background:#fff7ed; border-left-color:#c2410c;">
-                    <h4 style="color:#c2410c;">📌 Amazing Facts About Morning Teer</h4>
+                <li class="morning did-you-know" style="background:#fff3e0; border-left-color:#bf360c;">
+                    <h4 style="background:linear-gradient(135deg, #bf360c, #e65100);">📌 Amazing Facts About Morning Teer</h4>
                     <p style="font-style:italic;">Morning Teer is especially popular among elderly players who prefer to participate in the game during the cooler morning hours.</p>
                 </li>
                 <li class="morning">
@@ -929,7 +1379,7 @@
 
     <!-- ===== NIGHT TEER ===== -->
     <div class="history-section-direct">
-        <h2 class="seo-h2-dark" style="border-left-color:#334155;">🌙 Night Teer - Complete History, Tradition & Culture</h2>
+        <h2 class="seo-h2-dark" style="border-left-color:#1a237e; display:block; width:100%; text-align:center;">🌙 Night Teer - Complete History, Tradition & Culture</h2>
         <div class="history-card">
             <ul>
                 <li class="night">
@@ -944,8 +1394,8 @@
                     <h4>🏛️ Operational Details of Night Teer</h4>
                     <p>Night Teer operates from Monday to Friday, with FR at 11:10 PM and SR at 12:10 AM. It follows the same rules and regulations as other Teer games in Meghalaya.</p>
                 </li>
-                <li class="night did-you-know" style="background:#f8fafc; border-left-color:#1e293b;">
-                    <h4 style="color:#1e293b;">📌 Amazing Facts About Night Teer</h4>
+                <li class="night did-you-know" style="background:#e8eaf6; border-left-color:#000051;">
+                    <h4 style="background:linear-gradient(135deg, #000051, #1a237e);">📌 Amazing Facts About Night Teer</h4>
                     <p style="font-style:italic;">Night Teer has become a popular topic of discussion on social media platforms, with players sharing their predictions and experiences late into the night.</p>
                 </li>
                 <li class="night">
@@ -958,8 +1408,8 @@
 
     <!-- ===== STRATEGY ===== -->
     <div class="strategy-article-section">
-        <h2 class="seo-h2-dark" style="border-left-color: #a855f7;">🏆 WINNING PATTERNS & EXPERT LOGIC</h2>
-        <p style="margin-bottom:10px; font-size:0.9rem; color:#475569;">Professional players utilize structural trends rather than simple guesswork. Here are the top mathematical approaches to optimize your targets:</p>
+        <h2 class="seo-h2-dark" style="display:block; width:100%; text-align:center;">🏆 WINNING PATTERNS & EXPERT LOGIC</h2>
+        <p style="margin-bottom:10px; font-size:0.85rem; color:#444;">Professional players utilize structural trends rather than simple guesswork. Here are the top mathematical approaches to optimize your targets:</p>
         <div class="strategy-item">
             <strong>1. 14-Day Frequency Audit (১৪ দিনের ট্র্যাক)</strong>
             Monitor numbers that haven't appeared in the last 14 days. These structural gaps have a highly statistical probability to emerge next.
@@ -975,37 +1425,37 @@
     </div>
 
     <!-- ===== PDF DOWNLOAD ===== -->
-    <div style="margin:16px 0; text-align:center; background:#f0f9ff; border:1px solid #bae6fd; padding:12px; border-radius:14px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);">
-        <p style="margin:0 0 6px 0; font-weight:700; color:#0369a1; font-size:0.85rem;">📥 তীর ফর্মুলা বুক ও লাইভ চার্ট (PDF)</p>
-        <a href="https://omg10.com/4/11160871" target="_blank" style="display:inline-block; background:#0288d1; color:#fff; padding:6px 18px; border-radius:8px; text-decoration:none; font-weight:700; font-size:0.8rem; box-shadow: 0 2px 4px rgba(2,136,209,0.2);">
+    <div style="margin:12px 0; text-align:center; background:#eef9ff; border:1px solid #b3e5fc; padding:8px 12px; border-radius:10px;">
+        <p style="margin:0 0 3px 0; font-weight:700; color:#0277bd; font-size:0.8rem;">📥 তীর ফর্মুলা বুক ও লাইভ চার্ট (PDF)</p>
+        <a href="https://omg10.com/4/11160871" target="_blank" style="display:inline-block; background:#0288d1; color:#fff; padding:5px 14px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.75rem; margin-top:3px;">
             📥 Download PDF / ডাউনলোড কৰক
         </a>
     </div>
 
     <!-- ===== GUIDE ===== -->
-    <div style="background:#fff; padding:20px; border-radius:16px; box-shadow:0 4px 15px rgba(0,0,0,0.04); margin:16px 0; border: 1px solid #e2e8f0;">
-        <h2 class="seo-h2-dark">📖 নতুনদের জন্য গাইড ও নিয়মাবলী</h2>
-        <div style="display:grid; gap:12px; margin-top: 10px;">
+    <div style="background:#fff; padding:15px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.08); margin:12px 0;">
+        <h2 class="seo-h2-dark" style="display:block; width:100%; text-align:center;">📖 নতুনদের জন্য গাইড ও নিয়মাবলী</h2>
+        <div style="display:grid; gap:10px;">
             <div style="display:flex; gap:12px; align-items:flex-start;">
-                <div style="background:#2563eb; color:#fff; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; flex-shrink:0; font-size:0.85rem;">১</div>
-                <div><h4 style="margin:0 0 2px 0; color:#1e3a8a; font-size:0.95rem; font-weight: 700;">📊 ফলাফল ট্র্যাক করা শিখুন</h4><p style="margin:0; color:#475569; font-size:0.85rem; font-weight: 500;">প্রতিদিন আমাদের সাইটে এসে লাইভ FR এবং SR ফলাফল পর্যবেক্ষণ করুন।</p></div>
+                <div style="background:#0d47a1; color:#fff; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; flex-shrink:0; font-size:0.8rem;">১</div>
+                <div><h4 style="margin:0 0 2px 0; color:#0d47a1; font-size:0.9rem;">📊 ফলাফল ট্র্যাক করা শিখুন</h4><p style="margin:0; color:#555; font-size:0.8rem;">প্রতিদিন আমাদের সাইটে এসে লাইভ FR এবং SR ফলাফল পর্যবেক্ষণ করুন।</p></div>
             </div>
             <div style="display:flex; gap:12px; align-items:flex-start;">
-                <div style="background:#2563eb; color:#fff; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; flex-shrink:0; font-size:0.85rem;">২</div>
-                <div><h4 style="margin:0 0 2px 0; color:#1e3a8a; font-size:0.95rem; font-weight: 700;">🎯 কমন নাম্বার ও হাউজ বুঝুন</h4><p style="margin:0; color:#475569; font-size:0.85rem; font-weight: 500;">ডাইরেক্ট নাম্বারে রিস্ক বেশি থাকে, তাই প্রথমে হাউজ এবং এন্ডিং নাম্বার টার্গেট করুন।</p></div>
+                <div style="background:#0d47a1; color:#fff; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; flex-shrink:0; font-size:0.8rem;">২</div>
+                <div><h4 style="margin:0 0 2px 0; color:#0d47a1; font-size:0.9rem;">🎯 কমন নাম্বার ও হাউজ বুঝুন</h4><p style="margin:0; color:#555; font-size:0.8rem;">ডাইরেক্ট নাম্বারে রিস্ক বেশি থাকে, তাই প্রথমে হাউজ এবং এন্ডিং নাম্বার টার্গেট করুন।</p></div>
             </div>
         </div>
     </div>
 
     <!-- ===== TRENDING ===== -->
-    <div style="background:#fff; padding:20px; border-radius:16px; box-shadow:0 4px 15px rgba(0,0,0,0.04); margin:16px 0; border: 1px solid #e2e8f0;">
-        <h2 class="seo-h2-dark">🔥 ট্রেন্ডিং নাম্বার</h2>
+    <div style="background:#fff; padding:15px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.08); margin:12px 0;">
+        <h2 class="seo-h2-dark" style="display:block; width:100%; text-align:center;">🔥 ট্রেন্ডিং নাম্বার</h2>
         <div class="trending-grid" id="trendingGrid"></div>
     </div>
     
     <!-- ===== COMMENTS ===== -->
     <div class="comment-box">
-        <h2 class="seo-h2-dark">💬 আপনার মতামত দিন</h2>
+        <h2 class="seo-h2-dark" style="display:block; width:100%; text-align:center;">💬 আপনার মতামত দিন</h2>
         <textarea id="commentInput" placeholder="আপনার মতামত লিখুন..."></textarea>
         <div class="comment-input-row">
             <input type="text" id="commentName" placeholder="আপনার নাম">
@@ -1018,7 +1468,7 @@
     <!-- 🔥 FAQ - 10 Points (ENGLISH) -->
     <!-- ============================================================ -->
     <div class="faq-section">
-        <div class="faq-title">❓ FREQUENTLY ASKED QUESTIONS (FAQ)</div>
+        <div class="faq-title">❓ FREQUENTLY ASKED QUESTIONS (FAQ) - 10 Important Questions</div>
         <div class="faq-grid">
             <div class="faq-item active">
                 <div class="faq-question">1. What are the official timings for Shillong Teer? <span class="faq-icon">+</span></div>
@@ -1089,8 +1539,8 @@
     </div>
 
     <!-- ===== PARTNER LINK ===== -->
-    <div style="text-align:center; margin:1rem 0; padding:0.6rem; background:#fffbeb; border-radius:10px; border:1px solid #fef3c7;">
-        <a href="https://omg10.com/4/11160871" target="_blank" style="color:#0f172a; font-weight:700; text-decoration:none; font-size:0.8rem; display:inline-block; padding:4px 12px; border-radius:30px; background:rgba(217,119,6,0.05);">
+    <div style="text-align:center; margin:0.8rem 0; padding:0.4rem; background:#fdf8f0; border-radius:0.6rem; border:1px solid #e8dcc8;">
+        <a href="https://omg10.com/4/11160871" target="_blank" style="color:#0d0a0a; font-weight:700; text-decoration:none; font-size:0.75rem; display:inline-block; padding:0.2rem 0.6rem; border-radius:30px; background:rgba(204,0,0,0.04);">
             🔗 <span>আমাদের স্পেশাল পার্টনার সাইটটি দেখুন</span>
         </a>
     </div>
@@ -1100,18 +1550,18 @@
 <div id="vipModal" class="vip-modal-overlay">
     <div class="vip-modal-box">
         <span class="vip-modal-close" id="vipModalClose">&times;</span>
-        <div style="font-size:2.5rem; margin-bottom:4px;">🏆</div>
-        <h3 style="color:#0f172a; margin:4px 0; font-size:1.25rem; font-weight:800;">🎯 VIP Number Unlocked!</h3>
-        <p style="color:#64748b; font-size:0.8rem; margin:0 0 8px 0; font-weight:500;">আজকের স্পেশাল VIP ডাইরেক্ট নাম্বার</p>
+        <div style="font-size:2rem; margin-bottom:3px;">🏆</div>
+        <h3 style="color:#0a3d6b; margin:3px 0; font-size:1.1rem;">🎯 VIP Number Unlocked!</h3>
+        <p style="color:#888; font-size:0.75rem; margin:0 0 6px 0;">আজকের স্পেশাল VIP ডাইরেক্ট নাম্বার</p>
         <div id="vipNumberDisplay" class="vip-number-display">
             <span class="label">🔢 VIP DIRECT NUMBER</span>
             <span id="vipNumberValue">--</span>
         </div>
-        <div id="vipExtraInfo" style="font-size:0.85rem; color:#334155; margin-bottom:10px; font-weight:500;"></div>
-        <button onclick="document.getElementById('vipModal').classList.remove('active')" style="background:#0f172a; color:#fff; border:none; padding:8px 24px; border-radius:30px; font-weight:700; font-size:0.9rem; cursor:pointer; transition:all 0.2s;">
+        <div id="vipExtraInfo" style="font-size:0.8rem; color:#555; margin-bottom:6px;"></div>
+        <button onclick="document.getElementById('vipModal').classList.remove('active')" style="background:#0a3d6b; color:#fff; border:none; padding:6px 22px; border-radius:30px; font-weight:700; font-size:0.85rem; cursor:pointer;">
             ✕ Close / বন্ধ করুন
         </button>
-        <p style="font-size:0.65rem; color:#94a3b8; margin-top:10px; font-weight:500;">✅ VIP Number loaded from secure server</p>
+        <p style="font-size:0.6rem; color:#aaa; margin-top:8px;">✅ VIP Number loaded from secure server</p>
     </div>
 </div>
 
@@ -1245,25 +1695,25 @@
                         
                         html += `
                             <tr>
-                                <td style="padding: 10px; font-weight: 700; color: #0f172a; text-align: center; border-bottom: 1px solid #f1f5f9;">
+                                <td style="padding: 8px 12px; font-weight: 700; color: #0d0a0a; text-align: center; border-bottom: 1px solid #eee;">
                                     ${formattedDate}
                                 </td>
-                                <td style="padding: 10px; font-weight: 800; color: #2563eb; text-align: center; border-bottom: 1px solid #f1f5f9;">
+                                <td style="padding: 8px 12px; font-weight: 700; color: #0d47a1; text-align: center; border-bottom: 1px solid #eee;">
                                     ${row.fr_result || '--'}
                                 </td>
-                                <td style="padding: 10px; font-weight: 800; color: #1d4ed8; text-align: center; border-bottom: 1px solid #f1f5f9;">
+                                <td style="padding: 8px 12px; font-weight: 700; color: #1565c0; text-align: center; border-bottom: 1px solid #eee;">
                                     ${row.sr_result || '--'}
                                 </td>
                             </tr>
                         `;
                     });
                 } else {
-                    html = `<tr><td colspan="3" style="text-align:center; padding:15px; color:#64748b; font-weight:500;">${monthNames[monthIndex]} ${year} - No data available</td></tr>`;
+                    html = `<tr><td colspan="3" style="text-align:center; padding:15px; color:#8a7a6a;">${monthNames[monthIndex]} ${year} - No data available</td></tr>`;
                 }
                 
                 tbody.innerHTML = html;
             } catch(err) {
-                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:15px; color:#64748b; font-weight:500;">No data available</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:15px; color:#8a7a6a;">No data available</td></tr>`;
             }
         }
 
