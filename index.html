@@ -206,29 +206,11 @@
             line-height: 1.3;
         }
 
-        .slider-text .domain-part {
-            color: #0d47a1;
-        }
-
-        .slider-text .sep-part {
-            color: #00e676;
-            margin: 0 6px;
-            font-weight: 300;
-        }
-
-        .slider-text .subline-part {
-            color: #1565c0;
-        }
-
-        .slider-text.active {
-            opacity: 1;
-            transform: translateY(-50%) translateX(0);
-        }
-
-        .slider-text.slide-out {
-            opacity: 0;
-            transform: translateY(-50%) translateX(-100%);
-        }
+        .slider-text .domain-part { color: #0d47a1; }
+        .slider-text .sep-part { color: #00e676; margin: 0 6px; font-weight: 300; }
+        .slider-text .subline-part { color: #1565c0; }
+        .slider-text.active { opacity: 1; transform: translateY(-50%) translateX(0); }
+        .slider-text.slide-out { opacity: 0; transform: translateY(-50%) translateX(-100%); }
 
         @media (min-width: 1200px) {
             .slider-text { font-size: 1.8rem; }
@@ -250,43 +232,25 @@
 
         @media (max-width: 576px) {
             .slider-wrapper { height: 45px; padding: 0 6px; }
-            .slider-text { 
-                font-size: 1.1rem; 
-                padding: 0 10px; 
-                letter-spacing: 0.4px; 
-            }
-            .slider-container { padding: 8px 0; }
-            .slider-container { border-width: 2px; }
+            .slider-text { font-size: 1.1rem; padding: 0 10px; letter-spacing: 0.4px; }
+            .slider-container { padding: 8px 0; border-width: 2px; }
         }
 
         @media (max-width: 480px) {
             .slider-wrapper { height: 40px; padding: 0 5px; }
-            .slider-text { 
-                font-size: 0.95rem; 
-                padding: 0 8px; 
-                letter-spacing: 0.3px; 
-            }
+            .slider-text { font-size: 0.95rem; padding: 0 8px; letter-spacing: 0.3px; }
             .slider-container { padding: 6px 0; }
         }
 
         @media (max-width: 400px) {
             .slider-wrapper { height: 36px; padding: 0 4px; }
-            .slider-text { 
-                font-size: 0.85rem; 
-                padding: 0 6px; 
-                letter-spacing: 0.2px; 
-            }
-            .slider-container { padding: 5px 0; }
-            .slider-container { border-width: 2px; border-radius: 8px; }
+            .slider-text { font-size: 0.85rem; padding: 0 6px; letter-spacing: 0.2px; }
+            .slider-container { padding: 5px 0; border-width: 2px; border-radius: 8px; }
         }
 
         @media (max-width: 340px) {
             .slider-wrapper { height: 32px; padding: 0 3px; }
-            .slider-text { 
-                font-size: 0.75rem; 
-                padding: 0 5px; 
-                letter-spacing: 0.1px; 
-            }
+            .slider-text { font-size: 0.75rem; padding: 0 5px; letter-spacing: 0.1px; }
             .slider-container { padding: 4px 0; }
         }
 
@@ -388,38 +352,13 @@
             border-left: 4px solid #0d47a1;
             transition: transform 0.3s;
         }
-        .result-card:hover {
-            transform: translateY(-3px);
-        }
-        .result-card .venue-name {
-            font-size: 1.2rem;
-            font-weight: 900;
-            color: #0d47a1;
-            margin-bottom: 10px;
-        }
-        .result-card .round {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        .result-card .round:last-child {
-            border-bottom: none;
-        }
-        .result-card .round-label {
-            font-weight: 600;
-            color: #555;
-        }
-        .result-card .round-value {
-            font-weight: 900;
-            font-size: 1.3rem;
-            color: #cc0000;
-        }
-        .result-card .time {
-            font-size: 0.8rem;
-            color: #888;
-            margin-top: 8px;
-        }
+        .result-card:hover { transform: translateY(-3px); }
+        .result-card .venue-name { font-size: 1.2rem; font-weight: 900; color: #0d47a1; margin-bottom: 10px; }
+        .result-card .round { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f0f0f0; }
+        .result-card .round:last-child { border-bottom: none; }
+        .result-card .round-label { font-weight: 600; color: #555; }
+        .result-card .round-value { font-weight: 900; font-size: 1.3rem; color: #cc0000; }
+        .result-card .time { font-size: 0.8rem; color: #888; margin-top: 8px; }
 
         /* Common Numbers */
         .common-venues-container {
@@ -435,11 +374,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             border-top: 4px solid #0d47a1;
         }
-        .common-venue-card h3 {
-            color: #0d47a1;
-            margin: 0 0 10px 0;
-            font-size: 1.1rem;
-        }
+        .common-venue-card h3 { color: #0d47a1; margin: 0 0 10px 0; font-size: 1.1rem; }
         .common-venue-card .number-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -454,13 +389,10 @@
             font-size: 0.9rem;
             color: #0d47a1;
         }
-        .common-venue-card .num.highlight {
-            background: #0d47a1;
-            color: #fff;
-        }
+        .common-venue-card .num.highlight { background: #0d47a1; color: #fff; }
 
         /* ============================================================ */
-        /* 🔥 PREVIOUS RESULTS - YEAR & MONTH FILTER */
+        /* 🔥 PREVIOUS RESULTS - YEAR & MONTH FILTER (Compact) */
         /* ============================================================ */
         .monthwise-section {
             background: #fff;
@@ -472,26 +404,27 @@
         }
         .selector-container {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
         .selector-container select {
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 4px 10px;
+            border-radius: 6px;
             border: 2px solid #0d47a1;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.75rem;
             background: #fff;
             cursor: pointer;
-            min-width: 100px;
+            min-width: 70px;
+            height: 30px;
         }
         .selector-container label {
-            font-weight: 700;
+            font-weight: 600;
             color: #0d47a1;
-            font-size: 0.95rem;
+            font-size: 0.8rem;
         }
         .result-display-table {
             width: 100%;
@@ -509,9 +442,7 @@
             text-align: center;
             border-bottom: 1px solid #eee;
         }
-        .result-display-table tr:hover td {
-            background: #f5f9ff;
-        }
+        .result-display-table tr:hover td { background: #f5f9ff; }
 
         /* Dream Chart */
         .dream-chart-section {
@@ -538,9 +469,7 @@
             text-align: center;
             border-bottom: 1px solid #eee;
         }
-        .dream-chart-table tr:hover td {
-            background: #f5f9ff;
-        }
+        .dream-chart-table tr:hover td { background: #f5f9ff; }
 
         /* Dream Card */
         .dream-card {
@@ -551,19 +480,8 @@
             margin: 20px 0;
             text-align: center;
         }
-        .dream-title {
-            font-size: 1.3rem;
-            font-weight: 900;
-            color: #0d47a1;
-            margin-bottom: 15px;
-        }
-        .dream-flex {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
+        .dream-title { font-size: 1.3rem; font-weight: 900; color: #0d47a1; margin-bottom: 15px; }
+        .dream-flex { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 15px; }
         .dream-input {
             padding: 10px 16px;
             border: 2px solid #ddd;
@@ -572,30 +490,16 @@
             width: 200px;
             max-width: 100%;
         }
-        .dream-input:focus {
-            border-color: #0d47a1;
-            outline: none;
-        }
+        .dream-input:focus { border-color: #0d47a1; outline: none; }
         .dream-table {
             width: 100%;
             max-width: 500px;
             margin: 0 auto;
             border-collapse: collapse;
         }
-        .dream-table th {
-            background: #0d47a1;
-            color: #fff;
-            padding: 8px 12px;
-        }
-        .dream-table td {
-            padding: 12px;
-            border: 1px solid #ddd;
-        }
-        .number-group {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
+        .dream-table th { background: #0d47a1; color: #fff; padding: 8px 12px; }
+        .dream-table td { padding: 12px; border: 1px solid #ddd; }
+        .number-group { display: flex; gap: 10px; justify-content: center; }
         .dream-num-box {
             display: inline-block;
             padding: 8px 16px;
@@ -615,19 +519,9 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             margin: 20px 0;
         }
-        .faq-title {
-            font-size: 1.3rem;
-            font-weight: 900;
-            color: #0d47a1;
-            margin-bottom: 15px;
-        }
-        .faq-item {
-            border-bottom: 1px solid #eee;
-            padding: 12px 0;
-        }
-        .faq-item:last-child {
-            border-bottom: none;
-        }
+        .faq-title { font-size: 1.3rem; font-weight: 900; color: #0d47a1; margin-bottom: 15px; }
+        .faq-item { border-bottom: 1px solid #eee; padding: 12px 0; }
+        .faq-item:last-child { border-bottom: none; }
         .faq-question {
             font-weight: 700;
             color: #333;
@@ -636,23 +530,10 @@
             justify-content: space-between;
             align-items: center;
         }
-        .faq-icon {
-            font-size: 1.2rem;
-            color: #0d47a1;
-            transition: transform 0.3s;
-        }
-        .faq-item.active .faq-icon {
-            transform: rotate(45deg);
-        }
-        .faq-answer {
-            display: none;
-            padding-top: 8px;
-            color: #555;
-            line-height: 1.6;
-        }
-        .faq-item.active .faq-answer {
-            display: block;
-        }
+        .faq-icon { font-size: 1.2rem; color: #0d47a1; transition: transform 0.3s; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+        .faq-answer { display: none; padding-top: 8px; color: #555; line-height: 1.6; }
+        .faq-item.active .faq-answer { display: block; }
 
         /* Guide */
         .section-guide {
@@ -662,15 +543,8 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             margin: 20px 0;
         }
-        .guide-content {
-            display: grid;
-            gap: 15px;
-        }
-        .guide-step {
-            display: flex;
-            gap: 15px;
-            align-items: flex-start;
-        }
+        .guide-content { display: grid; gap: 15px; }
+        .guide-step { display: flex; gap: 15px; align-items: flex-start; }
         .step-number {
             background: #0d47a1;
             color: #fff;
@@ -683,20 +557,11 @@
             font-weight: 900;
             flex-shrink: 0;
         }
-        .step-text h4 {
-            margin: 0 0 4px 0;
-            color: #0d47a1;
-        }
-        .step-text p {
-            margin: 0;
-            color: #555;
-            font-size: 0.95rem;
-        }
+        .step-text h4 { margin: 0 0 4px 0; color: #0d47a1; }
+        .step-text p { margin: 0; color: #555; font-size: 0.95rem; }
 
         /* History Section */
-        .history-section-direct {
-            margin: 20px 0;
-        }
+        .history-section-direct { margin: 20px 0; }
         .history-card {
             background: #fff;
             padding: 20px;
@@ -725,30 +590,16 @@
             align-items: center;
             gap: 8px;
         }
-        .history-card li p {
-            margin: 0;
-            color: #444;
-            font-size: 0.95rem;
-        }
+        .history-card li p { margin: 0; color: #444; font-size: 0.95rem; }
         .history-card li.did-you-know {
             background: #e8f0f8;
             border-left-color: #0a2a5a;
         }
-        .history-card li.did-you-know h4 {
-            color: #0a2a5a;
-        }
+        .history-card li.did-you-know h4 { color: #0a2a5a; }
 
         /* Social Share */
-        .social-share-container {
-            margin: 25px 0;
-            text-align: center;
-        }
-        .share-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: #333;
-        }
+        .social-share-container { margin: 25px 0; text-align: center; }
+        .share-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; color: #333; }
         .share-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -768,10 +619,7 @@
             align-items: center;
             gap: 6px;
         }
-        .share-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
+        .share-btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
         .share-btn.facebook { background: #1877f2; }
         .share-btn.whatsapp { background: #25d366; }
         .share-btn.twitter { background: #000; }
@@ -809,14 +657,8 @@
             border-radius: 5px;
             margin-bottom: 10px;
         }
-        .language-bar a {
-            color: #0d47a1;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .language-bar a:hover {
-            text-decoration: underline;
-        }
+        .language-bar a { color: #0d47a1; text-decoration: none; font-weight: 600; }
+        .language-bar a:hover { text-decoration: underline; }
 
         /* Footer */
         .footer-links {
@@ -827,13 +669,8 @@
             border-top: 1px solid #eee;
             margin-top: 20px;
         }
-        .footer-links a {
-            color: #0d47a1;
-            text-decoration: none;
-        }
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
+        .footer-links a { color: #0d47a1; text-decoration: none; }
+        .footer-links a:hover { text-decoration: underline; }
         .disclaimer-footer {
             background: #f8f9fa;
             padding: 20px;
@@ -861,27 +698,11 @@
         }
 
         /* Site Brand */
-        .site-brand {
-            text-align: center;
-            padding: 15px 0;
-        }
-        .site-logo {
-            max-width: 80px;
-            height: auto;
-        }
-        .name-box h1 {
-            font-size: 1.6rem;
-            color: #0d47a1;
-            margin: 8px 0 4px 0;
-        }
-        .bn-title {
-            font-size: 1rem;
-            color: #555;
-        }
-        .domain {
-            font-size: 0.9rem;
-            color: #888;
-        }
+        .site-brand { text-align: center; padding: 15px 0; }
+        .site-logo { max-width: 80px; height: auto; }
+        .name-box h1 { font-size: 1.6rem; color: #0d47a1; margin: 8px 0 4px 0; }
+        .bn-title { font-size: 1rem; color: #555; }
+        .domain { font-size: 0.9rem; color: #888; }
         .live-badge-main {
             background: #cc0000;
             color: #fff;
@@ -893,11 +714,7 @@
             margin-top: 8px;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #f5f9ff;
@@ -915,18 +732,19 @@
             .results-grid { grid-template-columns: 1fr; }
             .common-venues-container { grid-template-columns: 1fr; }
             .common-venue-card .number-grid { grid-template-columns: repeat(4, 1fr); }
-            .selector-container { gap: 10px; }
-            .selector-container select { padding: 8px 14px; font-size: 0.8rem; min-width: 80px; }
+            .selector-container { gap: 6px; }
+            .selector-container select { padding: 3px 8px; font-size: 0.65rem; min-width: 60px; height: 26px; }
+            .selector-container label { font-size: 0.7rem; }
         }
         @media (max-width: 380px) {
             .nav-btn-big { padding: 6px 8px; font-size: 0.6rem; }
             .btn-row-three { gap: 4px; }
             .common-venue-card .number-grid { grid-template-columns: repeat(3, 1fr); }
-            .selector-container { gap: 6px; flex-direction: column; }
-            .selector-container select { padding: 6px 12px; font-size: 0.75rem; min-width: 100%; }
+            .selector-container { gap: 4px; flex-direction: row !important; flex-wrap: wrap; }
+            .selector-container select { padding: 2px 6px; font-size: 0.55rem; min-width: 50px; height: 22px; }
+            .selector-container label { font-size: 0.6rem; }
         }
 
-        /* SEO Headings */
         .seo-h2-orange {
             color: #cc0000;
             font-size: 1.5rem;
@@ -995,9 +813,7 @@
     <!-- ============================================================ -->
     <div class="slider-container">
         <div class="slider-wrapper" id="sliderWrapper">
-            <div class="slider-text-container" id="sliderTextContainer" style="position:relative;height:100%;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;">
-                <!-- Full lines will be dynamically inserted here by JavaScript -->
-            </div>
+            <div class="slider-text-container" id="sliderTextContainer" style="position:relative;height:100%;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;"></div>
         </div>
     </div>
 
@@ -1066,13 +882,13 @@
     <div class="common-venues-container" id="commonTablesContainer"></div>
     
     <!-- ============================================================ -->
-    <!-- 🔥 PREVIOUS RESULTS - YEAR & MONTH FILTER -->
+    <!-- 🔥 PREVIOUS RESULTS - YEAR & MONTH FILTER (Compact) -->
     <!-- ============================================================ -->
     <h2 class="seo-h2-dark">📅 Shillong Teer Previous Results</h2>
     <div class="monthwise-section">
         <div class="selector-container">
-            <!-- বাম দিকে - Year Selector -->
-            <div style="display: flex; align-items: center; gap: 8px;">
+            <!-- Year Selector - Compact -->
+            <div style="display: flex; align-items: center; gap: 5px;">
                 <label>📅 Year:</label>
                 <select id="yearSelectShillong">
                     <option value="2020">2020</option>
@@ -1086,22 +902,22 @@
                 </select>
             </div>
 
-            <!-- ডান দিকে - Month Selector -->
-            <div style="display: flex; align-items: center; gap: 8px;">
+            <!-- Month Selector - Compact -->
+            <div style="display: flex; align-items: center; gap: 5px;">
                 <label>📆 Month:</label>
                 <select id="monthSelectShillong">
-                    <option value="0">January</option>
-                    <option value="1">February</option>
-                    <option value="2">March</option>
-                    <option value="3">April</option>
+                    <option value="0">Jan</option>
+                    <option value="1">Feb</option>
+                    <option value="2">Mar</option>
+                    <option value="3">Apr</option>
                     <option value="4">May</option>
-                    <option value="5">June</option>
-                    <option value="6" selected>July</option>
-                    <option value="7">August</option>
-                    <option value="8">September</option>
-                    <option value="9">October</option>
-                    <option value="10">November</option>
-                    <option value="11">December</option>
+                    <option value="5">Jun</option>
+                    <option value="6" selected>Jul</option>
+                    <option value="7">Aug</option>
+                    <option value="8">Sep</option>
+                    <option value="9">Oct</option>
+                    <option value="10">Nov</option>
+                    <option value="11">Dec</option>
                 </select>
             </div>
         </div>
@@ -1184,10 +1000,7 @@
     <div style="text-align: center; margin: 30px 0;">
         <picture>
             <source srcset="shillong-teer-promo.webp" type="image/webp">
-            <img src="shillong-teer-promo.png" 
-                 alt="Shillong Teer Live Result - FR & SR Updates" 
-                 loading="lazy"
-                 style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            <img src="shillong-teer-promo.png" alt="Shillong Teer Live Result - FR & SR Updates" loading="lazy" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
         </picture>
     </div>
 
@@ -1544,109 +1357,73 @@
 <!-- 🔥 YEAR + MONTH FILTER JAVASCRIPT -->
 <!-- ============================================================ -->
 <script>
-    // ============================================================
-    // 🔥 YEAR + MONTH FILTER - Shillong Previous Results
-    // ============================================================
-    
     document.addEventListener('DOMContentLoaded', function() {
-        const yearSelect = document.getElementById('yearSelectShillong');
-        const monthSelect = document.getElementById('monthSelectShillong');
+        var yearSelect = document.getElementById('yearSelectShillong');
+        var monthSelect = document.getElementById('monthSelectShillong');
         
         if (!yearSelect || !monthSelect) return;
-        
-        // Function to load previous results
+
         async function loadShillongPreviousResults(year, monthIndex) {
-            const config = {
-                tableId: 'resultsTableShillong',
-                colorFr: '#0d47a1',
-                colorSr: '#1565c0',
-                venueName: 'Shillong'
-            };
-            
-            const tbody = document.getElementById(config.tableId);
+            var tbody = document.getElementById('resultsTableShillong');
             if (!tbody) return;
             
             try {
-                const month = String(monthIndex + 1).padStart(2, '0');
-                const firstDay = `${year}-${month}-01`;
-                const lastDay = `${year}-${month}-${new Date(year, monthIndex + 1, 0).getDate()}`;
+                var month = String(monthIndex + 1).padStart(2, '0');
+                var firstDay = year + '-' + month + '-01';
+                var lastDay = year + '-' + month + '-' + new Date(year, monthIndex + 1, 0).getDate();
                 
-                const { data, error } = await supabaseClient
+                var { data, error } = await supabaseClient
                     .from('teer_previous_results')
                     .select('*')
-                    .eq('venue', config.venueName)
+                    .eq('venue', 'Shillong')
                     .gte('result_date', firstDay)
                     .lte('result_date', lastDay)
                     .order('result_date', { ascending: false });
                     
-                let html = '';
-                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                var html = '';
+                var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
                 
                 if (!error && data && data.length > 0) {
-                    data.forEach(row => {
-                        const dateObj = new Date(row.result_date);
-                        const day = String(dateObj.getDate()).padStart(2, '0');
-                        const monthName = String(dateObj.getMonth() + 1).padStart(2, '0');
-                        const yearNum = dateObj.getFullYear();
-                        const formattedDate = `${day}.${monthName}.${yearNum}`;
-                        
-                        const fr = row.fr_result || '--';
-                        const sr = row.sr_result || '--';
+                    data.forEach(function(row) {
+                        var dateObj = new Date(row.result_date);
+                        var day = String(dateObj.getDate()).padStart(2, '0');
+                        var monthName = String(dateObj.getMonth() + 1).padStart(2, '0');
+                        var yearNum = dateObj.getFullYear();
+                        var formattedDate = day + '.' + monthName + '.' + yearNum;
                         
                         html += `
                             <tr>
                                 <td style="padding: 10px 15px; font-weight: 700; color: #0d0a0a; text-align: center; border-bottom: 1px solid #eee;">
                                     ${formattedDate}
                                 </td>
-                                <td style="padding: 10px 15px; font-weight: 700; color: ${config.colorFr}; text-align: center; border-bottom: 1px solid #eee;">
-                                    ${fr}
+                                <td style="padding: 10px 15px; font-weight: 700; color: #0d47a1; text-align: center; border-bottom: 1px solid #eee;">
+                                    ${row.fr_result || '--'}
                                 </td>
-                                <td style="padding: 10px 15px; font-weight: 700; color: ${config.colorSr}; text-align: center; border-bottom: 1px solid #eee;">
-                                    ${sr}
+                                <td style="padding: 10px 15px; font-weight: 700; color: #1565c0; text-align: center; border-bottom: 1px solid #eee;">
+                                    ${row.sr_result || '--'}
                                 </td>
                             </tr>
                         `;
                     });
                 } else {
-                    html = `
-                        <tr>
-                            <td colspan="3" style="text-align:center; padding:20px; color:#8a7a6a;">
-                                ${monthNames[monthIndex]} ${year} - No data available
-                            </td>
-                        </tr>
-                    `;
+                    html = `<tr><td colspan="3" style="text-align:center; padding:20px; color:#8a7a6a;">${monthNames[monthIndex]} ${year} - No data available</td></tr>`;
                 }
                 
                 tbody.innerHTML = html;
-                
             } catch(err) {
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="3" style="text-align:center; padding:20px; color:#8a7a6a;">
-                            No data available
-                        </td>
-                    </tr>
-                `;
+                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:20px; color:#8a7a6a;">No data available</td></tr>`;
             }
         }
-        
+
         // Initial load
-        const currentYear = parseInt(yearSelect.value);
-        const currentMonth = parseInt(monthSelect.value);
-        loadShillongPreviousResults(currentYear, currentMonth);
+        loadShillongPreviousResults(parseInt(yearSelect.value), parseInt(monthSelect.value));
         
-        // Year Change Event
         yearSelect.addEventListener('change', function() {
-            const year = parseInt(this.value);
-            const month = parseInt(monthSelect.value);
-            loadShillongPreviousResults(year, month);
+            loadShillongPreviousResults(parseInt(this.value), parseInt(monthSelect.value));
         });
         
-        // Month Change Event
         monthSelect.addEventListener('change', function() {
-            const month = parseInt(this.value);
-            const year = parseInt(yearSelect.value);
-            loadShillongPreviousResults(year, month);
+            loadShillongPreviousResults(parseInt(yearSelect.value), parseInt(this.value));
         });
     });
 </script>
