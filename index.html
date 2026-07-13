@@ -183,7 +183,6 @@
             box-sizing: border-box;
         }
 
-        /* Sliding Full Line Text - Slim Version */
         .slider-text {
             position: absolute;
             font-size: 1.5rem;
@@ -207,19 +206,16 @@
             line-height: 1.3;
         }
 
-        /* Domain Part - Dark Blue */
         .slider-text .domain-part {
             color: #0d47a1;
         }
 
-        /* Separator - Green */
         .slider-text .sep-part {
             color: #00e676;
             margin: 0 6px;
             font-weight: 300;
         }
 
-        /* Subline Part - Light Blue */
         .slider-text .subline-part {
             color: #1565c0;
         }
@@ -233,10 +229,6 @@
             opacity: 0;
             transform: translateY(-50%) translateX(-100%);
         }
-
-        /* ============================================================ */
-        /* 🔥 RESPONSIVE - Slim Box */
-        /* ============================================================ */
 
         @media (min-width: 1200px) {
             .slider-text { font-size: 1.8rem; }
@@ -298,7 +290,7 @@
             .slider-container { padding: 4px 0; }
         }
 
-        /* WhatsApp Box - Slim + Button Long */
+        /* WhatsApp Box */
         .whatsapp-box {
             max-width: 1200px;
             width: 100%;
@@ -337,7 +329,7 @@
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
         }
 
-        /* Bigger Buttons - Morning, Juwai, Night */
+        /* Bigger Buttons */
         .btn-row-three {
             display: flex;
             gap: 15px;
@@ -380,18 +372,584 @@
             .nav-btn-big { padding: 6px 8px; font-size: 0.6rem; }
             .btn-row-three { gap: 4px; }
         }
+
+        /* Results Grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .result-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 4px solid #0d47a1;
+            transition: transform 0.3s;
+        }
+        .result-card:hover {
+            transform: translateY(-3px);
+        }
+        .result-card .venue-name {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: #0d47a1;
+            margin-bottom: 10px;
+        }
+        .result-card .round {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .result-card .round:last-child {
+            border-bottom: none;
+        }
+        .result-card .round-label {
+            font-weight: 600;
+            color: #555;
+        }
+        .result-card .round-value {
+            font-weight: 900;
+            font-size: 1.3rem;
+            color: #cc0000;
+        }
+        .result-card .time {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 8px;
+        }
+
+        /* Common Numbers */
+        .common-venues-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .common-venue-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-top: 4px solid #0d47a1;
+        }
+        .common-venue-card h3 {
+            color: #0d47a1;
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+        }
+        .common-venue-card .number-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+        .common-venue-card .num {
+            background: #f5f5f5;
+            padding: 6px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #0d47a1;
+        }
+        .common-venue-card .num.highlight {
+            background: #0d47a1;
+            color: #fff;
+        }
+
+        /* ============================================================ */
+        /* 🔥 PREVIOUS RESULTS - YEAR & MONTH FILTER */
+        /* ============================================================ */
+        .monthwise-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        .selector-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        .selector-container select {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 2px solid #0d47a1;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: #fff;
+            cursor: pointer;
+            min-width: 100px;
+        }
+        .selector-container label {
+            font-weight: 700;
+            color: #0d47a1;
+            font-size: 0.95rem;
+        }
+        .result-display-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .result-display-table th {
+            background: #0d47a1;
+            color: #fff;
+            padding: 10px 12px;
+            text-align: center;
+        }
+        .result-display-table td {
+            padding: 8px 12px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        .result-display-table tr:hover td {
+            background: #f5f9ff;
+        }
+
+        /* Dream Chart */
+        .dream-chart-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        .dream-chart-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .dream-chart-table th {
+            background: #0d47a1;
+            color: #fff;
+            padding: 10px 12px;
+            text-align: center;
+        }
+        .dream-chart-table td {
+            padding: 8px 12px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        .dream-chart-table tr:hover td {
+            background: #f5f9ff;
+        }
+
+        /* Dream Card */
+        .dream-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 20px 0;
+            text-align: center;
+        }
+        .dream-title {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: #0d47a1;
+            margin-bottom: 15px;
+        }
+        .dream-flex {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        .dream-input {
+            padding: 10px 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            width: 200px;
+            max-width: 100%;
+        }
+        .dream-input:focus {
+            border-color: #0d47a1;
+            outline: none;
+        }
+        .dream-table {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        .dream-table th {
+            background: #0d47a1;
+            color: #fff;
+            padding: 8px 12px;
+        }
+        .dream-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        .number-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .dream-num-box {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: #0d47a1;
+            min-width: 40px;
+        }
+
+        /* FAQ */
+        .faq-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 20px 0;
+        }
+        .faq-title {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: #0d47a1;
+            margin-bottom: 15px;
+        }
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            padding: 12px 0;
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-question {
+            font-weight: 700;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-icon {
+            font-size: 1.2rem;
+            color: #0d47a1;
+            transition: transform 0.3s;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        .faq-answer {
+            display: none;
+            padding-top: 8px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* Guide */
+        .section-guide {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 20px 0;
+        }
+        .guide-content {
+            display: grid;
+            gap: 15px;
+        }
+        .guide-step {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+        .step-number {
+            background: #0d47a1;
+            color: #fff;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+        .step-text h4 {
+            margin: 0 0 4px 0;
+            color: #0d47a1;
+        }
+        .step-text p {
+            margin: 0;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        /* History Section */
+        .history-section-direct {
+            margin: 20px 0;
+        }
+        .history-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid #eaeaea;
+        }
+        .history-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 15px;
+        }
+        .history-card li {
+            padding: 15px;
+            background: #f5f9ff;
+            border-radius: 8px;
+            border-left: 4px solid #0d47a1;
+        }
+        .history-card li h4 {
+            margin: 0 0 8px 0;
+            color: #0d47a1;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .history-card li p {
+            margin: 0;
+            color: #444;
+            font-size: 0.95rem;
+        }
+        .history-card li.did-you-know {
+            background: #e8f0f8;
+            border-left-color: #0a2a5a;
+        }
+        .history-card li.did-you-know h4 {
+            color: #0a2a5a;
+        }
+
+        /* Social Share */
+        .social-share-container {
+            margin: 25px 0;
+            text-align: center;
+        }
+        .share-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #333;
+        }
+        .share-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .share-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .share-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .share-btn.facebook { background: #1877f2; }
+        .share-btn.whatsapp { background: #25d366; }
+        .share-btn.twitter { background: #000; }
+        .share-btn.telegram { background: #0088cc; }
+        .share-btn.copy { background: #6c757d; }
+
+        /* Strategy Section */
+        .strategy-article-section {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 20px 0;
+        }
+        .strategy-article-section .strategy-item {
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 8px;
+            border-left: 4px solid #7b1fa2;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+        .strategy-article-section .strategy-item strong {
+            color: #7b1fa2;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.05rem;
+        }
+
+        /* Language Bar */
+        .language-bar {
+            text-align: center;
+            padding: 5px;
+            background: #f5f5f5;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .language-bar a {
+            color: #0d47a1;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .language-bar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer-links {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.85rem;
+            color: #666;
+            border-top: 1px solid #eee;
+            margin-top: 20px;
+        }
+        .footer-links a {
+            color: #0d47a1;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .disclaimer-footer {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* Trending */
+        .trending-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            gap: 10px;
+        }
+        .trending-grid .trend-num {
+            background: #0d47a1;
+            color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        /* Site Brand */
+        .site-brand {
+            text-align: center;
+            padding: 15px 0;
+        }
+        .site-logo {
+            max-width: 80px;
+            height: auto;
+        }
+        .name-box h1 {
+            font-size: 1.6rem;
+            color: #0d47a1;
+            margin: 8px 0 4px 0;
+        }
+        .bn-title {
+            font-size: 1rem;
+            color: #555;
+        }
+        .domain {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        .live-badge-main {
+            background: #cc0000;
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f9ff;
+            margin: 0;
+            padding: 0;
+        }
+
+        @media (max-width: 600px) {
+            .btn-row-three { gap: 6px; flex-wrap: nowrap; }
+            .nav-btn-big { padding: 8px 12px; font-size: 0.7rem; letter-spacing: 0px; white-space: nowrap; }
+            .whatsapp-box { min-height: auto; padding: 15px 10px; }
+            .whatsapp-box h3 { font-size: 1.1rem; }
+            .whatsapp-box p { font-size: 0.8rem; }
+            .whatsapp-box .whatsapp-join-btn { font-size: 0.85rem; padding: 10px 20px; min-width: 150px; }
+            .results-grid { grid-template-columns: 1fr; }
+            .common-venues-container { grid-template-columns: 1fr; }
+            .common-venue-card .number-grid { grid-template-columns: repeat(4, 1fr); }
+            .selector-container { gap: 10px; }
+            .selector-container select { padding: 8px 14px; font-size: 0.8rem; min-width: 80px; }
+        }
+        @media (max-width: 380px) {
+            .nav-btn-big { padding: 6px 8px; font-size: 0.6rem; }
+            .btn-row-three { gap: 4px; }
+            .common-venue-card .number-grid { grid-template-columns: repeat(3, 1fr); }
+            .selector-container { gap: 6px; flex-direction: column; }
+            .selector-container select { padding: 6px 12px; font-size: 0.75rem; min-width: 100%; }
+        }
+
+        /* SEO Headings */
+        .seo-h2-orange {
+            color: #cc0000;
+            font-size: 1.5rem;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .seo-h2-dark {
+            color: #0d47a1;
+            font-size: 1.4rem;
+            margin: 20px 0 15px 0;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <!-- ===== ল্যাঙ্গুয়েজ বার ===== -->
-    <div class="language-bar" style="text-align:center;padding:5px;background:#f5f5f5;border-radius:5px;margin-bottom:10px;">
+    <div class="language-bar">
         🌐 ভাষা / Language: 
         <a href="#" onclick="showBangla()">🇧🇩 বাংলা</a> | 
         <a href="#" onclick="showEnglish()">🇬🇧 English</a>
     </div>
 
-    <!-- ===== সাইট ব্র্যান্ড (Logo সহ) ===== -->
+    <!-- ===== সাইট ব্র্যান্ড ===== -->
     <div class="site-brand">
         <img src="logo.png" alt="Shillong Teer Live Result" class="site-logo" loading="lazy">
         <div class="name-box">
@@ -403,7 +961,7 @@
     </div>
     
     <!-- ============================================================ -->
-    <!-- 🔥 MORNING / JUWAI / NIGHT TEER BUTTONS (Bigger + English) -->
+    <!-- 🔥 MORNING / JUWAI / NIGHT TEER BUTTONS -->
     <!-- ============================================================ -->
     <div class="btn-row-three">
         <a href="morning-teer-result.html" class="nav-btn-big btn-morning-big">🌅 Morning Teer</a>
@@ -419,7 +977,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 🔥 WHATSAPP BOX (Slim + Button Long) -->
+    <!-- 🔥 WHATSAPP BOX -->
     <!-- ============================================================ -->
     <div class="whatsapp-box">
         <div class="whatsapp-icon">💬</div>
@@ -433,7 +991,7 @@
     <h2 class="seo-h2-orange">🎯 Shillong Teer Result Today Live | আজকের শিলং তীর লাইভ রেজাল্ট</h2>
     
     <!-- ============================================================ -->
-    <!-- 🔥 SLIDER - Slim Box, Domain First, Then Subline -->
+    <!-- 🔥 SLIDER -->
     <!-- ============================================================ -->
     <div class="slider-container">
         <div class="slider-wrapper" id="sliderWrapper">
@@ -444,7 +1002,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 🔥 VIP TRIGGER BUTTON (Results Grid-এর ঠিক উপরে) -->
+    <!-- 🔥 VIP TRIGGER BUTTON -->
     <!-- ============================================================ -->
     <div style="margin: 15px 0; padding: 15px; border: 2px solid #cc0000; background: linear-gradient(135deg, #fff9e6, #fff0d0); border-radius: 12px; text-align: center; box-shadow: 0 3px 15px rgba(204,0,0,0.1);">
         <div style="display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;">
@@ -479,7 +1037,7 @@
     <div id="resultsGrid" class="results-grid"></div>
 
     <!-- ============================================================ -->
-    <!-- 🔥 সোশ্যাল শেয়ার বাটন (Results Grid-এর নিচে) -->
+    <!-- 🔥 সোশ্যাল শেয়ার বাটন -->
     <!-- ============================================================ -->
     <div class="social-share-container">
         <div class="share-title">📢 <span>শেয়ার করুন</span></div>
@@ -504,34 +1062,67 @@
         <a href="shillong-teer-result.html" class="nav-btn-main btn-shillong-result">📊 পূর্ণ Shillong Teer ফলাফল দেখুন →</a>
     </div>
 
-    <!-- Common Numbers & Previous Results -->
+    <!-- Common Numbers -->
     <div class="common-venues-container" id="commonTablesContainer"></div>
     
+    <!-- ============================================================ -->
+    <!-- 🔥 PREVIOUS RESULTS - YEAR & MONTH FILTER -->
+    <!-- ============================================================ -->
     <h2 class="seo-h2-dark">📅 Shillong Teer Previous Results</h2>
     <div class="monthwise-section">
         <div class="selector-container">
-            <select id="monthSelectShillong">
-                <option value="0">January 2026</option>
-                <option value="1">February 2026</option>
-                <option value="2">March 2026</option>
-                <option value="3">April 2026</option>
-                <option value="4">May 2026</option>
-                <option value="5">June 2026</option>
-                <option value="6" selected>July 2026</option>
-                <option value="7">August 2026</option>
-                <option value="8">September 2026</option>
-                <option value="9">October 2026</option>
-                <option value="10">November 2026</option>
-                <option value="11">December 2026</option>
-            </select>
+            <!-- বাম দিকে - Year Selector -->
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <label>📅 Year:</label>
+                <select id="yearSelectShillong">
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026" selected>2026</option>
+                    <option value="2027">2027</option>
+                </select>
+            </div>
+
+            <!-- ডান দিকে - Month Selector -->
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <label>📆 Month:</label>
+                <select id="monthSelectShillong">
+                    <option value="0">January</option>
+                    <option value="1">February</option>
+                    <option value="2">March</option>
+                    <option value="3">April</option>
+                    <option value="4">May</option>
+                    <option value="5">June</option>
+                    <option value="6" selected>July</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">October</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+                </select>
+            </div>
         </div>
+
         <table class="result-display-table">
-            <thead><tr><th>Date</th><th id="frHeader">FR (4:15 PM)</th><th id="srHeader">SR (5:10 PM)</th></tr></thead>
-            <tbody id="resultsTableShillong"></tbody>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th id="frHeader">FR (4:15 PM)</th>
+                    <th id="srHeader">SR (5:10 PM)</th>
+                </tr>
+            </thead>
+            <tbody id="resultsTableShillong">
+                <tr><td colspan="3" style="text-align:center; padding:20px; color:#8a7a6a;">Loading...</td></tr>
+            </tbody>
         </table>
     </div>
 
-    <!-- ===== DREAM CHART & PREDICTOR ===== -->
+    <!-- ============================================================ -->
+    <!-- 📜 DREAM CHART & PREDICTOR -->
+    <!-- ============================================================ -->
     <h2 class="seo-h2-dark">📖 Shillong Teer Dream Chart | শিলং তীর স্বপ্নের চার্ট</h2>
     <div class="dream-chart-section">
         <table class="dream-chart-table">
@@ -588,7 +1179,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 🔥 SHILLONG TEER PROMO BANNER (Article-এর মাঝখানে) -->
+    <!-- 🔥 SHILLONG TEER PROMO BANNER -->
     <!-- ============================================================ -->
     <div style="text-align: center; margin: 30px 0;">
         <picture>
@@ -601,7 +1192,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 📜 ARTICLE: KHANAPARA TEER HISTORY, TRADITION & CULTURE -->
+    <!-- 📜 ARTICLE: KHANAPARA TEER HISTORY -->
     <!-- ============================================================ -->
     <div class="history-section-direct" style="text-align: left; line-height: 1.7; margin-top: 35px;">
         <h2 style="color:#0d0a0a; border-left:5px solid #00695c; padding-left:15px; font-size:1.4rem; margin-bottom:1.5rem; font-weight:900; text-transform: uppercase;">📜 Khanapara Teer History, Tradition & Culture</h2>
@@ -628,7 +1219,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 📜 ARTICLE: JUWAI TEER HISTORY, TRADITION & CULTURE -->
+    <!-- 📜 ARTICLE: JUWAI TEER HISTORY -->
     <!-- ============================================================ -->
     <div class="history-section-direct" style="text-align: left; line-height: 1.7; margin-top: 35px;">
         <h2 style="color:#0d0a0a; border-left:5px solid #4a148c; padding-left:15px; font-size:1.4rem; margin-bottom:1.5rem; font-weight:900; text-transform: uppercase;">📜 Juwai Teer History, Tradition & Culture</h2>
@@ -655,7 +1246,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 📜 ARTICLE: MORNING TEER HISTORY, TRADITION & CULTURE -->
+    <!-- 📜 ARTICLE: MORNING TEER HISTORY -->
     <!-- ============================================================ -->
     <div class="history-section-direct" style="text-align: left; line-height: 1.7; margin-top: 35px;">
         <h2 style="color:#0d0a0a; border-left:5px solid #e65100; padding-left:15px; font-size:1.4rem; margin-bottom:1.5rem; font-weight:900; text-transform: uppercase;">📜 Morning Teer History, Tradition & Culture</h2>
@@ -682,7 +1273,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 📜 ARTICLE: NIGHT TEER HISTORY, TRADITION & CULTURE -->
+    <!-- 📜 ARTICLE: NIGHT TEER HISTORY -->
     <!-- ============================================================ -->
     <div class="history-section-direct" style="text-align: left; line-height: 1.7; margin-top: 35px;">
         <h2 style="color:#0d0a0a; border-left:5px solid #1a237e; padding-left:15px; font-size:1.4rem; margin-bottom:1.5rem; font-weight:900; text-transform: uppercase;">📜 Night Teer History, Tradition & Culture</h2>
@@ -880,14 +1471,11 @@
 <script src="app.js"></script>
 
 <!-- ============================================================ -->
-<!-- 🔥 SLIDER JAVASCRIPT - Slim Box, Domain First, Then Subline -->
+<!-- 🔥 SLIDER JAVASCRIPT -->
 <!-- ============================================================ -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Domain (সব ভাষায় একই থাকবে)
         var domain = 'shillongteerliveresult.in';
-        
-        // Sublines (ভাষা অনুযায়ী পরিবর্তন হবে)
         var sublines = [
             'Fastest Teer Result Update',
             'দ্রুততম তীর ফলাফল আপডেট',
@@ -899,12 +1487,10 @@
         var currentIndex = 0;
         var isTransitioning = false;
 
-        // Create full line: Domain + Subline
         function createTextElement(subline, index) {
             var div = document.createElement('div');
             div.className = 'slider-text';
             div.id = 'slider-text-' + index;
-            
             div.innerHTML = 
                 '<span class="domain-part">' + domain + '</span>' +
                 '<span class="sep-part">-</span>' +
@@ -912,7 +1498,6 @@
             return div;
         }
 
-        // Add all full lines to the container
         sublines.forEach(function(subline, index) {
             var el = createTextElement(subline, index);
             container.appendChild(el);
@@ -920,14 +1505,12 @@
 
         var allTexts = document.querySelectorAll('.slider-text');
 
-        // Show the first full line immediately
         function showFirstText() {
             var first = allTexts[0];
             first.classList.add('active');
             currentIndex = 0;
         }
 
-        // Change to the next full line with smooth overlapping effect
         function changeText() {
             if (isTransitioning) return;
             isTransitioning = true;
@@ -936,10 +1519,8 @@
             var nextIndex = (currentIndex + 1) % allTexts.length;
             var next = allTexts[nextIndex];
 
-            // Bring the next full line in from the right
             next.classList.add('active');
 
-            // After the new full line has fully appeared, slide the old one out
             setTimeout(function() {
                 current.classList.remove('active');
                 current.classList.add('slide-out');
@@ -954,9 +1535,119 @@
             }, 500);
         }
 
-        // Start the slider
         setTimeout(showFirstText, 300);
         setInterval(changeText, 4500);
+    });
+</script>
+
+<!-- ============================================================ -->
+<!-- 🔥 YEAR + MONTH FILTER JAVASCRIPT -->
+<!-- ============================================================ -->
+<script>
+    // ============================================================
+    // 🔥 YEAR + MONTH FILTER - Shillong Previous Results
+    // ============================================================
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const yearSelect = document.getElementById('yearSelectShillong');
+        const monthSelect = document.getElementById('monthSelectShillong');
+        
+        if (!yearSelect || !monthSelect) return;
+        
+        // Function to load previous results
+        async function loadShillongPreviousResults(year, monthIndex) {
+            const config = {
+                tableId: 'resultsTableShillong',
+                colorFr: '#0d47a1',
+                colorSr: '#1565c0',
+                venueName: 'Shillong'
+            };
+            
+            const tbody = document.getElementById(config.tableId);
+            if (!tbody) return;
+            
+            try {
+                const month = String(monthIndex + 1).padStart(2, '0');
+                const firstDay = `${year}-${month}-01`;
+                const lastDay = `${year}-${month}-${new Date(year, monthIndex + 1, 0).getDate()}`;
+                
+                const { data, error } = await supabaseClient
+                    .from('teer_previous_results')
+                    .select('*')
+                    .eq('venue', config.venueName)
+                    .gte('result_date', firstDay)
+                    .lte('result_date', lastDay)
+                    .order('result_date', { ascending: false });
+                    
+                let html = '';
+                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                
+                if (!error && data && data.length > 0) {
+                    data.forEach(row => {
+                        const dateObj = new Date(row.result_date);
+                        const day = String(dateObj.getDate()).padStart(2, '0');
+                        const monthName = String(dateObj.getMonth() + 1).padStart(2, '0');
+                        const yearNum = dateObj.getFullYear();
+                        const formattedDate = `${day}.${monthName}.${yearNum}`;
+                        
+                        const fr = row.fr_result || '--';
+                        const sr = row.sr_result || '--';
+                        
+                        html += `
+                            <tr>
+                                <td style="padding: 10px 15px; font-weight: 700; color: #0d0a0a; text-align: center; border-bottom: 1px solid #eee;">
+                                    ${formattedDate}
+                                </td>
+                                <td style="padding: 10px 15px; font-weight: 700; color: ${config.colorFr}; text-align: center; border-bottom: 1px solid #eee;">
+                                    ${fr}
+                                </td>
+                                <td style="padding: 10px 15px; font-weight: 700; color: ${config.colorSr}; text-align: center; border-bottom: 1px solid #eee;">
+                                    ${sr}
+                                </td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    html = `
+                        <tr>
+                            <td colspan="3" style="text-align:center; padding:20px; color:#8a7a6a;">
+                                ${monthNames[monthIndex]} ${year} - No data available
+                            </td>
+                        </tr>
+                    `;
+                }
+                
+                tbody.innerHTML = html;
+                
+            } catch(err) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="3" style="text-align:center; padding:20px; color:#8a7a6a;">
+                            No data available
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+        
+        // Initial load
+        const currentYear = parseInt(yearSelect.value);
+        const currentMonth = parseInt(monthSelect.value);
+        loadShillongPreviousResults(currentYear, currentMonth);
+        
+        // Year Change Event
+        yearSelect.addEventListener('change', function() {
+            const year = parseInt(this.value);
+            const month = parseInt(monthSelect.value);
+            loadShillongPreviousResults(year, month);
+        });
+        
+        // Month Change Event
+        monthSelect.addEventListener('change', function() {
+            const month = parseInt(this.value);
+            const year = parseInt(yearSelect.value);
+            loadShillongPreviousResults(year, month);
+        });
     });
 </script>
 </body>
