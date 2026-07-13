@@ -96,7 +96,7 @@ async function loadPreviousResults(venue, monthIndex) {
         const { data, error } = await supabaseClient
             .from('teer_previous_results')
             .select('*')
-            .eq('venue', config.venueName)  // 👈 ভেন্যু অনুযায়ী ফিল্টার
+            .eq('venue', config.venueName)
             .gte('result_date', firstDay)
             .lte('result_date', lastDay)
             .order('result_date', { ascending: false });
@@ -108,8 +108,15 @@ async function loadPreviousResults(venue, monthIndex) {
             data.forEach(row => {
                 const fr = row.fr_result || '--';
                 const sr = row.sr_result || '--';
+                // তারিখ ফরম্যাট DD.MM.YYYY
+                const dateObj = new Date(row.result_date);
+                const day = String(dateObj.getDate()).padStart(2, '0');
+                const monthName = String(dateObj.getMonth() + 1).padStart(2, '0');
+                const yearNum = dateObj.getFullYear();
+                const formattedDate = `${day}.${monthName}.${yearNum}`;
+                
                 html += `<tr>
-                    <td style="padding:8px; font-weight:700; color:#0d0a0a;">${row.result_date}</td>
+                    <td style="padding:8px; font-weight:700; color:#0d0a0a;">${formattedDate}</td>
                     <td style="padding:8px; font-weight:700; color:${config.colorFr};">${fr}</td>
                     <td style="padding:8px; font-weight:700; color:${config.colorSr};">${sr}</td>
                 </tr>`;
@@ -298,7 +305,7 @@ async function loadTodayResults() {
             let { data, error } = await supabaseClient
                 .from('teer_live_results')
                 .select('*')
-                .eq('venue', venueConfigs[venue].venueName)  // 👈 ভেন্যু অনুযায়ী ফিল্টার
+                .eq('venue', venueConfigs[venue].venueName)
                 .eq('result_date', today);
                 
             if (!error && data && data.length > 0) {
@@ -337,8 +344,11 @@ async function loadTodayResults() {
         globalLiveData = liveData;
         renderTodayResults(liveData, today, nightDate);
         
-        if (liveData.shillong) {
-            updateMetaTags('Shillong Teer', liveData.shillong.fr || '--', liveData.shillong.sr || '--', today);
+        // Meta Tags আপডেট করুন - Option 2
+        const currentVenue = detectVenueFromPage();
+        const venueId = currentVenue.toLowerCase();
+        if (liveData[venueId]) {
+            updateMetaTags(currentVenue, liveData[venueId].fr || '--', liveData[venueId].sr || '--', today);
         }
         
         Object.keys(venueConfigs).forEach(venue => {
@@ -349,6 +359,57 @@ async function loadTodayResults() {
     } catch(err) {
         console.error('❌ Error loading live results:', err);
         renderTodayResults({}, getTodayIST(), getNightDate());
+    }
+}
+
+// ============================================================
+// 🔥 PAGE DETECT - কোন পেজ তা চিনবে
+// ============================================================
+function detectVenueFromPage() {
+    const path = window.location.pathname;
+    
+    if (path.includes('khanapara')) return 'Khanapara';
+    if (path.includes('shillong')) return 'Shillong';
+    if (path.includes('juwai')) return 'Juwai';
+    if (path.includes('morning')) return 'Morning';
+    if (path.includes('night')) return 'Night';
+    return 'Shillong'; // Default
+}
+
+// ============================================================
+// 🔥 DYNAMIC META TAGS - Option 2 (Title Static + Meta Dynamic)
+// ============================================================
+function updateMetaTags(venue, frResult, srResult, date) {
+    const formattedDate = date || getTodayIST();
+    
+    // ===== TITLE - আগের মতো (শুধু Venue পরিবর্তন) =====
+    const title = document.querySelector('title');
+    if (title) {
+        title.textContent = venue + ' Teer Result Today | Live Updates & Predictions';
+    }
+    
+    // ===== META DESCRIPTION - Dynamic =====
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+        metaDesc.content = venue + ' result today - live FR & SR updates. Get expert predictions, house digits & ending digits for ' + venue + ' Teer.';
+    }
+    
+    // ===== META KEYWORDS - Dynamic =====
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords) {
+        metaKeywords.content = venue + ' Teer Result Today, ' + venue + ' Teer Live Result, ' + venue + ' Teer FR SR Result, ' + venue + ' Teer House Number';
+    }
+    
+    // ===== OG TITLE - Dynamic =====
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) {
+        ogTitle.content = venue + ' Teer Result Today | Live Updates';
+    }
+    
+    // ===== OG DESCRIPTION - Dynamic =====
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) {
+        ogDesc.content = 'Live ' + venue + ' Teer results with expert predictions and common numbers.';
     }
 }
 
@@ -530,16 +591,15 @@ function subscribeNewsletter() {
     document.getElementById('newsletterEmail').value = '';
 }
 
-function updateMetaTags(venue, frResult, srResult, date) {
-    const formattedDate = date.split('-').reverse().join('.');
-    document.title = (venue === 'Shillong Teer') ? `Shillong Teer Result ${formattedDate} | Live Updates` : `${venue} Result ${formattedDate} - FR: ${frResult} | SR: ${srResult} | Live Teer`;
-}
-
 const dreamChartData = [
-    { dream: "Snake / সাপ", direct: "05, 33, 77", house: "7", ending: "1" }, { dream: "Tiger / বাঘ", direct: "28, 44, 66", house: "3", ending: "9" },
-    { dream: "Lion / সিংহ", direct: "32, 55, 88", house: "8", ending: "4" }, { dream: "Elephant / হাতি", direct: "47, 70, 99", house: "6", ending: "0" },
-    { dream: "Horse / ঘোড়া", direct: "19, 41, 63", house: "2", ending: "4" }, { dream: "Dog / কুকুর", direct: "24, 46, 68", house: "6", ending: "9" },
-    { dream: "Cat / বিড়াল", direct: "18, 40, 62", house: "0", ending: "5" }, { dream: "Water / পানি", direct: "02, 24, 46", house: "1", ending: "3" }
+    { dream: "Snake / সাপ", direct: "05, 33, 77", house: "7", ending: "1" }, 
+    { dream: "Tiger / বাঘ", direct: "28, 44, 66", house: "3", ending: "9" },
+    { dream: "Lion / সিংহ", direct: "32, 55, 88", house: "8", ending: "4" }, 
+    { dream: "Elephant / হাতি", direct: "47, 70, 99", house: "6", ending: "0" },
+    { dream: "Horse / ঘোড়া", direct: "19, 41, 63", house: "2", ending: "4" }, 
+    { dream: "Dog / কুকুর", direct: "24, 46, 68", house: "6", ending: "9" },
+    { dream: "Cat / বিড়াল", direct: "18, 40, 62", house: "0", ending: "5" }, 
+    { dream: "Water / পানি", direct: "02, 24, 46", house: "1", ending: "3" }
 ];
 
 function renderDreamChart() { 
@@ -556,7 +616,14 @@ function dreamToNum(t) {
     let h=0; for(let i=0;i<l.length;i++) h=((h<<5)-h)+l.charCodeAt(i); 
     return Math.abs(h)%100||24; 
 }
-function getHENumbers(n) { let x=n%100; return { house:[((x*3+7)%10).toString(),((x*5+11)%10).toString()], ending:[((x*9+17)%10).toString(),((x*11+23)%10).toString()] }; }
+
+function getHENumbers(n) { 
+    let x = n % 100; 
+    return { 
+        house: [((x * 3 + 7) % 10).toString(), ((x * 5 + 11) % 10).toString()], 
+        ending: [((x * 9 + 17) % 10).toString(), ((x * 11 + 23) % 10).toString()] 
+    }; 
+}
 
 let globalLiveData = {};
 let globalCommonData = null;
@@ -812,31 +879,26 @@ document.addEventListener('DOMContentLoaded', function() {
 // Shillong Page
 async function loadShillongPageData() {
     await loadPreviousResults('shillong', 6);
-    // Shillong specific data loading
 }
 
 // Khanapara Page
 async function loadKhanaparaPageData() {
     await loadPreviousResults('khanapara', 6);
-    // Khanapara specific data loading
 }
 
 // Juwai Page
 async function loadJuwaiPageData() {
     await loadPreviousResults('juwai', 6);
-    // Juwai specific data loading
 }
 
 // Morning Page
 async function loadMorningPageData() {
     await loadPreviousResults('morning', 6);
-    // Morning specific data loading
 }
 
 // Night Page
 async function loadNightPageData() {
     await loadPreviousResults('night', 6);
-    // Night specific data loading
 }
 
 // Detect which page is loaded and load appropriate data
