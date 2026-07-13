@@ -433,7 +433,7 @@
         .vip-unlock-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
         /* ============================================================ */
-        /* 🔥 RESULTS GRID - Same as Before */
+        /* 🔥 RESULTS GRID - Venue Name White Text */
         /* ============================================================ */
         .results-grid {
             display: grid;
@@ -443,6 +443,7 @@
             justify-content: center;
             align-items: stretch;
         }
+
         .result-card {
             background: #fff;
             border-radius: 12px;
@@ -454,40 +455,102 @@
             flex-direction: column;
             justify-content: space-between;
         }
-        .result-card:hover { transform: translateY(-3px); box-shadow: 0 6px 25px rgba(0,0,0,0.12); }
-        .result-card .venue-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-        .result-card .venue-name { font-size: 1rem; font-weight: 900; color: #0d47a1; }
-        .result-card .live-badge { background: #cc0000; color: #fff; padding: 2px 10px; border-radius: 20px; font-size: 0.55rem; font-weight: 700; animation: pulse 1.5s infinite; }
-        .result-card .date-box { font-size: 0.75rem; color: #888; }
-        .result-card .timing-dual { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 8px 0; }
-        .result-card .fr-box, .result-card .sr-box {
+
+        .result-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+        }
+
+        /* ===== VENUE HEADER - Blue Background with White Text ===== */
+        .result-card .venue-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            padding: 8px 14px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(13,71,161,0.15);
+        }
+
+        .result-card .venue-name {
+            font-size: 1.05rem;
+            font-weight: 900;
+            color: #ffffff !important;
+            text-shadow: 0 1px 10px rgba(255,255,255,0.15);
+            letter-spacing: 0.5px;
+        }
+
+        .result-card .live-badge {
+            background: linear-gradient(135deg, #cc0000, #ff1a1a);
+            color: #fff;
+            padding: 3px 14px;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            animation: pulse 1.5s infinite;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 0 15px rgba(204,0,0,0.2);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(1.02); }
+        }
+
+        .result-card .date-box {
+            font-size: 0.75rem;
+            color: #888;
+            margin-bottom: 6px;
+        }
+
+        .result-card .timing-dual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 8px 0;
+        }
+
+        .result-card .fr-box,
+        .result-card .sr-box {
             background: #f8f9fa;
             border-radius: 8px;
             padding: 8px 10px;
             text-align: center;
             border: 1px solid #eee;
         }
-        .result-card .fr-box .round-label, .result-card .sr-box .round-label {
+
+        .result-card .fr-box .round-label,
+        .result-card .sr-box .round-label {
             font-size: 0.55rem;
             color: #888;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        .result-card .fr-box .result-number, .result-card .sr-box .result-number {
+
+        .result-card .fr-box .result-number,
+        .result-card .sr-box .result-number {
             font-size: 1.6rem;
             font-weight: 900;
             color: #cc0000;
             margin-top: 2px;
         }
-        .result-card .fr-box .waiting-number-display, .result-card .sr-box .waiting-number-display {
+
+        .result-card .fr-box .waiting-number-display,
+        .result-card .sr-box .waiting-number-display {
             font-size: 0.9rem;
             font-weight: 700;
             color: #ff9800;
             margin-top: 2px;
             animation: blink 1s infinite;
         }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
         .result-card .countdown-box {
             background: #0a3d6b;
             border-radius: 6px;
@@ -496,12 +559,14 @@
             text-align: center;
             border: 1px solid #ffcc00;
         }
+
         .result-card .countdown-box .countdown-label {
             color: #ffcc00;
             font-size: 0.5rem;
             font-weight: 600;
             letter-spacing: 0.5px;
         }
+
         .result-card .countdown-box .countdown-time {
             font-weight: 800;
             color: #fff;
@@ -510,6 +575,7 @@
             border-radius: 4px;
             font-size: 0.65rem;
         }
+
         .result-card .card-footer {
             display: flex;
             gap: 6px;
@@ -517,6 +583,7 @@
             margin-top: 8px;
             flex-wrap: wrap;
         }
+
         .result-card .card-footer a {
             padding: 5px 14px;
             border-radius: 25px;
@@ -525,12 +592,23 @@
             text-decoration: none;
             transition: all 0.3s;
         }
-        .result-card .card-footer a:hover { transform: scale(1.03); }
-        .btn-previous { background: #0d47a1; color: #fff; }
-        .btn-common { background: #00e676; color: #0d0a0a; }
+
+        .result-card .card-footer a:hover {
+            transform: scale(1.03);
+        }
+
+        .btn-previous {
+            background: #0d47a1;
+            color: #fff;
+        }
+
+        .btn-common {
+            background: #00e676;
+            color: #0d0a0a;
+        }
 
         /* ============================================================ */
-        /* 🔥 COMMON NUMBERS */
+        /* 🔥 COMMON NUMBERS - White Text on Blue Background */
         /* ============================================================ */
         .common-venues-container {
             display: grid;
@@ -538,6 +616,7 @@
             gap: 15px;
             margin: 12px 0;
         }
+
         .common-venue-card {
             background: #fff;
             border-radius: 12px;
@@ -545,27 +624,66 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             border-top: 3px solid #0d47a1;
         }
+
         .common-venue-card .common-venue-title {
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 800;
-            color: #0d47a1;
-            margin-bottom: 8px;
+            color: #ffffff !important;
+            margin-bottom: 10px;
             text-align: center;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-shadow: 0 1px 8px rgba(255,255,255,0.15);
+            box-shadow: 0 2px 12px rgba(13,71,161,0.15);
+            letter-spacing: 0.5px;
         }
-        .common-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+
+        .common-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+        }
+
         .common-table th {
-            background: #0d47a1;
-            color: #fff;
-            padding: 6px 8px;
-            font-size: 0.65rem;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            color: #ffffff !important;
+            padding: 8px 12px;
+            font-size: 0.7rem;
             text-align: center;
+            font-weight: 700;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.1);
         }
-        .common-table td { padding: 6px 8px; text-align: center; border-bottom: 1px solid #f0f0f0; }
+
+        .common-table td {
+            padding: 6px 10px;
+            text-align: center;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
         .common-table tr:hover td { background: #f0f4f9; }
         .common-table .round-cell { font-weight: 700; color: #0d47a1; }
-        .common-table .direct-num { background: #e3f2fd; padding: 2px 8px; border-radius: 4px; font-weight: 700; color: #0d47a1; }
-        .common-table .house-num { background: #e8f5e9; padding: 2px 8px; border-radius: 4px; font-weight: 700; color: #2e7d32; }
-        .common-table .ending-num { background: #fff3e0; padding: 2px 8px; border-radius: 4px; font-weight: 700; color: #e65100; }
+        .common-table .direct-num {
+            background: #e3f2fd;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            color: #0d47a1;
+        }
+        .common-table .house-num {
+            background: #e8f5e9;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            color: #2e7d32;
+        }
+        .common-table .ending-num {
+            background: #fff3e0;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            color: #e65100;
+        }
 
         /* ============================================================ */
         /* 🔥 PREVIOUS RESULTS - Year & Month Filter */
