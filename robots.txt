@@ -8,9 +8,8 @@
 # ============================================================
 # 🔥 Cloudflare Managed Content (AI Crawlers Control)
 # ============================================================
-User-agent: *
-Content-Signal: search=yes, ai-train=no, use=reference
-Allow: /
+# Note: Content-Signal is NOT supported by Googlebot
+# It is only for Cloudflare AI crawlers
 
 User-agent: Amazonbot
 Disallow: /
