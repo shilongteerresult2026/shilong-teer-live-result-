@@ -19,7 +19,6 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
             console.error('❌ Supabase Error:', error);
         } else {
             console.log('✅ Supabase Connected Successfully!');
-            console.log('📊 Sample Data:', data);
         }
     } catch (e) {
         console.error('❌ Connection Failed:', e);
@@ -463,7 +462,6 @@ let lastFetchTime = {};
 
 async function loadTodayResults(forceRefresh = false) {
     if (isLoading && !forceRefresh) {
-        console.log('Already loading results...');
         return globalLiveData;
     }
     
@@ -474,10 +472,7 @@ async function loadTodayResults(forceRefresh = false) {
         const nightDate = getNightDate();
         const yesterday = getYesterdayIST();
         
-        // Get venues for current page
         const venues = getVenuesForCurrentPage();
-        console.log('🔄 Loading results for venues:', venues);
-        
         const liveData = {};
         
         for (const venue of venues) {
@@ -490,9 +485,6 @@ async function loadTodayResults(forceRefresh = false) {
                 dateToUse = nightDate;
             }
             
-            console.log(`📊 Fetching ${venue} for date: ${dateToUse}`);
-            
-            // Try to get from live results first
             let { data, error } = await supabaseClient
                 .from('teer_live_results')
                 .select('*')
@@ -500,19 +492,15 @@ async function loadTodayResults(forceRefresh = false) {
                 .eq('result_date', dateToUse);
                 
             if (!error && data && data.length > 0) {
-                console.log(`✅ Found live data for ${venue}:`, data[0]);
                 liveData[venue] = { 
                     fr: data[0].fr_result || '--', 
                     sr: data[0].sr_result || '--' 
                 };
                 
-                // Auto-save to previous results
                 if (data[0].fr_result !== '--' && data[0].sr_result !== '--') {
                     await saveLiveResultToPrevious(config.venueName, data[0].fr_result, data[0].sr_result, dateToUse);
                 }
             } else {
-                // Try to get from previous results
-                console.log(`⚠️ No live data for ${venue}, checking previous results...`);
                 const { data: prevData, error: prevError } = await supabaseClient
                     .from('teer_previous_results')
                     .select('*')
@@ -521,13 +509,11 @@ async function loadTodayResults(forceRefresh = false) {
                     .limit(1);
                     
                 if (!prevError && prevData && prevData.length > 0) {
-                    console.log(`✅ Found previous data for ${venue}:`, prevData[0]);
                     liveData[venue] = { 
                         fr: prevData[0].fr_result || '--', 
                         sr: prevData[0].sr_result || '--' 
                     };
                 } else {
-                    console.log(`❌ No data found for ${venue}`);
                     liveData[venue] = { fr: '--', sr: '--' };
                 }
             }
@@ -539,17 +525,14 @@ async function loadTodayResults(forceRefresh = false) {
             [getTodayIST()]: Date.now()
         };
         
-        // Render results
         renderTodayResults(liveData, today, nightDate);
         
-        // Update meta tags
         const currentVenue = detectVenueFromPage();
         const venueId = currentVenue.toLowerCase();
         if (liveData[venueId]) {
             updateMetaTags(currentVenue, liveData[venueId].fr || '--', liveData[venueId].sr || '--', today);
         }
         
-        // Update selectors
         Object.keys(venueConfigs).forEach(venue => {
             const select = document.getElementById(venueConfigs[venue].selectId);
             if (select) loadPreviousResults(venue, parseInt(select.value));
@@ -572,8 +555,6 @@ async function loadTodayResults(forceRefresh = false) {
 function renderTodayResults(liveData, todayDate, nightDate) {
     const pageType = detectPageType();
     let venues = [];
-    
-    console.log('📄 Rendering for page type:', pageType);
     
     if (pageType === 'khanapara') {
         venues = [
@@ -602,7 +583,6 @@ function renderTodayResults(liveData, todayDate, nightDate) {
             { id: 'night', name: 'NIGHT TEER', time1: '11:10 PM', time2: '12:10 AM', date: nightDate || getNightDate() }
         ];
     } else {
-        // Home Page - সব ভেন্যু
         venues = [
             { id: 'shillong', name: 'SHILLONG TEER', time1: '4:15 PM', time2: '5:10 PM', date: todayDate },
             { id: 'khanapara', name: 'KHANAPARA TEER', time1: '4:10 PM', time2: '5:05 PM', date: todayDate },
@@ -613,19 +593,12 @@ function renderTodayResults(liveData, todayDate, nightDate) {
     }
     
     const grid = document.getElementById('resultsGrid');
-    if (!grid) {
-        console.warn('⚠️ resultsGrid not found on this page');
-        return;
-    }
-    
-    console.log('📊 Rendering venues:', venues.map(v => v.id));
+    if (!grid) return;
     
     let html = '';
     venues.forEach(v => {
         const data = liveData[v.id] || { fr: '--', sr: '--' };
         const hasData = (data.fr !== '--' || data.sr !== '--');
-        
-        console.log(`📊 ${v.id}: FR=${data.fr}, SR=${data.sr}`);
         
         const frDisplay = isWaitingForVenue(v.id, 'fr') ? `<div class="waiting-number-display">⏳ WAITING</div>` : `<div class="result-number">${data.fr}</div>`;
         const srDisplay = isWaitingForVenue(v.id, 'sr') ? `<div class="waiting-number-display">⏳ WAITING</div>` : `<div class="result-number">${data.sr}</div>`;
@@ -997,7 +970,6 @@ function subscribeToLiveResults() {
             async (payload) => {
                 console.log('🔔 Live results update received:', payload);
                 
-                // Check if this venue is on current page
                 const currentVenues = getVenuesForCurrentPage();
                 const venueId = Object.keys(venueConfigs).find(key => 
                     venueConfigs[key].venueName === payload.new?.venue
@@ -1006,7 +978,6 @@ function subscribeToLiveResults() {
                 if (venueId && currentVenues.includes(venueId)) {
                     console.log(`✅ Updating UI for ${venueId}`);
                     
-                    // Save to previous if both results available
                     if (payload.new?.fr_result !== '--' && payload.new?.sr_result !== '--') {
                         await saveLiveResultToPrevious(
                             payload.new.venue, 
@@ -1016,10 +987,7 @@ function subscribeToLiveResults() {
                         );
                     }
                     
-                    // Reload results for current page
                     await loadTodayResults(true);
-                    
-                    // Show toast notification
                     showToast(`🔄 ${payload.new?.venue} result updated!`);
                 } else {
                     console.log(`⏭️ Update for ${payload.new?.venue} not on current page, skipping UI update`);
@@ -1038,11 +1006,9 @@ function forceRefreshResults() {
     console.log('🔄 Force refreshing results...');
     showToast('🔄 Refreshing results...');
     
-    // Clear cache
     lastFetchTime = {};
     globalLiveData = {};
     
-    // Reload
     loadTodayResults(true).then(() => {
         showToast('✅ Results refreshed successfully!');
     }).catch((err) => {
@@ -1262,7 +1228,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('📄 Page loaded:', window.location.pathname);
     console.log('📄 Page type:', detectPageType());
     
-    // Load initial data
     loadTodayResults();
     loadCommonNumbers();
     setupAllSelectors();
@@ -1270,11 +1235,9 @@ document.addEventListener('DOMContentLoaded', function() {
     loadTrendingNumbers();
     loadLeaderboard();
     
-    // Real-time subscriptions
     subscribeToCommonNumbers();
     subscribeToLiveResults();
     
-    // Page specific loading
     const path = window.location.pathname;
     if (path.includes('shillong-teer-result.html') || path.includes('shillong-previous.html') || path.includes('shillong-common.html')) {
         loadShillongPageData();
@@ -1288,13 +1251,11 @@ document.addEventListener('DOMContentLoaded', function() {
         loadNightPageData();
     }
     
-    // Add force refresh button if exists
     const refreshBtn = document.getElementById('refreshResultsBtn');
     if (refreshBtn) {
         refreshBtn.addEventListener('click', forceRefreshResults);
     }
     
-    // Dream Predictor
     const predictBtn = document.getElementById('predictDreamBtn');
     if(predictBtn) {
         predictBtn.addEventListener('click', function() {
@@ -1314,7 +1275,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // FAQ Toggle
     document.querySelectorAll('.faq-question').forEach(q => {
         q.addEventListener('click', function() {
             let a = this.nextElementSibling;
@@ -1325,20 +1285,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Modal Close
     document.getElementById('closeLiveModalBtn')?.addEventListener('click', closeModals);
     document.getElementById('closePrevModalBtn')?.addEventListener('click', closeModals);
     window.addEventListener('click', function(e) { 
         if(e.target.classList.contains('modal')) closeModals(); 
     });
     
-    // Auto-refresh every 2 minutes
     setInterval(() => {
         if (!document.hidden) {
-            console.log('🔄 Auto-refreshing results...');
             loadTodayResults(true);
         }
-    }, 120000); // 2 minutes
+    }, 120000);
 });
 
 // ============================================================
@@ -1346,14 +1303,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // ============================================================
 document.addEventListener('visibilitychange', function() {
     if (!document.hidden) {
-        console.log('👁️ Page became visible, refreshing results...');
         loadTodayResults(true);
     }
 });
 
 console.log('✅ App.js loaded successfully with all features!');
-console.log('📌 Features: Live Results, Previous Results, Common Numbers, Dream Predictor, VIP System, Comments, Countdown, Real-time Updates');
-console.log('🏹 Venues: Shillong, Shillong Morning, Shillong Night, Khanapara, Khanapara Morning, Khanapara Night, Juwai, Juwai Morning, Juwai Night, Morning, Night');
-console.log('🔄 Real-time subscriptions active for live results and common numbers');
-console.log('⏰ Countdown updates every second for all venues');
-console.log('♻️ Auto-refresh every 2 minutes');
