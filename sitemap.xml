@@ -1,147 +1,188 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-
-  <!-- ============================================================ -->
-  <!-- 🔥 Home Page -->
-  <!-- ============================================================ -->
-  <url>
-    <loc>https://shillongteerliveresult.in/</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-
-  <!-- ============================================================ -->
-  <!-- 🔥 Result Pages -->
-  <!-- ============================================================ -->
-  <url>
-    <loc>https://shillongteerliveresult.in/shillong-teer-result.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://shillongteerliveresult.in/khanapara-teer-result.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://shillongteerliveresult.in/juwai-teer-result.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://shillongteerliveresult.in/morning-teer-result.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://shillongteerliveresult.in/night-teer-result.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- ============================================================ -->
-  <!-- 🔥 Common Number Pages -->
-  <!-- ============================================================ -->
-  <url>
-    <loc>https://shillongteerliveresult.in/shillong-common.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://shillongteerliveresult.in/khanapara-common.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://shillongteerliveresult.in/juwai-common.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- ============================================================ -->
-  <!-- 🔥 Previous Results Pages -->
-  <!-- ============================================================ -->
-  <url>
-    <loc>https://shillongteerliveresult.in/shillong-previous.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://shillongteerliveresult.in/khanapara-previous.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://shillongteerliveresult.in/juwai-previous.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://shillongteerliveresult.in/morning-previous.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <url>
-    <loc>https://shillongteerliveresult.in/night-previous.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <!-- ============================================================ -->
-  <!-- 🔥 Static Pages -->
-  <!-- ============================================================ -->
-  <url>
-    <loc>https://shillongteerliveresult.in/about.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-
-  <url>
-    <loc>https://shillongteerliveresult.in/contact.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-
-  <url>
-    <loc>https://shillongteerliveresult.in/privacy.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
-  <url>
-    <loc>https://shillongteerliveresult.in/terms.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-  </url>
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+    
+    <!-- ============================================================ -->
+    <!-- 🔥 HOME PAGE -->
+    <!-- ============================================================ -->
+    <url>
+        <loc>https://shillongteerliveresult.in/</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- ============================================================ -->
+    <!-- 🔥 SHILLONG TEER PAGES -->
+    <!-- ============================================================ -->
+    <url>
+        <loc>https://shillongteerliveresult.in/shillong-teer-result.html</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+        <image:image>
+            <image:loc>https://shillongteerliveresult.in/og-image.png</image:loc>
+            <image:title>Shillong Teer Result Today</image:loc>
+        </image:image>
+    </url>
+    
+    <url>
+        <loc>https://shillongteerliveresult.in/shillong-common.html</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://shillongteerliveresult.in/shillong-previous.html</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- ============================================================ -->
+    <!-- 🔥 KHANAPARA TEER PAGES -->
+    <!-- ============================================================ -->
+    <url>
+        <loc>https://shillongteerliveresult.in/khanapara-teer-result.html</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+        <image:image>
+            <image:loc>https://shillongteerliveresult.in/og-image.png</image:loc>
+            <image:title>Khanapara Teer Result Today</image:loc>
+        </image:image>
+    </url>
+    
+    <url>
+        <loc>https://shillongteerliveresult.in/khanapara-common.html</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://shillongteerliveresult.in/khanapara-previous.html</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- ============================================================ -->
+    <!-- 🔥 JUWAI TEER PAGES -->
+    <!-- ============================================================ -->
+    <url>
+        <loc>https://shillongteerliveresult.in/juwai-teer-result.html</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+        <image:image>
+            <image:loc>https://shillongteerliveresult.in/og-image.png</image:loc>
+            <image:title>Juwai Teer Result Today</image:loc>
+        </image:image>
+    </url>
+    
+    <url>
+        <loc>https://shillongteerliveresult.in/juwai-common.html</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://shillongteerliveresult.in/juwai-previous.html</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- ============================================================ -->
+    <!-- 🔥 MORNING TEER PAGES -->
+    <!-- ============================================================ -->
+    <url>
+        <loc>https://shillongteerliveresult.in/morning-teer-result.html</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+        <image:image>
+            <image:loc>https://shillongteerliveresult.in/og-image.png</image:loc>
+            <image:title>Morning Teer Result Today</image:loc>
+        </image:image>
+    </url>
+    
+    <url>
+        <loc>https://shillongteerliveresult.in/morning-common.html</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <url>
+        <loc>https://shillongteerliveresult.in/morning-previous.html</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <!-- ============================================================ -->
+    <!-- 🔥 NIGHT TEER PAGES -->
+    <!-- ============================================================ -->
+    <url>
+        <loc>https://shillongteerliveresult.in/night-teer-result.html</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+        <image:image>
+            <image:loc>https://shillongteerliveresult.in/og-image.png</image:loc>
+            <image:title>Night Teer Result Today</image:loc>
+        </image:image>
+    </url>
+    
+    <url>
+        <loc>https://shillongteerliveresult.in/night-common.html</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <url>
+        <loc>https://shillongteerliveresult.in/night-previous.html</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <!-- ============================================================ -->
+    <!-- 🔥 OTHER PAGES -->
+    <!-- ============================================================ -->
+    <url>
+        <loc>https://shillongteerliveresult.in/about.html</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <url>
+        <loc>https://shillongteerliveresult.in/contact.html</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <url>
+        <loc>https://shillongteerliveresult.in/privacy.html</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.2</priority>
+    </url>
+    
+    <url>
+        <loc>https://shillongteerliveresult.in/terms.html</loc>
+        <lastmod>2026-07-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.2</priority>
+    </url>
 
 </urlset>
