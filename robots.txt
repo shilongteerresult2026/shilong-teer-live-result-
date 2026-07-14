@@ -2,18 +2,68 @@
 # 🔥 ROBOTS.TXT - Shillong Teer Live Result
 # ============================================================
 # This file controls which pages search engines can crawl
-# Last Updated: 2026-07-05
+# Last Updated: 2026-07-14
 # ============================================================
 
 # ============================================================
-# 🔥 Allow all search engines to crawl
+# 🔥 Cloudflare Managed Content (AI Crawlers Control)
 # ============================================================
 User-agent: *
+Content-Signal: search=yes, ai-train=no, use=reference
+Allow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: CloudflareBrowserRenderingCrawler
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+# ============================================================
+# 🔥 Main Search Engines (Allow All)
+# ============================================================
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Yandex
 Allow: /
 
 # ============================================================
-# 🔥 Disallow - যেসব পেজ ক্রল করতে দেবেন না
+# 🔥 Disallow Sensitive Directories (For All Crawlers)
 # ============================================================
+User-agent: *
 Disallow: /admin/
 Disallow: /login/
 Disallow: /wp-admin/
@@ -23,6 +73,7 @@ Disallow: /temp/
 Disallow: /backup/
 Disallow: /logs/
 Disallow: /cache/
+Disallow: /assets/private/
 
 # ============================================================
 # 🔥 Sitemap Location
@@ -30,17 +81,11 @@ Disallow: /cache/
 Sitemap: https://shillongteerliveresult.in/sitemap.xml
 
 # ============================================================
-# 🔥 Crawl Delay (optional - slows down crawling)
+# 🔥 Crawl Delay (Only for slower bots)
 # ============================================================
+# Note: Google ignores crawl-delay, use it for Bing/Yandex
+User-agent: Bingbot
 Crawl-delay: 1
 
-# ============================================================
-# 🔥 Host (optional - specifies the preferred domain)
-# ============================================================
-Host: https://shillongteerliveresult.in
-
-# ============================================================
-# 🔥 Additional Settings
-# ============================================================
-# Respect the nofollow meta tags
-# Respect the noindex meta tags
+User-agent: Yandex
+Crawl-delay: 1
