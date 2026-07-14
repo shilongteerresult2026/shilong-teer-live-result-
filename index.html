@@ -2,7 +2,7 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <!-- ✅ Viewport Tag ঠিক করা হয়েছে (Zoom Enabled) -->
+    <!-- ✅ Viewport Tag ঠিক করা হয়েছে -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- ============================================================ -->
@@ -50,7 +50,7 @@
     <meta name="50064c663ff903c2e60fcbe064af79fac42c5954" content="50064c663ff903c2e60fcbe064af79fac42c5954" />
 
     <!-- ============================================================ -->
-    <!-- 🔥 OneSignal Push Notification (async যোগ করা হয়েছে) -->
+    <!-- 🔥 OneSignal Push Notification -->
     <!-- ============================================================ -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
@@ -116,7 +116,7 @@
             border: 1px solid rgba(13,71,161,0.08);
         }
 
-        /* ✅ Lazy Loading যোগ করা হয়েছে */
+        /* ✅ Width & Height যোগ করা হয়েছে */
         .site-logo {
             max-width: 55px;
             height: auto;
@@ -463,7 +463,6 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
-        /* ===== VENUE HEADER - Smaller ===== */
         .result-card .venue-header {
             display: flex;
             justify-content: space-between;
@@ -507,7 +506,6 @@
             text-align: center;
         }
 
-        /* ===== TIMING DUAL - Side by Side ===== */
         .result-card .timing-dual {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -555,7 +553,6 @@
             50% { opacity: 0.3; }
         }
 
-        /* ===== COUNTDOWN BOX ===== */
         .result-card .countdown-box {
             background: #0a3d6b;
             border-radius: 4px;
@@ -581,7 +578,6 @@
             font-size: 0.6rem;
         }
 
-        /* ===== CARD FOOTER ===== */
         .result-card .card-footer {
             display: flex;
             gap: 4px;
@@ -614,7 +610,7 @@
         }
 
         /* ============================================================ */
-        /* 🔥 COMMON NUMBERS - White Text on Blue Background */
+        /* 🔥 COMMON NUMBERS */
         /* ============================================================ */
         .common-venues-container {
             display: grid;
@@ -692,7 +688,7 @@
         }
 
         /* ============================================================ */
-        /* 🔥 PREVIOUS RESULTS - Year & Month Filter */
+        /* 🔥 PREVIOUS RESULTS */
         /* ============================================================ */
         .monthwise-section {
             background: #fff;
@@ -947,7 +943,7 @@
         .share-btn.copy { background: #6c757d; }
 
         /* ============================================================ */
-        /* 🔥 FAQ - 10 Points (English) */
+        /* 🔥 FAQ */
         /* ============================================================ */
         .faq-section {
             background: #fff;
@@ -1212,8 +1208,8 @@
     <!-- ===== HEADER ===== -->
     <div class="header-section">
         <div class="site-brand">
-            <!-- ✅ Lazy Loading যোগ করা হয়েছে -->
-            <img src="logo.png" alt="Shillong Teer Live Result" class="site-logo" loading="lazy">
+            <!-- ✅ Width & Height যোগ করা হয়েছে -->
+            <img src="logo.png" alt="Shillong Teer Live Result" class="site-logo" width="55" height="55" loading="lazy">
             <div class="name-box">
                 <h1>🏹 Shillong Teer Result Today</h1>
                 <div class="bn-title">আজকের শিলং তীর লাইভ রেজাল্ট ও কমন নাম্বার</div>
@@ -1247,429 +1243,431 @@
         <a href="https://whatsapp.com/channel/0029VaFbrQmLSmbjX5WOYp2d" target="_blank" class="whatsapp-join-btn">Join WhatsApp</a>
     </div>
 
-    <h2 class="seo-h2-orange" style="display:block; width:100%; text-align:center;">🎯 Shillong Teer Result Today Live | আজকের শিলং তীর লাইভ রেজাল্ট</h2>
-    
-    <!-- ===== SLIDER ===== -->
-    <div class="slider-container">
-        <div class="slider-wrapper" id="sliderWrapper">
-            <div class="slider-text-container" id="sliderTextContainer" style="position:relative;height:100%;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;"></div>
-        </div>
-    </div>
-
-    <!-- ===== VIP TRIGGER ===== -->
-    <div class="vip-box">
-        <div class="vip-icon">🔒</div>
-        <h3>🎯 VIP ডাইরেক্ট নাম্বার (100% Locked)</h3>
-        <p><span style="background:#ffeb3b; padding:2px 8px; border-radius:4px; font-weight:bold;">🚀 [BN]</span> ফ্রিতে আনলক করে স্পেশাল হিট নাম্বারটি দেখে নিন</p>
-        <button id="vipUnlockBtn" class="vip-unlock-btn">🔓 আনলক করুন / Unlock Now</button>
-        <div id="vipStatusText" style="margin-top:6px; font-size:0.75rem; color:#888; min-height:18px;"></div>
-    </div>
-
-    <!-- ===== Refresh Button ===== -->
-    <div style="text-align:center; margin:8px 0;">
-        <button onclick="window.location.reload();" style="background:linear-gradient(135deg,#00b300,#008000); color:#fff; padding:6px 16px; font-size:0.8rem; font-weight:700; border:none; border-radius:30px; cursor:pointer; box-shadow:0 3px 8px rgba(0,128,0,0.15); width:95%; max-width:350px;">
-            🔄 ক্লিক করে রেজাল্ট রিফ্রেশ করুন
-        </button>
-    </div>
-
-    <!-- ===== Fast Server Link ===== -->
-    <div style="margin:-4px 0 8px 0; text-align:center;">
-        <a href="https://omg10.com/4/11160871" target="_blank" style="display:inline-block; width:95%; max-width:350px; background:#fff0f0; border:1px dashed #ffcccc; color:#d00000; padding:3px 8px; border-radius:6px; font-size:0.65rem; font-weight:700; text-decoration:none;">
-            ⚡ [BN] সার্ভার-১ থেকে লাইভ দেখুন | [AS] চাৰ্ভাৰ-১ ৰ পৰা লাইভ চাওক
-        </a>
-    </div>
-
-    <!-- ===== RESULTS GRID ===== -->
-    <div id="resultsGrid" class="results-grid"></div>
-
-    <!-- ===== SOCIAL SHARE ===== -->
-    <div class="social-share-container">
-        <div class="share-title">📢 <span>শেয়ার করুন</span></div>
-        <div class="share-buttons">
-            <button onclick="shareOnFacebook()" class="share-btn facebook"><span>📘</span> Facebook</button>
-            <button onclick="shareOnWhatsApp()" class="share-btn whatsapp"><span>📱</span> WhatsApp</button>
-            <button onclick="shareOnTwitter()" class="share-btn twitter"><span>🐦</span> Twitter</button>
-            <button onclick="shareOnTelegram()" class="share-btn telegram"><span>✈️</span> Telegram</button>
-            <button onclick="copyLink()" class="share-btn copy"><span>📋</span> কপি লিংক</button>
-        </div>
-    </div>
-
-    <!-- ===== ADSTERA BANNER ===== -->
-    <div style="margin:1.5rem 0; text-align:center; background:#f9f5f0; padding:0.8rem; border-radius:12px;">
-        <p style="font-size:0.75rem; font-weight:700; color:#555; margin-bottom:6px; letter-spacing:0.5px;">💡 Trending News & Teer Tips 💡</p>
-        <!-- ✅ Adstera Script (Error Fix) -->
-        <script async="async" data-cfasync="false" src="https://pl30289530.effectivecpmnetwork.com/c790b6b5b066c06ce4ca5298332d2265/invoke.js"></script>
-        <div id="container-c790b6b5b066c06ce4ca5298332d2265"></div>
-    </div>
-
-    <!-- ===== COMMON NUMBERS ===== -->
-    <div class="common-venues-container" id="commonTablesContainer"></div>
-    
-    <!-- ===== PREVIOUS RESULTS ===== -->
-    <h2 class="seo-h2-dark" style="display:block; width:100%; text-align:center;">📅 Shillong Teer Previous Results</h2>
-    <div class="monthwise-section">
-        <div class="selector-container">
-            <div style="display: flex; align-items: center; gap: 6px;">
-                <label for="yearSelectShillong">📅 Year:</label>
-                <select id="yearSelectShillong">
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                    <option value="2025">2025</option>
-                    <option value="2026" selected>2026</option>
-                    <option value="2027">2027</option>
-                </select>
-            </div>
-            <div style="display: flex; align-items: center; gap: 6px;">
-                <label for="monthSelectShillong">📆 Month:</label>
-                <select id="monthSelectShillong">
-                    <option value="0">Jan</option>
-                    <option value="1">Feb</option>
-                    <option value="2">Mar</option>
-                    <option value="3">Apr</option>
-                    <option value="4">May</option>
-                    <option value="5">Jun</option>
-                    <option value="6" selected>Jul</option>
-                    <option value="7">Aug</option>
-                    <option value="8">Sep</option>
-                    <option value="9">Oct</option>
-                    <option value="10">Nov</option>
-                    <option value="11">Dec</option>
-                </select>
+    <!-- ✅ Main Landmark যোগ করা হয়েছে -->
+    <main>
+        <h2 class="seo-h2-orange" style="display:block; width:100%; text-align:center;">🎯 Shillong Teer Result Today Live | আজকের শিলং তীর লাইভ রেজাল্ট</h2>
+        
+        <!-- ===== SLIDER ===== -->
+        <div class="slider-container">
+            <div class="slider-wrapper" id="sliderWrapper">
+                <div class="slider-text-container" id="sliderTextContainer" style="position:relative;height:100%;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;"></div>
             </div>
         </div>
 
-        <table class="result-display-table">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>FR (4:15 PM)</th>
-                    <th>SR (5:10 PM)</th>
-                </tr>
-            </thead>
-            <tbody id="resultsTableShillong">
-                <tr><td colspan="3" style="text-align:center; padding:15px; color:#8a7a6a;">Loading...</td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- ===== DREAM CHART ===== -->
-    <h2 class="seo-h2-dark" style="display:block; width:100%; text-align:center;">📖 Shillong Teer Dream Chart | শিলং তীর স্বপ্নের চার্ট</h2>
-    <div class="dream-chart-section">
-        <table class="dream-chart-table">
-            <thead><tr><th>Dream</th><th>Direct Numbers</th><th>House Digit</th><th>Ending Digit</th></tr></thead>
-            <tbody id="dreamChartBody"></tbody>
-        </table>
-    </div>
-
-    <!-- ===== DREAM PREDICTOR ===== -->
-    <div class="dream-card">
-        <div class="dream-title">✨ DREAM NUMBER PREDICTOR ✨</div>
-        <div class="dream-flex">
-            <input type="text" id="dreamInput" class="dream-input" placeholder="e.g., snake, tiger">
-            <button id="predictDreamBtn" class="dream-predict-btn">🔮 PREDICT</button>
+        <!-- ===== VIP TRIGGER ===== -->
+        <div class="vip-box">
+            <div class="vip-icon">🔒</div>
+            <h3>🎯 VIP ডাইরেক্ট নাম্বার (100% Locked)</h3>
+            <p><span style="background:#ffeb3b; padding:2px 8px; border-radius:4px; font-weight:bold;">🚀 [BN]</span> ফ্রিতে আনলক করে স্পেশাল হিট নাম্বারটি দেখে নিন</p>
+            <button id="vipUnlockBtn" class="vip-unlock-btn">🔓 আনলক করুন / Unlock Now</button>
+            <div id="vipStatusText" style="margin-top:6px; font-size:0.75rem; color:#888; min-height:18px;"></div>
         </div>
-        <div id="dreamDisplayText" style="text-align:center; margin-bottom:6px; font-weight:700; color:#0d47a1; font-size:0.8rem;">💭 Enter a dream word and click Predict</div>
-        <table class="dream-table">
-            <thead><tr><th>🏠 HOUSE NUMBERS</th><th>🎯 ENDING NUMBERS</th></tr></thead>
-            <tbody>
-                <tr>
-                    <td><div class="number-group"><span class="dream-num-box" id="houseDigit1">--</span><span class="dream-num-box" id="houseDigit2">--</span></div></td>
-                    <td><div class="number-group"><span class="dream-num-box" id="endingDigit1">--</span><span class="dream-num-box" id="endingDigit2">--</span></div></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 
-    <!-- ============================================================ -->
-    <!-- 🔥 DETAILED HISTORY SECTION - ALL TEER VENUES (ENGLISH) -->
-    <!-- ============================================================ -->
-    
-    <!-- ===== SHILLONG TEER ===== -->
-    <div class="history-section-direct">
-        <h2 class="seo-h2-dark" style="border-left-color:#0d47a1; display:block; width:100%; text-align:center;">🏹 Shillong Teer - Complete History, Tradition & Culture</h2>
-        <div class="history-card">
-            <ul>
-                <li>
-                    <h4>📍 Origin & Historical Context of Shillong Teer</h4>
-                    <p>Shillong Teer is not merely a numbers game; it is a living cultural heritage of the Khasi community in Meghalaya. Originating during the British colonial era (1830s-1940s), archery was traditionally a means of self-defense and a royal sport among the indigenous Khasi tribes. The game transformed into a unique lottery system in the early 20th century. In 1982, the Meghalaya government legally recognized Teer under the Meghalaya Amusement and Betting Tax Act, making it one of the few legally sanctioned betting games in India.</p>
-                </li>
-                <li>
-                    <h4>🎯 Traditional Rituals of Shillong Teer</h4>
-                    <p>Before each match, local elders and priests perform traditional ceremonies to bless the archers and the counting process. These rituals ensure fair play and spiritual protection. The game is deeply rooted in Khasi culture, with archery being a symbol of strength, precision, and community bonding.</p>
-                </li>
-                <li>
-                    <h4>🏛️ Modern Evolution & Current Status of Shillong Teer</h4>
-                    <p>Today, over 200 licensed Teer counters operate across Meghalaya, processing millions of rupees in bets daily. The game has survived through generations, adapting to modern times while preserving its traditional essence. It stands as a unique blend of ancient archery skills and modern lottery systems, attracting players from all walks of life.</p>
-                </li>
-                <li class="did-you-know">
-                    <h4>📌 Amazing Facts About Shillong Teer</h4>
-                    <p style="font-style:italic;">The oldest recorded Teer match dates back to 1906 when local Khasi kings organized archery competitions during harvest festivals. The game was played with traditional bamboo bows and wooden arrows.</p>
-                </li>
-                <li>
-                    <h4>⏰ Shillong Teer Schedule</h4>
-                    <p>Shillong Teer runs from Monday to Friday. The First Round (FR) takes place at 4:15 PM and the Second Round (SR) at 5:10 PM.</p>
-                </li>
-            </ul>
+        <!-- ===== Refresh Button ===== -->
+        <div style="text-align:center; margin:8px 0;">
+            <button onclick="window.location.reload();" style="background:linear-gradient(135deg,#00b300,#008000); color:#fff; padding:6px 16px; font-size:0.8rem; font-weight:700; border:none; border-radius:30px; cursor:pointer; box-shadow:0 3px 8px rgba(0,128,0,0.15); width:95%; max-width:350px;">
+                🔄 ক্লিক করে রেজাল্ট রিফ্রেশ করুন
+            </button>
         </div>
-    </div>
 
-    <!-- ===== KHANAPARA TEER ===== -->
-    <div class="history-section-direct">
-        <h2 class="seo-h2-dark" style="border-left-color:#00695c; display:block; width:100%; text-align:center;">🏹 Khanapara Teer - Complete History, Tradition & Culture</h2>
-        <div class="history-card">
-            <ul>
-                <li class="khanapara">
-                    <h4>📍 Origin & Development of Khanapara Teer</h4>
-                    <p>Khanapara Teer originated as a regional variant of the traditional Shillong Teer game, played in the Khanapara area of Assam, near the Meghalaya border. It shares the same archery-based lottery system but has its own unique cultural identity and local flavor.</p>
-                </li>
-                <li class="khanapara">
-                    <h4>🎯 Local Traditions of Khanapara Teer</h4>
-                    <p>The Khanapara Teer grounds have become a hub for local communities, where players gather daily to witness the matches. The game has become an integral part of the local economy and social life, with many families having generations of archers.</p>
-                </li>
-                <li class="khanapara">
-                    <h4>🏛️ Modern Impact of Khanapara Teer</h4>
-                    <p>Khanapara Teer has grown significantly in popularity, attracting players from Assam and neighboring states. It operates under the same legal framework as Shillong Teer and follows similar rules and timings, with FR at 4:10 PM and SR at 5:05 PM.</p>
-                </li>
-                <li class="khanapara did-you-know" style="background:#e0f2f1; border-left-color:#004d40;">
-                    <h4 style="background:linear-gradient(135deg, #004d40, #00695c);">📌 Amazing Facts About Khanapara Teer</h4>
-                    <p style="font-style:italic;">Khanapara Teer has become a major tourist attraction, with visitors coming from across Assam to witness the unique archery competitions and the vibrant atmosphere of the grounds.</p>
-                </li>
-                <li class="khanapara">
-                    <h4>⏰ Khanapara Teer Schedule</h4>
-                    <p>Khanapara Teer runs from Monday to Friday. The First Round (FR) takes place at 4:10 PM and the Second Round (SR) at 5:05 PM.</p>
-                </li>
-            </ul>
+        <!-- ===== Fast Server Link ===== -->
+        <div style="margin:-4px 0 8px 0; text-align:center;">
+            <a href="https://omg10.com/4/11160871" target="_blank" style="display:inline-block; width:95%; max-width:350px; background:#fff0f0; border:1px dashed #ffcccc; color:#d00000; padding:3px 8px; border-radius:6px; font-size:0.65rem; font-weight:700; text-decoration:none;">
+                ⚡ [BN] সার্ভার-১ থেকে লাইভ দেখুন | [AS] চাৰ্ভাৰ-১ ৰ পৰা লাইভ চাওক
+            </a>
         </div>
-    </div>
 
-    <!-- ===== JUWAI TEER ===== -->
-    <div class="history-section-direct">
-        <h2 class="seo-h2-dark" style="border-left-color:#4a148c; display:block; width:100%; text-align:center;">🏹 Juwai Teer - Complete History, Tradition & Culture</h2>
-        <div class="history-card">
-            <ul>
-                <li class="juwai">
-                    <h4>📍 Origin & Cultural Roots of Juwai Teer</h4>
-                    <p>Juwai Teer is another regional variant of the traditional archery-based game, played in the Juwai area of Meghalaya. It has its own distinct identity, with local communities celebrating the game as a symbol of unity and cultural pride.</p>
-                </li>
-                <li class="juwai">
-                    <h4>🎯 Traditional Practices of Juwai Teer</h4>
-                    <p>The Juwai Teer matches are known for their festive atmosphere, with traditional music and dance performances accompanying the competitions. The game has become a social gathering point for families and friends.</p>
-                </li>
-                <li class="juwai">
-                    <h4>🏛️ Current Status of Juwai Teer</h4>
-                    <p>Juwai Teer operates with the same legal framework as other Teer games in Meghalaya. The timings are FR at 2:30 PM and SR at 3:15 PM, making it one of the afternoon matches.</p>
-                </li>
-                <li class="juwai did-you-know" style="background:#f3e5f5; border-left-color:#38006b;">
-                    <h4 style="background:linear-gradient(135deg, #38006b, #4a148c);">📌 Amazing Facts About Juwai Teer</h4>
-                    <p style="font-style:italic;">The Juwai Teer grounds are known for their picturesque location, surrounded by lush green hills and traditional Khasi villages.</p>
-                </li>
-                <li class="juwai">
-                    <h4>⏰ Juwai Teer Schedule</h4>
-                    <p>Juwai Teer runs from Monday to Friday. The First Round (FR) takes place at 2:30 PM and the Second Round (SR) at 3:15 PM.</p>
-                </li>
-            </ul>
-        </div>
-    </div>
+        <!-- ===== RESULTS GRID ===== -->
+        <div id="resultsGrid" class="results-grid"></div>
 
-    <!-- ===== MORNING TEER ===== -->
-    <div class="history-section-direct">
-        <h2 class="seo-h2-dark" style="border-left-color:#e65100; display:block; width:100%; text-align:center;">🌅 Morning Teer - Complete History, Tradition & Culture</h2>
-        <div class="history-card">
-            <ul>
-                <li class="morning">
-                    <h4>📍 Origin & Purpose of Morning Teer</h4>
-                    <p>Morning Teer was introduced to accommodate the growing demand for Teer matches in the morning hours. It allows players to participate in the game before their daily work begins, making it accessible to a wider audience.</p>
-                </li>
-                <li class="morning">
-                    <h4>🎯 Cultural Significance of Morning Teer</h4>
-                    <p>Morning Teer has become a daily ritual for many Khasi families, with people starting their day by checking the results and discussing strategies with fellow players.</p>
-                </li>
-                <li class="morning">
-                    <h4>🏛️ Operational Details of Morning Teer</h4>
-                    <p>Morning Teer operates from Monday to Friday, with FR at 10:30 AM and SR at 11:30 AM. It follows the same rules and regulations as other Teer games in Meghalaya.</p>
-                </li>
-                <li class="morning did-you-know" style="background:#fff3e0; border-left-color:#bf360c;">
-                    <h4 style="background:linear-gradient(135deg, #bf360c, #e65100);">📌 Amazing Facts About Morning Teer</h4>
-                    <p style="font-style:italic;">Morning Teer is especially popular among elderly players who prefer to participate in the game during the cooler morning hours.</p>
-                </li>
-                <li class="morning">
-                    <h4>⏰ Morning Teer Schedule</h4>
-                    <p>Morning Teer runs from Monday to Friday. The First Round (FR) takes place at 10:30 AM and the Second Round (SR) at 11:30 AM.</p>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- ===== NIGHT TEER ===== -->
-    <div class="history-section-direct">
-        <h2 class="seo-h2-dark" style="border-left-color:#1a237e; display:block; width:100%; text-align:center;">🌙 Night Teer - Complete History, Tradition & Culture</h2>
-        <div class="history-card">
-            <ul>
-                <li class="night">
-                    <h4>📍 Origin & Evolution of Night Teer</h4>
-                    <p>Night Teer was developed to cater to players who work during the day and prefer to participate in the evening. It has quickly gained popularity, becoming a favorite among the younger generation.</p>
-                </li>
-                <li class="night">
-                    <h4>🎯 Cultural Impact of Night Teer</h4>
-                    <p>Night Teer has created a vibrant evening community, with players gathering at local counters to discuss strategies and share predictions under the night sky.</p>
-                </li>
-                <li class="night">
-                    <h4>🏛️ Operational Details of Night Teer</h4>
-                    <p>Night Teer operates from Monday to Friday, with FR at 11:10 PM and SR at 12:10 AM. It follows the same rules and regulations as other Teer games in Meghalaya.</p>
-                </li>
-                <li class="night did-you-know" style="background:#e8eaf6; border-left-color:#000051;">
-                    <h4 style="background:linear-gradient(135deg, #000051, #1a237e);">📌 Amazing Facts About Night Teer</h4>
-                    <p style="font-style:italic;">Night Teer has become a popular topic of discussion on social media platforms, with players sharing their predictions and experiences late into the night.</p>
-                </li>
-                <li class="night">
-                    <h4>⏰ Night Teer Schedule</h4>
-                    <p>Night Teer runs from Monday to Friday. The First Round (FR) takes place at 11:10 PM and the Second Round (SR) at 12:10 AM.</p>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- ===== STRATEGY ===== -->
-    <div class="strategy-article-section">
-        <h2 class="seo-h2-dark" style="display:block; width:100%; text-align:center;">🏆 WINNING PATTERNS & EXPERT LOGIC</h2>
-        <p style="margin-bottom:10px; font-size:0.85rem; color:#444;">Professional players utilize structural trends rather than simple guesswork. Here are the top mathematical approaches to optimize your targets:</p>
-        <div class="strategy-item">
-            <strong>1. 14-Day Frequency Audit (১৪ দিনের ট্র্যাক)</strong>
-            Monitor numbers that haven't appeared in the last 14 days. These structural gaps have a highly statistical probability to emerge next.
-        </div>
-        <div class="strategy-item">
-            <strong>2. House/Ending Split Calculation (আলাদা হিসাব)</strong>
-            Do not guess full combinations blindly. Calculate House (tens digit) and Ending (units digit) indexes independently for a safer bankroll.
-        </div>
-        <div class="strategy-item">
-            <strong>3. Mythological Dream Correlation (স্বপ্নের সংকেত)</strong>
-            Use traditional Khasi dream charts. If you visualize water, it mathematically points to the 4 or 7 series.
-        </div>
-    </div>
-
-    <!-- ===== PDF DOWNLOAD ===== -->
-    <div style="margin:12px 0; text-align:center; background:#eef9ff; border:1px solid #b3e5fc; padding:8px 12px; border-radius:10px;">
-        <p style="margin:0 0 3px 0; font-weight:700; color:#0277bd; font-size:0.8rem;">📥 তীর ফর্মুলা বুক ও লাইভ চার্ট (PDF)</p>
-        <a href="https://omg10.com/4/11160871" target="_blank" style="display:inline-block; background:#0288d1; color:#fff; padding:5px 14px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.75rem; margin-top:3px;">
-            📥 Download PDF / ডাউনলোড কৰক
-        </a>
-    </div>
-
-    <!-- ===== GUIDE ===== -->
-    <div style="background:#fff; padding:15px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.08); margin:12px 0;">
-        <h2 class="seo-h2-dark" style="display:block; width:100%; text-align:center;">📖 নতুনদের জন্য গাইড ও নিয়মাবলী</h2>
-        <div style="display:grid; gap:10px;">
-            <div style="display:flex; gap:12px; align-items:flex-start;">
-                <div style="background:#0d47a1; color:#fff; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; flex-shrink:0; font-size:0.8rem;">১</div>
-                <div><h4 style="margin:0 0 2px 0; color:#0d47a1; font-size:0.9rem;">📊 ফলাফল ট্র্যাক করা শিখুন</h4><p style="margin:0; color:#555; font-size:0.8rem;">প্রতিদিন আমাদের সাইটে এসে লাইভ FR এবং SR ফলাফল পর্যবেক্ষণ করুন।</p></div>
-            </div>
-            <div style="display:flex; gap:12px; align-items:flex-start;">
-                <div style="background:#0d47a1; color:#fff; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; flex-shrink:0; font-size:0.8rem;">২</div>
-                <div><h4 style="margin:0 0 2px 0; color:#0d47a1; font-size:0.9rem;">🎯 কমন নাম্বার ও হাউজ বুঝুন</h4><p style="margin:0; color:#555; font-size:0.8rem;">ডাইরেক্ট নাম্বারে রিস্ক বেশি থাকে, তাই প্রথমে হাউজ এবং এন্ডিং নাম্বার টার্গেট করুন।</p></div>
+        <!-- ===== SOCIAL SHARE ===== -->
+        <div class="social-share-container">
+            <div class="share-title">📢 <span>শেয়ার করুন</span></div>
+            <div class="share-buttons">
+                <button onclick="shareOnFacebook()" class="share-btn facebook"><span>📘</span> Facebook</button>
+                <button onclick="shareOnWhatsApp()" class="share-btn whatsapp"><span>📱</span> WhatsApp</button>
+                <button onclick="shareOnTwitter()" class="share-btn twitter"><span>🐦</span> Twitter</button>
+                <button onclick="shareOnTelegram()" class="share-btn telegram"><span>✈️</span> Telegram</button>
+                <button onclick="copyLink()" class="share-btn copy"><span>📋</span> কপি লিংক</button>
             </div>
         </div>
-    </div>
 
-    <!-- ===== TRENDING ===== -->
-    <div style="background:#fff; padding:15px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.08); margin:12px 0;">
-        <h2 class="seo-h2-dark" style="display:block; width:100%; text-align:center;">🔥 ট্রেন্ডিং নাম্বার</h2>
-        <div class="trending-grid" id="trendingGrid"></div>
-    </div>
-    
-    <!-- ===== COMMENTS ===== -->
-    <div class="comment-box">
-        <h2 class="seo-h2-dark" style="display:block; width:100%; text-align:center;">💬 আপনার মতামত দিন</h2>
-        <textarea id="commentInput" placeholder="আপনার মতামত লিখুন..."></textarea>
-        <div class="comment-input-row">
-            <input type="text" id="commentName" placeholder="আপনার নাম">
-            <button onclick="addComment()">💬 পোস্ট করুন</button>
+        <!-- ===== ADSTERA BANNER ===== -->
+        <div style="margin:1.5rem 0; text-align:center; background:#f9f5f0; padding:0.8rem; border-radius:12px;">
+            <p style="font-size:0.75rem; font-weight:700; color:#555; margin-bottom:6px; letter-spacing:0.5px;">💡 Trending News & Teer Tips 💡</p>
+            <script async="async" data-cfasync="false" src="https://pl30289530.effectivecpmnetwork.com/c790b6b5b066c06ce4ca5298332d2265/invoke.js"></script>
+            <div id="container-c790b6b5b066c06ce4ca5298332d2265"></div>
         </div>
-        <div class="comment-list" id="commentList"></div>
-    </div>
 
-    <!-- ============================================================ -->
-    <!-- 🔥 FAQ - 10 Points (ENGLISH) -->
-    <!-- ============================================================ -->
-    <div class="faq-section">
-        <div class="faq-title">❓ FREQUENTLY ASKED QUESTIONS (FAQ) - 10 Important Questions</div>
-        <div class="faq-grid">
-            <div class="faq-item active">
-                <div class="faq-question">1. What are the official timings for Shillong Teer? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">Shillong Teer's First Round (FR) takes place at 4:15 PM and the Second Round (SR) at 5:10 PM. The game runs from Monday to Friday.</div>
+        <!-- ===== COMMON NUMBERS ===== -->
+        <div class="common-venues-container" id="commonTablesContainer"></div>
+        
+        <!-- ===== PREVIOUS RESULTS ===== -->
+        <h2 class="seo-h2-dark" style="display:block; width:100%; text-align:center;">📅 Shillong Teer Previous Results</h2>
+        <div class="monthwise-section">
+            <div class="selector-container">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <label for="yearSelectShillong">📅 Year:</label>
+                    <select id="yearSelectShillong">
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026" selected>2026</option>
+                        <option value="2027">2027</option>
+                    </select>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <label for="monthSelectShillong">📆 Month:</label>
+                    <select id="monthSelectShillong">
+                        <option value="0">Jan</option>
+                        <option value="1">Feb</option>
+                        <option value="2">Mar</option>
+                        <option value="3">Apr</option>
+                        <option value="4">May</option>
+                        <option value="5">Jun</option>
+                        <option value="6" selected>Jul</option>
+                        <option value="7">Aug</option>
+                        <option value="8">Sep</option>
+                        <option value="9">Oct</option>
+                        <option value="10">Nov</option>
+                        <option value="11">Dec</option>
+                    </select>
+                </div>
             </div>
-            <div class="faq-item">
-                <div class="faq-question">2. Is Teer game completely legal? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">Yes, Teer is completely legal in Meghalaya and Assam under the Meghalaya Amusements and Betting Tax Act. It is one of the few legally sanctioned betting games in India.</div>
+
+            <table class="result-display-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>FR (4:15 PM)</th>
+                        <th>SR (5:10 PM)</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsTableShillong">
+                    <tr><td colspan="3" style="text-align:center; padding:15px; color:#8a7a6a;">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ===== DREAM CHART ===== -->
+        <h2 class="seo-h2-dark" style="display:block; width:100%; text-align:center;">📖 Shillong Teer Dream Chart | শিলং তীর স্বপ্নের চার্ট</h2>
+        <div class="dream-chart-section">
+            <table class="dream-chart-table">
+                <thead><tr><th>Dream</th><th>Direct Numbers</th><th>House Digit</th><th>Ending Digit</th></tr></thead>
+                <tbody id="dreamChartBody"></tbody>
+            </table>
+        </div>
+
+        <!-- ===== DREAM PREDICTOR ===== -->
+        <div class="dream-card">
+            <div class="dream-title">✨ DREAM NUMBER PREDICTOR ✨</div>
+            <div class="dream-flex">
+                <input type="text" id="dreamInput" class="dream-input" placeholder="e.g., snake, tiger">
+                <button id="predictDreamBtn" class="dream-predict-btn">🔮 PREDICT</button>
             </div>
-            <div class="faq-item">
-                <div class="faq-question">3. What do "House" and "Ending" mean in Teer? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">"House" refers to the tens digit of the winning number (e.g., 4 in 45), while "Ending" refers to the units digit (e.g., 5 in 45). These are analyzed separately for better predictions.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">4. On which days is Teer game closed? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">Teer game is closed on Saturdays and Sundays. It runs only from Monday to Friday.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">5. What is the difference between Khanapara Teer and Shillong Teer? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">Khanapara Teer is played in the Khanapara area of Assam with FR at 4:10 PM and SR at 5:05 PM. Shillong Teer has FR at 4:15 PM and SR at 5:10 PM.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">6. When is Juwai Teer played? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">Juwai Teer is played with FR at 2:30 PM and SR at 3:15 PM. It is an afternoon match.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">7. What are the timings for Morning Teer? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">Morning Teer is played with FR at 10:30 AM and SR at 11:30 AM. It is a morning match.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">8. When is Night Teer played? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">Night Teer is played with FR at 11:10 PM and SR at 12:10 AM. It is a late-night match.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">9. How are Common Numbers calculated? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">Common Numbers are calculated through mathematical analysis, historical data, and expert observations. They are not guarantees of winning.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">10. Are the predictions on this site reliable? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">All predictions on this site are based on mathematical analysis and historical data. They are not guarantees of winning and are provided for informational purposes only.</div>
+            <div id="dreamDisplayText" style="text-align:center; margin-bottom:6px; font-weight:700; color:#0d47a1; font-size:0.8rem;">💭 Enter a dream word and click Predict</div>
+            <table class="dream-table">
+                <thead><tr><th>🏠 HOUSE NUMBERS</th><th>🎯 ENDING NUMBERS</th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td><div class="number-group"><span class="dream-num-box" id="houseDigit1">--</span><span class="dream-num-box" id="houseDigit2">--</span></div></td>
+                        <td><div class="number-group"><span class="dream-num-box" id="endingDigit1">--</span><span class="dream-num-box" id="endingDigit2">--</span></div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 🔥 DETAILED HISTORY SECTION - ALL TEER VENUES (ENGLISH) -->
+        <!-- ============================================================ -->
+        
+        <!-- ===== SHILLONG TEER ===== -->
+        <div class="history-section-direct">
+            <h2 class="seo-h2-dark" style="border-left-color:#0d47a1; display:block; width:100%; text-align:center;">🏹 Shillong Teer - Complete History, Tradition & Culture</h2>
+            <div class="history-card">
+                <ul>
+                    <li>
+                        <h4>📍 Origin & Historical Context of Shillong Teer</h4>
+                        <p>Shillong Teer is not merely a numbers game; it is a living cultural heritage of the Khasi community in Meghalaya. Originating during the British colonial era (1830s-1940s), archery was traditionally a means of self-defense and a royal sport among the indigenous Khasi tribes. The game transformed into a unique lottery system in the early 20th century. In 1982, the Meghalaya government legally recognized Teer under the Meghalaya Amusement and Betting Tax Act, making it one of the few legally sanctioned betting games in India.</p>
+                    </li>
+                    <li>
+                        <h4>🎯 Traditional Rituals of Shillong Teer</h4>
+                        <p>Before each match, local elders and priests perform traditional ceremonies to bless the archers and the counting process. These rituals ensure fair play and spiritual protection. The game is deeply rooted in Khasi culture, with archery being a symbol of strength, precision, and community bonding.</p>
+                    </li>
+                    <li>
+                        <h4>🏛️ Modern Evolution & Current Status of Shillong Teer</h4>
+                        <p>Today, over 200 licensed Teer counters operate across Meghalaya, processing millions of rupees in bets daily. The game has survived through generations, adapting to modern times while preserving its traditional essence. It stands as a unique blend of ancient archery skills and modern lottery systems, attracting players from all walks of life.</p>
+                    </li>
+                    <li class="did-you-know">
+                        <h4>📌 Amazing Facts About Shillong Teer</h4>
+                        <p style="font-style:italic;">The oldest recorded Teer match dates back to 1906 when local Khasi kings organized archery competitions during harvest festivals. The game was played with traditional bamboo bows and wooden arrows.</p>
+                    </li>
+                    <li>
+                        <h4>⏰ Shillong Teer Schedule</h4>
+                        <p>Shillong Teer runs from Monday to Friday. The First Round (FR) takes place at 4:15 PM and the Second Round (SR) at 5:10 PM.</p>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
 
-    <!-- ===== ADSTERA SOCIAL BAR ===== -->
-    <div style="margin:1.5rem 0; text-align:center;">
-        <script src="https://pl30289531.effectivecpmnetwork.com/37/c3/e8/37c3e84ed9f58e0e29697b546148cea6.js"></script>
-    </div>
+        <!-- ===== KHANAPARA TEER ===== -->
+        <div class="history-section-direct">
+            <h2 class="seo-h2-dark" style="border-left-color:#00695c; display:block; width:100%; text-align:center;">🏹 Khanapara Teer - Complete History, Tradition & Culture</h2>
+            <div class="history-card">
+                <ul>
+                    <li class="khanapara">
+                        <h4>📍 Origin & Development of Khanapara Teer</h4>
+                        <p>Khanapara Teer originated as a regional variant of the traditional Shillong Teer game, played in the Khanapara area of Assam, near the Meghalaya border. It shares the same archery-based lottery system but has its own unique cultural identity and local flavor.</p>
+                    </li>
+                    <li class="khanapara">
+                        <h4>🎯 Local Traditions of Khanapara Teer</h4>
+                        <p>The Khanapara Teer grounds have become a hub for local communities, where players gather daily to witness the matches. The game has become an integral part of the local economy and social life, with many families having generations of archers.</p>
+                    </li>
+                    <li class="khanapara">
+                        <h4>🏛️ Modern Impact of Khanapara Teer</h4>
+                        <p>Khanapara Teer has grown significantly in popularity, attracting players from Assam and neighboring states. It operates under the same legal framework as Shillong Teer and follows similar rules and timings, with FR at 4:10 PM and SR at 5:05 PM.</p>
+                    </li>
+                    <li class="khanapara did-you-know" style="background:#e0f2f1; border-left-color:#004d40;">
+                        <h4 style="background:linear-gradient(135deg, #004d40, #00695c);">📌 Amazing Facts About Khanapara Teer</h4>
+                        <p style="font-style:italic;">Khanapara Teer has become a major tourist attraction, with visitors coming from across Assam to witness the unique archery competitions and the vibrant atmosphere of the grounds.</p>
+                    </li>
+                    <li class="khanapara">
+                        <h4>⏰ Khanapara Teer Schedule</h4>
+                        <p>Khanapara Teer runs from Monday to Friday. The First Round (FR) takes place at 4:10 PM and the Second Round (SR) at 5:05 PM.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-    <!-- ===== DISCLAIMER ===== -->
-    <div class="disclaimer-footer">
-        <strong>⭐ Shillong Teer Result Today & Common Number</strong> - Your trusted source for daily Shillong Teer live results, common numbers, house digits, ending digits, and expert predictions. Updates every Monday to Friday at 4:00 PM (FR) and 5:00 PM (SR) IST.
-        <br><br>
-        <strong>⚠️ Disclaimer:</strong> This site is for entertainment and informational purposes only. We do not support or promote gambling. Teer is legally allowed only in Meghalaya and Assam under specific government acts. Please play responsibly and within your budget. We are not responsible for any financial losses incurred based on the information provided on this website. All predictions are based on mathematical analysis and historical data - they are not guarantees of winning.
-    </div>
+        <!-- ===== JUWAI TEER ===== -->
+        <div class="history-section-direct">
+            <h2 class="seo-h2-dark" style="border-left-color:#4a148c; display:block; width:100%; text-align:center;">🏹 Juwai Teer - Complete History, Tradition & Culture</h2>
+            <div class="history-card">
+                <ul>
+                    <li class="juwai">
+                        <h4>📍 Origin & Cultural Roots of Juwai Teer</h4>
+                        <p>Juwai Teer is another regional variant of the traditional archery-based game, played in the Juwai area of Meghalaya. It has its own distinct identity, with local communities celebrating the game as a symbol of unity and cultural pride.</p>
+                    </li>
+                    <li class="juwai">
+                        <h4>🎯 Traditional Practices of Juwai Teer</h4>
+                        <p>The Juwai Teer matches are known for their festive atmosphere, with traditional music and dance performances accompanying the competitions. The game has become a social gathering point for families and friends.</p>
+                    </li>
+                    <li class="juwai">
+                        <h4>🏛️ Current Status of Juwai Teer</h4>
+                        <p>Juwai Teer operates with the same legal framework as other Teer games in Meghalaya. The timings are FR at 2:30 PM and SR at 3:15 PM, making it one of the afternoon matches.</p>
+                    </li>
+                    <li class="juwai did-you-know" style="background:#f3e5f5; border-left-color:#38006b;">
+                        <h4 style="background:linear-gradient(135deg, #38006b, #4a148c);">📌 Amazing Facts About Juwai Teer</h4>
+                        <p style="font-style:italic;">The Juwai Teer grounds are known for their picturesque location, surrounded by lush green hills and traditional Khasi villages.</p>
+                    </li>
+                    <li class="juwai">
+                        <h4>⏰ Juwai Teer Schedule</h4>
+                        <p>Juwai Teer runs from Monday to Friday. The First Round (FR) takes place at 2:30 PM and the Second Round (SR) at 3:15 PM.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-    <!-- ===== FOOTER LINKS ===== -->
-    <div class="footer-links">
-        <a href="about.html">📖 About Us</a> | 
-        <a href="contact.html">📞 Contact</a> | 
-        <a href="privacy.html">🔒 Privacy Policy</a> |
-        <a href="terms.html">📜 Terms & Conditions</a> |
-        <a href="shillong-common.html">🎯 শিলং কমন</a> |
-        <a href="khanapara-common.html">🎯 খানাপাড়া কমন</a> |
-        <a href="juwai-common.html">🎯 জুওয়াই কমন</a> |
-        <a href="shillong-previous.html">📜 পূর্ববর্তী ফলাফল</a> |
-        <a href="shillong-teer-result.html">🏹 শিলং রেজাল্ট</a>
-    </div>
+        <!-- ===== MORNING TEER ===== -->
+        <div class="history-section-direct">
+            <h2 class="seo-h2-dark" style="border-left-color:#e65100; display:block; width:100%; text-align:center;">🌅 Morning Teer - Complete History, Tradition & Culture</h2>
+            <div class="history-card">
+                <ul>
+                    <li class="morning">
+                        <h4>📍 Origin & Purpose of Morning Teer</h4>
+                        <p>Morning Teer was introduced to accommodate the growing demand for Teer matches in the morning hours. It allows players to participate in the game before their daily work begins, making it accessible to a wider audience.</p>
+                    </li>
+                    <li class="morning">
+                        <h4>🎯 Cultural Significance of Morning Teer</h4>
+                        <p>Morning Teer has become a daily ritual for many Khasi families, with people starting their day by checking the results and discussing strategies with fellow players.</p>
+                    </li>
+                    <li class="morning">
+                        <h4>🏛️ Operational Details of Morning Teer</h4>
+                        <p>Morning Teer operates from Monday to Friday, with FR at 10:30 AM and SR at 11:30 AM. It follows the same rules and regulations as other Teer games in Meghalaya.</p>
+                    </li>
+                    <li class="morning did-you-know" style="background:#fff3e0; border-left-color:#bf360c;">
+                        <h4 style="background:linear-gradient(135deg, #bf360c, #e65100);">📌 Amazing Facts About Morning Teer</h4>
+                        <p style="font-style:italic;">Morning Teer is especially popular among elderly players who prefer to participate in the game during the cooler morning hours.</p>
+                    </li>
+                    <li class="morning">
+                        <h4>⏰ Morning Teer Schedule</h4>
+                        <p>Morning Teer runs from Monday to Friday. The First Round (FR) takes place at 10:30 AM and the Second Round (SR) at 11:30 AM.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-    <!-- ===== PARTNER LINK ===== -->
-    <div style="text-align:center; margin:0.8rem 0; padding:0.4rem; background:#fdf8f0; border-radius:0.6rem; border:1px solid #e8dcc8;">
-        <a href="https://omg10.com/4/11160871" target="_blank" style="color:#0d0a0a; font-weight:700; text-decoration:none; font-size:0.75rem; display:inline-block; padding:0.2rem 0.6rem; border-radius:30px; background:rgba(204,0,0,0.04);">
-            🔗 <span>আমাদের স্পেশাল পার্টনার সাইটটি দেখুন</span>
-        </a>
-    </div>
+        <!-- ===== NIGHT TEER ===== -->
+        <div class="history-section-direct">
+            <h2 class="seo-h2-dark" style="border-left-color:#1a237e; display:block; width:100%; text-align:center;">🌙 Night Teer - Complete History, Tradition & Culture</h2>
+            <div class="history-card">
+                <ul>
+                    <li class="night">
+                        <h4>📍 Origin & Evolution of Night Teer</h4>
+                        <p>Night Teer was developed to cater to players who work during the day and prefer to participate in the evening. It has quickly gained popularity, becoming a favorite among the younger generation.</p>
+                    </li>
+                    <li class="night">
+                        <h4>🎯 Cultural Impact of Night Teer</h4>
+                        <p>Night Teer has created a vibrant evening community, with players gathering at local counters to discuss strategies and share predictions under the night sky.</p>
+                    </li>
+                    <li class="night">
+                        <h4>🏛️ Operational Details of Night Teer</h4>
+                        <p>Night Teer operates from Monday to Friday, with FR at 11:10 PM and SR at 12:10 AM. It follows the same rules and regulations as other Teer games in Meghalaya.</p>
+                    </li>
+                    <li class="night did-you-know" style="background:#e8eaf6; border-left-color:#000051;">
+                        <h4 style="background:linear-gradient(135deg, #000051, #1a237e);">📌 Amazing Facts About Night Teer</h4>
+                        <p style="font-style:italic;">Night Teer has become a popular topic of discussion on social media platforms, with players sharing their predictions and experiences late into the night.</p>
+                    </li>
+                    <li class="night">
+                        <h4>⏰ Night Teer Schedule</h4>
+                        <p>Night Teer runs from Monday to Friday. The First Round (FR) takes place at 11:10 PM and the Second Round (SR) at 12:10 AM.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ===== STRATEGY ===== -->
+        <div class="strategy-article-section">
+            <h2 class="seo-h2-dark" style="display:block; width:100%; text-align:center;">🏆 WINNING PATTERNS & EXPERT LOGIC</h2>
+            <p style="margin-bottom:10px; font-size:0.85rem; color:#444;">Professional players utilize structural trends rather than simple guesswork. Here are the top mathematical approaches to optimize your targets:</p>
+            <div class="strategy-item">
+                <strong>1. 14-Day Frequency Audit (১৪ দিনের ট্র্যাক)</strong>
+                Monitor numbers that haven't appeared in the last 14 days. These structural gaps have a highly statistical probability to emerge next.
+            </div>
+            <div class="strategy-item">
+                <strong>2. House/Ending Split Calculation (আলাদা হিসাব)</strong>
+                Do not guess full combinations blindly. Calculate House (tens digit) and Ending (units digit) indexes independently for a safer bankroll.
+            </div>
+            <div class="strategy-item">
+                <strong>3. Mythological Dream Correlation (স্বপ্নের সংকেত)</strong>
+                Use traditional Khasi dream charts. If you visualize water, it mathematically points to the 4 or 7 series.
+            </div>
+        </div>
+
+        <!-- ===== PDF DOWNLOAD ===== -->
+        <div style="margin:12px 0; text-align:center; background:#eef9ff; border:1px solid #b3e5fc; padding:8px 12px; border-radius:10px;">
+            <p style="margin:0 0 3px 0; font-weight:700; color:#0277bd; font-size:0.8rem;">📥 তীর ফর্মুলা বুক ও লাইভ চার্ট (PDF)</p>
+            <a href="https://omg10.com/4/11160871" target="_blank" style="display:inline-block; background:#0288d1; color:#fff; padding:5px 14px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.75rem; margin-top:3px;">
+                📥 Download PDF / ডাউনলোড কৰক
+            </a>
+        </div>
+
+        <!-- ===== GUIDE ===== -->
+        <div style="background:#fff; padding:15px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.08); margin:12px 0;">
+            <h2 class="seo-h2-dark" style="display:block; width:100%; text-align:center;">📖 নতুনদের জন্য গাইড ও নিয়মাবলী</h2>
+            <div style="display:grid; gap:10px;">
+                <div style="display:flex; gap:12px; align-items:flex-start;">
+                    <div style="background:#0d47a1; color:#fff; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; flex-shrink:0; font-size:0.8rem;">১</div>
+                    <div><h4 style="margin:0 0 2px 0; color:#0d47a1; font-size:0.9rem;">📊 ফলাফল ট্র্যাক করা শিখুন</h4><p style="margin:0; color:#555; font-size:0.8rem;">প্রতিদিন আমাদের সাইটে এসে লাইভ FR এবং SR ফলাফল পর্যবেক্ষণ করুন।</p></div>
+                </div>
+                <div style="display:flex; gap:12px; align-items:flex-start;">
+                    <div style="background:#0d47a1; color:#fff; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; flex-shrink:0; font-size:0.8rem;">২</div>
+                    <div><h4 style="margin:0 0 2px 0; color:#0d47a1; font-size:0.9rem;">🎯 কমন নাম্বার ও হাউজ বুঝুন</h4><p style="margin:0; color:#555; font-size:0.8rem;">ডাইরেক্ট নাম্বারে রিস্ক বেশি থাকে, তাই প্রথমে হাউজ এবং এন্ডিং নাম্বার টার্গেট করুন।</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TRENDING ===== -->
+        <div style="background:#fff; padding:15px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.08); margin:12px 0;">
+            <h2 class="seo-h2-dark" style="display:block; width:100%; text-align:center;">🔥 ট্রেন্ডিং নাম্বার</h2>
+            <div class="trending-grid" id="trendingGrid"></div>
+        </div>
+        
+        <!-- ===== COMMENTS ===== -->
+        <div class="comment-box">
+            <h2 class="seo-h2-dark" style="display:block; width:100%; text-align:center;">💬 আপনার মতামত দিন</h2>
+            <textarea id="commentInput" placeholder="আপনার মতামত লিখুন..."></textarea>
+            <div class="comment-input-row">
+                <input type="text" id="commentName" placeholder="আপনার নাম">
+                <button onclick="addComment()">💬 পোস্ট করুন</button>
+            </div>
+            <div class="comment-list" id="commentList"></div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 🔥 FAQ - 10 Points (ENGLISH) -->
+        <!-- ============================================================ -->
+        <div class="faq-section">
+            <div class="faq-title">❓ FREQUENTLY ASKED QUESTIONS (FAQ) - 10 Important Questions</div>
+            <div class="faq-grid">
+                <div class="faq-item active">
+                    <div class="faq-question">1. What are the official timings for Shillong Teer? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">Shillong Teer's First Round (FR) takes place at 4:15 PM and the Second Round (SR) at 5:10 PM. The game runs from Monday to Friday.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">2. Is Teer game completely legal? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">Yes, Teer is completely legal in Meghalaya and Assam under the Meghalaya Amusements and Betting Tax Act. It is one of the few legally sanctioned betting games in India.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">3. What do "House" and "Ending" mean in Teer? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">"House" refers to the tens digit of the winning number (e.g., 4 in 45), while "Ending" refers to the units digit (e.g., 5 in 45). These are analyzed separately for better predictions.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">4. On which days is Teer game closed? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">Teer game is closed on Saturdays and Sundays. It runs only from Monday to Friday.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">5. What is the difference between Khanapara Teer and Shillong Teer? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">Khanapara Teer is played in the Khanapara area of Assam with FR at 4:10 PM and SR at 5:05 PM. Shillong Teer has FR at 4:15 PM and SR at 5:10 PM.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">6. When is Juwai Teer played? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">Juwai Teer is played with FR at 2:30 PM and SR at 3:15 PM. It is an afternoon match.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">7. What are the timings for Morning Teer? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">Morning Teer is played with FR at 10:30 AM and SR at 11:30 AM. It is a morning match.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">8. When is Night Teer played? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">Night Teer is played with FR at 11:10 PM and SR at 12:10 AM. It is a late-night match.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">9. How are Common Numbers calculated? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">Common Numbers are calculated through mathematical analysis, historical data, and expert observations. They are not guarantees of winning.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">10. Are the predictions on this site reliable? <span class="faq-icon">+</span></div>
+                    <div class="faq-answer">All predictions on this site are based on mathematical analysis and historical data. They are not guarantees of winning and are provided for informational purposes only.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== ADSTERA SOCIAL BAR ===== -->
+        <div style="margin:1.5rem 0; text-align:center;">
+            <script src="https://pl30289531.effectivecpmnetwork.com/37/c3/e8/37c3e84ed9f58e0e29697b546148cea6.js"></script>
+        </div>
+
+        <!-- ===== DISCLAIMER ===== -->
+        <div class="disclaimer-footer">
+            <strong>⭐ Shillong Teer Result Today & Common Number</strong> - Your trusted source for daily Shillong Teer live results, common numbers, house digits, ending digits, and expert predictions. Updates every Monday to Friday at 4:00 PM (FR) and 5:00 PM (SR) IST.
+            <br><br>
+            <strong>⚠️ Disclaimer:</strong> This site is for entertainment and informational purposes only. We do not support or promote gambling. Teer is legally allowed only in Meghalaya and Assam under specific government acts. Please play responsibly and within your budget. We are not responsible for any financial losses incurred based on the information provided on this website. All predictions are based on mathematical analysis and historical data - they are not guarantees of winning.
+        </div>
+
+        <!-- ===== FOOTER LINKS ===== -->
+        <div class="footer-links">
+            <a href="about.html">📖 About Us</a> | 
+            <a href="contact.html">📞 Contact</a> | 
+            <a href="privacy.html">🔒 Privacy Policy</a> |
+            <a href="terms.html">📜 Terms & Conditions</a> |
+            <a href="shillong-common.html">🎯 শিলং কমন</a> |
+            <a href="khanapara-common.html">🎯 খানাপাড়া কমন</a> |
+            <a href="juwai-common.html">🎯 জুওয়াই কমন</a> |
+            <a href="shillong-previous.html">📜 পূর্ববর্তী ফলাফল</a> |
+            <a href="shillong-teer-result.html">🏹 শিলং রেজাল্ট</a>
+        </div>
+
+        <!-- ===== PARTNER LINK ===== -->
+        <div style="text-align:center; margin:0.8rem 0; padding:0.4rem; background:#fdf8f0; border-radius:0.6rem; border:1px solid #e8dcc8;">
+            <a href="https://omg10.com/4/11160871" target="_blank" style="color:#0d0a0a; font-weight:700; text-decoration:none; font-size:0.75rem; display:inline-block; padding:0.2rem 0.6rem; border-radius:30px; background:rgba(204,0,0,0.04);">
+                🔗 <span>আমাদের স্পেশাল পার্টনার সাইটটি দেখুন</span>
+            </a>
+        </div>
+    </main>
 </div>
 
 <!-- ===== VIP MODAL ===== -->
@@ -1710,7 +1708,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<!-- ✅ defer যোগ করা হয়েছে (পারফরম্যান্সের জন্য) -->
+<!-- ✅ defer যোগ করা হয়েছে -->
 <script src="app.js" defer></script>
 
 <!-- ============================================================ -->
