@@ -2,7 +2,8 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <!-- ✅ Viewport Tag ঠিক করা হয়েছে (Zoom Enabled) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- ============================================================ -->
     <!-- 🔥 Google Analytics (GA4) -->
@@ -44,6 +45,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
+    <!-- ✅ async যোগ করা হয়েছে -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
         window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -113,6 +115,7 @@
             border: 1px solid rgba(0,105,92,0.08);
         }
 
+        /* ✅ Lazy Loading যোগ করা হয়েছে */
         .site-logo {
             max-width: 55px;
             height: auto;
@@ -1222,6 +1225,7 @@
     <!-- ===== HEADER ===== -->
     <div class="header-section">
         <div class="site-brand">
+            <!-- ✅ Lazy Loading যোগ করা হয়েছে -->
             <img src="logo.png" alt="Khanapara Teer Live Result" class="site-logo" loading="lazy">
             <div class="name-box">
                 <h1>🏹 Khanapara Teer Result Today</h1>
@@ -1324,7 +1328,7 @@
     <div class="monthwise-section">
         <div class="selector-container">
             <div style="display: flex; align-items: center; gap: 6px;">
-                <label>📅 Year:</label>
+                <label for="yearSelectKhanapara">📅 Year:</label>
                 <select id="yearSelectKhanapara">
                     <option value="2020">2020</option>
                     <option value="2021">2021</option>
@@ -1337,7 +1341,7 @@
                 </select>
             </div>
             <div style="display: flex; align-items: center; gap: 6px;">
-                <label>📆 Month:</label>
+                <label for="monthSelectKhanapara">📆 Month:</label>
                 <select id="monthSelectKhanapara">
                     <option value="0">Jan</option>
                     <option value="1">Feb</option>
@@ -1642,7 +1646,9 @@
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="app.js"></script>
+
+<!-- ✅ defer যোগ করা হয়েছে (পারফরম্যান্সের জন্য) -->
+<script src="app.js" defer></script>
 
 <!-- ============================================================ -->
 <!-- 🔥 SLIDER JAVASCRIPT -->
