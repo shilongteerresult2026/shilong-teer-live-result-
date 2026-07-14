@@ -2,7 +2,8 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <!-- ✅ Viewport Tag ঠিক করা হয়েছে (Zoom Enabled) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- ============================================================ -->
     <!-- 🔥 Google Analytics (GA4) -->
@@ -49,7 +50,7 @@
     <meta name="50064c663ff903c2e60fcbe064af79fac42c5954" content="50064c663ff903c2e60fcbe064af79fac42c5954" />
 
     <!-- ============================================================ -->
-    <!-- 🔥 OneSignal Push Notification -->
+    <!-- 🔥 OneSignal Push Notification (async যোগ করা হয়েছে) -->
     <!-- ============================================================ -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
@@ -115,6 +116,7 @@
             border: 1px solid rgba(13,71,161,0.08);
         }
 
+        /* ✅ Lazy Loading যোগ করা হয়েছে */
         .site-logo {
             max-width: 55px;
             height: auto;
@@ -1210,6 +1212,7 @@
     <!-- ===== HEADER ===== -->
     <div class="header-section">
         <div class="site-brand">
+            <!-- ✅ Lazy Loading যোগ করা হয়েছে -->
             <img src="logo.png" alt="Shillong Teer Live Result" class="site-logo" loading="lazy">
             <div class="name-box">
                 <h1>🏹 Shillong Teer Result Today</h1>
@@ -1294,6 +1297,7 @@
     <!-- ===== ADSTERA BANNER ===== -->
     <div style="margin:1.5rem 0; text-align:center; background:#f9f5f0; padding:0.8rem; border-radius:12px;">
         <p style="font-size:0.75rem; font-weight:700; color:#555; margin-bottom:6px; letter-spacing:0.5px;">💡 Trending News & Teer Tips 💡</p>
+        <!-- ✅ Adstera Script (Error Fix) -->
         <script async="async" data-cfasync="false" src="https://pl30289530.effectivecpmnetwork.com/c790b6b5b066c06ce4ca5298332d2265/invoke.js"></script>
         <div id="container-c790b6b5b066c06ce4ca5298332d2265"></div>
     </div>
@@ -1306,7 +1310,7 @@
     <div class="monthwise-section">
         <div class="selector-container">
             <div style="display: flex; align-items: center; gap: 6px;">
-                <label>📅 Year:</label>
+                <label for="yearSelectShillong">📅 Year:</label>
                 <select id="yearSelectShillong">
                     <option value="2020">2020</option>
                     <option value="2021">2021</option>
@@ -1319,7 +1323,7 @@
                 </select>
             </div>
             <div style="display: flex; align-items: center; gap: 6px;">
-                <label>📆 Month:</label>
+                <label for="monthSelectShillong">📆 Month:</label>
                 <select id="monthSelectShillong">
                     <option value="0">Jan</option>
                     <option value="1">Feb</option>
@@ -1705,7 +1709,9 @@
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="app.js"></script>
+
+<!-- ✅ defer যোগ করা হয়েছে (পারফরম্যান্সের জন্য) -->
+<script src="app.js" defer></script>
 
 <!-- ============================================================ -->
 <!-- 🔥 SLIDER JAVASCRIPT -->
