@@ -63,12 +63,1320 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- ============================================================ -->
-    <!-- 🔥 CSS - আলাদা ফাইল -->
-    <!-- ============================================================ -->
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <style>
+        /* ============================================================ */
+        /* 🔥 BASE & RESET */
+        /* ============================================================ */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f4f9; margin: 0; padding: 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+
+        /* ============================================================ */
+        /* 🔥 HEADER - Slim, White Box with Blue Text */
+        /* ============================================================ */
+        .header-section {
+            background: linear-gradient(135deg, #0a2a5a, #0d47a1, #1565c0);
+            padding: 6px 0 10px 0;
+            border-radius: 0 0 18px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 25px rgba(13,71,161,0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00e676, #ffcc00, #00e676, transparent);
+            animation: glowLine 3s ease-in-out infinite;
+        }
+
+        @keyframes glowLine {
+            0%, 100% { transform: translateX(-100%); opacity: 0.3; }
+            50% { transform: translateX(100%); opacity: 1; }
+        }
+
+        .site-brand {
+            text-align: center;
+            padding: 12px 20px;
+            position: relative;
+            z-index: 1;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.06);
+            margin: 0 10px;
+            border: 1px solid rgba(13,71,161,0.08);
+        }
+
+        .site-logo {
+            max-width: 55px;
+            height: auto;
+            border-radius: 50%;
+            border: 3px solid #0d47a1;
+            box-shadow: 0 2px 15px rgba(13,71,161,0.15);
+            transition: all 0.4s ease;
+        }
+        .site-logo:hover {
+            transform: scale(1.05) rotate(-3deg);
+            border-color: #00e676;
+            box-shadow: 0 0 30px rgba(0,230,118,0.2);
+        }
+
+        .name-box h1 {
+            font-size: 1.5rem;
+            color: #0d47a1;
+            margin: 4px 0 2px 0;
+            text-shadow: 0 1px 3px rgba(13,71,161,0.08);
+            letter-spacing: 0.5px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #0d47a1, #1565c0, #0d47a1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+            padding: 0 5px;
+        }
+
+        .name-box .bn-title {
+            font-size: 0.95rem;
+            color: #1565c0;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-shadow: 0 1px 3px rgba(21,101,192,0.06);
+        }
+
+        .domain {
+            font-size: 0.8rem;
+            color: #64b5f6;
+            margin-top: 2px;
+            letter-spacing: 0.5px;
+            font-weight: 400;
+        }
+
+        .live-badge-main {
+            background: linear-gradient(135deg, #cc0000, #ff1a1a);
+            color: #fff;
+            padding: 4px 22px;
+            border-radius: 30px;
+            display: inline-block;
+            font-weight: 700;
+            font-size: 0.75rem;
+            margin-top: 6px;
+            box-shadow: 0 0 25px rgba(204,0,0,0.25);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { box-shadow: 0 0 25px rgba(204,0,0,0.25); }
+            50% { box-shadow: 0 0 45px rgba(204,0,0,0.45); }
+        }
+
+        /* ============================================================ */
+        /* 🔥 LANGUAGE BAR */
+        /* ============================================================ */
+        .language-bar {
+            text-align: center;
+            padding: 3px 12px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            margin: 0 15px 4px 15px;
+            color: #fff;
+            font-size: 0.75rem;
+            display: inline-block;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .language-bar a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0 4px;
+            transition: all 0.3s;
+        }
+        .language-bar a:hover {
+            text-decoration: underline;
+            color: #fff;
+        }
+
+        /* ============================================================ */
+        /* 🔥 NAVIGATION BUTTONS */
+        /* ============================================================ */
+        .btn-row-three { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 10px 0; }
+        .nav-btn-big {
+            padding: 8px 18px;
+            border-radius: 30px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+        .nav-btn-big:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(0,0,0,0.25); }
+        .btn-morning-big { background: linear-gradient(135deg, #f57c00, #e65100); }
+        .btn-juwai-big { background: linear-gradient(135deg, #4a148c, #6a1b9a); }
+        .btn-night-big { background: linear-gradient(135deg, #1a237e, #0d1442); }
+        .btn-shillong-big { background: linear-gradient(135deg, #0d47a1, #1565c0); }
+        .btn-khanapara-big { background: linear-gradient(135deg, #00695c, #00897b); }
+
+        /* ============================================================ */
+        /* 🔥 OMG10 LINK */
+        /* ============================================================ */
+        .omg10-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #8b0000, #cc0000);
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-decoration: none;
+            box-shadow: 0 3px 15px rgba(204,0,0,0.3);
+            border: 2px solid #ffcc00;
+            transition: all 0.3s;
+        }
+        .omg10-link:hover { transform: scale(1.03); box-shadow: 0 5px 25px rgba(204,0,0,0.5); }
+
+        /* ============================================================ */
+        /* 🔥 SLIDER TRACKER - 4 NEW BUTTONS */
+        /* ============================================================ */
+        .slider-tracker {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 8px 0 12px 0;
+            flex-wrap: wrap;
+        }
+        .slider-tracker .tracker-btn {
+            background: linear-gradient(135deg, #e8f0fe, #d2e3fc);
+            color: #0a3d6b;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            border: 2px solid #4a8ab5;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(10,61,107,0.06);
+        }
+        .slider-tracker .tracker-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(10,61,107,0.15);
+            background: linear-gradient(135deg, #d2e3fc, #e8f0fe);
+        }
+        .slider-tracker .tracker-btn.active {
+            background: linear-gradient(135deg, #0a3d6b, #1a6b9a);
+            color: #fff;
+            border-color: #0a3d6b;
+            box-shadow: 0 4px 20px rgba(10,61,107,0.25);
+        }
+
+        /* ============================================================ */
+        /* 🔥 VIP BOX */
+        /* ============================================================ */
+        .vip-box-new {
+            width: 100%;
+            min-height: 200px;
+            margin: 0 auto 12px auto;
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+            border: 3px solid #cc0000;
+            border-radius: 16px;
+            padding: 15px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 25px rgba(204,0,0,0.12);
+        }
+        .vip-box-new .vip-icon { font-size: 2.5rem; }
+        .vip-box-new h3 {
+            font-size: 1.2rem;
+            margin: 6px 0;
+            color: #8b0000;
+        }
+        .vip-box-new p {
+            font-size: 0.85rem;
+            margin: 4px 0 10px 0;
+            color: #5d4037;
+        }
+        .vip-box-new .vip-unlock-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #cc0000, #8b0000);
+            color: #fff;
+            padding: 10px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(204,0,0,0.3);
+        }
+        .vip-box-new .vip-unlock-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 30px rgba(204,0,0,0.5);
+        }
+
+        /* ============================================================ */
+        /* 🔥 WHATSAPP BOX */
+        /* ============================================================ */
+        .whatsapp-box-new {
+            width: 100%;
+            min-height: 120px;
+            margin: 10px 0 12px 0;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border: 3px solid #25D366;
+            border-radius: 16px;
+            padding: 12px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 25px rgba(37,211,102,0.1);
+        }
+        .whatsapp-box-new .whatsapp-icon { font-size: 2rem; }
+        .whatsapp-box-new h3 {
+            font-size: 1rem;
+            margin: 4px 0;
+            color: #1b5e20;
+        }
+        .whatsapp-box-new p {
+            font-size: 0.75rem;
+            margin: 2px 0 6px 0;
+            color: #4a7a6a;
+        }
+        .whatsapp-box-new .whatsapp-join-btn {
+            display: inline-block;
+            background: #25D366;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.3);
+        }
+        .whatsapp-box-new .whatsapp-join-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(37,211,102,0.5);
+        }
+
+        /* ============================================================ */
+        /* 🔥 BLOG SECTION */
+        /* ============================================================ */
+        .blog-section {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            margin: 12px 0;
+            border: 2px solid #4a8ab5;
+        }
+        .blog-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e8dcc8;
+        }
+        .blog-author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid #0a3d6b;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .blog-meta {
+            flex: 1;
+        }
+        .blog-meta .author-name {
+            font-weight: 700;
+            color: #0a3d6b;
+            font-size: 1rem;
+        }
+        .blog-meta .blog-date {
+            color: #6c7a89;
+            font-size: 0.8rem;
+        }
+        .blog-meta .blog-read-time {
+            color: #8a9aa8;
+            font-size: 0.7rem;
+        }
+        .blog-toc {
+            background: #f5f0e8;
+            border-radius: 8px;
+            padding: 12px 18px;
+            margin: 10px 0 18px 0;
+            border-left: 4px solid #0a3d6b;
+        }
+        .blog-toc-title {
+            font-weight: 700;
+            color: #0a3d6b;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+        }
+        .blog-toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 15px;
+        }
+        .blog-toc ul li {
+            font-size: 0.75rem;
+        }
+        .blog-toc ul li a {
+            color: #1a6b9a;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .blog-toc ul li a:hover {
+            text-decoration: underline;
+            color: #0a3d6b;
+        }
+        .blog-title-main {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #0a3d6b;
+            margin: 10px 0 12px 0;
+        }
+        .blog-content {
+            color: #1a1a1a;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        .blog-content h3 {
+            color: #0a3d6b;
+            font-size: 1.1rem;
+            margin: 12px 0 6px 0;
+            font-weight: 700;
+        }
+        .blog-content p {
+            margin-bottom: 10px;
+        }
+        .blog-content ul {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .blog-content ul li {
+            margin-bottom: 4px;
+        }
+
+        /* ============================================================ */
+        /* 🔥 SEO HEADINGS - Slim, White Text on Blue Background */
+        /* ============================================================ */
+        .seo-h2 {
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin: 10px 0 6px 0;
+            text-align: center;
+            position: relative;
+            padding: 6px 15px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            border-radius: 10px;
+            display: inline-block;
+            width: auto;
+            box-shadow: 0 2px 15px rgba(13,71,161,0.15);
+            text-shadow: 0 1px 10px rgba(255,255,255,0.1);
+        }
+        .seo-h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(to right, #00e676, #ffcc00);
+            border-radius: 2px;
+            animation: headingGlow 2s ease-in-out infinite;
+        }
+        @keyframes headingGlow {
+            0%, 100% { width: 50px; opacity: 0.6; }
+            50% { width: 70px; opacity: 1; }
+        }
+
+        .seo-h2-dark {
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin: 12px 0 6px 0;
+            padding: 6px 15px;
+            background: linear-gradient(135deg, #0a2a5a, #0d47a1);
+            border-radius: 10px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            width: auto;
+            box-shadow: 0 2px 15px rgba(10,42,90,0.15);
+            text-shadow: 0 1px 10px rgba(255,255,255,0.08);
+        }
+
+        .seo-h2-orange {
+            color: #ffffff;
+            font-size: 1.15rem;
+            text-align: center;
+            margin: 10px 0;
+            padding: 6px 20px;
+            background: linear-gradient(135deg, #cc0000, #ff1a1a);
+            border-radius: 10px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            width: auto;
+            box-shadow: 0 2px 15px rgba(204,0,0,0.15);
+            text-shadow: 0 1px 10px rgba(255,255,255,0.08);
+        }
+
+        /* ============================================================ */
+        /* 🔥 SLIDER */
+        /* ============================================================ */
+        .slider-container {
+            width: 100%;
+            overflow: hidden;
+            background: #fff;
+            padding: 8px 0;
+            border-radius: 10px;
+            margin: 10px 0;
+            border: 3px solid #00e676;
+            box-shadow: 0 0 20px rgba(0,230,118,0.2), 0 4px 12px rgba(0,0,0,0.05);
+            text-align: center;
+            position: relative;
+            animation: borderPulse 2.5s ease-in-out infinite;
+        }
+        @keyframes borderPulse {
+            0% { border-color: #00e676; box-shadow: 0 0 20px rgba(0,230,118,0.2); }
+            50% { border-color: #69f0ae; box-shadow: 0 0 35px rgba(0,230,118,0.4); }
+            100% { border-color: #00e676; box-shadow: 0 0 20px rgba(0,230,118,0.2); }
+        }
+        .slider-wrapper { display: flex; justify-content: center; align-items: center; position: relative; height: 48px; overflow: hidden; width: 100%; padding: 0 8px; }
+        .slider-text {
+            position: absolute;
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: 0.6px;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.5s ease;
+            padding: 0 12px;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%) translateX(100%);
+            width: 100%;
+            text-align: center;
+            box-sizing: border-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+            line-height: 1.3;
+        }
+        .slider-text .domain-part { color: #0d47a1; }
+        .slider-text .sep-part { color: #00e676; margin: 0 4px; font-weight: 300; }
+        .slider-text .subline-part { color: #1565c0; }
+        .slider-text.active { opacity: 1; transform: translateY(-50%) translateX(0); }
+        .slider-text.slide-out { opacity: 0; transform: translateY(-50%) translateX(-100%); }
+
+        @media (max-width: 768px) { .slider-wrapper { height: 40px; } .slider-text { font-size: 1rem; padding: 0 8px; } }
+        @media (max-width: 480px) { .slider-wrapper { height: 36px; } .slider-text { font-size: 0.85rem; padding: 0 6px; letter-spacing: 0.3px; } }
+
+        /* ============================================================ */
+        /* 🔥 RESULTS GRID - Smaller Cards, Side by Side Digits */
+        /* ============================================================ */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px;
+            margin: 10px 0;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        .result-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 10px 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border-left: 3px solid #0d47a1;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .result-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .result-card .venue-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            padding: 5px 10px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(13,71,161,0.12);
+        }
+
+        .result-card .venue-name {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: #ffffff !important;
+            text-shadow: 0 1px 6px rgba(255,255,255,0.12);
+            letter-spacing: 0.3px;
+        }
+
+        .result-card .live-badge {
+            background: linear-gradient(135deg, #cc0000, #ff1a1a);
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.5rem;
+            font-weight: 700;
+            animation: pulse 1.5s infinite;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 0 12px rgba(204,0,0,0.15);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(1.02); }
+        }
+
+        .result-card .date-box {
+            font-size: 0.65rem;
+            color: #888;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+
+        .result-card .timing-dual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin: 6px 0;
+        }
+
+        .result-card .fr-box,
+        .result-card .sr-box {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 6px 8px;
+            text-align: center;
+            border: 1px solid #eee;
+        }
+
+        .result-card .fr-box .round-label,
+        .result-card .sr-box .round-label {
+            font-size: 0.5rem;
+            color: #888;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .result-card .fr-box .result-number,
+        .result-card .sr-box .result-number {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: #cc0000;
+            margin-top: 1px;
+        }
+
+        .result-card .fr-box .waiting-number-display,
+        .result-card .sr-box .waiting-number-display {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #ff9800;
+            margin-top: 1px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .result-card .countdown-box {
+            background: #0a3d6b;
+            border-radius: 4px;
+            padding: 2px 6px;
+            margin-bottom: 4px;
+            text-align: center;
+            border: 1px solid #ffcc00;
+        }
+
+        .result-card .countdown-box .countdown-label {
+            color: #ffcc00;
+            font-size: 0.45rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .result-card .countdown-box .countdown-time {
+            font-weight: 800;
+            color: #fff;
+            background: #000;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.6rem;
+        }
+
+        .result-card .card-footer {
+            display: flex;
+            gap: 4px;
+            justify-content: center;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+
+        .result-card .card-footer a {
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.55rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .result-card .card-footer a:hover {
+            transform: scale(1.03);
+        }
+
+        .btn-previous {
+            background: #0d47a1;
+            color: #fff;
+        }
+
+        .btn-common {
+            background: #00e676;
+            color: #0d0a0a;
+        }
+
+        /* ============================================================ */
+        /* 🔥 COMMON NUMBERS */
+        /* ============================================================ */
+        .common-venues-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 15px;
+            margin: 12px 0;
+        }
+
+        .common-venue-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-top: 3px solid #0d47a1;
+        }
+
+        .common-venue-card .common-venue-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #ffffff !important;
+            margin-bottom: 10px;
+            text-align: center;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-shadow: 0 1px 8px rgba(255,255,255,0.15);
+            box-shadow: 0 2px 12px rgba(13,71,161,0.15);
+            letter-spacing: 0.5px;
+        }
+
+        .common-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+        }
+
+        .common-table th {
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            color: #ffffff !important;
+            padding: 8px 12px;
+            font-size: 0.7rem;
+            text-align: center;
+            font-weight: 700;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+
+        .common-table td {
+            padding: 6px 10px;
+            text-align: center;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .common-table tr:hover td { background: #f0f4f9; }
+        .common-table .round-cell { font-weight: 700; color: #0d47a1; }
+        .common-table .direct-num {
+            background: #e3f2fd;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            color: #0d47a1;
+        }
+        .common-table .house-num {
+            background: #e8f5e9;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            color: #2e7d32;
+        }
+        .common-table .ending-num {
+            background: #fff3e0;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            color: #e65100;
+        }
+
+        /* ============================================================ */
+        /* 🔥 PREVIOUS RESULTS */
+        /* ============================================================ */
+        .monthwise-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        .selector-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .selector-container select {
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 2px solid #0d47a1;
+            font-weight: 600;
+            font-size: 0.85rem;
+            background: #fff;
+            cursor: pointer;
+            min-width: 80px;
+            height: 34px;
+            transition: all 0.3s;
+        }
+        .selector-container select:hover {
+            border-color: #1565c0;
+            box-shadow: 0 0 10px rgba(13,71,161,0.15);
+        }
+        .selector-container label {
+            font-weight: 600;
+            color: #0d47a1;
+            font-size: 0.85rem;
+        }
+        .result-display-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        .result-display-table th {
+            background: #0d47a1;
+            color: #fff;
+            padding: 10px 12px;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .result-display-table td {
+            padding: 8px 12px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            font-size: 0.85rem;
+        }
+        .result-display-table tr:hover td { background: #f0f4f9; }
+
+        /* ============================================================ */
+        /* 🔥 DREAM CHART */
+        /* ============================================================ */
+        .dream-chart-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 12px 0;
+            overflow-x: auto;
+        }
+        .dream-chart-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .dream-chart-table th { background: #0d47a1; color: #fff; padding: 8px 10px; text-align: center; }
+        .dream-chart-table td { padding: 6px 10px; text-align: center; border-bottom: 1px solid #f0f0f0; }
+        .dream-chart-table tr:hover td { background: #f0f4f9; }
+
+        /* ============================================================ */
+        /* 🔥 DREAM PREDICTOR */
+        /* ============================================================ */
+        .dream-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 12px 0;
+            text-align: center;
+        }
+        .dream-title { font-size: 1.2rem; font-weight: 900; color: #0d47a1; margin-bottom: 10px; }
+        .dream-flex { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px; }
+        .dream-input {
+            padding: 8px 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            width: 200px;
+            max-width: 100%;
+            transition: all 0.3s;
+        }
+        .dream-input:focus { border-color: #0d47a1; outline: none; box-shadow: 0 0 12px rgba(13,71,161,0.12); }
+        .dream-predict-btn {
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            color: #fff;
+            border: none;
+            padding: 8px 18px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .dream-predict-btn:hover { transform: scale(1.05); box-shadow: 0 4px 15px rgba(13,71,161,0.3); }
+        .dream-table { width: 100%; max-width: 450px; margin: 0 auto; border-collapse: collapse; }
+        .dream-table th { background: #0d47a1; color: #fff; padding: 8px 10px; }
+        .dream-table td { padding: 10px; border: 1px solid #ddd; }
+        .number-group { display: flex; gap: 12px; justify-content: center; }
+        .dream-num-box {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            font-weight: 900;
+            font-size: 1rem;
+            color: #0d47a1;
+            min-width: 35px;
+            border: 2px solid #eee;
+        }
+
+        /* ============================================================ */
+        /* 🔥 HISTORY SECTION - All Teer Details (English) */
+        /* ============================================================ */
+        .history-section-direct { margin: 15px 0; }
+        .history-card {
+            background: #fff;
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid #eaeaea;
+        }
+        .history-card ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+        .history-card li {
+            padding: 12px 15px;
+            background: #f0f4f9;
+            border-radius: 8px;
+            border-left: 4px solid #0d47a1;
+            transition: all 0.3s;
+        }
+        .history-card li:hover { transform: translateX(5px); }
+        .history-card li h4 {
+            margin: 0 0 4px 0;
+            color: #ffffff;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            padding: 4px 12px;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            border-radius: 8px;
+            display: inline-block;
+            width: auto;
+        }
+        .history-card li p { margin: 0; color: #444; font-size: 0.85rem; line-height: 1.6; }
+        .history-card li.did-you-know { background: #e3f2fd; border-left-color: #0a2a5a; }
+        .history-card li.did-you-know h4 { background: linear-gradient(135deg, #0a2a5a, #0d47a1); }
+        .history-card li.khanapara { border-left-color: #00695c; background: #f0f7f4; }
+        .history-card li.khanapara h4 { background: linear-gradient(135deg, #00695c, #00897b); }
+        .history-card li.juwai { border-left-color: #4a148c; background: #f5f0f9; }
+        .history-card li.juwai h4 { background: linear-gradient(135deg, #4a148c, #6a1b9a); }
+        .history-card li.morning { border-left-color: #e65100; background: #fff8f2; }
+        .history-card li.morning h4 { background: linear-gradient(135deg, #e65100, #f57c00); }
+        .history-card li.night { border-left-color: #1a237e; background: #f0f2f8; }
+        .history-card li.night h4 { background: linear-gradient(135deg, #1a237e, #283593); }
+
+        /* ============================================================ */
+        /* 🔥 STRATEGY */
+        /* ============================================================ */
+        .strategy-article-section {
+            background: #fff;
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 12px 0;
+        }
+        .strategy-article-section .strategy-item {
+            padding: 10px 14px;
+            background: #fafafa;
+            border-radius: 8px;
+            border-left: 4px solid #7b1fa2;
+            margin-bottom: 8px;
+        }
+        .strategy-article-section .strategy-item strong {
+            color: #7b1fa2;
+            display: block;
+            margin-bottom: 3px;
+            font-size: 0.9rem;
+        }
+
+        /* ============================================================ */
+        /* 🔥 TRENDING */
+        /* ============================================================ */
+        .trending-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(55px, 1fr));
+            gap: 8px;
+            margin: 10px 0;
+        }
+        .trending-grid .trend-num {
+            background: #0d47a1;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 900;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .trending-grid .trend-num:hover { transform: scale(1.08); box-shadow: 0 4px 12px rgba(13,71,161,0.25); }
+
+        /* ============================================================ */
+        /* 🔥 SOCIAL SHARE */
+        /* ============================================================ */
+        .social-share-container { margin: 18px 0; text-align: center; }
+        .share-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+            padding: 4px 16px;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            border-radius: 20px;
+            display: inline-block;
+            text-shadow: 0 1px 6px rgba(255,255,255,0.08);
+        }
+        .share-buttons { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+        .share-btn {
+            padding: 6px 14px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .share-btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .share-btn.facebook { background: #1877f2; }
+        .share-btn.whatsapp { background: #25d366; }
+        .share-btn.twitter { background: #000; }
+        .share-btn.telegram { background: #0088cc; }
+        .share-btn.copy { background: #6c757d; }
+
+        /* ============================================================ */
+        /* 🔥 FAQ */
+        /* ============================================================ */
+        .faq-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 12px 0;
+        }
+        .faq-title {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-align: center;
+            padding: 6px 20px;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            border-radius: 10px;
+            text-shadow: 0 1px 10px rgba(255,255,255,0.08);
+            box-shadow: 0 2px 15px rgba(13,71,161,0.12);
+        }
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        @media (max-width: 768px) {
+            .faq-grid { grid-template-columns: 1fr; }
+        }
+        .faq-item {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 10px 14px;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+        .faq-item:hover {
+            border-color: #0d47a1;
+            box-shadow: 0 2px 10px rgba(13,71,161,0.08);
+        }
+        .faq-question {
+            font-weight: 700;
+            color: #0d47a1;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            gap: 10px;
+        }
+        .faq-icon {
+            font-size: 1.1rem;
+            color: #0d47a1;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+        .faq-answer {
+            display: none;
+            padding-top: 6px;
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.8rem;
+        }
+        .faq-item.active .faq-answer { display: block; }
+
+        /* ============================================================ */
+        /* 🔥 COMMENTS */
+        /* ============================================================ */
+        .comment-box {
+            background: #fff;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 12px 0;
+        }
+        .comment-box textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            min-height: 60px;
+            box-sizing: border-box;
+            transition: all 0.3s;
+        }
+        .comment-box textarea:focus { border-color: #0d47a1; outline: none; }
+        .comment-input-row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+        .comment-input-row input {
+            flex: 1;
+            padding: 6px 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            min-width: 120px;
+            transition: all 0.3s;
+        }
+        .comment-input-row input:focus { border-color: #0d47a1; outline: none; }
+        .comment-input-row button {
+            background: #0d47a1;
+            color: #fff;
+            border: none;
+            padding: 6px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .comment-input-row button:hover { background: #1565c0; transform: scale(1.03); }
+        .comment-list { margin-top: 10px; }
+        .comment-item {
+            display: flex;
+            gap: 10px;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            align-items: flex-start;
+        }
+        .comment-item .c-avatar {
+            width: 32px;
+            height: 32px;
+            background: #0d47a1;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+            font-size: 0.8rem;
+        }
+        .comment-item .c-body { flex: 1; }
+        .comment-item .c-name { font-weight: 700; color: #333; font-size: 0.85rem; }
+        .comment-item .c-text { color: #555; margin-top: 2px; font-size: 0.85rem; }
+        .comment-item .c-time { font-size: 0.65rem; color: #999; margin-top: 2px; }
+
+        /* ============================================================ */
+        /* 🔥 FOOTER */
+        /* ============================================================ */
+        .footer-links {
+            text-align: center;
+            padding: 12px 0;
+            font-size: 0.75rem;
+            color: #666;
+            border-top: 1px solid #eee;
+            margin-top: 15px;
+        }
+        .footer-links a { color: #0d47a1; text-decoration: none; margin: 0 3px; }
+        .footer-links a:hover { text-decoration: underline; }
+        .disclaimer-footer {
+            background: #f8f9fa;
+            padding: 15px 18px;
+            border-radius: 12px;
+            margin: 12px 0;
+            font-size: 0.75rem;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* ============================================================ */
+        /* 🔥 VIP MODAL */
+        /* ============================================================ */
+        .vip-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        .vip-modal-overlay.active { display: flex; }
+        .vip-modal-box {
+            background: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 92%;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: vipFadeIn 0.4s ease;
+            position: relative;
+        }
+        @keyframes vipFadeIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .vip-modal-close { position: absolute; top: 8px; right: 15px; font-size: 26px; cursor: pointer; color: #999; transition: color 0.2s; }
+        .vip-modal-close:hover { color: #cc0000; }
+        .vip-number-display {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #cc0000;
+            background: linear-gradient(135deg, #fff9e6, #fff0d0);
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px dashed #cc0000;
+            margin: 10px 0;
+            letter-spacing: 2px;
+        }
+        .vip-number-display .label { font-size: 0.6rem; color: #888; display: block; margin-bottom: 3px; font-weight: normal; letter-spacing: 0.5px; }
+
+        /* ============================================================ */
+        /* 🔥 RESPONSIVE */
+        /* ============================================================ */
+        @media (max-width: 768px) {
+            .name-box h1 { font-size: 1.2rem; }
+            .name-box .bn-title { font-size: 0.8rem; }
+            .site-brand { padding: 8px 15px; }
+            .site-logo { max-width: 45px; }
+            .seo-h2, .seo-h2-dark, .seo-h2-orange, .faq-title {
+                font-size: 0.95rem;
+                padding: 4px 12px;
+            }
+            .slider-text { font-size: 1rem; }
+            .slider-wrapper { height: 40px; }
+            .results-grid { grid-template-columns: 1fr; }
+            .common-venues-container { grid-template-columns: 1fr; }
+            .btn-row-three { gap: 5px; }
+            .nav-btn-big { padding: 6px 12px; font-size: 0.65rem; }
+            .vip-box-new { min-height: auto; padding: 12px; }
+            .vip-box-new h3 { font-size: 1rem; }
+            .vip-box-new .vip-unlock-btn { font-size: 0.8rem; padding: 8px 16px; }
+            .whatsapp-box-new { min-height: auto; padding: 10px; }
+            .selector-container { gap: 10px; }
+            .selector-container select { padding: 5px 10px; font-size: 0.75rem; min-width: 70px; height: 30px; }
+            .faq-grid { grid-template-columns: 1fr; }
+            .history-card li h4 { font-size: 0.8rem; padding: 3px 10px; }
+            .blog-author-img { width: 45px; height: 45px; }
+            .blog-title-main { font-size: 1.1rem; }
+            .blog-toc ul { flex-direction: column; gap: 4px; }
+            .slider-tracker .tracker-btn { font-size: 0.7rem; padding: 6px 14px; }
+        }
+        @media (max-width: 480px) {
+            .name-box h1 { font-size: 1rem; }
+            .name-box .bn-title { font-size: 0.7rem; }
+            .site-brand { padding: 6px 10px; }
+            .site-logo { max-width: 38px; }
+            .seo-h2, .seo-h2-dark, .seo-h2-orange, .faq-title {
+                font-size: 0.85rem;
+                padding: 3px 10px;
+            }
+            .slider-text { font-size: 0.85rem; }
+            .slider-wrapper { height: 36px; }
+            .result-card .timing-dual { grid-template-columns: 1fr; }
+            .result-card .fr-box .result-number, .result-card .sr-box .result-number { font-size: 1.4rem; }
+            .common-table th, .common-table td { padding: 4px 6px; font-size: 0.7rem; }
+            .selector-container { gap: 6px; flex-direction: row !important; flex-wrap: wrap; }
+            .selector-container select { padding: 4px 8px; font-size: 0.7rem; min-width: 60px; height: 28px; }
+            .selector-container label { font-size: 0.7rem; }
+            .history-card li h4 { font-size: 0.7rem; padding: 2px 8px; }
+            .blog-author-img { width: 40px; height: 40px; }
+            .blog-title-main { font-size: 0.95rem; }
+            .blog-content { font-size: 0.85rem; }
+            .slider-tracker .tracker-btn { font-size: 0.6rem; padding: 4px 10px; }
+            .vip-box-new { min-height: auto; padding: 10px; }
+            .vip-box-new h3 { font-size: 0.9rem; }
+            .vip-box-new .vip-unlock-btn { font-size: 0.75rem; padding: 6px 14px; }
+            .whatsapp-box-new { min-height: auto; padding: 8px; }
+            .whatsapp-box-new h3 { font-size: 0.85rem; }
+            .whatsapp-box-new .whatsapp-join-btn { font-size: 0.75rem; padding: 6px 14px; }
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -108,7 +1416,7 @@
         </a>
     </div>
 
-    <!-- ===== SLIDER TRACKER BUTTON ===== -->
+    <!-- ===== SLIDER TRACKER - 4 NEW BUTTONS ===== -->
     <div class="slider-tracker">
         <button class="tracker-btn active" onclick="changeSlider('today')">📊 Today's Result</button>
         <button class="tracker-btn" onclick="changeSlider('common')">🎯 Common Numbers</button>
@@ -236,7 +1544,7 @@
 
         <div class="blog-title-main" id="blogTitle">📊 Shillong Teer Result Analysis & Winning Predictions</div>
         <div class="blog-content" id="blogContent">
-            <!-- Content will be dynamically loaded -->
+            <!-- Content will be dynamically loaded from blog.js -->
         </div>
     </div>
 
@@ -319,7 +1627,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 🔥 DETAILED HISTORY SECTION - ALL TEER VENUES -->
+    <!-- 🔥 DETAILED HISTORY SECTION - ALL TEER VENUES (ENGLISH) -->
     <!-- ============================================================ -->
     
     <!-- ===== SHILLONG TEER ===== -->
@@ -526,7 +1834,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 🔥 FAQ - 10 Points -->
+    <!-- 🔥 FAQ - 10 Points (ENGLISH) -->
     <!-- ============================================================ -->
     <div class="faq-section">
         <div class="faq-title">❓ FREQUENTLY ASKED QUESTIONS (FAQ) - 10 Important Questions</div>
@@ -649,7 +1957,415 @@
 <!-- 🔥 JS Files - আলাদা -->
 <!-- ============================================================ -->
 <script src="app.js" defer></script>
-<script src="blog.js" defer></script>
+<script src="blog.js" defer></script>   <!-- ← blog.js আলাদা ফাইল -->
 
+<!-- ============================================================ -->
+<!-- 🔥 SLIDER JAVASCRIPT -->
+<!-- ============================================================ -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var domain = 'shillongteerliveresult.in';
+        var sublines = [
+            'Fastest Teer Result Update',
+            'দ্রুততম তীর ফলাফল আপডেট',
+            'আটাইতকৈ তীৰ ফলাফল আপডেট',
+            'सबसे तेज़ तीर परिणाम अपडेट'
+        ];
+
+        var container = document.getElementById('sliderTextContainer');
+        var currentIndex = 0;
+        var isTransitioning = false;
+
+        function createTextElement(subline, index) {
+            var div = document.createElement('div');
+            div.className = 'slider-text';
+            div.id = 'slider-text-' + index;
+            div.innerHTML = 
+                '<span class="domain-part">' + domain + '</span>' +
+                '<span class="sep-part">-</span>' +
+                '<span class="subline-part">' + subline + '</span>';
+            return div;
+        }
+
+        sublines.forEach(function(subline, index) {
+            var el = createTextElement(subline, index);
+            container.appendChild(el);
+        });
+
+        var allTexts = document.querySelectorAll('.slider-text');
+
+        function showFirstText() {
+            var first = allTexts[0];
+            first.classList.add('active');
+            currentIndex = 0;
+        }
+
+        function changeText() {
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            var current = allTexts[currentIndex];
+            var nextIndex = (currentIndex + 1) % allTexts.length;
+            var next = allTexts[nextIndex];
+
+            next.classList.add('active');
+
+            setTimeout(function() {
+                current.classList.remove('active');
+                current.classList.add('slide-out');
+
+                setTimeout(function() {
+                    current.classList.remove('slide-out');
+                    current.classList.remove('active');
+                    current.style.transform = '';
+                    currentIndex = nextIndex;
+                    isTransitioning = false;
+                }, 550);
+            }, 500);
+        }
+
+        setTimeout(showFirstText, 300);
+        setInterval(changeText, 4500);
+    });
+
+    // ============================================================
+    // 🔥 SLIDER TRACKER FUNCTION
+    // ============================================================
+    function changeSlider(type) {
+        var buttons = document.querySelectorAll('.tracker-btn');
+        buttons.forEach(function(btn) {
+            btn.classList.remove('active');
+        });
+        
+        var clickedBtn = document.querySelector('.tracker-btn[onclick="changeSlider(\'' + type + '\')"]');
+        if (clickedBtn) {
+            clickedBtn.classList.add('active');
+        }
+        
+        if (type === 'today') {
+            document.getElementById('resultsGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else if (type === 'common') {
+            document.getElementById('commonTablesContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else if (type === 'predict') {
+            document.querySelector('.dream-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else if (type === 'blog') {
+            document.getElementById('blogSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    // ============================================================
+    // 🔥 VIP UNLOCK
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', function() {
+        var vipBtn = document.getElementById('vipUnlockBtn');
+        var vipModal = document.getElementById('vipModal');
+        var vipModalClose = document.getElementById('vipModalClose');
+        var vipNumberValue = document.getElementById('vipNumberValue');
+        var vipExtraInfo = document.getElementById('vipExtraInfo');
+        var vipStatusText = document.getElementById('vipStatusText');
+
+        if (vipBtn) {
+            vipBtn.addEventListener('click', function() {
+                var randomNum = Math.floor(Math.random() * 100).toString().padStart(2, '0');
+                var extra = ['🔥 Strong Hit', '⭐ Very High Chance', '🎯 Target Number', '💎 Jackpot Hint'];
+                var randomExtra = extra[Math.floor(Math.random() * extra.length)];
+                
+                if (vipNumberValue) vipNumberValue.textContent = randomNum;
+                if (vipExtraInfo) vipExtraInfo.textContent = randomExtra;
+                if (vipModal) vipModal.classList.add('active');
+                if (vipStatusText) vipStatusText.textContent = '✅ VIP Number Unlocked! Check the popup.';
+            });
+        }
+
+        if (vipModalClose) {
+            vipModalClose.addEventListener('click', function() {
+                if (vipModal) vipModal.classList.remove('active');
+            });
+        }
+
+        if (vipModal) {
+            vipModal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+        }
+    });
+
+    // ============================================================
+    // 🔥 YEAR + MONTH FILTER JAVASCRIPT
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', function() {
+        var yearSelect = document.getElementById('yearSelectShillong');
+        var monthSelect = document.getElementById('monthSelectShillong');
+        
+        if (!yearSelect || !monthSelect) return;
+
+        async function loadShillongPreviousResults(year, monthIndex) {
+            var tbody = document.getElementById('resultsTableShillong');
+            if (!tbody) return;
+            
+            try {
+                var month = String(monthIndex + 1).padStart(2, '0');
+                var firstDay = year + '-' + month + '-01';
+                var lastDay = year + '-' + month + '-' + new Date(year, monthIndex + 1, 0).getDate();
+                
+                var { data, error } = await supabaseClient
+                    .from('teer_previous_results')
+                    .select('*')
+                    .eq('venue', 'Shillong')
+                    .gte('result_date', firstDay)
+                    .lte('result_date', lastDay)
+                    .order('result_date', { ascending: false });
+                    
+                var html = '';
+                var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                
+                if (!error && data && data.length > 0) {
+                    data.forEach(function(row) {
+                        var dateObj = new Date(row.result_date);
+                        var day = String(dateObj.getDate()).padStart(2, '0');
+                        var monthName = String(dateObj.getMonth() + 1).padStart(2, '0');
+                        var yearNum = dateObj.getFullYear();
+                        var formattedDate = day + '.' + monthName + '.' + yearNum;
+                        
+                        html += `
+                            <tr>
+                                <td style="padding: 8px 12px; font-weight: 700; color: #0d0a0a; text-align: center; border-bottom: 1px solid #eee;">
+                                    ${formattedDate}
+                                </td>
+                                <td style="padding: 8px 12px; font-weight: 700; color: #0d47a1; text-align: center; border-bottom: 1px solid #eee;">
+                                    ${row.fr_result || '--'}
+                                </td>
+                                <td style="padding: 8px 12px; font-weight: 700; color: #1565c0; text-align: center; border-bottom: 1px solid #eee;">
+                                    ${row.sr_result || '--'}
+                                </td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    html = `<tr><td colspan="3" style="text-align:center; padding:15px; color:#8a7a6a;">${monthNames[monthIndex]} ${year} - No data available</td></tr>`;
+                }
+                
+                tbody.innerHTML = html;
+            } catch(err) {
+                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:15px; color:#8a7a6a;">No data available</td></tr>`;
+            }
+        }
+
+        loadShillongPreviousResults(parseInt(yearSelect.value), parseInt(monthSelect.value));
+        
+        yearSelect.addEventListener('change', function() {
+            loadShillongPreviousResults(parseInt(this.value), parseInt(monthSelect.value));
+        });
+        
+        monthSelect.addEventListener('change', function() {
+            loadShillongPreviousResults(parseInt(yearSelect.value), parseInt(this.value));
+        });
+    });
+
+    // ============================================================
+    // 🔥 DREAM CHART - 16 Dreams
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', function() {
+        var dreamBody = document.getElementById('dreamChartBody');
+        if (dreamBody) {
+            var dreams = [
+                { dream: '🐍 Snake', direct: '12, 34, 56', house: '3, 5', ending: '2, 6' },
+                { dream: '🐅 Tiger', direct: '23, 45, 67', house: '4, 6', ending: '3, 7' },
+                { dream: '🌊 Water', direct: '34, 56, 78', house: '5, 7', ending: '4, 8' },
+                { dream: '🔥 Fire', direct: '45, 67, 89', house: '6, 8', ending: '5, 9' },
+                { dream: '🌳 Tree', direct: '56, 78, 90', house: '7, 9', ending: '6, 0' },
+                { dream: '🐘 Elephant', direct: '11, 22, 33', house: '1, 2', ending: '1, 3' },
+                { dream: '🦁 Lion', direct: '14, 25, 36', house: '2, 4', ending: '4, 6' },
+                { dream: '🕊️ Bird', direct: '07, 18, 29', house: '0, 3', ending: '7, 9' },
+                { dream: '🐟 Fish', direct: '09, 20, 31', house: '2, 5', ending: '0, 1' },
+                { dream: '🌙 Moon', direct: '15, 26, 37', house: '3, 6', ending: '5, 7' },
+                { dream: '☀️ Sun', direct: '18, 29, 40', house: '4, 7', ending: '8, 0' },
+                { dream: '🌟 Star', direct: '21, 32, 43', house: '5, 8', ending: '1, 3' },
+                { dream: '🌈 Rainbow', direct: '24, 35, 46', house: '6, 9', ending: '4, 6' },
+                { dream: '⛰️ Mountain', direct: '27, 38, 49', house: '7, 0', ending: '7, 9' },
+                { dream: '🌺 Flower', direct: '30, 41, 52', house: '8, 1', ending: '0, 2' },
+                { dream: '🦋 Butterfly', direct: '33, 44, 55', house: '9, 2', ending: '3, 5' }
+            ];
+            dreamBody.innerHTML = dreams.map(d => `
+                <tr>
+                    <td>${d.dream}</td>
+                    <td>${d.direct}</td>
+                    <td>${d.house}</td>
+                    <td>${d.ending}</td>
+                </tr>
+            `).join('');
+        }
+    });
+
+    // ============================================================
+    // 🔥 DREAM PREDICTOR
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', function() {
+        var dreamBtn = document.getElementById('predictDreamBtn');
+        var dreamInput = document.getElementById('dreamInput');
+        var displayText = document.getElementById('dreamDisplayText');
+        var house1 = document.getElementById('houseDigit1');
+        var house2 = document.getElementById('houseDigit2');
+        var ending1 = document.getElementById('endingDigit1');
+        var ending2 = document.getElementById('endingDigit2');
+
+        if (dreamBtn && dreamInput) {
+            dreamBtn.addEventListener('click', function() {
+                var word = dreamInput.value.trim().toLowerCase();
+                if (!word) {
+                    if (displayText) displayText.textContent = '💭 Please enter a dream word!';
+                    return;
+                }
+
+                var hash = word.split('').reduce(function(acc, char) { return acc + char.charCodeAt(0); }, 0);
+                var num1 = (hash % 10).toString();
+                var num2 = ((hash + 7) % 10).toString();
+                var num3 = ((hash + 3) % 10).toString();
+                var num4 = ((hash + 9) % 10).toString();
+
+                if (house1) house1.textContent = num1;
+                if (house2) house2.textContent = num2;
+                if (ending1) ending1.textContent = num3;
+                if (ending2) ending2.textContent = num4;
+                if (displayText) displayText.textContent = '🔮 Dream "' + word + '" → House: ' + num1 + ', ' + num2 + ' | Ending: ' + num3 + ', ' + num4;
+            });
+        }
+    });
+
+    // ============================================================
+    // 🔥 FAQ TOGGLE
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', function() {
+        var faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(function(item) {
+            var question = item.querySelector('.faq-question');
+            if (question) {
+                question.addEventListener('click', function() {
+                    item.classList.toggle('active');
+                });
+            }
+        });
+    });
+
+    // ============================================================
+    // 🔥 LANGUAGE FUNCTIONS
+    // ============================================================
+    function showBangla() {
+        var title = document.querySelector('.name-box .bn-title');
+        var badge = document.querySelector('.live-badge-main');
+        var heading = document.querySelector('.seo-h2-orange');
+        if (title) title.textContent = 'আজকের শিলং তীর লাইভ রেজাল্ট ও কমন নাম্বার';
+        if (badge) badge.textContent = '🔴 শিলং তীর লাইভ | আজকের লাইভ রেজাল্ট';
+        if (heading) heading.textContent = '🎯 শিলং তীর রেজাল্ট টুডে লাইভ | আজকের শিলং তীর লাইভ রেজাল্ট';
+    }
+
+    function showEnglish() {
+        var title = document.querySelector('.name-box .bn-title');
+        var badge = document.querySelector('.live-badge-main');
+        var heading = document.querySelector('.seo-h2-orange');
+        if (title) title.textContent = 'Today\'s Shillong Teer Live Result & Common Numbers';
+        if (badge) badge.textContent = '🔴 Shillong Teer Live | Today\'s Live Result';
+        if (heading) heading.textContent = '🎯 Shillong Teer Result Today Live | Today\'s Shillong Teer Live Result';
+    }
+
+    // ============================================================
+    // 🔥 SHARE FUNCTIONS
+    // ============================================================
+    function shareOnFacebook() {
+        window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href), '_blank');
+    }
+
+    function shareOnWhatsApp() {
+        window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent('Shillong Teer Result Today - ' + window.location.href), '_blank');
+    }
+
+    function shareOnTwitter() {
+        window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(window.location.href) + '&text=Shillong Teer Result Today', '_blank');
+    }
+
+    function shareOnTelegram() {
+        window.open('https://t.me/share/url?url=' + encodeURIComponent(window.location.href) + '&text=Shillong Teer Result Today', '_blank');
+    }
+
+    function copyLink() {
+        navigator.clipboard.writeText(window.location.href).then(function() {
+            alert('✅ Link copied to clipboard!');
+        }).catch(function() {
+            var input = document.createElement('input');
+            input.value = window.location.href;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            alert('✅ Link copied to clipboard!');
+        });
+    }
+
+    // ============================================================
+    // 🔥 COMMENT SYSTEM
+    // ============================================================
+    function addComment() {
+        var input = document.getElementById('commentInput');
+        var nameInput = document.getElementById('commentName');
+        var list = document.getElementById('commentList');
+        
+        if (!input || !list) return;
+        
+        var text = input.value.trim();
+        var name = nameInput ? nameInput.value.trim() || 'Anonymous' : 'Anonymous';
+        
+        if (!text) {
+            alert('Please write a comment.');
+            return;
+        }
+
+        var now = new Date();
+        var time = now.toLocaleTimeString();
+        var avatar = name.charAt(0).toUpperCase();
+
+        var div = document.createElement('div');
+        div.className = 'comment-item';
+        div.innerHTML = `
+            <div class="c-avatar">${avatar}</div>
+            <div class="c-body">
+                <div class="c-name">${name}</div>
+                <div class="c-text">${text}</div>
+                <div class="c-time">🕐 ${time}</div>
+            </div>
+        `;
+
+        list.prepend(div);
+        input.value = '';
+        if (nameInput) nameInput.value = '';
+        
+        var comments = JSON.parse(localStorage.getItem('teer_comments') || '[]');
+        comments.unshift({ name: name, text: text, time: time });
+        localStorage.setItem('teer_comments', JSON.stringify(comments.slice(0, 50)));
+    }
+
+    // Load comments from localStorage
+    document.addEventListener('DOMContentLoaded', function() {
+        var list = document.getElementById('commentList');
+        if (list) {
+            var saved = JSON.parse(localStorage.getItem('teer_comments') || '[]');
+            saved.forEach(function(comment) {
+                var avatar = comment.name.charAt(0).toUpperCase();
+                var div = document.createElement('div');
+                div.className = 'comment-item';
+                div.innerHTML = `
+                    <div class="c-avatar">${avatar}</div>
+                    <div class="c-body">
+                        <div class="c-name">${comment.name}</div>
+                        <div class="c-text">${comment.text}</div>
+                        <div class="c-time">🕐 ${comment.time}</div>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+        }
+    });
+</script>
 </body>
 </html>
