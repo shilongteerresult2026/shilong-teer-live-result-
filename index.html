@@ -75,7 +75,7 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
 
         /* ============================================================ */
-        /* 🔥 HEADER - Slim, White Box with Blue Text */
+        /* 🔥 HEADER */
         /* ============================================================ */
         .header-section {
             background: linear-gradient(135deg, #0a2a5a, #0d47a1, #1565c0);
@@ -251,7 +251,7 @@
         .omg10-link:hover { transform: scale(1.03); box-shadow: 0 5px 25px rgba(204,0,0,0.5); }
 
         /* ============================================================ */
-        /* 🔥 SLIDER TRACKER - 4 NEW BUTTONS */
+        /* 🔥 SLIDER TRACKER */
         /* ============================================================ */
         .slider-tracker {
             display: flex;
@@ -282,103 +282,6 @@
             color: #fff;
             border-color: #0a3d6b;
             box-shadow: 0 4px 20px rgba(10,61,107,0.25);
-        }
-
-        /* ============================================================ */
-        /* 🔥 BLOG TOC - SLIDER STYLE */
-        /* ============================================================ */
-        .blog-toc-slider {
-            background: #f5f0e8;
-            border-radius: 12px;
-            padding: 12px 18px;
-            margin: 10px 0 18px 0;
-            border-left: 5px solid #0a3d6b;
-            position: relative;
-            overflow: hidden;
-        }
-        .blog-toc-slider .toc-slider-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            overflow: hidden;
-            position: relative;
-            height: 40px;
-        }
-        .blog-toc-slider .toc-slider-track {
-            display: flex;
-            transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
-            gap: 20px;
-            align-items: center;
-            white-space: nowrap;
-            will-change: transform;
-        }
-        .blog-toc-slider .toc-item {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #1a6b9a;
-            cursor: pointer;
-            padding: 4px 12px;
-            border-radius: 20px;
-            background: rgba(255,255,255,0.6);
-            transition: all 0.3s;
-            border: 1px solid transparent;
-            flex-shrink: 0;
-        }
-        .blog-toc-slider .toc-item:hover {
-            background: #0a3d6b;
-            color: #fff;
-            border-color: #0a3d6b;
-            transform: scale(1.05);
-        }
-        .blog-toc-slider .toc-item.active {
-            background: #0a3d6b;
-            color: #fff;
-            border-color: #0a3d6b;
-        }
-        .blog-toc-slider .toc-nav-btn {
-            background: rgba(10,61,107,0.1);
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            font-size: 1rem;
-            cursor: pointer;
-            color: #0a3d6b;
-            transition: all 0.3s;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .blog-toc-slider .toc-nav-btn:hover {
-            background: #0a3d6b;
-            color: #fff;
-        }
-        .blog-toc-slider .toc-nav-btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-        .blog-toc-slider .toc-title {
-            font-weight: 700;
-            color: #0a3d6b;
-            font-size: 0.8rem;
-            flex-shrink: 0;
-            margin-right: 4px;
-            background: #fff;
-            padding: 2px 10px;
-            border-radius: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .blog-toc-slider .toc-slider-wrapper { height: 36px; }
-            .blog-toc-slider .toc-item { font-size: 0.7rem; padding: 3px 10px; }
-            .blog-toc-slider .toc-nav-btn { width: 26px; height: 26px; font-size: 0.8rem; }
-        }
-        @media (max-width: 480px) {
-            .blog-toc-slider .toc-slider-wrapper { height: 32px; }
-            .blog-toc-slider .toc-item { font-size: 0.6rem; padding: 2px 8px; }
-            .blog-toc-slider .toc-nav-btn { width: 22px; height: 22px; font-size: 0.7rem; }
-            .blog-toc-slider .toc-title { font-size: 0.65rem; padding: 1px 8px; }
         }
 
         /* ============================================================ */
@@ -476,7 +379,7 @@
         }
 
         /* ============================================================ */
-        /* 🔥 TEER CALCULATOR - COMPACT VERSION */
+        /* 🔥 TEER CALCULATOR */
         /* ============================================================ */
         .teer-calculator {
             background: #ffffff;
@@ -679,13 +582,13 @@
         .blog-content h2 {
             color: #0a3d6b;
             font-size: 1.1rem;
-            margin: 12px 0 6px 0;
+            margin: 18px 0 6px 0;
             font-weight: 700;
         }
         .blog-content h3 {
             color: #0a3d6b;
             font-size: 1rem;
-            margin: 10px 0 4px 0;
+            margin: 12px 0 4px 0;
             font-weight: 700;
         }
         .blog-content p {
@@ -716,7 +619,150 @@
         }
 
         /* ============================================================ */
-        /* 🔥 SEO HEADINGS - Slim, White Text on Blue Background */
+        /* 🔥 BLOG TOC - PREMIUM 4K HD BLUE STYLE (পুরনো পয়েন্ট সহ) */
+        /* ============================================================ */
+        .blog-toc-premium {
+            background: linear-gradient(145deg, #f0f7ff, #e3edfc);
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+            border: 2px solid #1a56db;
+            box-shadow: 0 8px 32px rgba(26, 86, 219, 0.15), 0 2px 8px rgba(26, 86, 219, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-toc-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1a56db, #3b82f6, #60a5fa, #3b82f6, #1a56db);
+            background-size: 200% 100%;
+            animation: gradientMove 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .blog-toc-premium .blog-toc-title {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #1a56db;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0.5px;
+            text-shadow: 0 1px 2px rgba(26, 86, 219, 0.1);
+        }
+
+        .blog-toc-premium .blog-toc-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, #1a56db, transparent);
+            margin-left: 8px;
+        }
+
+        .blog-toc-premium .toc-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 6px;
+        }
+
+        .blog-toc-premium .toc-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: 1px solid rgba(26, 86, 219, 0.08);
+            backdrop-filter: blur(4px);
+        }
+
+        .blog-toc-premium .toc-link:hover {
+            background: rgba(26, 86, 219, 0.08);
+            border-color: #1a56db;
+            transform: translateX(6px);
+            box-shadow: 0 4px 16px rgba(26, 86, 219, 0.12);
+        }
+
+        .blog-toc-premium .toc-link .toc-number {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #1a56db;
+            min-width: 30px;
+            text-align: right;
+            opacity: 0.8;
+            font-feature-settings: "tnum";
+        }
+
+        .blog-toc-premium .toc-link .toc-text {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #0a2a5a;
+            line-height: 1.4;
+            transition: color 0.3s;
+        }
+
+        .blog-toc-premium .toc-link:hover .toc-text {
+            color: #1a56db;
+        }
+
+        @media (max-width: 768px) {
+            .blog-toc-premium {
+                padding: 16px 18px;
+                border-radius: 12px;
+            }
+            .blog-toc-premium .blog-toc-title {
+                font-size: 1.2rem;
+            }
+            .blog-toc-premium .toc-link {
+                padding: 8px 12px;
+                gap: 10px;
+            }
+            .blog-toc-premium .toc-link .toc-number {
+                font-size: 0.95rem;
+                min-width: 24px;
+            }
+            .blog-toc-premium .toc-link .toc-text {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .blog-toc-premium {
+                padding: 12px 14px;
+                border-radius: 10px;
+            }
+            .blog-toc-premium .blog-toc-title {
+                font-size: 1rem;
+            }
+            .blog-toc-premium .toc-link {
+                padding: 6px 10px;
+                gap: 8px;
+                border-radius: 8px;
+            }
+            .blog-toc-premium .toc-link .toc-number {
+                font-size: 0.8rem;
+                min-width: 20px;
+            }
+            .blog-toc-premium .toc-link .toc-text {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* ============================================================ */
+        /* 🔥 SEO HEADINGS */
         /* ============================================================ */
         .seo-h2 {
             color: #ffffff;
@@ -835,7 +881,7 @@
         @media (max-width: 480px) { .slider-wrapper { height: 36px; } .slider-text { font-size: 0.85rem; padding: 0 6px; letter-spacing: 0.3px; } }
 
         /* ============================================================ */
-        /* 🔥 RESULTS GRID - Smaller Cards, Side by Side Digits */
+        /* 🔥 RESULTS GRID */
         /* ============================================================ */
         .results-grid {
             display: grid;
@@ -1215,7 +1261,7 @@
         }
 
         /* ============================================================ */
-        /* 🔥 HISTORY SECTION - All Teer Details (English) */
+        /* 🔥 HISTORY SECTION */
         /* ============================================================ */
         .history-section-direct { margin: 15px 0; }
         .history-card {
@@ -1648,7 +1694,7 @@
         </a>
     </div>
 
-    <!-- ===== SLIDER TRACKER - 4 NEW BUTTONS ===== -->
+    <!-- ===== SLIDER TRACKER ===== -->
     <div class="slider-tracker">
         <button class="tracker-btn active" onclick="changeSlider('today')">📊 Today's Result</button>
         <button class="tracker-btn" onclick="changeSlider('common')">🎯 Common Numbers</button>
@@ -1722,7 +1768,7 @@
     <div class="common-venues-container" id="commonTablesContainer"></div>
 
     <!-- ============================================================ -->
-    <!-- 🔥 TEER CALCULATOR - COMPACT VERSION -->
+    <!-- 🔥 TEER CALCULATOR -->
     <!-- ============================================================ -->
     <div class="teer-calculator" id="teerCalculator">
         <div class="calculator-header">
@@ -1775,7 +1821,7 @@
     </div>
     
     <!-- ============================================================ -->
-    <!-- 🔥 BLOG SECTION - Blog TOC + Blog Content (UPDATED with Slider) -->
+    <!-- 🔥 BLOG SECTION - Premium 4K HD Blue TOC (পুরনো ৯টি পয়েন্ট) -->
     <!-- ============================================================ -->
     <div class="blog-section" id="blogSection">
         <div class="blog-header">
@@ -1787,23 +1833,46 @@
             </div>
         </div>
 
-        <!-- ===== BLOG TABLE OF CONTENTS (Slider Button Style) ===== -->
-        <div class="blog-toc-slider" id="blogTocSlider">
-            <div class="toc-slider-wrapper">
-                <button class="toc-nav-btn" id="tocPrevBtn" disabled>‹</button>
-                <span class="toc-title">📑 Table of Contents</span>
-                <div class="toc-slider-track" id="tocSliderTrack">
-                    <span class="toc-item active" data-target="blog-intro">1. Introduction</span>
-                    <span class="toc-item" data-target="blog-result">2. Result Analysis</span>
-                    <span class="toc-item" data-target="blog-common">3. Common Numbers</span>
-                    <span class="toc-item" data-target="blog-house">4. House & Ending</span>
-                    <span class="toc-item" data-target="blog-tips">5. Expert Tips</span>
-                    <span class="toc-item" data-target="blog-strategy">6. Strategy</span>
-                    <span class="toc-item" data-target="blog-psychology">7. Psychology</span>
-                    <span class="toc-item" data-target="blog-mistakes">8. Mistakes</span>
-                    <span class="toc-item" data-target="blog-conclusion">9. Conclusion</span>
-                </div>
-                <button class="toc-nav-btn" id="tocNextBtn">›</button>
+        <!-- ===== BLOG TABLE OF CONTENTS (Premium 4K HD Blue Style - পুরনো পয়েন্ট) ===== -->
+        <div class="blog-toc-premium" id="blogToc">
+            <div class="blog-toc-title">📑 Table of Contents</div>
+            <div class="toc-grid">
+                <a onclick="scrollToBlogSection('blog-intro')" class="toc-link">
+                    <span class="toc-number">1.</span>
+                    <span class="toc-text">Introduction</span>
+                </a>
+                <a onclick="scrollToBlogSection('blog-result')" class="toc-link">
+                    <span class="toc-number">2.</span>
+                    <span class="toc-text">Result Analysis</span>
+                </a>
+                <a onclick="scrollToBlogSection('blog-common')" class="toc-link">
+                    <span class="toc-number">3.</span>
+                    <span class="toc-text">Common Numbers</span>
+                </a>
+                <a onclick="scrollToBlogSection('blog-house')" class="toc-link">
+                    <span class="toc-number">4.</span>
+                    <span class="toc-text">House & Ending</span>
+                </a>
+                <a onclick="scrollToBlogSection('blog-tips')" class="toc-link">
+                    <span class="toc-number">5.</span>
+                    <span class="toc-text">Expert Tips</span>
+                </a>
+                <a onclick="scrollToBlogSection('blog-strategy')" class="toc-link">
+                    <span class="toc-number">6.</span>
+                    <span class="toc-text">Strategy</span>
+                </a>
+                <a onclick="scrollToBlogSection('blog-psychology')" class="toc-link">
+                    <span class="toc-number">7.</span>
+                    <span class="toc-text">Psychology</span>
+                </a>
+                <a onclick="scrollToBlogSection('blog-mistakes')" class="toc-link">
+                    <span class="toc-number">8.</span>
+                    <span class="toc-text">Mistakes</span>
+                </a>
+                <a onclick="scrollToBlogSection('blog-conclusion')" class="toc-link">
+                    <span class="toc-number">9.</span>
+                    <span class="toc-text">Conclusion</span>
+                </a>
             </div>
         </div>
 
@@ -1891,11 +1960,7 @@
         </table>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- 🔥 DETAILED HISTORY SECTION - ALL TEER VENUES (ENGLISH) -->
-    <!-- ============================================================ -->
-    
-    <!-- ===== SHILLONG TEER ===== -->
+    <!-- ===== DETAILED HISTORY SECTION ===== -->
     <div class="history-section-direct">
         <h2 class="seo-h2-dark" style="border-left-color:#0d47a1; display:block; width:100%; text-align:center;">🏹 Shillong Teer - Complete History, Tradition & Culture</h2>
         <div class="history-card">
@@ -2099,7 +2164,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 🔥 FAQ - 10 Points (ENGLISH) -->
+    <!-- 🔥 FAQ -->
     <!-- ============================================================ -->
     <div class="faq-section" id="faq-section">
         <div class="faq-title">❓ FREQUENTLY ASKED QUESTIONS (FAQ) - 10 Important Questions</div>
@@ -2219,13 +2284,13 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <!-- ============================================================ -->
-<!-- 🔥 JS Files - আলাদা -->
+<!-- 🔥 JS Files -->
 <!-- ============================================================ -->
 <script src="app.js" defer></script>
 <script src="blog.js" defer></script>
 
 <!-- ============================================================ -->
-<!-- 🔥 SLIDER JAVASCRIPT -->
+<!-- 🔥 MAIN JAVASCRIPT -->
 <!-- ============================================================ -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -2294,16 +2359,14 @@
     });
 
     // ============================================================
-    // 🔥 SCROLL TO SECTION FUNCTION
+    // 🔥 SCROLL TO BLOG SECTION FUNCTION
     // ============================================================
-    function scrollToSection(id) {
-        var element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        } else {
-            var el = document.querySelector('.' + id);
-            if (el) {
-                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    function scrollToBlogSection(id) {
+        var blogContent = document.getElementById('blogContent');
+        if (blogContent) {
+            var targetEl = blogContent.querySelector('#' + id);
+            if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
     }
@@ -2373,7 +2436,7 @@
     });
 
     // ============================================================
-    // 🔥 TEER CALCULATOR - COMPACT
+    // 🔥 TEER CALCULATOR
     // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
         var calcBtn = document.getElementById('calcPredictBtn');
@@ -2754,103 +2817,7 @@
     });
 
     // ============================================================
-    // 🔥 BLOG TOC SLIDER
-    // ============================================================
-    document.addEventListener('DOMContentLoaded', function() {
-        var track = document.getElementById('tocSliderTrack');
-        var prevBtn = document.getElementById('tocPrevBtn');
-        var nextBtn = document.getElementById('tocNextBtn');
-        var items = track ? track.querySelectorAll('.toc-item') : [];
-        
-        if (!track || items.length === 0) return;
-        
-        var itemWidth = 0;
-        var totalWidth = 0;
-        var currentPosition = 0;
-        var maxPosition = 0;
-        var visibleCount = 3;
-        
-        function calculateWidths() {
-            var containerWidth = track.parentElement.clientWidth - 120;
-            var itemsArray = Array.from(items);
-            var totalItemsWidth = 0;
-            itemsArray.forEach(function(item) {
-                totalItemsWidth += item.offsetWidth + 20;
-            });
-            totalWidth = totalItemsWidth;
-            itemWidth = itemsArray[0] ? itemsArray[0].offsetWidth + 20 : 80;
-            visibleCount = Math.max(1, Math.floor(containerWidth / (itemWidth + 5)));
-            maxPosition = Math.max(0, totalWidth - containerWidth);
-        }
-        
-        function updateSlider() {
-            track.style.transform = 'translateX(-' + currentPosition + 'px)';
-            prevBtn.disabled = currentPosition <= 0;
-            nextBtn.disabled = currentPosition >= maxPosition;
-            // Update active item based on scroll position
-            var itemsArray = Array.from(items);
-            var containerWidth = track.parentElement.clientWidth - 120;
-            var midPoint = currentPosition + containerWidth / 2;
-            var activeIndex = 0;
-            var cumWidth = 0;
-            itemsArray.forEach(function(item, idx) {
-                var w = item.offsetWidth + 20;
-                if (midPoint >= cumWidth && midPoint < cumWidth + w) {
-                    activeIndex = idx;
-                }
-                cumWidth += w;
-            });
-            itemsArray.forEach(function(item, idx) {
-                item.classList.toggle('active', idx === activeIndex);
-            });
-        }
-        
-        function goToPrev() {
-            var step = itemWidth * visibleCount * 0.8;
-            currentPosition = Math.max(0, currentPosition - step);
-            updateSlider();
-        }
-        
-        function goToNext() {
-            var step = itemWidth * visibleCount * 0.8;
-            currentPosition = Math.min(maxPosition, currentPosition + step);
-            updateSlider();
-        }
-        
-        // Click on item to scroll to blog section
-        items.forEach(function(item) {
-            item.addEventListener('click', function() {
-                var target = this.getAttribute('data-target');
-                var blogContent = document.getElementById('blogContent');
-                if (blogContent) {
-                    var targetEl = blogContent.querySelector('#' + target);
-                    if (targetEl) {
-                        targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
-                }
-                // Update active
-                items.forEach(function(it) { it.classList.remove('active'); });
-                this.classList.add('active');
-            });
-        });
-        
-        prevBtn.addEventListener('click', goToPrev);
-        nextBtn.addEventListener('click', goToNext);
-        
-        window.addEventListener('resize', function() {
-            calculateWidths();
-            currentPosition = Math.min(currentPosition, maxPosition);
-            updateSlider();
-        });
-        
-        setTimeout(function() {
-            calculateWidths();
-            updateSlider();
-        }, 300);
-    });
-
-    // ============================================================
-    // 🔥 BLOG CONTENT - Dynamic Loading (English)
+    // 🔥 BLOG CONTENT (Shillong Teer - পুরনো কন্টেন্ট)
     // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
         var contentHTML = `
