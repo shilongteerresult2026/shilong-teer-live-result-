@@ -1655,6 +1655,39 @@
             .whatsapp-box-new .whatsapp-join-btn { font-size: 0.75rem; padding: 6px 14px; }
         }
     </style>
+    
+    <!-- ============================================================ -->
+    <!-- 🔥 ADDITIONAL CSS FOR ADS (FALLBACK DESIGN) -->
+    <!-- ============================================================ -->
+    <style>
+        .ad-container {
+            min-height: 250px;
+            width: 100%;
+            margin: 12px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #eef2f6;
+            overflow: hidden;
+            flex-direction: column;
+            color: #888;
+        }
+        .ad-container .ad-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        .ad-container .ad-placeholder .icon { font-size: 2.5rem; margin-bottom: 5px; }
+        .ad-container .ad-placeholder .small-text { font-size: 0.7rem; margin-top: 4px; }
+        .ad-container.banner-leaderboard { min-height: 90px; max-height: 100px; }
+        .ad-container.banner-mobile { min-height: 100px; max-height: 120px; }
+        .ad-container iframe, .ad-container img { max-width: 100%; max-height: 100%; }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -1742,8 +1775,29 @@
         </a>
     </div>
 
+    <!-- ===== ADS 1: Header Banner (300x250) - Highest CPM Zone ===== -->
+    <div class="ad-container">
+        <div class="ad-placeholder">
+            <div class="icon">📢</div>
+            <span>বিজ্ঞাপন লোড হচ্ছে...</span>
+            <span class="small-text">(লাইভ সার্ভারে অ্যাড দেখাবে)</span>
+        </div>
+        <script async="async" data-cfasync="false" src="https://pl30289530.effectivecpmnetwork.com/c790b6b5b066c06ce4ca5298332d2265/invoke.js"></script>
+        <div id="container-c790b6b5b066c06ce4ca5298332d2265"></div>
+    </div>
+
     <!-- ===== RESULTS GRID ===== -->
     <div id="resultsGrid" class="results-grid"></div>
+
+    <!-- ===== ADS 2: Mobile Banner (320x100) placed right after results ===== -->
+    <div class="ad-container banner-mobile">
+        <div class="ad-placeholder">
+            <div class="icon">📱</div>
+            <span>মোবাইল বিজ্ঞাপন</span>
+            <span class="small-text">(লাইভ সার্ভারে অ্যাড দেখাবে)</span>
+        </div>
+        <!-- Add your second banner ad script here if needed -->
+    </div>
 
     <!-- ===== SOCIAL SHARE ===== -->
     <div class="social-share-container">
@@ -1755,13 +1809,6 @@
             <button onclick="shareOnTelegram()" class="share-btn telegram"><span>✈️</span> Telegram</button>
             <button onclick="copyLink()" class="share-btn copy"><span>📋</span> কপি লিংক</button>
         </div>
-    </div>
-
-    <!-- ===== ADSTERA BANNER ===== -->
-    <div style="margin:1.5rem 0; text-align:center; background:#f9f5f0; padding:0.8rem; border-radius:12px;">
-        <p style="font-size:0.75rem; font-weight:700; color:#555; margin-bottom:6px; letter-spacing:0.5px;">💡 Trending News & Teer Tips 💡</p>
-        <script async="async" data-cfasync="false" src="https://pl30289530.effectivecpmnetwork.com/c790b6b5b066c06ce4ca5298332d2265/invoke.js"></script>
-        <div id="container-c790b6b5b066c06ce4ca5298332d2265"></div>
     </div>
 
     <!-- ===== COMMON NUMBERS ===== -->
@@ -1818,6 +1865,16 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- ===== ADS 3: Leaderboard Banner (728x90) before Blog ===== -->
+    <div class="ad-container banner-leaderboard">
+        <div class="ad-placeholder">
+            <div class="icon">💡</div>
+            <span>ট্রেন্ডিং নিউজ ও টিপস</span>
+            <span class="small-text">(লাইভ সার্ভারে অ্যাড দেখাবে)</span>
+        </div>
+        <!-- Add your third banner ad script here -->
     </div>
     
     <!-- ============================================================ -->
@@ -2212,11 +2269,6 @@
         </div>
     </div>
 
-    <!-- ===== ADSTERA SOCIAL BAR ===== -->
-    <div style="margin:1.5rem 0; text-align:center;">
-        <script src="https://pl30289531.effectivecpmnetwork.com/37/c3/e8/37c3e84ed9f58e0e29697b546148cea6.js"></script>
-    </div>
-
     <!-- ===== DISCLAIMER ===== -->
     <div class="disclaimer-footer">
         <strong>⭐ Shillong Teer Result Today & Common Number</strong> - Your trusted source for daily Shillong Teer live results, common numbers, house digits, ending digits, and expert predictions. Updates every Monday to Friday at 4:00 PM (FR) and 5:00 PM (SR) IST.
@@ -2293,6 +2345,13 @@
 <!-- 🔥 MAIN JAVASCRIPT -->
 <!-- ============================================================ -->
 <script>
+    // ============================================================
+    // 🔥 SUPABASE CLIENT SETUP (আপনার Key বসান)
+    // ============================================================
+    const SUPABASE_URL = 'আপনার_SUPABASE_URL_এখানে_দিন';
+    const SUPABASE_ANON_KEY = 'আপনার_SUPABASE_ANON_KEY_এখানে_দিন';
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
     document.addEventListener('DOMContentLoaded', function() {
         var domain = 'shillongteerliveresult.in';
         var sublines = [
