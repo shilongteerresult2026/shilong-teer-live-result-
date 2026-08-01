@@ -3037,18 +3037,11 @@
     });
 
     // ============================================================
-    // 🔥 এয়ারপোর্ট স্টাইলের প্রফেশনাল ভয়েস অ্যানাউন্স (৩টি ভাষায়) - NEW UPDATE
+    // 🔥 Supabase দিয়ে কন্ট্রোল করা ভয়েস অ্যানাউন্স (৩টি ভাষায়)
     // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
         
-        // ১. ৩টি ভাষার জন্য প্রফেশনাল মেসেজ (আপনার দেওয়া লাইন যুক্ত করা হয়েছে)
-        const MESSAGES = {
-            'bn': "স্বাগতম! Direct VIP গুটি ও কমন নাম্বারের জন্য এবং সবচেয়ে দ্রুত রেজাল্টের জন্য আমাদের সাইটে নজর রাখুন। আপনার জন্য শুভকামনা।",
-            'hi': "स्वागत है! Direct VIP गुटी और कॉमन नंबर के लिए और सबसे तेज रिजल्ट के लिए हमारी साइट पर नज़र रखें। आपके लिए शुभकामनाएं।",
-            'as': "স্বাগতম! Direct VIP গুটি আৰু কমন নম্বৰৰ বাবে আৰু আটাইতকৈ দ্ৰুত ৰিজাল্টৰ বাবে আমাৰ চাইটত চকু ৰাখক। আপোনাৰ বাবে শুভকামনা।"
-        };
-
-        // ২. ভাষা সনাক্ত করার ফাংশন
+        // ১. ভাষা সনাক্ত করার ফাংশন
         function detectLanguage() {
             let lang = navigator.language || navigator.languages[0] || 'en';
             lang = lang.toLowerCase();
@@ -3060,30 +3053,62 @@
             } else if (lang.startsWith('as') || lang === 'asm' || lang === 'assamese') {
                 return 'as';
             }
-            return 'bn'; // ডিফল্ট বাংলা
+            return 'bn';
         }
 
         let currentLang = detectLanguage();
 
-        // ৩. ভয়েস বক্স তৈরি করা
+        // ২. Supabase থেকে মেসেজ লোড করার ফাংশন
+        async function loadMessages() {
+            try {
+                const { data, error } = await supabaseClient
+                    .from('voice_announcements')
+                    .select('lang_code, message, is_active')
+                    .eq('is_active', true);
+
+                if (error) throw error;
+
+                let messages = {};
+                if (data && data.length > 0) {
+                    data.forEach(row => {
+                        messages[row.lang_code] = row.message;
+                    });
+                }
+
+                // ডিফল্ট মেসেজ (যদি Supabase লোড না হয়)
+                if (!messages['bn']) messages['bn'] = "স্বাগতম! লাইভ রেজাল্ট ও কমন নাম্বারের জন্য আমাদের সাইটে নজর রাখুন।";
+                if (!messages['hi']) messages['hi'] = "स्वागत है! लाइव रिजल्ट और कॉमन नंबर के लिए हमारी साइट पर नज़र रखें।";
+                if (!messages['as']) messages['as'] = "স্বাগতম! লাইভ ৰিজাল্ট আৰু কমন নম্বৰৰ বাবে আমাৰ চাইটত চকু ৰাখক।";
+
+                return messages;
+            } catch (err) {
+                // ফলব্যাক মেসেজ
+                return {
+                    'bn': "স্বাগতম! Direct VIP গুটি ও কমন নাম্বারের জন্য এবং সবচেয়ে দ্রুত রেজাল্টের জন্য আমাদের সাইটে নজর রাখুন।",
+                    'hi': "स्वागत है! Direct VIP गुटी और कॉमन नंबर के लिए और सबसे तेज रिजल्ट के लिए हमारी साइट पर नज़र रखें।",
+                    'as': "স্বাগতম! Direct VIP গুটি আৰু কমন নম্বৰৰ বাবে আৰু আটাইতকৈ দ্ৰুত ৰিজাল্টৰ বাবে আমাৰ চাইটত চকু ৰাখক।"
+                };
+            }
+        }
+
         const voiceBox = document.createElement('div');
         voiceBox.className = 'voice-announce-container';
         voiceBox.innerHTML = `
             <div class="voice-icon">🔊</div>
             <div class="voice-info">
                 <div class="v-title">🔊 ভয়েস অ্যানাউন্স</div>
-                <div class="v-text" id="voiceTextDisplay">${MESSAGES[currentLang].substring(0, 20)}...</div>
+                <div class="v-text" id="voiceTextDisplay">লোড হচ্ছে...</div>
             </div>
             <div class="voice-actions">
                 <select class="voice-lang-select" id="voiceLangSelect">
-                    <option value="bn" ${currentLang === 'bn' ? 'selected' : ''}>বাংলা</option>
-                    <option value="hi" ${currentLang === 'hi' ? 'selected' : ''}>हिन्दी</option>
-                    <option value="as" ${currentLang === 'as' ? 'selected' : ''}>অসমীয়া</option>
+                    <option value="bn">বাংলা</option>
+                    <option value="hi">हिन्दी</option>
+                    <option value="as">অসমীয়া</option>
                 </select>
                 <div class="voice-buttons">
                     <button class="voice-btn play-btn" id="playVoiceBtn" title="শুনুন/सुनो/शुनक">▶</button>
-                    <button class="voice-btn stop-btn" id="stopVoiceBtn" title="বন্ধ করুন/बंद करें/বন্ধ কৰক">⏹</button>
-                    <button class="voice-btn close-btn" id="closeVoiceBtn" title="বন্ধ করুন/बंद करें/বন্ধ কৰক">✕</button>
+                    <button class="voice-btn stop-btn" id="stopVoiceBtn" title="বন্ধ করুন/बंद करें/बন্ধ কৰক">⏹</button>
+                    <button class="voice-btn close-btn" id="closeVoiceBtn" title="বন্ধ করুন/बंद करें/बন্ধ কৰক">✕</button>
                 </div>
             </div>
         `;
@@ -3095,11 +3120,35 @@
         const langSelect = document.getElementById('voiceLangSelect');
         const textDisplay = document.getElementById('voiceTextDisplay');
 
-        // ৪. এয়ারপোর্ট স্টাইলের প্রফেশনাল ভয়েস প্লে ফাংশন
+        let MESSAGES = {};
+
+        async function initAnnouncer() {
+            MESSAGES = await loadMessages();
+            langSelect.value = currentLang;
+            textDisplay.textContent = MESSAGES[currentLang] ? MESSAGES[currentLang].substring(0, 20) + '...' : 'মেসেজ লোড হয়নি';
+
+            langSelect.addEventListener('change', function() {
+                const newLang = this.value;
+                textDisplay.textContent = MESSAGES[newLang] ? MESSAGES[newLang].substring(0, 20) + '...' : 'মেসেজ লোড হয়নি';
+            });
+
+            const hasAutoPlayed = sessionStorage.getItem('voice_auto_played');
+            if (!hasAutoPlayed && MESSAGES[currentLang]) {
+                setTimeout(function() {
+                    playAnnouncement();
+                }, 1500);
+            }
+        }
+
         function playAnnouncement() {
             const selectedLang = langSelect.value;
             const text = MESSAGES[selectedLang];
             
+            if (!text) {
+                alert('এই ভাষার জন্য মেসেজ লোড হয়নি!');
+                return;
+            }
+
             if (window.speechSynthesis.speaking) {
                 window.speechSynthesis.cancel();
             }
@@ -3107,20 +3156,15 @@
             let utterance = new SpeechSynthesisUtterance();
             utterance.text = text;
             
-            // ভাষা কোড সেট করা
             if (selectedLang === 'bn') utterance.lang = 'bn-BD';
             else if (selectedLang === 'hi') utterance.lang = 'hi-IN';
             else if (selectedLang === 'as') utterance.lang = 'as-IN';
             
-            // 🌟 এয়ারপোর্ট স্টাইলের জন্য সেটিংস (একেবারে ক্লিয়ার ও প্রফেশনাল)
-            utterance.rate = 0.7;  // ধীরে ও ক্লিয়ার করে বলবে (এয়ারপোর্টের মতো)
-            utterance.pitch = 1.0; // স্বাভাবিক ও গম্ভীর টোন
-            utterance.volume = 1.0; // ম্যাক্সিমাম ভলিউম
+            utterance.rate = 0.7;
+            utterance.pitch = 1.0;
+            utterance.volume = 1.0;
 
-            // সিস্টেমের সেরা & মিষ্টি ভয়েস খুঁজে বের করা (Google/Microsoft ভয়েস পছন্দ করবে)
             const voices = window.speechSynthesis.getVoices();
-            
-            // প্রথমে সেই ভাষার সেরা প্রাকৃতিক ভয়েস খোঁজা
             const bestVoice = voices.find(v => 
                 v.lang.includes(selectedLang) && 
                 (v.name.includes('Google') || v.name.includes('Microsoft') || v.name.includes('Neural') || v.name.includes('Premium'))
@@ -3137,38 +3181,17 @@
             textDisplay.textContent = text.substring(0, 20) + '...';
         }
 
-        // ৫. ইভেন্ট লিসেনার যুক্ত করা
         playBtn.addEventListener('click', playAnnouncement);
-        
-        stopBtn.addEventListener('click', function() {
-            window.speechSynthesis.cancel();
-        });
+        stopBtn.addEventListener('click', function() { window.speechSynthesis.cancel(); });
+        closeBtn.addEventListener('click', function() { window.speechSynthesis.cancel(); voiceBox.classList.add('hidden'); });
 
-        closeBtn.addEventListener('click', function() {
-            window.speechSynthesis.cancel();
-            voiceBox.classList.add('hidden');
-        });
-
-        // ভাষা পরিবর্তন হলে টেক্সট আপডেট করা
-        langSelect.addEventListener('change', function() {
-            const newLang = this.value;
-            textDisplay.textContent = MESSAGES[newLang].substring(0, 20) + '...';
-        });
-
-        // ৬. অটোমেটিক প্লে লজিক (প্রথমবার আসলে ১.৫ সেকেন্ড পর প্লে)
-        const hasAutoPlayed = sessionStorage.getItem('voice_auto_played');
-        if (!hasAutoPlayed) {
-            setTimeout(function() {
-                playAnnouncement();
-            }, 1500);
-        }
-
-        // ৭. মোবাইলের জন্য প্রথম ক্লিকে অটো প্লে (যদি ব্লক হয়ে যায়)
         document.body.addEventListener('click', function() {
             if (!sessionStorage.getItem('voice_auto_played')) {
                 playAnnouncement();
             }
         }, { once: true });
+
+        initAnnouncer();
     });
 </script>
 </body>
