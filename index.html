@@ -1656,7 +1656,7 @@
         }
 
         /* ============================================================ */
-        /* 🔥 VOICE ANNOUNCER STYLES (NEW UPDATE) */
+        /* 🔥 VOICE ANNOUNCER STYLES (এয়ারপোর্ট স্টাইল) */
         /* ============================================================ */
         .voice-announce-container {
             position: fixed;
@@ -3037,15 +3037,15 @@
     });
 
     // ============================================================
-    // 🔥 VOICE ANNOUNCER (NEW UPDATE) - ADDED AT THE END
+    // 🔥 এয়ারপোর্ট স্টাইলের প্রফেশনাল ভয়েস অ্যানাউন্স (৩টি ভাষায়) - NEW UPDATE
     // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
         
-        // ১. ৩টি ভাষার জন্য আলাদা মেসেজ (আপনি আপনার পছন্দমতো বদলাতে পারেন)
+        // ১. ৩টি ভাষার জন্য প্রফেশনাল মেসেজ (আপনার দেওয়া লাইন যুক্ত করা হয়েছে)
         const MESSAGES = {
-            'bn': "স্বাগতম! শিলং তীর লাইভ রেজাল্ট ও কমন নাম্বার পেতে আমাদের সাইটে নজর রাখুন। আজকের রেজাল্ট আপডেট করা হয়েছে।",
-            'hi': "स्वागत है! शिलांग तीर लाइव रिजल्ट और कॉमन नंबर पाने के लिए हमारी साइट पर नज़र रखें। आज का रिजल्ट अपडेट कर दिया गया है।",
-            'as': "স্বাগতম! শ্বিলং তীৰ লাইভ ৰিজাল্ট আৰু কমন নম্বৰ পাবলৈ আমাৰ চাইটত চকু ৰাখক। আজিৰ ৰিজাল্ট আপডেট কৰা হৈছে।"
+            'bn': "স্বাগতম! Direct VIP গুটি ও কমন নাম্বারের জন্য এবং সবচেয়ে দ্রুত রেজাল্টের জন্য আমাদের সাইটে নজর রাখুন। আপনার জন্য শুভকামনা।",
+            'hi': "स्वागत है! Direct VIP गुटी और कॉमन नंबर के लिए और सबसे तेज रिजल्ट के लिए हमारी साइट पर नज़र रखें। आपके लिए शुभकामनाएं।",
+            'as': "স্বাগতম! Direct VIP গুটি আৰু কমন নম্বৰৰ বাবে আৰু আটাইতকৈ দ্ৰুত ৰিজাল্টৰ বাবে আমাৰ চাইটত চকু ৰাখক। আপোনাৰ বাবে শুভকামনা।"
         };
 
         // ২. ভাষা সনাক্ত করার ফাংশন
@@ -3060,8 +3060,7 @@
             } else if (lang.startsWith('as') || lang === 'asm' || lang === 'assamese') {
                 return 'as';
             }
-            // যদি কিছু না মেলে, তবে বাংলা ডিফল্ট (কারণ আপনার সাইটটি বাংলায়)
-            return 'bn';
+            return 'bn'; // ডিফল্ট বাংলা
         }
 
         let currentLang = detectLanguage();
@@ -3082,7 +3081,7 @@
                     <option value="as" ${currentLang === 'as' ? 'selected' : ''}>অসমীয়া</option>
                 </select>
                 <div class="voice-buttons">
-                    <button class="voice-btn play-btn" id="playVoiceBtn" title="শুনুন/सुनो/শুনক">▶</button>
+                    <button class="voice-btn play-btn" id="playVoiceBtn" title="শুনুন/सुनो/शुनक">▶</button>
                     <button class="voice-btn stop-btn" id="stopVoiceBtn" title="বন্ধ করুন/बंद करें/বন্ধ কৰক">⏹</button>
                     <button class="voice-btn close-btn" id="closeVoiceBtn" title="বন্ধ করুন/बंद करें/বন্ধ কৰক">✕</button>
                 </div>
@@ -3096,7 +3095,7 @@
         const langSelect = document.getElementById('voiceLangSelect');
         const textDisplay = document.getElementById('voiceTextDisplay');
 
-        // ৪. ভয়েস প্লে ফাংশন
+        // ৪. এয়ারপোর্ট স্টাইলের প্রফেশনাল ভয়েস প্লে ফাংশন
         function playAnnouncement() {
             const selectedLang = langSelect.value;
             const text = MESSAGES[selectedLang];
@@ -3111,10 +3110,27 @@
             // ভাষা কোড সেট করা
             if (selectedLang === 'bn') utterance.lang = 'bn-BD';
             else if (selectedLang === 'hi') utterance.lang = 'hi-IN';
-            else if (selectedLang === 'as') utterance.lang = 'as-IN'; // বা 'bn-IN' (যেহেতু অসমীয়ার জন্য নেটিভ ভয়েস সাপোর্ট কম, ব্রাউজার বাংলা/ইংরেজি পড়বে)
+            else if (selectedLang === 'as') utterance.lang = 'as-IN';
             
-            utterance.rate = 0.9;
-            utterance.pitch = 1;
+            // 🌟 এয়ারপোর্ট স্টাইলের জন্য সেটিংস (একেবারে ক্লিয়ার ও প্রফেশনাল)
+            utterance.rate = 0.7;  // ধীরে ও ক্লিয়ার করে বলবে (এয়ারপোর্টের মতো)
+            utterance.pitch = 1.0; // স্বাভাবিক ও গম্ভীর টোন
+            utterance.volume = 1.0; // ম্যাক্সিমাম ভলিউম
+
+            // সিস্টেমের সেরা & মিষ্টি ভয়েস খুঁজে বের করা (Google/Microsoft ভয়েস পছন্দ করবে)
+            const voices = window.speechSynthesis.getVoices();
+            
+            // প্রথমে সেই ভাষার সেরা প্রাকৃতিক ভয়েস খোঁজা
+            const bestVoice = voices.find(v => 
+                v.lang.includes(selectedLang) && 
+                (v.name.includes('Google') || v.name.includes('Microsoft') || v.name.includes('Neural') || v.name.includes('Premium'))
+            ) || voices.find(v => v.lang.includes(selectedLang) && v.localService === false) || 
+            voices.find(v => v.lang.includes(selectedLang)) || 
+            voices[0];
+            
+            if (bestVoice) {
+                utterance.voice = bestVoice;
+            }
 
             window.speechSynthesis.speak(utterance);
             sessionStorage.setItem('voice_auto_played', 'true');
@@ -3137,7 +3153,6 @@
         langSelect.addEventListener('change', function() {
             const newLang = this.value;
             textDisplay.textContent = MESSAGES[newLang].substring(0, 20) + '...';
-            // শুধু টেক্সট আপডেট হবে, ভয়েস প্লে হবে না (যাতে বিরক্তিকর না হয়)
         });
 
         // ৬. অটোমেটিক প্লে লজিক (প্রথমবার আসলে ১.৫ সেকেন্ড পর প্লে)
