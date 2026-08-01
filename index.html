@@ -1654,6 +1654,132 @@
             .whatsapp-box-new h3 { font-size: 0.85rem; }
             .whatsapp-box-new .whatsapp-join-btn { font-size: 0.75rem; padding: 6px 14px; }
         }
+
+        /* ============================================================ */
+        /* 🔥 VOICE ANNOUNCER STYLES (NEW UPDATE) */
+        /* ============================================================ */
+        .voice-announce-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9998;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid #0d47a1;
+            max-width: 360px;
+            transition: all 0.3s ease;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .voice-announce-container.hidden {
+            display: none;
+        }
+        .voice-icon {
+            width: 40px;
+            height: 40px;
+            background: #0d47a1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.2rem;
+            animation: voicePulse 1.5s ease-in-out infinite;
+        }
+        @keyframes voicePulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(13, 71, 161, 0.4); }
+            50% { box-shadow: 0 0 0 12px rgba(13, 71, 161, 0); }
+        }
+        .voice-info {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .voice-info .v-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #0d47a1;
+            margin-bottom: 2px;
+        }
+        .voice-info .v-text {
+            font-size: 0.7rem;
+            color: #555;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 130px;
+        }
+        .voice-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+        }
+        .voice-lang-select {
+            font-size: 0.6rem;
+            padding: 2px 4px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            background: #f9f9f9;
+            outline: none;
+        }
+        .voice-buttons {
+            display: flex;
+            gap: 4px;
+        }
+        .voice-btn {
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 4px;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .voice-btn.play-btn {
+            background: #0d47a1;
+            color: #fff;
+        }
+        .voice-btn.play-btn:hover {
+            background: #1565c0;
+            transform: scale(1.05);
+        }
+        .voice-btn.stop-btn {
+            color: #cc0000;
+        }
+        .voice-btn.stop-btn:hover {
+            background: #ffebee;
+            color: #aa0000;
+        }
+        .voice-btn.close-btn {
+            color: #888;
+        }
+        .voice-btn.close-btn:hover {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        @media (max-width: 480px) {
+            .voice-announce-container {
+                top: 10px;
+                right: 10px;
+                padding: 10px 12px;
+                max-width: 280px;
+            }
+            .voice-info .v-text { max-width: 80px; font-size: 0.6rem; }
+            .voice-icon { width: 32px; height: 32px; font-size: 1rem; }
+            .voice-lang-select { font-size: 0.5rem; padding: 1px 3px; }
+            .voice-btn { width: 26px; height: 26px; font-size: 0.8rem; }
+        }
     </style>
 </head>
 <body>
@@ -2908,6 +3034,126 @@
             var options = { year: 'numeric', month: 'long', day: 'numeric' };
             dateSpan.textContent = '📅 ' + now.toLocaleDateString('en-US', options);
         }
+    });
+
+    // ============================================================
+    // 🔥 VOICE ANNOUNCER (NEW UPDATE) - ADDED AT THE END
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // ১. ৩টি ভাষার জন্য আলাদা মেসেজ (আপনি আপনার পছন্দমতো বদলাতে পারেন)
+        const MESSAGES = {
+            'bn': "স্বাগতম! শিলং তীর লাইভ রেজাল্ট ও কমন নাম্বার পেতে আমাদের সাইটে নজর রাখুন। আজকের রেজাল্ট আপডেট করা হয়েছে।",
+            'hi': "स्वागत है! शिलांग तीर लाइव रिजल्ट और कॉमन नंबर पाने के लिए हमारी साइट पर नज़र रखें। आज का रिजल्ट अपडेट कर दिया गया है।",
+            'as': "স্বাগতম! শ্বিলং তীৰ লাইভ ৰিজাল্ট আৰু কমন নম্বৰ পাবলৈ আমাৰ চাইটত চকু ৰাখক। আজিৰ ৰিজাল্ট আপডেট কৰা হৈছে।"
+        };
+
+        // ২. ভাষা সনাক্ত করার ফাংশন
+        function detectLanguage() {
+            let lang = navigator.language || navigator.languages[0] || 'en';
+            lang = lang.toLowerCase();
+            
+            if (lang.startsWith('bn') || lang === 'ben' || lang === 'bengali' || ['BD', 'IN'].includes(navigator.language?.split('-')[1])) {
+                return 'bn';
+            } else if (lang.startsWith('hi') || lang === 'hin' || lang === 'hindi') {
+                return 'hi';
+            } else if (lang.startsWith('as') || lang === 'asm' || lang === 'assamese') {
+                return 'as';
+            }
+            // যদি কিছু না মেলে, তবে বাংলা ডিফল্ট (কারণ আপনার সাইটটি বাংলায়)
+            return 'bn';
+        }
+
+        let currentLang = detectLanguage();
+
+        // ৩. ভয়েস বক্স তৈরি করা
+        const voiceBox = document.createElement('div');
+        voiceBox.className = 'voice-announce-container';
+        voiceBox.innerHTML = `
+            <div class="voice-icon">🔊</div>
+            <div class="voice-info">
+                <div class="v-title">🔊 ভয়েস অ্যানাউন্স</div>
+                <div class="v-text" id="voiceTextDisplay">${MESSAGES[currentLang].substring(0, 20)}...</div>
+            </div>
+            <div class="voice-actions">
+                <select class="voice-lang-select" id="voiceLangSelect">
+                    <option value="bn" ${currentLang === 'bn' ? 'selected' : ''}>বাংলা</option>
+                    <option value="hi" ${currentLang === 'hi' ? 'selected' : ''}>हिन्दी</option>
+                    <option value="as" ${currentLang === 'as' ? 'selected' : ''}>অসমীয়া</option>
+                </select>
+                <div class="voice-buttons">
+                    <button class="voice-btn play-btn" id="playVoiceBtn" title="শুনুন/सुनो/শুনক">▶</button>
+                    <button class="voice-btn stop-btn" id="stopVoiceBtn" title="বন্ধ করুন/बंद करें/বন্ধ কৰক">⏹</button>
+                    <button class="voice-btn close-btn" id="closeVoiceBtn" title="বন্ধ করুন/बंद करें/বন্ধ কৰক">✕</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(voiceBox);
+
+        const playBtn = document.getElementById('playVoiceBtn');
+        const stopBtn = document.getElementById('stopVoiceBtn');
+        const closeBtn = document.getElementById('closeVoiceBtn');
+        const langSelect = document.getElementById('voiceLangSelect');
+        const textDisplay = document.getElementById('voiceTextDisplay');
+
+        // ৪. ভয়েস প্লে ফাংশন
+        function playAnnouncement() {
+            const selectedLang = langSelect.value;
+            const text = MESSAGES[selectedLang];
+            
+            if (window.speechSynthesis.speaking) {
+                window.speechSynthesis.cancel();
+            }
+
+            let utterance = new SpeechSynthesisUtterance();
+            utterance.text = text;
+            
+            // ভাষা কোড সেট করা
+            if (selectedLang === 'bn') utterance.lang = 'bn-BD';
+            else if (selectedLang === 'hi') utterance.lang = 'hi-IN';
+            else if (selectedLang === 'as') utterance.lang = 'as-IN'; // বা 'bn-IN' (যেহেতু অসমীয়ার জন্য নেটিভ ভয়েস সাপোর্ট কম, ব্রাউজার বাংলা/ইংরেজি পড়বে)
+            
+            utterance.rate = 0.9;
+            utterance.pitch = 1;
+
+            window.speechSynthesis.speak(utterance);
+            sessionStorage.setItem('voice_auto_played', 'true');
+            textDisplay.textContent = text.substring(0, 20) + '...';
+        }
+
+        // ৫. ইভেন্ট লিসেনার যুক্ত করা
+        playBtn.addEventListener('click', playAnnouncement);
+        
+        stopBtn.addEventListener('click', function() {
+            window.speechSynthesis.cancel();
+        });
+
+        closeBtn.addEventListener('click', function() {
+            window.speechSynthesis.cancel();
+            voiceBox.classList.add('hidden');
+        });
+
+        // ভাষা পরিবর্তন হলে টেক্সট আপডেট করা
+        langSelect.addEventListener('change', function() {
+            const newLang = this.value;
+            textDisplay.textContent = MESSAGES[newLang].substring(0, 20) + '...';
+            // শুধু টেক্সট আপডেট হবে, ভয়েস প্লে হবে না (যাতে বিরক্তিকর না হয়)
+        });
+
+        // ৬. অটোমেটিক প্লে লজিক (প্রথমবার আসলে ১.৫ সেকেন্ড পর প্লে)
+        const hasAutoPlayed = sessionStorage.getItem('voice_auto_played');
+        if (!hasAutoPlayed) {
+            setTimeout(function() {
+                playAnnouncement();
+            }, 1500);
+        }
+
+        // ৭. মোবাইলের জন্য প্রথম ক্লিকে অটো প্লে (যদি ব্লক হয়ে যায়)
+        document.body.addEventListener('click', function() {
+            if (!sessionStorage.getItem('voice_auto_played')) {
+                playAnnouncement();
+            }
+        }, { once: true });
     });
 </script>
 </body>
