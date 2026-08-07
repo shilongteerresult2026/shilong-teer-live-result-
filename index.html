@@ -807,6 +807,13 @@
         </a>
     </div>
 </div>
+
+<!-- ===== HAMBURGER MENU (MOBILE SIDEBAR TOGGLE) ===== -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleSidebar()">
+    ☰
+</button>
+
 <div id="vipModal" class="vip-modal-overlay">
     <div class="vip-modal-box">
         <span class="vip-modal-close" id="vipModalClose">&times;</span>
@@ -824,6 +831,7 @@
         <p style="font-size:0.6rem; color:#aaa; margin-top:8px;">✅ VIP Number loaded from secure server</p>
     </div>
 </div>
+
 <script src="https://quge5.com/88/tag.min.js" data-zone="254149" async data-cfasync="false"></script>
 <script type="text/javascript">
     var script1 = document.createElement('script');
@@ -839,6 +847,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="app.js" defer></script>
 <script src="blog.js" defer></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var domain = 'shillongteerliveresult.in';
@@ -905,9 +914,6 @@
         setInterval(changeText, 4500);
     });
 
-    // ============================================================
-    // 🔥 SCROLL TO BLOG SECTION FUNCTION
-    // ============================================================
     function scrollToBlogSection(id) {
         var blogContent = document.getElementById('blogContent');
         if (blogContent) {
@@ -918,9 +924,6 @@
         }
     }
 
-    // ============================================================
-    // 🔥 SLIDER TRACKER FUNCTION
-    // ============================================================
     function changeSlider(type) {
         var buttons = document.querySelectorAll('.tracker-btn');
         buttons.forEach(function(btn) {
@@ -943,9 +946,6 @@
         }
     }
 
-    // ============================================================
-    // 🔥 VIP UNLOCK
-    // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
         var vipBtn = document.getElementById('vipUnlockBtn');
         var vipModal = document.getElementById('vipModal');
@@ -982,9 +982,6 @@
         }
     });
 
-    // ============================================================
-    // 🔥 TEER CALCULATOR
-    // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
         var calcBtn = document.getElementById('calcPredictBtn');
         var calcFrNumber = document.getElementById('calcFrNumber');
@@ -1088,9 +1085,6 @@
         }
     });
 
-    // ============================================================
-    // 🔥 YEAR + MONTH FILTER
-    // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
         var yearSelect = document.getElementById('yearSelectShillong');
         var monthSelect = document.getElementById('monthSelectShillong');
@@ -1160,9 +1154,6 @@
         });
     });
 
-    // ============================================================
-    // 🔥 DREAM CHART - 16 Dreams
-    // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
         var dreamBody = document.getElementById('dreamChartBody');
         if (dreamBody) {
@@ -1195,9 +1186,6 @@
         }
     });
 
-    // ============================================================
-    // 🔥 DREAM PREDICTOR
-    // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
         var dreamBtn = document.getElementById('predictDreamBtn');
         var dreamInput = document.getElementById('dreamInput');
@@ -1230,9 +1218,6 @@
         }
     });
 
-    // ============================================================
-    // 🔥 FAQ TOGGLE
-    // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
         var faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(function(item) {
@@ -1245,9 +1230,6 @@
         });
     });
 
-    // ============================================================
-    // 🔥 LANGUAGE FUNCTIONS
-    // ============================================================
     function showBangla() {
         var title = document.querySelector('.name-box .bn-title');
         var badge = document.querySelector('.live-badge-main');
@@ -1266,9 +1248,6 @@
         if (heading) heading.textContent = '🎯 Shillong Teer Result Today Live | Today\'s Shillong Teer Live Result';
     }
 
-    // ============================================================
-    // 🔥 SHARE FUNCTIONS
-    // ============================================================
     function shareOnFacebook() {
         window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href), '_blank');
     }
@@ -1299,9 +1278,6 @@
         });
     }
 
-    // ============================================================
-    // 🔥 COMMENT SYSTEM
-    // ============================================================
     function addComment() {
         var input = document.getElementById('commentInput');
         var nameInput = document.getElementById('commentName');
@@ -1341,7 +1317,6 @@
         localStorage.setItem('teer_comments', JSON.stringify(comments.slice(0, 50)));
     }
 
-    // Load comments from localStorage
     document.addEventListener('DOMContentLoaded', function() {
         var list = document.getElementById('commentList');
         if (list) {
@@ -1363,9 +1338,6 @@
         }
     });
 
-    // ============================================================
-    // 🔥 BLOG CONTENT
-    // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
         var contentHTML = `
             <h2 id="blog-intro">1. Introduction</h2>
@@ -1495,9 +1467,9 @@
                 return messages;
             } catch (err) {
                 return {
-                    'bn': "স্বাগতম! Direct VIP গুটি ও কমন নাম্বারের জন্য এবং সবচেয়ে দ্রুত রেজাল্টের জন্য আমাদের সাইটে নজর রাখুন।",
-                    'hi': "स्वागत है! Direct VIP गुटी और कॉमन नंबर के लिए और सबसे तेज रिजल्ट के लिए हमारी साइट पर नज़र रखें।",
-                    'as': "স্বাগতম! Direct VIP গুটি আৰু কমন নম্বৰৰ বাবে আৰু আটাইতকৈ দ্ৰুত ৰিজাল্টৰ বাবে আমাৰ চাইটত চকু ৰাখক।"
+                    'bn': "স্বাগতম! Direct VIP गुटी आणि कॉमन नंबरसाठी आणि सर्वात जलद निकालासाठी आमच्या साइटवर लक्ष ठेवा. तुमच्यासाठी शुभेच्छा.",
+                    'hi': "स्वागत है! Direct VIP गुटी और कॉमन नंबर के लिए और सबसे तेज रिजल्ट के लिए हमारी साइट पर नज़र रखें। आपके लिए शुभकामनाएं।",
+                    'as': "স্বাগতম! Direct VIP गुटी आरु कॉमन नंबरर बाबे आरु सबसे तेज रिजल्टर बाबे आमार साइटत नजर राखक।"
                 };
             }
         }
@@ -1507,8 +1479,8 @@
         voiceBox.innerHTML = `
             <div class="voice-icon">🔊</div>
             <div class="voice-info">
-                <div class="v-title">🔊 ভয়েস অ্যানাউন্স</div>
-                <div class="v-text" id="voiceTextDisplay">লোড হচ্ছে...</div>
+                <div class="v-title">🔊 भ्वाइस घोषणा</div>
+                <div class="v-text" id="voiceTextDisplay">लोड हो रहा है...</div>
             </div>
             <div class="voice-actions">
                 <select class="voice-lang-select" id="voiceLangSelect">
@@ -1518,7 +1490,7 @@
                 </select>
                 <div class="voice-buttons">
                     <button class="voice-btn play-btn" id="playVoiceBtn" title="শুনুন/सुनो/शुनक">▶</button>
-                    <button class="voice-btn stop-btn" id="stopVoiceBtn" title="বন্ধ করুন/बंद करें/बন্ধ কৰক">⏹</button>
+                    <button class="voice-btn stop-btn" id="stopVoiceBtn" title="বন্ধ করুন/बंद करें/বন্ধ কৰক">⏹</button>
                     <button class="voice-btn close-btn" id="closeVoiceBtn" title="বন্ধ করুন/बंद करें/बন্ধ কৰক">✕</button>
                 </div>
             </div>
@@ -1615,6 +1587,27 @@
         }, { once: true });
 
         initAnnouncer();
+    });
+
+    // ============================================================
+    // 🔥 HAMBURGER MENU TOGGLE LOGIC
+    // ============================================================
+    function toggleSidebar() {
+        var sidebar = document.querySelector('.sidebar-right');
+        var overlay = document.getElementById('sidebarOverlay');
+        
+        if (sidebar) {
+            sidebar.classList.toggle('open');
+            if (overlay) {
+                overlay.classList.toggle('active');
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.innerWidth <= 768) {
+            document.getElementById('mobileMenuBtn').style.display = 'block';
+        }
     });
 </script>
 </body>
