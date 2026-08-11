@@ -1299,7 +1299,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================================
-// 🔥 ব্রাউজার ট্যাব ভিসিবিলিটি চেঞ্জ হ্যান্ডলার
+// 🔥 BROWSER TAB VISIBILITY CHANGE HANDLER
 // ============================================================
 document.addEventListener('visibilitychange', function() {
     if (!document.hidden) {
