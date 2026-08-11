@@ -71,9 +71,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        /* ============================================================ */
-        /* 🔥 Performance & SEO Optimization */
-        /* ============================================================ */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Poppins', sans-serif; }
+        body { background: #0a0e14; padding: 0.8rem; }
+
         html { scroll-behavior: smooth; }
         body {
             -webkit-font-smoothing: antialiased;
@@ -81,8 +81,6 @@
             text-rendering: optimizeLegibility;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Poppins', sans-serif; }
-        body { background: #0a0e14; padding: 0.8rem; }
         .container { max-width: 100%; margin: 0 auto; background: #ffffff; border-radius: 1.2rem; padding: 1rem; box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
         .header-title { text-align: center; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid #0a2a5a; }
         .header-title h1 { font-size: 1.5rem; color: #0d0a0a; font-weight: 800; }
@@ -101,9 +99,6 @@
         .live-badge { display: inline-block; background: #cc0000; color: white; font-size: 0.7rem; font-weight: bold; padding: 0.15rem 0.8rem; border-radius: 30px; animation: pulseRed 1s infinite; margin-left: 8px; }
         @keyframes pulseRed { 0%,100% { background: #cc0000; } 50% { background: #ff0000; box-shadow: 0 0 10px rgba(204,0,0,0.3); } }
 
-        /* ============================================================ */
-        /* 🔥 Footer Links - সব ইন্টারনাল লিংক সহ */
-        /* ============================================================ */
         .footer-links {
             text-align: center;
             margin-top: 1.5rem;
@@ -187,9 +182,6 @@
         <a href="index.html" class="back-btn">⬅️ Back to Home | হোমে ফিরুন</a>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- 🔥 Footer Links - সমস্ত ইন্টারনাল লিংক যোগ করা হয়েছে -->
-    <!-- ============================================================ -->
     <div class="footer-links">
         <a href="about.html">📖 About Us</a>
         <a href="contact.html">📞 Contact</a>
@@ -212,8 +204,9 @@
 </div>
 
 <script>
+// ✅ সঠিক Supabase Configuration
 const SUPABASE_URL = 'https://bwjjqidmeooyojjvtqjs.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable__qokEKHuO9i1LVn24Hxp3g_4MZQ7wIg';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3ampxaWRtZW9veW9qanZ0cWpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NDIxMTAsImV4cCI6MjA5NjUxODExMH0.sRbG-Pwd8kgy94e9g7uuWhAj0-mH6JjOC7KXARxLIEk';
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 function getCurrentMonthIndex() {
@@ -237,7 +230,7 @@ async function loadJuwaiPreviousFromSupabase(monthIndex) {
         const { data, error } = await supabaseClient
             .from('teer_previous_results')
             .select('*')
-            .eq('venue', 'juwai')
+            .eq('venue', 'Juwai')
             .gte('result_date', firstDay)
             .lte('result_date', lastDay)
             .order('result_date', { ascending: false });
