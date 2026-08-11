@@ -179,48 +179,642 @@
             box-shadow: 0 4px 20px rgba(10,61,107,0.25);
         }
 
-        .welcome-voice-status {
-            text-align: center;
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            display: inline-block;
-            margin: 5px auto;
+        /* ============================================================ */
+        /* 🔥 TOC - Premium Slim Blue Box with Circle Numbers */
+        /* ============================================================ */
+        .blog-toc-premium {
+            background: linear-gradient(145deg, #f0f7ff, #e3edfc);
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+            border: 2px solid #1a56db;
+            box-shadow: 0 8px 32px rgba(26, 86, 219, 0.15), 0 2px 8px rgba(26, 86, 219, 0.06);
+            position: relative;
+            overflow: hidden;
         }
-        .welcome-voice-status.loading {
-            background: #fff3e0;
-            color: #e65100;
+        .blog-toc-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1a56db, #3b82f6, #60a5fa, #3b82f6, #1a56db);
+            background-size: 200% 100%;
+            animation: gradientMove 3s ease-in-out infinite;
         }
-        .welcome-voice-status.ready {
-            background: #e8f5e9;
-            color: #2e7d32;
+        @keyframes gradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
-        .welcome-voice-status.played {
-            background: #e3f2fd;
-            color: #0d47a1;
+        .blog-toc-premium .blog-toc-title {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #1a56db;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0.5px;
+            text-shadow: 0 1px 2px rgba(26, 86, 219, 0.1);
         }
-        .welcome-voice-status.error {
-            background: #ffebee;
-            color: #c62828;
-        }
-        .welcome-voice-status.skipped {
-            background: #f5f5f5;
-            color: #757575;
-        }
-
-        .lang-badge {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 20px;
-            font-size: 0.65rem;
-            font-weight: 700;
+        .blog-toc-premium .blog-toc-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, #1a56db, transparent);
             margin-left: 8px;
         }
-        .lang-badge.bn { background: #006a4e; color: #fff; }
-        .lang-badge.hi { background: #ff9933; color: #fff; }
-        .lang-badge.as { background: #1a5c2e; color: #fff; }
-        .lang-badge.en { background: #0d47a1; color: #fff; }
+        .blog-toc-premium .toc-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        .blog-toc-premium .toc-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 10px 18px;
+            background: rgba(26, 86, 219, 0.06);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: 1.5px solid rgba(26, 86, 219, 0.15);
+            backdrop-filter: blur(4px);
+        }
+        .blog-toc-premium .toc-link:hover {
+            background: rgba(26, 86, 219, 0.12);
+            border-color: #1a56db;
+            transform: translateX(6px);
+            box-shadow: 0 4px 16px rgba(26, 86, 219, 0.12);
+        }
+
+        .blog-toc-premium .toc-link .toc-number {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #fff;
+            background: linear-gradient(135deg, #1a56db, #3b82f6);
+            min-width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(26, 86, 219, 0.25);
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        .blog-toc-premium .toc-link:hover .toc-number {
+            transform: scale(1.08);
+            box-shadow: 0 4px 20px rgba(26, 86, 219, 0.35);
+        }
+
+        .blog-toc-premium .toc-link .toc-text {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #0a2a5a;
+            line-height: 1.4;
+            transition: color 0.3s;
+        }
+        .blog-toc-premium .toc-link:hover .toc-text {
+            color: #1a56db;
+        }
+
+        @media (max-width: 768px) {
+            .blog-toc-premium { padding: 16px 18px; border-radius: 12px; }
+            .blog-toc-premium .blog-toc-title { font-size: 1.2rem; }
+            .blog-toc-premium .toc-link { padding: 8px 14px; gap: 12px; }
+            .blog-toc-premium .toc-link .toc-number { min-width: 30px; height: 30px; font-size: 0.95rem; }
+            .blog-toc-premium .toc-link .toc-text { font-size: 0.85rem; }
+        }
+        @media (max-width: 480px) {
+            .blog-toc-premium { padding: 12px 14px; border-radius: 10px; }
+            .blog-toc-premium .blog-toc-title { font-size: 1rem; }
+            .blog-toc-premium .toc-link { padding: 6px 12px; gap: 10px; border-radius: 8px; }
+            .blog-toc-premium .toc-link .toc-number { min-width: 26px; height: 26px; font-size: 0.8rem; }
+            .blog-toc-premium .toc-link .toc-text { font-size: 0.75rem; }
+        }
+
+        /* ============================================================ */
+        /* 🔥 FAQ - Box with Side Blue Line (No Toggle) */
+        /* ============================================================ */
+        .faq-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 12px 0;
+        }
+        .faq-title {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-align: center;
+            padding: 6px 20px;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            border-radius: 10px;
+            text-shadow: 0 1px 10px rgba(255,255,255,0.08);
+            box-shadow: 0 2px 15px rgba(13,71,161,0.12);
+        }
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        @media (max-width: 768px) {
+            .faq-grid { grid-template-columns: 1fr; }
+        }
+
+        .faq-item {
+            border: 1px solid #e3edfc;
+            border-radius: 10px;
+            padding: 14px 18px;
+            transition: all 0.3s;
+            background: #fafcff;
+            position: relative;
+            border-left: 4px solid #1a56db;
+            box-shadow: 0 2px 8px rgba(26, 86, 219, 0.04);
+        }
+        .faq-item:hover {
+            border-color: #1a56db;
+            box-shadow: 0 4px 16px rgba(26, 86, 219, 0.08);
+            transform: translateX(3px);
+        }
+
+        .faq-item .faq-question {
+            font-weight: 700;
+            color: #0d47a1;
+            font-size: 0.95rem;
+            display: block;
+            margin-bottom: 6px;
+            padding-right: 10px;
+        }
+
+        .faq-item .faq-answer {
+            color: #444;
+            line-height: 1.7;
+            font-size: 0.9rem;
+            display: block;
+            padding-top: 4px;
+            border-top: 1px solid #e8f0fe;
+        }
+
+        /* ============================================================ */
+        /* 🔥 ARTICLE POINTS - Beautiful Boxes */
+        /* ============================================================ */
+        .history-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 14px;
+        }
+
+        .history-card li {
+            padding: 18px 22px;
+            background: linear-gradient(145deg, #ffffff, #f8faff);
+            border-radius: 14px;
+            border-left: 5px solid #0d47a1;
+            transition: all 0.4s ease;
+            box-shadow: 0 2px 12px rgba(13, 71, 161, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .history-card li::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(13, 71, 161, 0.04) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .history-card li:hover {
+            transform: translateX(6px);
+            box-shadow: 0 6px 25px rgba(13, 71, 161, 0.12);
+            border-left-color: #1a56db;
+        }
+
+        .history-card li h4 {
+            margin: 0 0 6px 0;
+            color: #ffffff;
+            font-size: 1rem;
+            display: inline-block;
+            font-weight: 700;
+            padding: 5px 16px;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            border-radius: 30px;
+            box-shadow: 0 2px 12px rgba(13, 71, 161, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .history-card li p {
+            margin: 6px 0 0 0;
+            color: #333;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .history-card li.did-you-know {
+            background: linear-gradient(145deg, #e3f2fd, #f0f7ff);
+            border-left-color: #0a2a5a;
+        }
+        .history-card li.did-you-know h4 {
+            background: linear-gradient(135deg, #0a2a5a, #0d47a1);
+        }
+
+        .history-card li.khanapara {
+            border-left-color: #00695c;
+            background: linear-gradient(145deg, #ffffff, #f0f7f4);
+        }
+        .history-card li.khanapara h4 {
+            background: linear-gradient(135deg, #00695c, #00897b);
+        }
+        .history-card li.khanapara.did-you-know {
+            background: linear-gradient(145deg, #e0f2f1, #f0f7f4);
+            border-left-color: #004d40;
+        }
+
+        .history-card li.juwai {
+            border-left-color: #4a148c;
+            background: linear-gradient(145deg, #ffffff, #f5f0f9);
+        }
+        .history-card li.juwai h4 {
+            background: linear-gradient(135deg, #4a148c, #6a1b9a);
+        }
+        .history-card li.juwai.did-you-know {
+            background: linear-gradient(145deg, #f3e5f5, #f5f0f9);
+            border-left-color: #38006b;
+        }
+
+        .history-card li.morning {
+            border-left-color: #e65100;
+            background: linear-gradient(145deg, #ffffff, #fff8f2);
+        }
+        .history-card li.morning h4 {
+            background: linear-gradient(135deg, #e65100, #f57c00);
+        }
+        .history-card li.morning.did-you-know {
+            background: linear-gradient(145deg, #fff3e0, #fff8f2);
+            border-left-color: #bf360c;
+        }
+
+        .history-card li.night {
+            border-left-color: #1a237e;
+            background: linear-gradient(145deg, #ffffff, #f0f2f8);
+        }
+        .history-card li.night h4 {
+            background: linear-gradient(135deg, #1a237e, #283593);
+        }
+        .history-card li.night.did-you-know {
+            background: linear-gradient(145deg, #e8eaf6, #f0f2f8);
+            border-left-color: #000051;
+        }
+
+        /* ============================================================ */
+        /* 🔥 STRATEGY ITEMS - Beautiful Boxes */
+        /* ============================================================ */
+        .strategy-article-section {
+            background: #fff;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 12px 0;
+        }
+
+        .strategy-item {
+            padding: 16px 20px;
+            background: linear-gradient(145deg, #ffffff, #fafcff);
+            border-radius: 12px;
+            border-left: 5px solid #7b1fa2;
+            margin-bottom: 12px;
+            transition: all 0.4s ease;
+            box-shadow: 0 2px 10px rgba(123, 31, 162, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .strategy-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(123, 31, 162, 0.04) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .strategy-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 25px rgba(123, 31, 162, 0.10);
+            border-left-color: #9c27b0;
+        }
+
+        .strategy-item strong {
+            color: #7b1fa2;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 1.05rem;
+        }
+
+        .strategy-item span {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #444;
+            display: block;
+        }
+
+        /* ============================================================ */
+        /* 🔥 GUIDE ITEMS - Beautiful Boxes */
+        /* ============================================================ */
+        .guide-box {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            padding: 14px 18px;
+            background: linear-gradient(145deg, #ffffff, #f8faff);
+            border-radius: 12px;
+            border-left: 4px solid #0d47a1;
+            transition: all 0.4s ease;
+            box-shadow: 0 2px 10px rgba(13, 71, 161, 0.05);
+        }
+        .guide-box:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 20px rgba(13, 71, 161, 0.10);
+        }
+
+        .guide-box .step-number {
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 10px rgba(13, 71, 161, 0.2);
+        }
+
+        .guide-box .step-text h4 {
+            margin: 0 0 3px 0;
+            color: #0d47a1;
+            font-size: 0.95rem;
+        }
+        .guide-box .step-text p {
+            margin: 0;
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ============================================================ */
+        /* 🔥 BLOG CONTENT - Article Points with Beautiful Boxes */
+        /* ============================================================ */
+        .blog-content h2 {
+            background: linear-gradient(135deg, #0a3d6b, #1a6b9a, #0a3d6b);
+            background-size: 200% 200%;
+            animation: blueGrad 4s ease-in-out infinite;
+            color: #fff;
+            padding: 14px 22px;
+            border-radius: 12px;
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin: 20px 0 10px 0;
+            box-shadow: 0 4px 25px rgba(10,61,107,0.3);
+            border: 2px solid #4a8ab5;
+            text-shadow: 0 1px 10px rgba(255,255,255,0.1);
+            letter-spacing: 0.5px;
+        }
+        @keyframes blueGrad {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .blog-content h3 {
+            background: linear-gradient(135deg, #0d47a1, #1565c0, #0d47a1);
+            background-size: 200% 200%;
+            animation: blueGrad2 3s ease-in-out infinite;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 16px 0 8px 0;
+            box-shadow: 0 3px 20px rgba(13,71,161,0.25);
+            border: 1px solid #4a8ab5;
+            text-shadow: 0 1px 8px rgba(255,255,255,0.08);
+        }
+        @keyframes blueGrad2 {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .blog-content p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #333;
+            padding: 6px 0;
+        }
+
+        .blog-content ul, .blog-content ol {
+            padding-left: 25px;
+            margin: 10px 0;
+        }
+
+        .blog-content ul li, .blog-content ol li {
+            font-size: 1rem;
+            line-height: 1.7;
+            padding: 6px 12px;
+            margin-bottom: 4px;
+            background: linear-gradient(145deg, #f8faff, #ffffff);
+            border-radius: 8px;
+            border-left: 3px solid #1a56db;
+            transition: all 0.3s ease;
+        }
+
+        .blog-content ul li:hover, .blog-content ol li:hover {
+            background: linear-gradient(145deg, #e8f0fe, #f8faff);
+            transform: translateX(4px);
+            box-shadow: 0 2px 12px rgba(26, 86, 219, 0.08);
+        }
+
+        .blog-content .highlight-box {
+            background: linear-gradient(145deg, #e3f2fd, #f0f7ff);
+            border-left: 5px solid #0d47a1;
+            padding: 1.2rem 1.6rem;
+            border-radius: 12px;
+            margin: 1.2rem 0;
+            box-shadow: 0 2px 15px rgba(13,71,161,0.08);
+            transition: all 0.3s ease;
+        }
+        .blog-content .highlight-box:hover {
+            box-shadow: 0 4px 25px rgba(13,71,161,0.12);
+            transform: translateX(3px);
+        }
+
+        .blog-content .stat-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            color: #fff;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 10px rgba(13,71,161,0.2);
+        }
+
+        /* ============================================================ */
+        /* 🔥 WELCOME VOICE STATUS - HIDDEN */
+        /* ============================================================ */
+        .welcome-voice-status {
+            display: none !important;
+        }
+        .lang-badge {
+            display: none !important;
+        }
+
+        /* ============================================================ */
+        /* 🔥 PREVIOUS RESULTS - Filter Side by Side */
+        /* ============================================================ */
+        .selector-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .selector-container .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .selector-container .filter-group label {
+            font-weight: 600;
+            color: #0d47a1;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        .selector-container .filter-group select {
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 2px solid #0d47a1;
+            font-weight: 600;
+            font-size: 0.85rem;
+            background: #fff;
+            cursor: pointer;
+            min-width: 80px;
+            height: 34px;
+            transition: all 0.3s;
+        }
+        .selector-container .filter-group select:hover {
+            border-color: #1565c0;
+            box-shadow: 0 0 10px rgba(13,71,161,0.15);
+        }
+
+        /* ============================================================ */
+        /* 🔥 RESPONSIVE */
+        /* ============================================================ */
+        @media (max-width: 768px) {
+            .selector-container {
+                gap: 12px;
+                flex-direction: row !important;
+                flex-wrap: wrap;
+            }
+            .selector-container .filter-group select {
+                padding: 4px 10px;
+                font-size: 0.75rem;
+                min-width: 70px;
+                height: 30px;
+            }
+            .selector-container .filter-group label {
+                font-size: 0.8rem;
+            }
+            .history-card li p {
+                font-size: 0.95rem;
+            }
+            .blog-content p {
+                font-size: 0.95rem;
+            }
+            .blog-content h2 {
+                font-size: 1.2rem;
+            }
+            .blog-content h3 {
+                font-size: 1.05rem;
+            }
+            .guide-box {
+                padding: 12px 14px;
+            }
+            .guide-box .step-text p {
+                font-size: 0.9rem;
+            }
+            .history-card li {
+                padding: 14px 18px;
+            }
+            .strategy-item {
+                padding: 14px 16px;
+            }
+        }
+        @media (max-width: 480px) {
+            .selector-container {
+                gap: 8px;
+            }
+            .selector-container .filter-group select {
+                padding: 3px 8px;
+                font-size: 0.7rem;
+                min-width: 60px;
+                height: 28px;
+            }
+            .selector-container .filter-group label {
+                font-size: 0.7rem;
+            }
+            .history-card li p {
+                font-size: 0.85rem;
+            }
+            .blog-content p {
+                font-size: 0.85rem;
+            }
+            .blog-content h2 {
+                font-size: 1rem;
+            }
+            .blog-content h3 {
+                font-size: 0.9rem;
+            }
+            .history-card li {
+                padding: 12px 14px;
+            }
+            .strategy-item {
+                padding: 12px 14px;
+            }
+            .guide-box {
+                padding: 10px 12px;
+                gap: 10px;
+            }
+            .guide-box .step-text p {
+                font-size: 0.85rem;
+            }
+            .guide-box .step-text h4 {
+                font-size: 0.85rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -261,10 +855,10 @@
         </a>
     </div>
 
-    <!-- ===== WELCOME VOICE STATUS ===== -->
-    <div style="text-align:center; margin:5px 0 10px 0;">
-        <span id="welcomeVoiceStatus" class="welcome-voice-status loading">⏳ স্বাগতম বার্তা লোড হচ্ছে...</span>
-        <span id="detectedLanguage" class="lang-badge" style="display:none;"></span>
+    <!-- ===== WELCOME VOICE STATUS (HIDDEN) ===== -->
+    <div style="display:none;">
+        <span id="welcomeVoiceStatus" class="welcome-voice-status"></span>
+        <span id="detectedLanguage" class="lang-badge"></span>
     </div>
 
     <!-- ===== SLIDER TRACKER ===== -->
@@ -426,71 +1020,310 @@
         </div>
 
         <!-- ===== BLOG TABLE OF CONTENTS ===== -->
-        <div style="background:linear-gradient(145deg,#f0f7ff,#e3edfc); border-radius:16px; padding:20px 24px; margin-bottom:20px; border:2px solid #1a56db; box-shadow:0 8px 32px rgba(26,86,219,0.15),0 2px 8px rgba(26,86,219,0.06); position:relative; overflow:hidden;">
-            <div style="position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,#1a56db,#3b82f6,#60a5fa,#3b82f6,#1a56db); background-size:200% 100%; animation:gradientMove 3s ease-in-out infinite;"></div>
-            <div style="font-weight:800; font-size:1.4rem; color:#1a56db; margin-bottom:16px; display:flex; align-items:center; gap:10px; letter-spacing:0.5px; text-shadow:0 1px 2px rgba(26,86,219,0.1);">
-                📑 Table of Contents
-                <span style="flex:1; height:2px; background:linear-gradient(90deg,#1a56db,transparent); margin-left:8px;"></span>
-            </div>
-            <div style="display:grid; grid-template-columns:1fr; gap:6px;">
-                <a onclick="scrollToBlogSection('blog-intro')" style="display:flex; align-items:center; gap:12px; padding:10px 16px; background:rgba(255,255,255,0.7); border-radius:10px; cursor:pointer; transition:all 0.3s ease; text-decoration:none; border:1px solid rgba(26,86,219,0.08); backdrop-filter:blur(4px);">
-                    <span style="font-weight:800; font-size:1.1rem; color:#1a56db; min-width:30px; text-align:right; opacity:0.8;">1.</span>
-                    <span style="font-weight:600; font-size:1rem; color:#0a2a5a; line-height:1.4; transition:color 0.3s;">Introduction</span>
+        <div class="blog-toc-premium" id="blogToc">
+            <div class="blog-toc-title">📑 Table of Contents</div>
+            <div class="toc-grid">
+                <a onclick="scrollToBlogSection('blog-intro')" class="toc-link">
+                    <span class="toc-number">1</span>
+                    <span class="toc-text">Introduction</span>
                 </a>
-                <a onclick="scrollToBlogSection('blog-result')" style="display:flex; align-items:center; gap:12px; padding:10px 16px; background:rgba(255,255,255,0.7); border-radius:10px; cursor:pointer; transition:all 0.3s ease; text-decoration:none; border:1px solid rgba(26,86,219,0.08); backdrop-filter:blur(4px);">
-                    <span style="font-weight:800; font-size:1.1rem; color:#1a56db; min-width:30px; text-align:right; opacity:0.8;">2.</span>
-                    <span style="font-weight:600; font-size:1rem; color:#0a2a5a; line-height:1.4; transition:color 0.3s;">Result Analysis</span>
+                <a onclick="scrollToBlogSection('blog-result')" class="toc-link">
+                    <span class="toc-number">2</span>
+                    <span class="toc-text">Result Analysis</span>
                 </a>
-                <a onclick="scrollToBlogSection('blog-common')" style="display:flex; align-items:center; gap:12px; padding:10px 16px; background:rgba(255,255,255,0.7); border-radius:10px; cursor:pointer; transition:all 0.3s ease; text-decoration:none; border:1px solid rgba(26,86,219,0.08); backdrop-filter:blur(4px);">
-                    <span style="font-weight:800; font-size:1.1rem; color:#1a56db; min-width:30px; text-align:right; opacity:0.8;">3.</span>
-                    <span style="font-weight:600; font-size:1rem; color:#0a2a5a; line-height:1.4; transition:color 0.3s;">Common Numbers</span>
+                <a onclick="scrollToBlogSection('blog-common')" class="toc-link">
+                    <span class="toc-number">3</span>
+                    <span class="toc-text">Common Numbers</span>
                 </a>
-                <a onclick="scrollToBlogSection('blog-house')" style="display:flex; align-items:center; gap:12px; padding:10px 16px; background:rgba(255,255,255,0.7); border-radius:10px; cursor:pointer; transition:all 0.3s ease; text-decoration:none; border:1px solid rgba(26,86,219,0.08); backdrop-filter:blur(4px);">
-                    <span style="font-weight:800; font-size:1.1rem; color:#1a56db; min-width:30px; text-align:right; opacity:0.8;">4.</span>
-                    <span style="font-weight:600; font-size:1rem; color:#0a2a5a; line-height:1.4; transition:color 0.3s;">House & Ending</span>
+                <a onclick="scrollToBlogSection('blog-house')" class="toc-link">
+                    <span class="toc-number">4</span>
+                    <span class="toc-text">House & Ending</span>
                 </a>
-                <a onclick="scrollToBlogSection('blog-tips')" style="display:flex; align-items:center; gap:12px; padding:10px 16px; background:rgba(255,255,255,0.7); border-radius:10px; cursor:pointer; transition:all 0.3s ease; text-decoration:none; border:1px solid rgba(26,86,219,0.08); backdrop-filter:blur(4px);">
-                    <span style="font-weight:800; font-size:1.1rem; color:#1a56db; min-width:30px; text-align:right; opacity:0.8;">5.</span>
-                    <span style="font-weight:600; font-size:1rem; color:#0a2a5a; line-height:1.4; transition:color 0.3s;">Expert Tips</span>
+                <a onclick="scrollToBlogSection('blog-tips')" class="toc-link">
+                    <span class="toc-number">5</span>
+                    <span class="toc-text">Expert Tips</span>
                 </a>
-                <a onclick="scrollToBlogSection('blog-strategy')" style="display:flex; align-items:center; gap:12px; padding:10px 16px; background:rgba(255,255,255,0.7); border-radius:10px; cursor:pointer; transition:all 0.3s ease; text-decoration:none; border:1px solid rgba(26,86,219,0.08); backdrop-filter:blur(4px);">
-                    <span style="font-weight:800; font-size:1.1rem; color:#1a56db; min-width:30px; text-align:right; opacity:0.8;">6.</span>
-                    <span style="font-weight:600; font-size:1rem; color:#0a2a5a; line-height:1.4; transition:color 0.3s;">Strategy</span>
+                <a onclick="scrollToBlogSection('blog-strategy')" class="toc-link">
+                    <span class="toc-number">6</span>
+                    <span class="toc-text">Strategy</span>
                 </a>
-                <a onclick="scrollToBlogSection('blog-psychology')" style="display:flex; align-items:center; gap:12px; padding:10px 16px; background:rgba(255,255,255,0.7); border-radius:10px; cursor:pointer; transition:all 0.3s ease; text-decoration:none; border:1px solid rgba(26,86,219,0.08); backdrop-filter:blur(4px);">
-                    <span style="font-weight:800; font-size:1.1rem; color:#1a56db; min-width:30px; text-align:right; opacity:0.8;">7.</span>
-                    <span style="font-weight:600; font-size:1rem; color:#0a2a5a; line-height:1.4; transition:color 0.3s;">Psychology</span>
+                <a onclick="scrollToBlogSection('blog-psychology')" class="toc-link">
+                    <span class="toc-number">7</span>
+                    <span class="toc-text">Psychology</span>
                 </a>
-                <a onclick="scrollToBlogSection('blog-mistakes')" style="display:flex; align-items:center; gap:12px; padding:10px 16px; background:rgba(255,255,255,0.7); border-radius:10px; cursor:pointer; transition:all 0.3s ease; text-decoration:none; border:1px solid rgba(26,86,219,0.08); backdrop-filter:blur(4px);">
-                    <span style="font-weight:800; font-size:1.1rem; color:#1a56db; min-width:30px; text-align:right; opacity:0.8;">8.</span>
-                    <span style="font-weight:600; font-size:1rem; color:#0a2a5a; line-height:1.4; transition:color 0.3s;">Mistakes</span>
+                <a onclick="scrollToBlogSection('blog-mistakes')" class="toc-link">
+                    <span class="toc-number">8</span>
+                    <span class="toc-text">Mistakes</span>
                 </a>
-                <a onclick="scrollToBlogSection('blog-conclusion')" style="display:flex; align-items:center; gap:12px; padding:10px 16px; background:rgba(255,255,255,0.7); border-radius:10px; cursor:pointer; transition:all 0.3s ease; text-decoration:none; border:1px solid rgba(26,86,219,0.08); backdrop-filter:blur(4px);">
-                    <span style="font-weight:800; font-size:1.1rem; color:#1a56db; min-width:30px; text-align:right; opacity:0.8;">9.</span>
-                    <span style="font-weight:600; font-size:1rem; color:#0a2a5a; line-height:1.4; transition:color 0.3s;">Conclusion</span>
+                <a onclick="scrollToBlogSection('blog-conclusion')" class="toc-link">
+                    <span class="toc-number">9</span>
+                    <span class="toc-text">Conclusion</span>
                 </a>
             </div>
         </div>
-        <style>
-            @keyframes gradientMove {
-                0%, 100% { background-position: 0% 50%; }
-                50% { background-position: 100% 50%; }
-            }
-        </style>
 
         <div style="font-size:1.3rem; font-weight:800; color:#0a3d6b; margin:10px 0 12px 0;" id="blogTitle">📊 Shillong Teer Result Analysis & Winning Predictions</div>
-        <div style="color:#1a1a1a; font-size:0.95rem; line-height:1.8;" id="blogContent">
+        <div class="blog-content" id="blogContent">
             <!-- Content will be dynamically loaded -->
         </div>
     </div>
 
-    <!-- ===== PREVIOUS RESULTS ===== -->
+    <!-- ============================================================ -->
+    <!-- 🔥 DETAILED HISTORY SECTION - Shillong Teer -->
+    <!-- ============================================================ -->
+    <div class="history-section-direct">
+        <h2 style="color:#ffffff; font-size:1.1rem; margin:12px 0 6px 0; padding:6px 15px; background:linear-gradient(135deg,#0a2a5a,#0d47a1); border-radius:10px; font-weight:800; letter-spacing:0.5px; display:block; width:100%; box-shadow:0 2px 15px rgba(10,42,90,0.15); text-shadow:0 1px 10px rgba(255,255,255,0.08); text-align:center;">🏹 Shillong Teer - Complete History, Tradition & Culture</h2>
+        <div class="history-card">
+            <ul>
+                <li>
+                    <h4>📍 Origin & Historical Context</h4>
+                    <p>Shillong Teer is not merely a numbers game; it is a living cultural heritage of the Khasi community in Meghalaya. Originating during the British colonial era (1830s-1940s), archery was traditionally a means of self-defense and a royal sport among the indigenous Khasi tribes. The game transformed into a unique lottery system in the early 20th century. In 1982, the Meghalaya government legally recognized Teer under the Meghalaya Amusement and Betting Tax Act, making it one of the few legally sanctioned betting games in India.</p>
+                </li>
+                <li>
+                    <h4>🎯 Traditional Rituals</h4>
+                    <p>Before each match, local elders and priests perform traditional ceremonies to bless the archers and the counting process. These rituals ensure fair play and spiritual protection. The game is deeply rooted in Khasi culture, with archery being a symbol of strength, precision, and community bonding.</p>
+                </li>
+                <li>
+                    <h4>🏛️ Modern Evolution & Current Status</h4>
+                    <p>Today, over 200 licensed Teer counters operate across Meghalaya, processing millions of rupees in bets daily. The game has survived through generations, adapting to modern times while preserving its traditional essence. It stands as a unique blend of ancient archery skills and modern lottery systems, attracting players from all walks of life.</p>
+                </li>
+                <li class="did-you-know">
+                    <h4>📌 Amazing Facts</h4>
+                    <p style="font-style:italic;">The oldest recorded Teer match dates back to 1906 when local Khasi kings organized archery competitions during harvest festivals. The game was played with traditional bamboo bows and wooden arrows.</p>
+                </li>
+                <li>
+                    <h4>⏰ Schedule</h4>
+                    <p>Shillong Teer runs from Monday to Friday. The First Round (FR) takes place at 4:15 PM and the Second Round (SR) at 5:10 PM.</p>
+                </li>
+                <li>
+                    <h4>🏆 Winning Strategy</h4>
+                    <p>Successful players focus on House and Ending numbers. Track the last 14 days of results, identify patterns, and avoid betting on numbers that appeared in the last 2 games. Combine mathematical analysis with dream interpretation for better results.</p>
+                </li>
+                <li>
+                    <h4>📊 Previous Result Calculation</h4>
+                    <p>To calculate previous results, track the FR and SR numbers daily. Use the formula: (FR + SR) % 100 to get next predictions. House numbers are the tens digit, Ending numbers are the units digit.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 🔥 DETAILED HISTORY SECTION - Khanapara Teer -->
+    <!-- ============================================================ -->
+    <div class="history-section-direct">
+        <h2 style="color:#ffffff; font-size:1.1rem; margin:12px 0 6px 0; padding:6px 15px; background:linear-gradient(135deg,#00695c,#00897b); border-radius:10px; font-weight:800; letter-spacing:0.5px; display:block; width:100%; box-shadow:0 2px 15px rgba(0,105,92,0.15); text-shadow:0 1px 10px rgba(255,255,255,0.08); text-align:center;">🏹 Khanapara Teer - Complete History, Tradition & Culture</h2>
+        <div class="history-card">
+            <ul>
+                <li class="khanapara">
+                    <h4>📍 Origin & Development</h4>
+                    <p>Khanapara Teer originated as a regional variant of the traditional Shillong Teer game, played in the Khanapara area of Assam, near the Meghalaya border. It shares the same archery-based lottery system but has its own unique cultural identity and local flavor.</p>
+                </li>
+                <li class="khanapara">
+                    <h4>🎯 Local Traditions</h4>
+                    <p>The Khanapara Teer grounds have become a hub for local communities, where players gather daily to witness the matches. The game has become an integral part of the local economy and social life, with many families having generations of archers.</p>
+                </li>
+                <li class="khanapara">
+                    <h4>🏛️ Modern Impact</h4>
+                    <p>Khanapara Teer has grown significantly in popularity, attracting players from Assam and neighboring states. It operates under the same legal framework as Shillong Teer and follows similar rules and timings, with FR at 4:10 PM and SR at 5:05 PM.</p>
+                </li>
+                <li class="khanapara did-you-know" style="background:#e0f2f1; border-left-color:#004d40;">
+                    <h4 style="background:linear-gradient(135deg, #004d40, #00695c);">📌 Amazing Facts</h4>
+                    <p style="font-style:italic;">Khanapara Teer has become a major tourist attraction, with visitors coming from across Assam to witness the unique archery competitions and the vibrant atmosphere of the grounds.</p>
+                </li>
+                <li class="khanapara">
+                    <h4>⏰ Schedule</h4>
+                    <p>Khanapara Teer runs from Monday to Friday. The First Round (FR) takes place at 4:10 PM and the Second Round (SR) at 5:05 PM.</p>
+                </li>
+                <li class="khanapara">
+                    <h4>🏆 Winning Strategy</h4>
+                    <p>Focus on House numbers 3, 5, 7 and Ending numbers 2, 4, 6. Track patterns from the last 7 days and combine odd and even numbers for better coverage.</p>
+                </li>
+                <li class="khanapara">
+                    <h4>📊 Previous Result Calculation</h4>
+                    <p>Use the same calculation method as Shillong Teer. Track FR and SR daily, calculate House and Ending digits, and identify repeating patterns.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 🔥 DETAILED HISTORY SECTION - Juwai Teer -->
+    <!-- ============================================================ -->
+    <div class="history-section-direct">
+        <h2 style="color:#ffffff; font-size:1.1rem; margin:12px 0 6px 0; padding:6px 15px; background:linear-gradient(135deg,#4a148c,#6a1b9a); border-radius:10px; font-weight:800; letter-spacing:0.5px; display:block; width:100%; box-shadow:0 2px 15px rgba(74,20,140,0.15); text-shadow:0 1px 10px rgba(255,255,255,0.08); text-align:center;">🏹 Juwai Teer - Complete History, Tradition & Culture</h2>
+        <div class="history-card">
+            <ul>
+                <li class="juwai">
+                    <h4>📍 Origin & Cultural Roots</h4>
+                    <p>Juwai Teer is another regional variant of the traditional archery-based game, played in the Juwai area of Meghalaya. It has its own distinct identity, with local communities celebrating the game as a symbol of unity and cultural pride.</p>
+                </li>
+                <li class="juwai">
+                    <h4>🎯 Traditional Practices</h4>
+                    <p>The Juwai Teer matches are known for their festive atmosphere, with traditional music and dance performances accompanying the competitions. The game has become a social gathering point for families and friends.</p>
+                </li>
+                <li class="juwai">
+                    <h4>🏛️ Current Status</h4>
+                    <p>Juwai Teer operates with the same legal framework as other Teer games in Meghalaya. The timings are FR at 2:30 PM and SR at 3:15 PM, making it one of the afternoon matches.</p>
+                </li>
+                <li class="juwai did-you-know" style="background:#f3e5f5; border-left-color:#38006b;">
+                    <h4 style="background:linear-gradient(135deg, #38006b, #4a148c);">📌 Amazing Facts</h4>
+                    <p style="font-style:italic;">The Juwai Teer grounds are known for their picturesque location, surrounded by lush green hills and traditional Khasi villages.</p>
+                </li>
+                <li class="juwai">
+                    <h4>⏰ Schedule</h4>
+                    <p>Juwai Teer runs from Monday to Friday. The First Round (FR) takes place at 2:30 PM and the Second Round (SR) at 3:15 PM.</p>
+                </li>
+                <li class="juwai">
+                    <h4>🏆 Winning Strategy</h4>
+                    <p>Juwai Teer requires a fresh approach. Don't rely solely on Shillong patterns. Focus on House digits 2, 3, 4, 5 and Ending digits 2, 3, 4, 5, 6, 7, 8, 9. Track Juwai results independently.</p>
+                </li>
+                <li class="juwai">
+                    <h4>📊 Previous Result Calculation</h4>
+                    <p>Use the standard calculation method. Track FR and SR daily, calculate House and Ending digits, and look for unique patterns specific to Juwai Teer.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 🔥 MORNING TEER HISTORY -->
+    <!-- ============================================================ -->
+    <div class="history-section-direct">
+        <h2 style="color:#ffffff; font-size:1.1rem; margin:12px 0 6px 0; padding:6px 15px; background:linear-gradient(135deg,#e65100,#f57c00); border-radius:10px; font-weight:800; letter-spacing:0.5px; display:block; width:100%; box-shadow:0 2px 15px rgba(230,81,0,0.15); text-shadow:0 1px 10px rgba(255,255,255,0.08); text-align:center;">🌅 Morning Teer - Complete History, Tradition & Culture</h2>
+        <div class="history-card">
+            <ul>
+                <li class="morning">
+                    <h4>📍 Origin & Purpose</h4>
+                    <p>Morning Teer was introduced to accommodate the growing demand for Teer matches in the morning hours. It allows players to participate in the game before their daily work begins, making it accessible to a wider audience.</p>
+                </li>
+                <li class="morning">
+                    <h4>🎯 Cultural Significance</h4>
+                    <p>Morning Teer has become a daily ritual for many Khasi families, with people starting their day by checking the results and discussing strategies with fellow players.</p>
+                </li>
+                <li class="morning">
+                    <h4>🏛️ Operational Details</h4>
+                    <p>Morning Teer operates from Monday to Friday, with FR at 10:30 AM and SR at 11:30 AM. It follows the same rules and regulations as other Teer games in Meghalaya.</p>
+                </li>
+                <li class="morning did-you-know" style="background:#fff3e0; border-left-color:#bf360c;">
+                    <h4 style="background:linear-gradient(135deg, #bf360c, #e65100);">📌 Amazing Facts</h4>
+                    <p style="font-style:italic;">Morning Teer is especially popular among elderly players who prefer to participate in the game during the cooler morning hours.</p>
+                </li>
+                <li class="morning">
+                    <h4>⏰ Schedule</h4>
+                    <p>Morning Teer runs from Monday to Friday. The First Round (FR) takes place at 10:30 AM and the Second Round (SR) at 11:30 AM.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 🔥 NIGHT TEER HISTORY -->
+    <!-- ============================================================ -->
+    <div class="history-section-direct">
+        <h2 style="color:#ffffff; font-size:1.1rem; margin:12px 0 6px 0; padding:6px 15px; background:linear-gradient(135deg,#1a237e,#283593); border-radius:10px; font-weight:800; letter-spacing:0.5px; display:block; width:100%; box-shadow:0 2px 15px rgba(26,35,126,0.15); text-shadow:0 1px 10px rgba(255,255,255,0.08); text-align:center;">🌙 Night Teer - Complete History, Tradition & Culture</h2>
+        <div class="history-card">
+            <ul>
+                <li class="night">
+                    <h4>📍 Origin & Evolution</h4>
+                    <p>Night Teer was developed to cater to players who work during the day and prefer to participate in the evening. It has quickly gained popularity, becoming a favorite among the younger generation.</p>
+                </li>
+                <li class="night">
+                    <h4>🎯 Cultural Impact</h4>
+                    <p>Night Teer has created a vibrant evening community, with players gathering at local counters to discuss strategies and share predictions under the night sky.</p>
+                </li>
+                <li class="night">
+                    <h4>🏛️ Operational Details</h4>
+                    <p>Night Teer operates from Monday to Friday, with FR at 11:10 PM and SR at 12:10 AM. It follows the same rules and regulations as other Teer games in Meghalaya.</p>
+                </li>
+                <li class="night did-you-know" style="background:#e8eaf6; border-left-color:#000051;">
+                    <h4 style="background:linear-gradient(135deg, #000051, #1a237e);">📌 Amazing Facts</h4>
+                    <p style="font-style:italic;">Night Teer has become a popular topic of discussion on social media platforms, with players sharing their predictions and experiences late into the night.</p>
+                </li>
+                <li class="night">
+                    <h4>⏰ Schedule</h4>
+                    <p>Night Teer runs from Monday to Friday. The First Round (FR) takes place at 11:10 PM and the Second Round (SR) at 12:10 AM.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 🔥 STRATEGY SECTION -->
+    <!-- ============================================================ -->
+    <div class="strategy-article-section">
+        <h2 style="color:#ffffff; font-size:1.1rem; margin:12px 0 6px 0; padding:6px 15px; background:linear-gradient(135deg,#0a2a5a,#0d47a1); border-radius:10px; font-weight:800; letter-spacing:0.5px; display:block; width:100%; box-shadow:0 2px 15px rgba(10,42,90,0.15); text-shadow:0 1px 10px rgba(255,255,255,0.08); text-align:center;">🏆 WINNING PATTERNS & EXPERT LOGIC</h2>
+        <p style="margin-bottom:12px; font-size:1rem; color:#555;">Professional players utilize structural trends rather than simple guesswork. Here are the top mathematical approaches to optimize your targets:</p>
+
+        <div class="strategy-item">
+            <strong>📊 1. 14-Day Frequency Audit (১৪ দিনের ট্র্যাক)</strong>
+            <span>Monitor numbers that haven't appeared in the last 14 days. These structural gaps have a highly statistical probability to emerge next.</span>
+        </div>
+
+        <div class="strategy-item">
+            <strong>🧮 2. House/Ending Split Calculation (আলাদা হিসাব)</strong>
+            <span>Do not guess full combinations blindly. Calculate House (tens digit) and Ending (units digit) indexes independently for a safer bankroll.</span>
+        </div>
+
+        <div class="strategy-item">
+            <strong>🌙 3. Mythological Dream Correlation (স্বপ্নের সংকেত)</strong>
+            <span>Use traditional Khasi dream charts. If you visualize water, it mathematically points to the 4 or 7 series.</span>
+        </div>
+
+        <div class="strategy-item">
+            <strong>📈 4. Previous Result Calculation Method</strong>
+            <span>Use the formula: (FR + SR) % 100 to get next predictions. Track House and Ending digits separately for better accuracy.</span>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 🔥 PDF DOWNLOAD -->
+    <!-- ============================================================ -->
+    <div style="margin:12px 0; text-align:center; background:#eef9ff; border:1px solid #b3e5fc; padding:8px 12px; border-radius:10px;">
+        <p style="margin:0 0 3px 0; font-weight:700; color:#0277bd; font-size:0.8rem;">📥 তীর ফর্মুলা বুক ও লাইভ চার্ট (PDF)</p>
+        <a href="https://omg10.com/4/11160871" target="_blank" style="display:inline-block; background:#0288d1; color:#fff; padding:5px 14px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.75rem; margin-top:3px;">
+            📥 Download PDF / ডাউনলোড কৰক
+        </a>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 🔥 GUIDE SECTION -->
+    <!-- ============================================================ -->
+    <div style="background:#fff; padding:18px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.08); margin:12px 0;">
+        <h2 style="color:#ffffff; font-size:1.1rem; margin:12px 0 6px 0; padding:6px 15px; background:linear-gradient(135deg,#0a2a5a,#0d47a1); border-radius:10px; font-weight:800; letter-spacing:0.5px; display:block; width:100%; box-shadow:0 2px 15px rgba(10,42,90,0.15); text-shadow:0 1px 10px rgba(255,255,255,0.08); text-align:center;">📖 নতুনদের জন্য গাইড ও নিয়মাবলী</h2>
+        <div style="display:grid; gap:12px;">
+            <div class="guide-box">
+                <div class="step-number">১</div>
+                <div class="step-text">
+                    <h4>📊 ফলাফল ট্র্যাক করা শিখুন</h4>
+                    <p>প্রতিদিন আমাদের সাইটে এসে লাইভ FR এবং SR ফলাফল পর্যবেক্ষণ করুন।</p>
+                </div>
+            </div>
+            <div class="guide-box">
+                <div class="step-number">২</div>
+                <div class="step-text">
+                    <h4>🎯 কমন নাম্বার ও হাউজ বুঝুন</h4>
+                    <p>ডাইরেক্ট নাম্বারে রিস্ক বেশি থাকে, তাই প্রথমে হাউজ এবং এন্ডিং নাম্বার টার্গেট করুন।</p>
+                </div>
+            </div>
+            <div class="guide-box">
+                <div class="step-number">৩</div>
+                <div class="step-text">
+                    <h4>📈 পূর্ববর্তী ফলাফল বিশ্লেষণ</h4>
+                    <p>আমাদের Previous Results সেকশন থেকে গত মাসের ফলাফল দেখুন এবং প্যাটার্ন চিহ্নিত করুন।</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 🔥 PREVIOUS RESULTS -->
+    <!-- ============================================================ -->
     <h2 style="color:#ffffff; font-size:1.1rem; margin:12px 0 6px 0; padding:6px 15px; background:linear-gradient(135deg,#0a2a5a,#0d47a1); border-radius:10px; font-weight:800; letter-spacing:0.5px; display:block; width:100%; box-shadow:0 2px 15px rgba(10,42,90,0.15); text-shadow:0 1px 10px rgba(255,255,255,0.08); text-align:center;">📅 Shillong Teer Previous Results</h2>
     <div style="background:#fff; border-radius:12px; padding:15px 20px; box-shadow:0 4px 15px rgba(0,0,0,0.08); margin:15px 0; overflow-x:auto;">
-        <div style="display:flex; gap:15px; justify-content:center; align-items:center; flex-wrap:wrap; margin-bottom:12px;">
-            <div style="display:flex; align-items:center; gap:6px;">
-                <label style="font-weight:600; color:#0d47a1; font-size:0.85rem;">📅 Year:</label>
-                <select id="yearSelectShillong" style="padding:6px 14px; border-radius:8px; border:2px solid #0d47a1; font-weight:600; font-size:0.85rem; background:#fff; cursor:pointer; min-width:80px; height:34px;">
+        <div class="selector-container">
+            <div class="filter-group">
+                <label for="yearSelectShillong">📅 Year:</label>
+                <select id="yearSelectShillong">
                     <option value="2020">2020</option>
                     <option value="2021">2021</option>
                     <option value="2022">2022</option>
@@ -501,9 +1334,9 @@
                     <option value="2027">2027</option>
                 </select>
             </div>
-            <div style="display:flex; align-items:center; gap:6px;">
-                <label style="font-weight:600; color:#0d47a1; font-size:0.85rem;">📆 Month:</label>
-                <select id="monthSelectShillong" style="padding:6px 14px; border-radius:8px; border:2px solid #0d47a1; font-weight:600; font-size:0.85rem; background:#fff; cursor:pointer; min-width:80px; height:34px;">
+            <div class="filter-group">
+                <label for="monthSelectShillong">📆 Month:</label>
+                <select id="monthSelectShillong">
                     <option value="0">Jan</option>
                     <option value="1">Feb</option>
                     <option value="2">Mar</option>
@@ -534,7 +1367,9 @@
         </table>
     </div>
 
-    <!-- ===== DREAM CHART ===== -->
+    <!-- ============================================================ -->
+    <!-- 🔥 DREAM CHART -->
+    <!-- ============================================================ -->
     <h2 style="color:#ffffff; font-size:1.1rem; margin:12px 0 6px 0; padding:6px 15px; background:linear-gradient(135deg,#0a2a5a,#0d47a1); border-radius:10px; font-weight:800; letter-spacing:0.5px; display:block; width:100%; box-shadow:0 2px 15px rgba(10,42,90,0.15); text-shadow:0 1px 10px rgba(255,255,255,0.08); text-align:center;">📖 Shillong Teer Dream Chart | শিলং তীর স্বপ্নের চার্ট</h2>
     <div style="background:#fff; border-radius:12px; padding:15px; box-shadow:0 4px 15px rgba(0,0,0,0.08); margin:12px 0; overflow-x:auto;">
         <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
@@ -543,7 +1378,9 @@
         </table>
     </div>
 
-    <!-- ===== DREAM PREDICTOR ===== -->
+    <!-- ============================================================ -->
+    <!-- 🔥 DREAM PREDICTOR -->
+    <!-- ============================================================ -->
     <div class="dream-card" id="dream-card" style="background:#fff; border-radius:12px; padding:18px; box-shadow:0 4px 15px rgba(0,0,0,0.08); margin:12px 0; text-align:center;">
         <div style="font-size:1.2rem; font-weight:900; color:#0d47a1; margin-bottom:10px;">✨ DREAM NUMBER PREDICTOR ✨</div>
         <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:10px;">
@@ -562,7 +1399,71 @@
         </table>
     </div>
 
-    <!-- ===== DISCLAIMER ===== -->
+    <!-- ============================================================ -->
+    <!-- 🔥 COMMENTS SECTION -->
+    <!-- ============================================================ -->
+    <div class="comment-box" id="comment-box" style="background:#fff; padding:15px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.08); margin:12px 0;">
+        <h2 style="color:#ffffff; font-size:1.1rem; margin:12px 0 6px 0; padding:6px 15px; background:linear-gradient(135deg,#0a2a5a,#0d47a1); border-radius:10px; font-weight:800; letter-spacing:0.5px; display:block; width:100%; box-shadow:0 2px 15px rgba(10,42,90,0.15); text-shadow:0 1px 10px rgba(255,255,255,0.08); text-align:center;">💬 আপনার মতামত দিন</h2>
+        <textarea id="commentInput" placeholder="আপনার মতামত লিখুন..." style="width:100%; padding:8px 12px; border:2px solid #ddd; border-radius:8px; font-size:0.9rem; min-height:60px; box-sizing:border-box; transition:all 0.3s;"></textarea>
+        <div class="comment-input-row" style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
+            <input type="text" id="commentName" placeholder="আপনার নাম" style="flex:1; padding:6px 12px; border:2px solid #ddd; border-radius:8px; font-size:0.9rem; min-width:120px; transition:all 0.3s;">
+            <button onclick="addComment()" style="background:#0d47a1; color:#fff; border:none; padding:6px 18px; border-radius:8px; font-weight:700; cursor:pointer; transition:all 0.3s;">💬 পোস্ট করুন</button>
+        </div>
+        <div class="comment-list" id="commentList" style="margin-top:10px;"></div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 🔥 FAQ SECTION -->
+    <!-- ============================================================ -->
+    <div class="faq-section" id="faq-section">
+        <div class="faq-title">❓ FREQUENTLY ASKED QUESTIONS (FAQ) - 10 Important Questions</div>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <div class="faq-question">1. What are the official timings for Shillong Teer?</div>
+                <div class="faq-answer">Shillong Teer's First Round (FR) takes place at 4:15 PM and the Second Round (SR) at 5:10 PM. The game runs from Monday to Friday.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">2. Is Teer game completely legal?</div>
+                <div class="faq-answer">Yes, Teer is completely legal in Meghalaya and Assam under the Meghalaya Amusements and Betting Tax Act. It is one of the few legally sanctioned betting games in India.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">3. What do "House" and "Ending" mean in Teer?</div>
+                <div class="faq-answer">"House" refers to the tens digit of the winning number (e.g., 4 in 45), while "Ending" refers to the units digit (e.g., 5 in 45). These are analyzed separately for better predictions.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">4. On which days is Teer game closed?</div>
+                <div class="faq-answer">Teer game is closed on Saturdays and Sundays. It runs only from Monday to Friday.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">5. What is the difference between Khanapara Teer and Shillong Teer?</div>
+                <div class="faq-answer">Khanapara Teer is played in the Khanapara area of Assam with FR at 4:10 PM and SR at 5:05 PM. Shillong Teer has FR at 4:15 PM and SR at 5:10 PM.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">6. When is Juwai Teer played?</div>
+                <div class="faq-answer">Juwai Teer is played with FR at 2:30 PM and SR at 3:15 PM. It is an afternoon match.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">7. What are the timings for Morning Teer?</div>
+                <div class="faq-answer">Morning Teer is played with FR at 10:30 AM and SR at 11:30 AM. It is a morning match.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">8. When is Night Teer played?</div>
+                <div class="faq-answer">Night Teer is played with FR at 11:10 PM and SR at 12:10 AM. It is a late-night match.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">9. How are Common Numbers calculated?</div>
+                <div class="faq-answer">Common Numbers are calculated through mathematical analysis, historical data, and expert observations. They are not guarantees of winning.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">10. Are the predictions on this site reliable?</div>
+                <div class="faq-answer">All predictions on this site are based on mathematical analysis and historical data. They are not guarantees of winning and are provided for informational purposes only.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 🔥 DISCLAIMER -->
+    <!-- ============================================================ -->
     <div style="margin-top:1rem; padding:1.5rem; background:linear-gradient(135deg,#0a2a5a,#0a3d6b,#0a2a5a); background-size:200% 200%; animation:disclaimerGrad 6s ease-in-out infinite; border:2px solid #4a8ab5; border-radius:0.8rem; font-size:0.85rem; color:#e8e8e8; text-align:center; font-weight:600; line-height:1.8; box-shadow:0 4px 25px rgba(10,42,90,0.2);">
         <strong style="color:#ffcc00;">⭐ Shillong Teer Result Today & Common Number</strong> - Your trusted source for daily Shillong Teer live results, common numbers, house digits, ending digits, and expert predictions. Updates every Monday to Friday at 4:00 PM (FR) and 5:00 PM (SR) IST.
         <br><br>
@@ -576,7 +1477,9 @@
         }
     </style>
 
-    <!-- ===== FOOTER LINKS ===== -->
+    <!-- ============================================================ -->
+    <!-- 🔥 FOOTER LINKS -->
+    <!-- ============================================================ -->
     <div style="text-align:center; margin-top:1.2rem; padding-top:1rem; border-top:2px solid #e8dcc8; display:flex; flex-wrap:wrap; justify-content:center; gap:0.3rem;">
         <a href="about.html" style="color:#0a3d6b; text-decoration:none; margin:0 4px; font-size:0.85rem; font-weight:600; padding:0.3rem 0.8rem; border-radius:20px; background:linear-gradient(135deg,#f0f6fa,#e6f3ff);">📖 About Us</a>
         <a href="contact.html" style="color:#0a3d6b; text-decoration:none; margin:0 4px; font-size:0.85rem; font-weight:600; padding:0.3rem 0.8rem; border-radius:20px; background:linear-gradient(135deg,#f0f6fa,#e6f3ff);">📞 Contact</a>
@@ -648,71 +1551,455 @@
 <script src="blog.js" defer></script>
 
 <!-- ============================================================ -->
-<!-- 🔥 SUPABASE WELCOME VOICE - sessionStorage ব্যবহার করে -->
+<!-- 🔥 MAIN JAVASCRIPT -->
 <!-- ============================================================ -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // ===== SUPABASE CONFIG =====
+    // ===== SLIDER FUNCTIONALITY =====
+    var slides = document.querySelectorAll('.slider-text');
+    var currentIndex = 0;
+    var totalSlides = slides.length;
+    
+    if (slides.length > 0) {
+        slides.forEach(function(slide, index) {
+            slide.classList.remove('active');
+        });
+        slides[0].classList.add('active');
+        
+        setInterval(function() {
+            slides[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % totalSlides;
+            slides[currentIndex].classList.add('active');
+        }, 4000);
+    }
+
+    // ===== SLIDER TRACKER BUTTONS =====
+    var trackerBtns = document.querySelectorAll('.tracker-btn');
+    
+    trackerBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            trackerBtns.forEach(function(b) {
+                b.classList.remove('active');
+            });
+            this.classList.add('active');
+            
+            var targetId = this.getAttribute('data-target');
+            var targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    // ===== VIP UNLOCK =====
+    var vipBtn = document.getElementById('vipUnlockBtn');
+    var vipModal = document.getElementById('vipModal');
+    var vipModalClose = document.getElementById('vipModalClose');
+    var vipNumberValue = document.getElementById('vipNumberValue');
+    var vipExtraInfo = document.getElementById('vipExtraInfo');
+    var vipStatusText = document.getElementById('vipStatusText');
+
+    if (vipBtn) {
+        vipBtn.addEventListener('click', function() {
+            var randomNum = Math.floor(Math.random() * 100).toString().padStart(2, '0');
+            var extra = ['🔥 Strong Hit', '⭐ Very High Chance', '🎯 Target Number', '💎 Jackpot Hint'];
+            var randomExtra = extra[Math.floor(Math.random() * extra.length)];
+            
+            if (vipNumberValue) vipNumberValue.textContent = randomNum;
+            if (vipExtraInfo) vipExtraInfo.textContent = randomExtra;
+            if (vipModal) vipModal.style.display = 'flex';
+            if (vipStatusText) vipStatusText.textContent = '✅ VIP Number Unlocked! Check the popup.';
+        });
+    }
+
+    if (vipModalClose) {
+        vipModalClose.addEventListener('click', function() {
+            if (vipModal) vipModal.style.display = 'none';
+        });
+    }
+
+    if (vipModal) {
+        vipModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+            }
+        });
+    }
+
+    // ===== DREAM PREDICTOR =====
+    var dreamBtn = document.getElementById('predictDreamBtn');
+    var dreamInput = document.getElementById('dreamInput');
+    var displayText = document.getElementById('dreamDisplayText');
+    var house1 = document.getElementById('houseDigit1');
+    var house2 = document.getElementById('houseDigit2');
+    var ending1 = document.getElementById('endingDigit1');
+    var ending2 = document.getElementById('endingDigit2');
+
+    if (dreamBtn && dreamInput) {
+        dreamBtn.addEventListener('click', function() {
+            var word = dreamInput.value.trim().toLowerCase();
+            if (!word) {
+                if (displayText) displayText.textContent = '💭 Please enter a dream word!';
+                return;
+            }
+
+            var hash = word.split('').reduce(function(acc, char) { return acc + char.charCodeAt(0); }, 0);
+            var num1 = (hash % 10).toString();
+            var num2 = ((hash + 7) % 10).toString();
+            var num3 = ((hash + 3) % 10).toString();
+            var num4 = ((hash + 9) % 10).toString();
+
+            if (house1) house1.textContent = num1;
+            if (house2) house2.textContent = num2;
+            if (ending1) ending1.textContent = num3;
+            if (ending2) ending2.textContent = num4;
+            if (displayText) displayText.textContent = '🔮 Dream "' + word + '" → House: ' + num1 + ', ' + num2 + ' | Ending: ' + num3 + ', ' + num4;
+        });
+    }
+
+    // ===== BLOG SCROLL FUNCTION =====
+    window.scrollToBlogSection = function(id) {
+        var blogContent = document.getElementById('blogContent');
+        if (blogContent) {
+            var targetEl = blogContent.querySelector('#' + id);
+            if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    };
+
+    // ===== SHARE FUNCTIONS =====
+    window.shareOnFacebook = function() {
+        window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href), '_blank');
+    };
+    window.shareOnWhatsApp = function() {
+        window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent('Shillong Teer Result Today - ' + window.location.href), '_blank');
+    };
+    window.shareOnTwitter = function() {
+        window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(window.location.href) + '&text=Shillong Teer Result Today', '_blank');
+    };
+    window.shareOnTelegram = function() {
+        window.open('https://t.me/share/url?url=' + encodeURIComponent(window.location.href) + '&text=Shillong Teer Result Today', '_blank');
+    };
+    window.copyLink = function() {
+        navigator.clipboard.writeText(window.location.href).then(function() {
+            alert('✅ Link copied to clipboard!');
+        }).catch(function() {
+            var input = document.createElement('input');
+            input.value = window.location.href;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            alert('✅ Link copied to clipboard!');
+        });
+    };
+
+    // ===== LANGUAGE FUNCTIONS =====
+    window.showBangla = function() {
+        var title = document.querySelector('.name-box .bn-title');
+        var badge = document.querySelector('.live-badge-main');
+        var heading = document.querySelector('.seo-h2-orange');
+        if (title) title.textContent = 'আজকের শিলং তীর লাইভ রেজাল্ট ও কমন নাম্বার';
+        if (badge) badge.textContent = '🔴 শিলং তীর লাইভ | আজকের লাইভ রেজাল্ট';
+        if (heading) heading.textContent = '🎯 শিলং তীর রেজাল্ট টুডে লাইভ | আজকের শিলং তীর লাইভ রেজাল্ট';
+    };
+    window.showEnglish = function() {
+        var title = document.querySelector('.name-box .bn-title');
+        var badge = document.querySelector('.live-badge-main');
+        var heading = document.querySelector('.seo-h2-orange');
+        if (title) title.textContent = 'Today\'s Shillong Teer Live Result & Common Numbers';
+        if (badge) badge.textContent = '🔴 Shillong Teer Live | Today\'s Live Result';
+        if (heading) heading.textContent = '🎯 Shillong Teer Result Today Live | Today\'s Shillong Teer Live Result';
+    };
+
+    // ===== COMMENT SYSTEM =====
+    window.addComment = function() {
+        var input = document.getElementById('commentInput');
+        var nameInput = document.getElementById('commentName');
+        var list = document.getElementById('commentList');
+        
+        if (!input || !list) return;
+        
+        var text = input.value.trim();
+        var name = nameInput ? nameInput.value.trim() || 'Anonymous' : 'Anonymous';
+        
+        if (!text) {
+            alert('Please write a comment.');
+            return;
+        }
+
+        var now = new Date();
+        var time = now.toLocaleTimeString();
+        var avatar = name.charAt(0).toUpperCase();
+
+        var div = document.createElement('div');
+        div.className = 'comment-item';
+        div.style.cssText = 'display:flex; gap:10px; padding:8px 12px; background:#f8f9fa; border-radius:8px; margin-bottom:6px; align-items:flex-start;';
+        div.innerHTML = `
+            <div style="width:32px; height:32px; background:#0d47a1; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; font-size:0.8rem;">${avatar}</div>
+            <div style="flex:1;">
+                <div style="font-weight:700; color:#333; font-size:0.85rem;">${name}</div>
+                <div style="color:#555; margin-top:2px; font-size:0.85rem;">${text}</div>
+                <div style="font-size:0.65rem; color:#999; margin-top:2px;">🕐 ${time}</div>
+            </div>
+        `;
+
+        list.prepend(div);
+        input.value = '';
+        if (nameInput) nameInput.value = '';
+        
+        var comments = JSON.parse(localStorage.getItem('teer_comments') || '[]');
+        comments.unshift({ name: name, text: text, time: time });
+        localStorage.setItem('teer_comments', JSON.stringify(comments.slice(0, 50)));
+    };
+
+    // Load comments from localStorage
+    var list = document.getElementById('commentList');
+    if (list) {
+        var saved = JSON.parse(localStorage.getItem('teer_comments') || '[]');
+        saved.forEach(function(comment) {
+            var avatar = comment.name.charAt(0).toUpperCase();
+            var div = document.createElement('div');
+            div.className = 'comment-item';
+            div.style.cssText = 'display:flex; gap:10px; padding:8px 12px; background:#f8f9fa; border-radius:8px; margin-bottom:6px; align-items:flex-start;';
+            div.innerHTML = `
+                <div style="width:32px; height:32px; background:#0d47a1; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; font-size:0.8rem;">${avatar}</div>
+                <div style="flex:1;">
+                    <div style="font-weight:700; color:#333; font-size:0.85rem;">${comment.name}</div>
+                    <div style="color:#555; margin-top:2px; font-size:0.85rem;">${comment.text}</div>
+                    <div style="font-size:0.65rem; color:#999; margin-top:2px;">🕐 ${comment.time}</div>
+                </div>
+            `;
+            list.appendChild(div);
+        });
+    }
+
+    // ===== TEER CALCULATOR =====
+    var calcBtn = document.getElementById('calcPredictBtn');
+    var calcFrNumber = document.getElementById('calcFrNumber');
+    var calcSrNumber = document.getElementById('calcSrNumber');
+    var calcRoundSelect = document.getElementById('calcRoundSelect');
+    var calcTypeSelect = document.getElementById('calcTypeSelect');
+    var resultNumber = document.getElementById('calcResultNumber');
+    var calcHouse = document.getElementById('calcHouse');
+    var calcEnding = document.getElementById('calcEnding');
+    var calcNextPrediction = document.getElementById('calcNextPrediction');
+    var historyList = document.getElementById('calcHistoryList');
+
+    var history = JSON.parse(localStorage.getItem('teer_calc_history') || '[]');
+
+    function updateHistory() {
+        if (history.length === 0) {
+            historyList.innerHTML = '<span style="background:#f0f4f9; padding:2px 10px; border-radius:20px; font-size:0.6rem; font-weight:600; color:#0a3d6b; border:1px solid #d2e3fc;">No calculations</span>';
+            return;
+        }
+        historyList.innerHTML = history.slice(0, 10).map(function(item) {
+            return '<span style="background:#f0f4f9; padding:2px 10px; border-radius:20px; font-size:0.6rem; font-weight:600; color:#0a3d6b; border:1px solid #d2e3fc;">' + item + '</span>';
+        }).join('');
+    }
+    updateHistory();
+
+    if (calcBtn) {
+        calcBtn.addEventListener('click', function() {
+            var frNum = parseInt(calcFrNumber.value) || 0;
+            var srNum = parseInt(calcSrNumber.value) || 0;
+            var round = calcRoundSelect.value;
+            var type = calcTypeSelect.value;
+
+            if (frNum < 0 || frNum > 99 || srNum < 0 || srNum > 99) {
+                alert('Please enter numbers between 0-99');
+                return;
+            }
+
+            var frHouse = Math.floor(frNum / 10) % 10;
+            var frEnding = frNum % 10;
+            var srHouse = Math.floor(srNum / 10) % 10;
+            var srEnding = srNum % 10;
+
+            var nextFr = (frNum + srNum) % 100;
+            var nextSr = (srNum + frNum + 11) % 100;
+
+            var resultText = '';
+            var houseText = '';
+            var endingText = '';
+
+            if (round === 'fr' || round === 'both') {
+                if (type === 'direct' || type === 'all') {
+                    resultText = 'FR: ' + frNum.toString().padStart(2, '0');
+                }
+                if (type === 'house' || type === 'all') {
+                    houseText = 'FR House: ' + frHouse;
+                }
+                if (type === 'ending' || type === 'all') {
+                    endingText = 'FR Ending: ' + frEnding;
+                }
+            }
+
+            if (round === 'sr' || round === 'both') {
+                if (round === 'both' && (type === 'direct' || type === 'all')) {
+                    resultText = resultText + ' | SR: ' + srNum.toString().padStart(2, '0');
+                } else if (round === 'sr' && (type === 'direct' || type === 'all')) {
+                    resultText = 'SR: ' + srNum.toString().padStart(2, '0');
+                }
+                if (type === 'house' || type === 'all') {
+                    houseText = houseText + (houseText ? ' | ' : '') + 'SR House: ' + srHouse;
+                }
+                if (type === 'ending' || type === 'all') {
+                    endingText = endingText + (endingText ? ' | ' : '') + 'SR Ending: ' + srEnding;
+                }
+            }
+
+            if (type === 'house') {
+                resultNumber.textContent = '🏠 ' + houseText;
+            } else if (type === 'ending') {
+                resultNumber.textContent = '🎯 ' + endingText;
+            } else {
+                resultNumber.textContent = resultText || '--';
+            }
+
+            if (calcHouse) calcHouse.textContent = houseText || '--';
+            if (calcEnding) calcEnding.textContent = endingText || '--';
+            if (calcNextPrediction) {
+                calcNextPrediction.textContent = 'FR:' + nextFr.toString().padStart(2, '0') + ' SR:' + nextSr.toString().padStart(2, '0');
+            }
+
+            var historyEntry = 'FR:' + frNum.toString().padStart(2, '0') + ' SR:' + srNum.toString().padStart(2, '0') + ' → ' + resultNumber.textContent;
+            history.unshift(historyEntry);
+            if (history.length > 20) history.pop();
+            localStorage.setItem('teer_calc_history', JSON.stringify(history));
+            updateHistory();
+        });
+    }
+
+    if (calcFrNumber && calcSrNumber) {
+        calcFrNumber.addEventListener('keypress', function(e) { if (e.key === 'Enter') calcBtn.click(); });
+        calcSrNumber.addEventListener('keypress', function(e) { if (e.key === 'Enter') calcBtn.click(); });
+    }
+
+    // ===== DREAM CHART =====
+    var dreamChartData = [
+        { dream: '🐍 Snake', direct: '12, 34, 56', house: '3, 5', ending: '2, 6' },
+        { dream: '🐅 Tiger', direct: '23, 45, 67', house: '4, 6', ending: '3, 7' },
+        { dream: '🌊 Water', direct: '34, 56, 78', house: '5, 7', ending: '4, 8' },
+        { dream: '🔥 Fire', direct: '45, 67, 89', house: '6, 8', ending: '5, 9' },
+        { dream: '🌳 Tree', direct: '56, 78, 90', house: '7, 9', ending: '6, 0' },
+        { dream: '🐘 Elephant', direct: '11, 22, 33', house: '1, 2', ending: '1, 3' },
+        { dream: '🦁 Lion', direct: '14, 25, 36', house: '2, 4', ending: '4, 6' },
+        { dream: '🕊️ Bird', direct: '07, 18, 29', house: '0, 3', ending: '7, 9' },
+        { dream: '🐟 Fish', direct: '09, 20, 31', house: '2, 5', ending: '0, 1' },
+        { dream: '🌙 Moon', direct: '15, 26, 37', house: '3, 6', ending: '5, 7' },
+        { dream: '☀️ Sun', direct: '18, 29, 40', house: '4, 7', ending: '8, 0' },
+        { dream: '🌟 Star', direct: '21, 32, 43', house: '5, 8', ending: '1, 3' },
+        { dream: '🌈 Rainbow', direct: '24, 35, 46', house: '6, 9', ending: '4, 6' },
+        { dream: '⛰️ Mountain', direct: '27, 38, 49', house: '7, 0', ending: '7, 9' },
+        { dream: '🌺 Flower', direct: '30, 41, 52', house: '8, 1', ending: '0, 2' },
+        { dream: '🦋 Butterfly', direct: '33, 44, 55', house: '9, 2', ending: '3, 5' }
+    ];
+
+    var dreamBody = document.getElementById('dreamChartBody');
+    if (dreamBody) {
+        dreamBody.innerHTML = dreamChartData.map(function(d) {
+            return '<tr><td style="padding:6px 10px; text-align:center; border-bottom:1px solid #f0f0f0;">' + d.dream + '</td><td style="padding:6px 10px; text-align:center; border-bottom:1px solid #f0f0f0;">' + d.direct + '</td><td style="padding:6px 10px; text-align:center; border-bottom:1px solid #f0f0f0;">' + d.house + '</td><td style="padding:6px 10px; text-align:center; border-bottom:1px solid #f0f0f0;">' + d.ending + '</td></tr>';
+        }).join('');
+    }
+
+    // ===== YEAR + MONTH FILTER =====
+    var yearSelect = document.getElementById('yearSelectShillong');
+    var monthSelect = document.getElementById('monthSelectShillong');
+    
+    if (yearSelect && monthSelect) {
+        async function loadShillongPreviousResults(year, monthIndex) {
+            var tbody = document.getElementById('resultsTableShillong');
+            if (!tbody) return;
+            
+            try {
+                var month = String(monthIndex + 1).padStart(2, '0');
+                var firstDay = year + '-' + month + '-01';
+                var lastDay = year + '-' + month + '-' + new Date(year, monthIndex + 1, 0).getDate();
+                
+                var { data, error } = await supabaseClient
+                    .from('teer_previous_results')
+                    .select('*')
+                    .eq('venue', 'Shillong')
+                    .gte('result_date', firstDay)
+                    .lte('result_date', lastDay)
+                    .order('result_date', { ascending: false });
+                    
+                var html = '';
+                var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                
+                if (!error && data && data.length > 0) {
+                    data.forEach(function(row) {
+                        var dateObj = new Date(row.result_date);
+                        var day = String(dateObj.getDate()).padStart(2, '0');
+                        var monthName = String(dateObj.getMonth() + 1).padStart(2, '0');
+                        var yearNum = dateObj.getFullYear();
+                        var formattedDate = day + '.' + monthName + '.' + yearNum;
+                        
+                        html += `
+                            <tr>
+                                <td style="padding: 8px 12px; font-weight: 700; color: #0d0a0a; text-align: center; border-bottom: 1px solid #eee;">
+                                    ${formattedDate}
+                                </td>
+                                <td style="padding: 8px 12px; font-weight: 700; color: #0d47a1; text-align: center; border-bottom: 1px solid #eee;">
+                                    ${row.fr_result || '--'}
+                                </td>
+                                <td style="padding: 8px 12px; font-weight: 700; color: #1565c0; text-align: center; border-bottom: 1px solid #eee;">
+                                    ${row.sr_result || '--'}
+                                </td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    html = `<tr><td colspan="3" style="text-align:center; padding:15px; color:#8a7a6a;">${monthNames[monthIndex]} ${year} - No data available</td></tr>`;
+                }
+                
+                tbody.innerHTML = html;
+            } catch(err) {
+                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:15px; color:#8a7a6a;">No data available</td></tr>`;
+            }
+        }
+
+        loadShillongPreviousResults(parseInt(yearSelect.value), parseInt(monthSelect.value));
+        
+        yearSelect.addEventListener('change', function() {
+            loadShillongPreviousResults(parseInt(this.value), parseInt(monthSelect.value));
+        });
+        
+        monthSelect.addEventListener('change', function() {
+            loadShillongPreviousResults(parseInt(yearSelect.value), parseInt(this.value));
+        });
+    }
+});
+
+// ============================================================
+// 🔥 SUPABASE WELCOME VOICE - HIDDEN STATUS
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
     const SUPABASE_URL = 'https://bwjjqidmeooyojjvtqjs.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3ampxaWRtZW9veW9qanZ0cWpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NDIxMTAsImV4cCI6MjA5NjUxODExMH0.sRbG-Pwd8kgy94e9g7uuWhAj0-mH6JjOC7KXARxLIEk';
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // ===== CHECK USING sessionStorage (page refresh এ কাজ করবে না) =====
-    // sessionStorage শুধু current session এর জন্য, browser close করলে clear হয়ে যায়
     var hasAnnounced = sessionStorage.getItem('teer_welcome_announced');
-    var statusEl = document.getElementById('welcomeVoiceStatus');
-    var langBadge = document.getElementById('detectedLanguage');
 
-    // ===== IF ALREADY ANNOUNCED IN THIS SESSION, SKIP =====
     if (hasAnnounced === 'true') {
-        if (statusEl) {
-            statusEl.className = 'welcome-voice-status skipped';
-            statusEl.textContent = '✅ স্বাগতম বার্তা ইতিমধ্যে বাজানো হয়েছে (এই সেশনে)';
-        }
         console.log('⏭️ Already announced in this session, skipping');
         return;
     }
 
-    // ===== DETECT BROWSER LANGUAGE =====
     function detectBrowserLanguage() {
         var lang = navigator.language || navigator.userLanguage || 'en-US';
         var langCode = lang.substring(0, 2).toLowerCase();
-        
-        var langMap = {
-            'bn': 'bn',
-            'hi': 'hi',
-            'as': 'as',
-            'en': 'en'
-        };
-        
+        var langMap = { 'bn': 'bn', 'hi': 'hi', 'as': 'as', 'en': 'en' };
         return langMap[langCode] || 'en';
     }
 
     var detectedLang = detectBrowserLanguage();
     console.log('🌐 Detected Language:', detectedLang);
 
-    // Show language badge
-    if (langBadge) {
-        langBadge.style.display = 'inline-block';
-        var langNames = {
-            'bn': 'বাংলা',
-            'hi': 'हिन्दी',
-            'as': 'অসমীয়া',
-            'en': 'English'
-        };
-        langBadge.className = 'lang-badge ' + detectedLang;
-        langBadge.textContent = '🗣️ ' + (langNames[detectedLang] || 'English');
-    }
-
-    // ===== LOAD WELCOME MESSAGE FROM SUPABASE =====
     async function loadWelcomeMessage() {
         try {
-            if (statusEl) {
-                statusEl.className = 'welcome-voice-status loading';
-                statusEl.textContent = '⏳ স্বাগতম বার্তা লোড হচ্ছে... (' + (langNames[detectedLang] || 'English') + ')';
-            }
-
-            // Fetch from Supabase based on detected language
             const { data, error } = await supabaseClient
                 .from('welcome_messages')
                 .select('*')
@@ -724,76 +2011,37 @@ document.addEventListener('DOMContentLoaded', function() {
             var messageText = '';
             var voiceLang = 'en-US';
 
-            if (error) {
-                console.error('❌ Supabase Error:', error);
-                messageText = getDefaultMessage(detectedLang);
-                voiceLang = getVoiceLanguage(detectedLang);
-            } else if (data && data.length > 0) {
-                messageText = data[0].message_text;
-                voiceLang = data[0].voice_language || getVoiceLanguage(detectedLang);
-                console.log('✅ Welcome message loaded from Supabase:', messageText);
+            if (error || !data || data.length === 0) {
+                var messages = {
+                    'bn': 'শিলং তীর লাইভ রেজাল্ট ওয়েবসাইটে আপনাকে স্বাগতম। প্রতিদিনের লাইভ ফলাফল, কমন নাম্বার এবং বিশেষজ্ঞদের ভবিষ্যদ্বাণী পেতে আমাদের সাথে থাকুন।',
+                    'hi': 'शिलांग तीर लाइव रिजल्ट वेबसाइट पर आपका स्वागत है। दैनिक लाइव परिणाम, सामान्य संख्याएँ और विशेषज्ञ भविष्यवाणियाँ प्राप्त करने के लिए हमारे साथ बने रहें।',
+                    'as': 'শিলং তীৰ লাইভ ৰিজাল্ট ৱেবছাইটলৈ আপোনাক স্বাগতম। প্ৰতিদিনৰ লাইভ ফলাফল, কমন নাম্বাৰ আৰু বিশেষজ্ঞৰ ভৱিষ্যদ্বাণী পাবলৈ আমাৰ সৈতে থাকক।',
+                    'en': 'Welcome to Shillong Teer Live Result website. Stay with us for daily live results, common numbers, and expert predictions.'
+                };
+                messageText = messages[detectedLang] || messages['en'];
+                var voiceMap = { 'bn': 'bn-BD', 'hi': 'hi-IN', 'as': 'bn-BD', 'en': 'en-US' };
+                voiceLang = voiceMap[detectedLang] || 'en-US';
             } else {
-                messageText = getDefaultMessage(detectedLang);
-                voiceLang = getVoiceLanguage(detectedLang);
-                console.log('⚠️ No message found for ' + detectedLang + ', using default');
+                messageText = data[0].message_text;
+                voiceLang = data[0].voice_language || 'en-US';
             }
 
-            if (statusEl) {
-                statusEl.className = 'welcome-voice-status ready';
-                statusEl.textContent = '🔊 ৩ সেকেন্ড পর স্বাগতম বার্তা বাজানো হবে...';
-            }
-
-            // Play after 3 seconds
             setTimeout(function() {
                 playWelcomeVoice(messageText, voiceLang);
             }, 3000);
 
         } catch (err) {
-            console.error('❌ Error loading welcome message:', err);
-            var fallbackMsg = getDefaultMessage(detectedLang);
-            var fallbackLang = getVoiceLanguage(detectedLang);
-            if (statusEl) {
-                statusEl.className = 'welcome-voice-status ready';
-                statusEl.textContent = '🔊 ৩ সেকেন্ড পর স্বাগতম বার্তা বাজানো হবে...';
-            }
+            console.error('❌ Error:', err);
             setTimeout(function() {
-                playWelcomeVoice(fallbackMsg, fallbackLang);
+                var fallbackMsg = 'Welcome to Shillong Teer Live Result website.';
+                playWelcomeVoice(fallbackMsg, 'en-US');
             }, 3000);
         }
     }
 
-    // ===== DEFAULT MESSAGES =====
-    function getDefaultMessage(lang) {
-        var messages = {
-            'bn': 'শিলং তীর লাইভ রেজাল্ট ওয়েবসাইটে আপনাকে স্বাগতম। প্রতিদিনের লাইভ ফলাফল, কমন নাম্বার এবং বিশেষজ্ঞদের ভবিষ্যদ্বাণী পেতে আমাদের সাথে থাকুন।',
-            'hi': 'शिलांग तीर लाइव रिजल्ट वेबसाइट पर आपका स्वागत है। दैनिक लाइव परिणाम, सामान्य संख्याएँ और विशेषज्ञ भविष्यवाणियाँ प्राप्त करने के लिए हमारे साथ बने रहें।',
-            'as': 'শিলং তীৰ লাইভ ৰিজাল্ট ৱেবছাইটলৈ আপোনাক স্বাগতম। প্ৰতিদিনৰ লাইভ ফলাফল, কমন নাম্বাৰ আৰু বিশেষজ্ঞৰ ভৱিষ্যদ্বাণী পাবলৈ আমাৰ সৈতে থাকক।',
-            'en': 'Welcome to Shillong Teer Live Result website. Stay with us for daily live results, common numbers, and expert predictions.'
-        };
-        return messages[lang] || messages['en'];
-    }
-
-    function getVoiceLanguage(lang) {
-        var voiceMap = {
-            'bn': 'bn-BD',
-            'hi': 'hi-IN',
-            'as': 'bn-BD',
-            'en': 'en-US'
-        };
-        return voiceMap[lang] || 'en-US';
-    }
-
-    // ===== PLAY WELCOME VOICE =====
     function playWelcomeVoice(message, language) {
-        var statusEl = document.getElementById('welcomeVoiceStatus');
-
         if (!('speechSynthesis' in window)) {
             console.warn('⚠️ Speech synthesis not supported');
-            if (statusEl) {
-                statusEl.className = 'welcome-voice-status error';
-                statusEl.textContent = '❌ আপনার ব্রাউজার ভয়েস সাপোর্ট করে না!';
-            }
-            // Mark as announced in sessionStorage
             sessionStorage.setItem('teer_welcome_announced', 'true');
             return;
         }
@@ -804,7 +2052,6 @@ document.addEventListener('DOMContentLoaded', function() {
         utterance.pitch = 1.1;
         utterance.volume = 1;
 
-        // Try to get a female voice
         var voices = window.speechSynthesis.getVoices();
         var femaleVoice = null;
         var femalePatterns = ['Google UK', 'Google US', 'Samantha', 'Victoria', 'Zira', 'Female', 'Microsoft Zira', 'Microsoft Hazel', 'Google हिन्दी', 'Google বাংলা'];
@@ -839,54 +2086,25 @@ document.addEventListener('DOMContentLoaded', function() {
         if (femaleVoice) {
             utterance.voice = femaleVoice;
             console.log('✅ Female voice selected:', femaleVoice.name);
-        } else {
-            console.log('⚠️ No female voice found, using default');
         }
 
-        // Event: Start
-        utterance.onstart = function() {
-            if (statusEl) {
-                statusEl.className = 'welcome-voice-status ready';
-                statusEl.textContent = '🔊 স্বাগতম বার্তা বাজানো হচ্ছে...';
-            }
-            console.log('🔊 Welcome voice started in:', language);
-        };
-
-        // Event: End - Mark as announced
         utterance.onend = function() {
             sessionStorage.setItem('teer_welcome_announced', 'true');
-            if (statusEl) {
-                statusEl.className = 'welcome-voice-status played';
-                statusEl.textContent = '✅ স্বাগতম বার্তা সম্পন্ন!';
-            }
-            console.log('✅ Welcome voice completed');
         };
 
-        // Event: Error
-        utterance.onerror = function(event) {
-            console.error('❌ Voice error:', event);
+        utterance.onerror = function() {
             sessionStorage.setItem('teer_welcome_announced', 'true');
-            if (statusEl) {
-                statusEl.className = 'welcome-voice-status error';
-                statusEl.textContent = '❌ ভয়েস বাজাতে ব্যর্থ!';
-            }
         };
 
         window.speechSynthesis.speak(utterance);
 
-        // Fallback: Mark after 10 seconds
         setTimeout(function() {
             if (!sessionStorage.getItem('teer_welcome_announced')) {
                 sessionStorage.setItem('teer_welcome_announced', 'true');
-                if (statusEl) {
-                    statusEl.className = 'welcome-voice-status played';
-                    statusEl.textContent = '✅ স্বাগতম বার্তা সম্পন্ন!';
-                }
             }
         }, 10000);
     }
 
-    // ===== LOAD VOICES AND START =====
     if (window.speechSynthesis) {
         var voices = window.speechSynthesis.getVoices();
         if (voices.length > 0) {
@@ -905,10 +2123,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         loadWelcomeMessage();
     }
-
-    console.log('✅ Welcome Voice system loaded (sessionStorage - only once per session)');
 });
 </script>
-
 </body>
 </html>
